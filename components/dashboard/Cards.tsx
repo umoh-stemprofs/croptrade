@@ -1,51 +1,58 @@
-// Home page (step 2): three small data cards — today's exchange rates, maize price,
-// weather for the farm — each with its data-source badge (Live / Saved data / Simulated).
-// All data is fetched on the server; every failure shows a sentence, never a crash.
+// Dashboard cards (moved from the step-2 home page): today's exchange rates, maize
+// price and weather — each with its data-source badge. All fetched on the server;
+// every failure shows a sentence, never a crash.
 
 import { prisma } from "@/lib/db";
-import { resolveFarmLocation } from "@/lib/farm";
 import { getMarketProvider } from "@/lib/market/provider";
-import { getFxRates } from "@/lib/fx/service";
+import { getFxRates, type FxRateView } from "@/lib/fx/service";
 import { prismaFxStore } from "@/lib/fx/prismaStore";
 import { FX_ATTRIBUTION } from "@/lib/fx/rates";
-import { getWeather, noOpSnapshotStore } from "@/lib/weather/getWeather";
+import { getWeather } from "@/lib/weather/getWeather";
 import { prismaSnapshotStore } from "@/lib/weather/prismaStore";
 import { loadingWindow } from "@/lib/weather/loadingWindow";
+import { resolveFarmLocation } from "@/lib/farm";
+import { noOpSnapshotStore } from "@/lib/weather/getWeather";
+import type { WeatherDay } from "@/lib/weather/types";
 import { formatDateHuman, formatNairaFromKobo, formatRate } from "@/lib/format";
 import { DataSourceBadge, OldRateTag, type BadgeSpec } from "@/components/DataSourceBadge";
 import { RetryButton } from "@/components/RetryButton";
 
-export const dynamic = "force-dynamic";
+const card = "rounded-card border border-border bg-surface p-6 shadow-card";
+const cardHead = "flex flex-wrap items-start justify-between gap-2";
+const cardTitle = "text-base font-medium leading-6 text-muted";
 
-const card =
-  "rounded-card border border-border bg-surface p-6 shadow-card";
-const cardHead =
-  "flex flex-wrap items-start justify-between gap-2";
-const cardTitle = "text-base font-medium text-muted";
-
-type RatesState =
-  | { kind: "rates"; rows: import("@/lib/fx/service").FxRateView[] }
+export type RatesState =
+  | { kind: "rates"; rows: FxRateView[] }
   | { kind: "error"; message: string };
 
-type MaizeState =
+export type MaizeState =
   | { kind: "price"; priceKobo: number; date: string }
   | { kind: "error"; message: string };
 
-type WeatherState =
+export type WeatherState =
   | {
       kind: "weather";
-      /** true → farm lookup failed, showing the default Port Harcourt coordinates. */
+      /** true → farm lookup failed; showing the default Port Harcourt coordinates */
       defaultLocation: boolean;
       badge: BadgeSpec;
+      coords: { lat: number; lon: number };
       tempC: number;
       text: string;
       humidity: number;
       windKmh: number;
+      daily: WeatherDay[];
       loadingMessage: string;
     }
   | { kind: "error"; message: string };
 
-async function loadRates(): Promise<RatesState> {
+/** Badge for one rate row: Manual > Live > Saved data. */
+export function rateRowBadge(row: FxRateView): BadgeSpec {
+  if (row.source === "MANUAL") return { kind: "manual" };
+  if (row.live) return { kind: "live" };
+  return { kind: "saved", ageLabel: formatDateHuman(row.date) };
+}
+
+export async function loadRates(): Promise<RatesState> {
   try {
     const result = await getFxRates({ store: prismaFxStore });
     if (!result.ok) return { kind: "error", message: result.error };
@@ -55,11 +62,11 @@ async function loadRates(): Promise<RatesState> {
   }
 }
 
-async function loadMaize(): Promise<MaizeState> {
+export async function loadMaize(): Promise<MaizeState> {
   try {
-    const [maize] = await getMarketProvider().latestPrices().then((rows) =>
-      rows.filter((r) => r.crop === "MAIZE")
-    );
+    const [maize] = await getMarketProvider()
+      .latestPrices()
+      .then((rows) => rows.filter((r) => r.crop === "MAIZE"));
     if (!maize) {
       return { kind: "error", message: "No maize price available right now. Try again later." };
     }
@@ -69,13 +76,18 @@ async function loadMaize(): Promise<MaizeState> {
   }
 }
 
-async function loadWeather(): Promise<WeatherState> {
+/**
+ * Weather for the logged-in farmer's farm. If the farm lookup fails (slow or down
+ * database) or no farm exists, show the default location (Port Harcourt) and skip
+ * saving the snapshot (00-global §3).
+ */
+export async function loadWeather(userId: string): Promise<WeatherState> {
   try {
-    // If the farm lookup fails (slow or down database) or no farm exists yet,
-    // show the weather for the default location (Port Harcourt) and skip
-    // saving the snapshot — there is no farm row to save under.
     const location = await resolveFarmLocation(() =>
-      prisma.farm.findFirst({ select: { id: true, lat: true, lon: true } })
+      prisma.farm.findFirst({
+        where: { userId },
+        select: { id: true, lat: true, lon: true },
+      })
     );
     const result = await getWeather(
       location.farmId ?? "default-location",
@@ -92,10 +104,12 @@ async function loadWeather(): Promise<WeatherState> {
         result.badge.kind === "live"
           ? { kind: "live" }
           : { kind: "saved", ageLabel: result.badge.ageLabel },
+      coords: { lat: location.lat, lon: location.lon },
       tempC: result.data.current.tempC,
       text: result.data.current.text,
       humidity: result.data.current.humidity,
       windKmh: result.data.current.windKmh,
+      daily: result.data.daily,
       loadingMessage: window.message,
     };
   } catch {
@@ -103,7 +117,7 @@ async function loadWeather(): Promise<WeatherState> {
   }
 }
 
-function RatesCard({ state }: { state: RatesState }) {
+export function RatesCard({ state }: { state: RatesState }) {
   return (
     <section className={card} aria-labelledby="rates-title">
       <div className={cardHead}>
@@ -124,7 +138,9 @@ function RatesCard({ state }: { state: RatesState }) {
       </div>
       {state.kind === "error" ? (
         <div className="mt-4 flex items-center gap-3">
-          <p className="text-base text-danger">{state.message}</p>
+          <p role="alert" className="text-base text-danger">
+            {state.message}
+          </p>
           <RetryButton />
         </div>
       ) : (
@@ -137,21 +153,13 @@ function RatesCard({ state }: { state: RatesState }) {
               </span>
               <span className="flex items-center gap-2">
                 {row.old ? <OldRateTag /> : null}
-                <DataSourceBadge
-                  badge={
-                    row.source === "MANUAL"
-                      ? { kind: "manual" }
-                      : row.live
-                        ? { kind: "live" }
-                        : { kind: "saved", ageLabel: formatDateHuman(row.date) }
-                  }
-                />
+                <DataSourceBadge badge={rateRowBadge(row)} />
               </span>
             </li>
           ))}
         </ul>
       )}
-      <p className="mt-4 text-sm text-muted">
+      <p className="mt-4 text-sm leading-5 text-muted">
         Rates meaning “1 foreign = X local”.{" "}
         <a
           href={FX_ATTRIBUTION.url}
@@ -166,7 +174,7 @@ function RatesCard({ state }: { state: RatesState }) {
   );
 }
 
-function MaizeCard({ state }: { state: MaizeState }) {
+export function MaizeCard({ state }: { state: MaizeState }) {
   return (
     <section className={card} aria-labelledby="maize-title">
       <div className={cardHead}>
@@ -177,7 +185,9 @@ function MaizeCard({ state }: { state: MaizeState }) {
       </div>
       {state.kind === "error" ? (
         <div className="mt-4 flex items-center gap-3">
-          <p className="text-base text-danger">{state.message}</p>
+          <p role="alert" className="text-base text-danger">
+            {state.message}
+          </p>
           <RetryButton />
         </div>
       ) : (
@@ -186,27 +196,29 @@ function MaizeCard({ state }: { state: MaizeState }) {
             {formatNairaFromKobo(state.priceKobo)}
             <span className="ml-2 text-base font-medium text-muted">per kg</span>
           </p>
-          <p className="mt-2 text-sm text-muted">As of {formatDateHuman(state.date)}</p>
+          <p className="mt-2 text-sm leading-5 text-muted">As of {formatDateHuman(state.date)}</p>
         </>
       )}
     </section>
   );
 }
 
-function WeatherCard({ state }: { state: WeatherState }) {
+export function WeatherCard({ state }: { state: WeatherState }) {
   return (
     <section className={card} aria-labelledby="weather-title">
       <div className={cardHead}>
         <h2 id="weather-title" className={cardTitle}>
           {state.kind === "weather" && state.defaultLocation
             ? "Weather — Port Harcourt (default location)"
-            : "Weather — Demo Farm"}
+            : "Weather — your farm"}
         </h2>
         {state.kind === "weather" ? <DataSourceBadge badge={state.badge} /> : null}
       </div>
       {state.kind === "error" ? (
         <div className="mt-4 flex flex-wrap items-center gap-3">
-          <p className="text-base text-danger">{state.message}</p>
+          <p role="alert" className="text-base text-danger">
+            {state.message}
+          </p>
           <RetryButton />
         </div>
       ) : (
@@ -215,41 +227,12 @@ function WeatherCard({ state }: { state: WeatherState }) {
             {Math.round(state.tempC)}°C
             <span className="ml-2 text-base font-medium text-muted">{state.text}</span>
           </p>
-          <p className="mt-2 text-sm text-muted">
+          <p className="mt-2 text-sm leading-5 text-muted">
             Humidity {Math.round(state.humidity)}% · Wind {Math.round(state.windKmh)} km/h
           </p>
-          <p className="mt-2 text-base text-text">{state.loadingMessage}</p>
+          <p className="mt-2 text-base leading-6 text-text">{state.loadingMessage}</p>
         </>
       )}
     </section>
-  );
-}
-
-export default async function HomePage() {
-  const [rates, maize, weather] = await Promise.all([
-    loadRates(),
-    loadMaize(),
-    loadWeather(),
-  ]);
-
-  return (
-    <main className="mx-auto min-h-screen max-w-[1280px] px-6 py-8">
-      <header className="mb-8">
-        <h1 className="text-[32px] font-bold leading-10">CropTrade</h1>
-        <p className="mt-1 text-lg leading-7 text-muted">
-          What is my crop worth abroad?
-        </p>
-      </header>
-
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-        <RatesCard state={rates} />
-        <MaizeCard state={maize} />
-        <WeatherCard state={weather} />
-      </div>
-
-      <footer className="mt-8 text-sm text-muted">
-        Decision-support tool. You decide. Sample prices are placeholders.
-      </footer>
-    </main>
   );
 }

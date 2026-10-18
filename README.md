@@ -26,8 +26,10 @@ npm run dev            # http://localhost:3200
 | Key | Required | Purpose |
 |---|---|---|
 | `DATABASE_URL` | yes | Neon Postgres connection string |
+| `SESSION_SECRET` | yes | session cookie encryption (iron-session), 32+ random characters |
 | `MARKET_API_URL` | no | if set, live market price endpoint (falls back to the simulated feed) |
 | `OWM_API_KEY` | no | OpenWeatherMap key; empty = Open-Meteo (no key) |
+| `DEMO_MODE` | no | `true` shows the "Try demo account" button on the login page |
 
 ## Demo account (README only)
 
@@ -43,8 +45,9 @@ Badges on every card say `Live`, `Saved data` or `Simulated`.
 
 - [x] Step 1 — schema + seed
 - [x] Step 2 — market + weather + FX adapter with fallback tests (routes, home cards, docs/api.md)
-- [ ] Step 3 — export.ts + tests
-- [ ] Step 4 — wizard
+- [x] Step 3 — export.ts + tests (weather keeps working when the database is down)
+- [x] Step 4A — auth (iron-session + bcrypt), dashboard shell, stock, market, weather, settings
+- [ ] Step 4B — valuation wizard, saved valuations, Rates pages
 - [ ] Step 5 — charts
 - [ ] Step 6 — click-through
 

@@ -27,6 +27,16 @@ export function formatRate(naira: number): string {
   return naira2.format(naira);
 }
 
+const usd2 = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+});
+
+/** Foreign amount → "$40.00" (stock value in USD). */
+export function formatUsd(amount: number): string {
+  return usd2.format(amount);
+}
+
 /** YYYY-MM-DD → "18 Oct 2026" in APP_TZ. */
 export function formatDateHuman(iso: string): string {
   return formatInTimeZone(new Date(iso + "T12:00:00Z"), APP_TZ, "d MMM yyyy");

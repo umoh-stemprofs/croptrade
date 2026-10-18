@@ -18,6 +18,9 @@ export const WEATHER_ALERTS = {
 export const FX_QUOTES = ["USD", "EUR", "GBP"] as const;
 export type FxQuote = (typeof FX_QUOTES)[number];
 
+/** Demo farmer email (password lives in README only — 00-global §3). */
+export const DEMO_EMAIL = "farmer@demo.local";
+
 /** A rate older than this is flagged "Old rate" (still calculates). */
 export const FX_OLD_RATE_DAYS = 7;
 /** Server-side FX cache lifetime. */
