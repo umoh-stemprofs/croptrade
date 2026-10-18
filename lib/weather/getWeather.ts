@@ -21,6 +21,13 @@ export interface WeatherSnapshotStore {
   save(farmId: string, source: string, payload: WeatherData): Promise<void>;
 }
 
+/** Store that reads and writes nothing. Used when the default location (Port Harcourt)
+ *  is shown because the farm lookup failed — there is no farm row to save under. */
+export const noOpSnapshotStore: WeatherSnapshotStore = {
+  latest: async () => null,
+  save: async () => {},
+};
+
 export type WeatherBadge =
   | { kind: "live" }
   | { kind: "saved"; ageLabel: string };

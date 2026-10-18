@@ -3,11 +3,12 @@
 // All data is fetched on the server; every failure shows a sentence, never a crash.
 
 import { prisma } from "@/lib/db";
+import { resolveFarmLocation } from "@/lib/farm";
 import { getMarketProvider } from "@/lib/market/provider";
 import { getFxRates } from "@/lib/fx/service";
 import { prismaFxStore } from "@/lib/fx/prismaStore";
 import { FX_ATTRIBUTION } from "@/lib/fx/rates";
-import { getWeather } from "@/lib/weather/getWeather";
+import { getWeather, noOpSnapshotStore } from "@/lib/weather/getWeather";
 import { prismaSnapshotStore } from "@/lib/weather/prismaStore";
 import { loadingWindow } from "@/lib/weather/loadingWindow";
 import { formatDateHuman, formatNairaFromKobo, formatRate } from "@/lib/format";
@@ -33,6 +34,8 @@ type MaizeState =
 type WeatherState =
   | {
       kind: "weather";
+      /** true → farm lookup failed, showing the default Port Harcourt coordinates. */
+      defaultLocation: boolean;
       badge: BadgeSpec;
       tempC: number;
       text: string;
@@ -68,20 +71,23 @@ async function loadMaize(): Promise<MaizeState> {
 
 async function loadWeather(): Promise<WeatherState> {
   try {
-    const farm = await prisma.farm.findFirst();
-    if (!farm) {
-      return {
-        kind: "error",
-        message: "No farm set up yet. Add your farm to see its weather.",
-      };
-    }
-    const result = await getWeather(farm.id, farm.lat, farm.lon, {
-      store: prismaSnapshotStore,
-    });
+    // If the farm lookup fails (slow or down database) or no farm exists yet,
+    // show the weather for the default location (Port Harcourt) and skip
+    // saving the snapshot — there is no farm row to save under.
+    const location = await resolveFarmLocation(() =>
+      prisma.farm.findFirst({ select: { id: true, lat: true, lon: true } })
+    );
+    const result = await getWeather(
+      location.farmId ?? "default-location",
+      location.lat,
+      location.lon,
+      { store: location.usedDefault ? noOpSnapshotStore : prismaSnapshotStore }
+    );
     if (!result.ok) return { kind: "error", message: result.error };
     const window = loadingWindow(result.data.daily);
     return {
       kind: "weather",
+      defaultLocation: location.usedDefault,
       badge:
         result.badge.kind === "live"
           ? { kind: "live" }
@@ -192,7 +198,9 @@ function WeatherCard({ state }: { state: WeatherState }) {
     <section className={card} aria-labelledby="weather-title">
       <div className={cardHead}>
         <h2 id="weather-title" className={cardTitle}>
-          Weather — Demo Farm
+          {state.kind === "weather" && state.defaultLocation
+            ? "Weather — Port Harcourt (default location)"
+            : "Weather — Demo Farm"}
         </h2>
         {state.kind === "weather" ? <DataSourceBadge badge={state.badge} /> : null}
       </div>

@@ -3,13 +3,13 @@
 // The live source is USD-based, so localPerForeign = rates[local] / rates[foreign].
 
 import { z } from "zod";
+import { FX_OLD_RATE_DAYS } from "../config";
+
+export { FX_OLD_RATE_DAYS };
 
 /** Free, no-key, USD-based endpoint (terms: attribution required, no redistribution). */
 export const FX_SOURCE_URL = "https://open.er-api.com/v6/latest/USD";
 export const FX_ATTRIBUTION = { label: "Rates By Exchange Rate API", url: "https://www.exchangerate-api.com" };
-
-/** A rate older than this is flagged "Old rate" (it still calculates). */
-export const FX_OLD_RATE_DAYS = 7;
 
 /** open.er-api.com success shape (verified 2026-10): https://open.er-api.com/v6/latest/USD */
 export const openEraSchema = z.object({
