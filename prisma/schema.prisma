@@ -1,0 +1,131 @@
+// CropTrade — Prisma schema (AGRO base from 00-global §3 + CropTrade additions)
+// Provider: postgresql (hosted Neon, DATABASE_URL lives in .env and is never committed)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------- enums ----------
+
+enum PriceUnit {
+  KG
+  TRAY
+  LITRE
+}
+
+enum PriceSource {
+  SIMULATED
+  LIVE
+}
+
+enum FxSource {
+  SIMULATED
+  LIVE
+  MANUAL
+}
+
+// ---------- AGRO base ----------
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  passHash  String
+  createdAt DateTime @default(now())
+  farms     Farm[]
+}
+
+model Farm {
+  id               String            @id @default(cuid())
+  userId           String
+  user             User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name             String
+  lat              Float
+  lon              Float
+  currency         String            @default("NGN")
+  createdAt        DateTime          @default(now())
+  weatherSnapshots WeatherSnapshot[]
+  inventoryItems   InventoryItem[]
+  settings         Settings?
+  valuations       Valuation[]
+
+  @@index([userId])
+}
+
+model PriceTick {
+  id        String      @id @default(cuid())
+  crop      String
+  date      DateTime    @db.Date
+  priceKobo Int
+  unit      PriceUnit
+  source    PriceSource @default(SIMULATED)
+
+  @@unique([crop, date])
+  @@index([date])
+}
+
+model WeatherSnapshot {
+  id        String   @id @default(cuid())
+  farmId    String
+  farm      Farm     @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  fetchedAt DateTime @default(now())
+  source    String
+  payload   Json
+
+  @@index([farmId, fetchedAt])
+}
+
+model InventoryItem {
+  id        String   @id @default(cuid())
+  farmId    String
+  farm      Farm     @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  crop      String
+  qtyKg     Float
+  note      String?
+  createdAt DateTime @default(now())
+
+  @@index([farmId])
+}
+
+// ---------- CropTrade additions (04-croptrade.md) ----------
+
+model Settings {
+  farmId        String @id
+  farm          Farm   @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  localCurrency String @default("NGN")
+  exportCostPct Float  @default(0)
+}
+
+model FxTick {
+  id              String   @id @default(cuid())
+  base            String   @default("NGN")
+  quote           String
+  date            DateTime @db.Date
+  // Rate meaning fixed everywhere: "1 foreign = X local" (e.g. 1 USD = 1,500 NGN)
+  localPerForeign Float
+  source          FxSource @default(SIMULATED)
+
+  @@unique([quote, date])
+  @@index([date])
+}
+
+model Valuation {
+  id                  String   @id @default(cuid())
+  farmId              String
+  farm                Farm     @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  crop                String
+  qtyKg               Float
+  localPricePerKgKobo Int
+  quote               String
+  rate                Float
+  grossForeign        Float
+  netForeign          Float
+  date                DateTime @db.Date
+
+  @@index([farmId])
+}

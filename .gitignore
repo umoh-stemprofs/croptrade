@@ -1,0 +1,23 @@
+# secrets — never commit
+.env
+.env.local
+.env.*.local
+
+# dependencies
+node_modules/
+
+# next.js
+.next/
+out/
+next-env.d.ts
+
+# production
+build/
+
+# logs
+npm-debug.log*
+*.log
+
+# misc
+.DS_Store
+*.tsbuildinfo
