@@ -42,7 +42,7 @@ Badges on every card say `Live`, `Saved data` or `Simulated`.
 ## Progress
 
 - [x] Step 1 — schema + seed
-- [ ] Step 2 — market + weather + FX adapter with fallback tests
+- [x] Step 2 — market + weather + FX adapter with fallback tests (routes, home cards, docs/api.md)
 - [ ] Step 3 — export.ts + tests
 - [ ] Step 4 — wizard
 - [ ] Step 5 — charts
