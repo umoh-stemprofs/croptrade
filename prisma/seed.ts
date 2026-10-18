@@ -12,7 +12,15 @@ import { priceKobo } from "../lib/market/generator";
 import { APP_TZ, DEFAULT_FARM_LAT, DEFAULT_FARM_LON, FX_QUOTES, FX_HISTORY_DAYS } from "../lib/config";
 import { mulberry32, hash32 } from "../lib/market/generator";
 
-const prisma = new PrismaClient();
+// The link to Neon is slow from this machine: give the pool more than the default 10 s
+// (appended in memory only — .env is untouched, same as lib/db.ts).
+function datasourceUrl(): string | undefined {
+  const raw = process.env.DATABASE_URL;
+  if (!raw || raw.includes("pool_timeout=")) return raw;
+  return `${raw}${raw.includes("?") ? "&" : "?"}pool_timeout=60`;
+}
+
+const prisma = new PrismaClient({ datasourceUrl: datasourceUrl() });
 
 // Demo credentials are documented in README.md only (00-global §3).
 const DEMO_EMAIL = "farmer@demo.local";
@@ -121,6 +129,9 @@ async function main() {
     }
   }
   await prisma.fxTick.createMany({ data: fxRows });
+
+  // ---------- manual rates: none by default, so the shared rates show on first run ----------
+  await prisma.manualRate.deleteMany({ where: { farmId: farm.id } });
 
   // ---------- demo stock (InventoryItem) ----------
   await prisma.inventoryItem.deleteMany({ where: { farmId: farm.id } });

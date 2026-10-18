@@ -5,6 +5,7 @@
 import { prisma } from "@/lib/db";
 import { getMarketProvider } from "@/lib/market/provider";
 import { getFxRates, type FxRateView } from "@/lib/fx/service";
+import { effectiveRates } from "@/lib/fx/effective";
 import { prismaFxStore } from "@/lib/fx/prismaStore";
 import { FX_ATTRIBUTION } from "@/lib/fx/rates";
 import { getWeather } from "@/lib/weather/getWeather";
@@ -52,9 +53,16 @@ export function rateRowBadge(row: FxRateView): BadgeSpec {
   return { kind: "saved", ageLabel: formatDateHuman(row.date) };
 }
 
-export async function loadRates(): Promise<RatesState> {
+export async function loadRates(userId: string): Promise<RatesState> {
   try {
-    const result = await getFxRates({ store: prismaFxStore });
+    const farm = await prisma.farm.findFirst({
+      where: { userId },
+      orderBy: { createdAt: "asc" },
+      select: { id: true },
+    });
+    const result = farm
+      ? await effectiveRates(farm.id)
+      : await getFxRates({ store: prismaFxStore });
     if (!result.ok) return { kind: "error", message: result.error };
     return { kind: "rates", rows: result.rates };
   } catch {

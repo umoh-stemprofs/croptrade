@@ -15,8 +15,8 @@ Recharts · Zod · iron-session · bcryptjs · date-fns-tz · Vitest
 
 ```bash
 npm install
-cp .env.example .env   # then fill DATABASE_URL
-npm run db:push        # create tables
+cp .env.example .env   # then fill DATABASE_URL and SESSION_SECRET
+npx prisma migrate deploy   # create tables from prisma/migrations
 npm run db:seed        # seed demo data
 npm run dev            # http://localhost:3200
 ```
@@ -39,7 +39,9 @@ npm run dev            # http://localhost:3200
 ## Data labelling
 
 All prices and FX rates are **Simulated** until an optional live source is configured.
-Badges on every card say `Live`, `Saved data` or `Simulated`.
+Badges on every card say `Live`, `Saved data`, `Simulated` or `Manual`.
+A manual rate is stored per farm (`ManualRate`), never in the shared FX table, so one
+farmer's override cannot change another farmer's rate. "Use live rate again" removes it.
 
 ## Progress
 
@@ -47,7 +49,7 @@ Badges on every card say `Live`, `Saved data` or `Simulated`.
 - [x] Step 2 — market + weather + FX adapter with fallback tests (routes, home cards, docs/api.md)
 - [x] Step 3 — export.ts + tests (weather keeps working when the database is down)
 - [x] Step 4A — auth (iron-session + bcrypt), dashboard shell, stock, market, weather, settings
-- [ ] Step 4B — valuation wizard, saved valuations, Rates pages
+- [x] Step 4B — valuation wizard, saved valuations, Rates pages (per-farm manual rates)
 - [ ] Step 5 — charts
 - [ ] Step 6 — click-through
 

@@ -84,7 +84,7 @@ export default async function SettingsPage({
               required
               inputMode="decimal"
               defaultValue={settings?.exportCostPct ?? 0}
-              helper="Costs taken off the export value, from 0 to 100. Used by the value wizard in the next step."
+              helper="Costs taken off the export value, from 0 to 100. The value wizard starts with this number."
             />
             <p className="text-sm leading-5 text-muted">
               Currency: NGN (fixed for now).

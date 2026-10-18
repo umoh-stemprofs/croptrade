@@ -53,6 +53,7 @@ model Farm {
   inventoryItems   InventoryItem[]
   settings         Settings?
   valuations       Valuation[]
+  manualRates      ManualRate[]
 
   @@index([userId])
 }
@@ -112,6 +113,21 @@ model FxTick {
 
   @@unique([quote, date])
   @@index([date])
+}
+
+// Manual exchange rate override — PRIVATE to one farm (unlike the shared FxTick table).
+// Effective rate for a farm = its ManualRate if one is set, otherwise the latest
+// live or saved or simulated FxTick. "Use live rate again" deletes the row.
+model ManualRate {
+  id              String   @id @default(cuid())
+  farmId          String
+  farm            Farm     @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  quote           String
+  localPerForeign Float
+  setOn           DateTime @default(now()) @db.Date
+
+  @@unique([farmId, quote])
+  @@index([farmId])
 }
 
 model Valuation {

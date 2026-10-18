@@ -5,12 +5,15 @@
 // - if the call fails, use the last saved rate with the "Saved data" badge
 // - a saved rate older than 7 days also gets the "Old rate" tag; it still calculates
 // - if there is no rate and no saved data: one-sentence error, no crash
+// - the caller may pass the farm's own manual rates; they win over any shared rate
+//   and are never written back to FxTick (see manual.ts)
 
 import { FX_QUOTES, type FxQuote } from "../config";
 import { addDaysIso, todayIso } from "../time";
 import { fetchJson, type FetchLike } from "../server/http";
 import { crossRate, isOldRate, openEraSchema, FX_SOURCE_URL } from "./rates";
 import { saveLiveRates, type FxSavedRate, type FxStore } from "./store";
+import { mergeManualRates, type ManualRateRow } from "./manual";
 
 /** 6-hour cache for the live pull (the provider itself updates once a day). */
 export const FX_CACHE_MS = 6 * 60 * 60 * 1000;
@@ -65,21 +68,22 @@ export interface GetFxOptions {
   fetchImpl?: FetchLike;
   now?: Date;
   quotes?: readonly FxQuote[];
+  /** This farm's manual overrides only — never another farm's. */
+  manual?: readonly ManualRateRow[];
 }
 
 export async function getFxRates(opts: GetFxOptions): Promise<FxResult> {
   const now = opts.now ?? new Date();
   const quotes = opts.quotes ?? FX_QUOTES;
   const today = todayIso(now);
+  const manual = opts.manual ?? [];
 
   // Fresh 6-hour cache.
   if (liveCache && now.getTime() - liveCache.fetchedAt < FX_CACHE_MS) {
-    return {
-      ok: true,
-      rates: liveCache.rates
-        .filter((r) => quotes.includes(r.quote as FxQuote))
-        .map((r) => ({ ...r, source: "LIVE" as const, old: false, live: true })),
-    };
+    const live = liveCache.rates
+      .filter((r) => quotes.includes(r.quote as FxQuote))
+      .map((r) => ({ ...r, source: "LIVE" as const, old: false, live: true }));
+    return { ok: true, rates: mergeManualRates(live, manual, today) };
   }
 
   try {
@@ -97,17 +101,16 @@ export async function getFxRates(opts: GetFxOptions): Promise<FxResult> {
       // Failing to persist must not break the page — still show the live rates.
     }
     liveCache = { fetchedAt: now.getTime(), rates: rows };
-    return {
-      ok: true,
-      rates: rows.map((r) => ({ ...r, source: "LIVE" as const, old: false, live: true })),
-    };
+    const live = rows.map((r) => ({ ...r, source: "LIVE" as const, old: false, live: true }));
+    return { ok: true, rates: mergeManualRates(live, manual, today) };
   } catch {
-    // Fall back to the last saved rate per currency.
-    const rates: FxRateView[] = [];
+    // Fall back to the last saved rate per currency, then let manual rates win.
+    const saved: FxRateView[] = [];
     for (const quote of quotes) {
       const view = await savedView(opts.store, quote, today);
-      if (view) rates.push(view);
+      if (view) saved.push(view);
     }
+    const rates = mergeManualRates(saved, manual, today);
     if (rates.length === 0) {
       return {
         ok: false,

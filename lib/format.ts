@@ -37,6 +37,18 @@ export function formatUsd(amount: number): string {
   return usd2.format(amount);
 }
 
+const foreign2: Record<string, Intl.NumberFormat> = {
+  USD: new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }),
+  EUR: new Intl.NumberFormat("en-IE", { style: "currency", currency: "EUR" }),
+  GBP: new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" }),
+};
+
+/** Foreign amount → "$120.50" / "€98.00" / "£85.10" (export value). */
+export function formatForeign(amount: number, quote: string): string {
+  const formatter = foreign2[quote];
+  return formatter ? formatter.format(amount) : `${quote} ${amount.toFixed(2)}`;
+}
+
 /** YYYY-MM-DD → "18 Oct 2026" in APP_TZ. */
 export function formatDateHuman(iso: string): string {
   return formatInTimeZone(new Date(iso + "T12:00:00Z"), APP_TZ, "d MMM yyyy");

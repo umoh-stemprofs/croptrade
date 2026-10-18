@@ -3,6 +3,7 @@
 // loading window — then the weather, maize and rates cards with their badges.
 // No charts yet (step 5). The FX attribution lives in the rates card.
 
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getSessionUser } from "@/lib/server/session";
 import { listStock, totalStockValueKobo } from "@/lib/inventory";
@@ -20,6 +21,7 @@ import {
   rateRowBadge,
 } from "@/components/dashboard/Cards";
 import type { BadgeSpec } from "@/components/DataSourceBadge";
+import { primaryButtonClass } from "@/components/ui/Field";
 
 export const dynamic = "force-dynamic";
 
@@ -32,7 +34,7 @@ export default async function DashboardPage() {
     getMarketProvider()
       .latestPrices()
       .catch(() => null),
-    loadRates(),
+    loadRates(user.id),
     loadMaize(),
     loadWeather(user.id),
   ]);
@@ -56,11 +58,16 @@ export default async function DashboardPage() {
 
   return (
     <>
-      <header className="mb-6">
-        <h1 className="text-[32px] font-bold leading-10">Dashboard</h1>
-        <p className="mt-1 text-base leading-6 text-muted">
-          Hello, {user.name}. Here is your farm today.
-        </p>
+      <header className="mb-6 flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h1 className="text-[32px] font-bold leading-10">Dashboard</h1>
+          <p className="mt-1 text-base leading-6 text-muted">
+            Hello, {user.name}. Here is your farm today.
+          </p>
+        </div>
+        <Link href="/value" className={`${primaryButtonClass} sm:w-auto sm:px-6`}>
+          Work out value
+        </Link>
       </header>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">

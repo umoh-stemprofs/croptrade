@@ -1,7 +1,14 @@
 // Line icons for the nav (design.md: Lucide-style, 1.75 stroke, line style).
 // Inlined so no extra dependency is needed.
 
-export type IconName = "dashboard" | "stock" | "market" | "weather" | "settings";
+export type IconName =
+  | "dashboard"
+  | "stock"
+  | "market"
+  | "weather"
+  | "valuations"
+  | "rates"
+  | "settings";
 
 export function NavIcon({ name, className }: { name: IconName; className: string }) {
   const common = {
@@ -45,6 +52,22 @@ export function NavIcon({ name, className }: { name: IconName; className: string
           <circle cx="8" cy="8" r="3.5" />
           <path d="M8 2v1.5M2 8h1.5M12.7 3.3l-1 1M4.3 11.7l-1 1" />
           <path d="M14 21a4 4 0 0 0 0-8 6 6 0 0 0-11.3 1.7A3.5 3.5 0 0 0 4 21z" />
+        </svg>
+      );
+    case "valuations":
+      return (
+        <svg {...common}>
+          <path d="M6 3h12v18l-3-2-3 2-3-2-3 2z" />
+          <path d="M9 7.5h6M9 11.5h6M9 15.5h4" />
+        </svg>
+      );
+    case "rates":
+      return (
+        <svg {...common}>
+          <path d="M4 8h14" />
+          <path d="m15 5 3 3-3 3" />
+          <path d="M20 16H6" />
+          <path d="m9 13-3 3 3 3" />
         </svg>
       );
     case "settings":
