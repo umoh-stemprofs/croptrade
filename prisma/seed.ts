@@ -1,6 +1,7 @@
-// CropTrade seed (step 1: schema + seed).
-// Creates: demo farmer + farm + settings, 90 days of inventory-ready price ticks
-// (deterministic simulated feed), 30 days of SIMULATED FX history, demo stock, 2 saved valuations.
+// CropTrade seed (steps 1 and 5: schema + demo states).
+// Creates: demo farmer + farm + settings, price ticks (deterministic simulated feed),
+// FX history with one stale currency, a demo Manual rate, demo stock, 2 saved
+// valuations. Safe to re-run: every block deletes what it owns first.
 // Run: npm run db:seed
 
 import { PrismaClient } from "@prisma/client";
@@ -108,7 +109,10 @@ async function main() {
     await prisma.priceTick.createMany({ data: priceRows.slice(i, i + 500) });
   }
 
-  // ---------- FX history: 30 days of SIMULATED rates (1 foreign = X local) ----------
+  // ---------- FX history: SIMULATED rates (1 foreign = X local) ----------
+  // Demo states (step 5): EUR's saved history ends 10 days ago, so the EUR card can
+  // show "Saved data" + the orange "Old rate" tag and its chart shows real gaps.
+  const DEMO_STALE_DAYS = 10; // > FX_OLD_RATE_DAYS (7), PLACEHOLDER for the demo
   await prisma.fxTick.deleteMany();
   const fxStartRates: Record<string, number> = { USD: 1500, EUR: 1620, GBP: 1920 }; // PLACEHOLDERS
   const fxRows: {
@@ -120,8 +124,10 @@ async function main() {
   }[] = [];
   for (const quote of FX_QUOTES) {
     const baseRate = fxStartRates[quote];
-    for (let i = FX_HISTORY_DAYS - 1; i >= 0; i--) {
-      const dayIso = addDaysIso(today, -i);
+    const staleDays = quote === "EUR" ? DEMO_STALE_DAYS : 0;
+    const dayCount = FX_HISTORY_DAYS - staleDays;
+    for (let i = dayCount - 1; i >= 0; i--) {
+      const dayIso = addDaysIso(today, -staleDays - i);
       const rand = mulberry32(hash32(`FX${quote}${dayIso}`))();
       const wander = (rand - 0.5) * 2 * 0.01; // ±1% per day
       const rate = Math.round(baseRate * (1 + wander) * 100) / 100;
@@ -130,8 +136,18 @@ async function main() {
   }
   await prisma.fxTick.createMany({ data: fxRows });
 
-  // ---------- manual rates: none by default, so the shared rates show on first run ----------
+  // ---------- demo Manual rate (private to the demo farm) ----------
+  // Set 10 days ago so the demo shows the "Manual" badge together with the orange
+  // "Old rate" tag. "Use live rate again" deletes it; other farms never see it.
   await prisma.manualRate.deleteMany({ where: { farmId: farm.id } });
+  await prisma.manualRate.create({
+    data: {
+      farmId: farm.id,
+      quote: "GBP",
+      localPerForeign: 1850, // PLACEHOLDER
+      setOn: parseIso(addDaysIso(today, -DEMO_STALE_DAYS)),
+    },
+  });
 
   // ---------- demo stock (InventoryItem) ----------
   await prisma.inventoryItem.deleteMany({ where: { farmId: farm.id } });
@@ -179,17 +195,21 @@ async function main() {
     }
   }
 
-  const [users, farms, prices, fx, items, vals] = await Promise.all([
+  const [users, farms, prices, fx, items, vals, manual] = await Promise.all([
     prisma.user.count(),
     prisma.farm.count(),
     prisma.priceTick.count(),
     prisma.fxTick.count(),
     prisma.inventoryItem.count(),
     prisma.valuation.count(),
+    prisma.manualRate.count({ where: { farmId: farm.id } }),
   ]);
   console.log(`Seed complete for ${today} (${APP_TZ}).`);
   console.log(
-    `  users=${users} farms=${farms} priceTicks=${prices} fxTicks=${fx} inventory=${items} valuations=${vals}`
+    `  users=${users} farms=${farms} priceTicks=${prices} fxTicks=${fx} inventory=${items} valuations=${vals} manualRates=${manual}`
+  );
+  console.log(
+    `  Demo states: EUR saved rate is ${DEMO_STALE_DAYS} days old (Saved data + Old rate, chart gaps); GBP has a Manual rate ${DEMO_STALE_DAYS} days old (Manual + Old rate).`
   );
 }
 

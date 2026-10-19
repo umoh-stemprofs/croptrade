@@ -9,7 +9,7 @@ import { logoutAction } from "@/lib/actions/auth";
 const focusRing =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 
-const linkClass = `flex h-12 items-center rounded-input px-2 text-sm text-muted hover:text-text ${focusRing}`;
+const linkClass = `flex h-12 items-center whitespace-nowrap rounded-input px-2 text-sm text-muted hover:text-text ${focusRing}`;
 
 export function TopBar() {
   return (
@@ -28,7 +28,7 @@ export function TopBar() {
         <form action={logoutAction}>
           <button
             type="submit"
-            className={`flex h-12 items-center rounded-input px-2 text-sm font-semibold text-accent hover:underline ${focusRing}`}
+            className={`flex h-12 items-center whitespace-nowrap rounded-input px-2 text-sm font-semibold text-accent hover:underline ${focusRing}`}
           >
             Log out
           </button>

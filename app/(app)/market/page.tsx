@@ -1,13 +1,16 @@
-// Market (S-MARKET): a card per crop with today's price, the change since yesterday
-// (color + arrow + word — never color alone) and the data-source badge.
-// Charts arrive in step 5.
+// Market (S-MARKET): a crop price chart (7 / 30 / 90 days), then a card per crop
+// with today's price, the change since yesterday (color + arrow + word — never
+// color alone) and the data-source badge.
 
+import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { getSessionUser } from "@/lib/server/session";
 import { getMarketProvider } from "@/lib/market/provider";
 import { CATALOG, getCatalogEntry } from "@/lib/market/catalog";
 import { formatNairaFromKobo } from "@/lib/format";
 import { DataSourceBadge, type BadgeSpec } from "@/components/DataSourceBadge";
+import { ChartSkeleton } from "@/components/charts/ChartSkeleton";
+import { MarketChartSection } from "@/components/charts/sections";
 
 export const dynamic = "force-dynamic";
 
@@ -55,6 +58,12 @@ export default async function MarketPage() {
           Today’s prices from the app’s simulated live feed, with the change since yesterday.
         </p>
       </header>
+
+      <div className="mb-6">
+        <Suspense fallback={<ChartSkeleton />}>
+          <MarketChartSection />
+        </Suspense>
+      </div>
 
       {cards.length === 0 ? (
         <p className="rounded-card border border-border bg-surface p-6 text-base text-muted shadow-card">

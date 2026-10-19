@@ -1,9 +1,10 @@
 // Dashboard (04-croptrade.md screen 2): 4 stat cards — total stock value in naira,
 // the same value in USD, today's USD rate (with its badge and "Old rate" tag) and the
-// loading window — then the weather, maize and rates cards with their badges.
-// No charts yet (step 5). The FX attribution lives in the rates card.
+// loading window — then the weather, maize and rates cards with their badges, then
+// the two stock value charts (bar + pie). The FX attribution lives in the rates card.
 
 import Link from "next/link";
+import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { getSessionUser } from "@/lib/server/session";
 import { listStock, totalStockValueKobo } from "@/lib/inventory";
@@ -22,6 +23,8 @@ import {
 } from "@/components/dashboard/Cards";
 import type { BadgeSpec } from "@/components/DataSourceBadge";
 import { primaryButtonClass } from "@/components/ui/Field";
+import { ChartSkeletonPair } from "@/components/charts/ChartSkeleton";
+import { StockChartsSection } from "@/components/charts/sections";
 
 export const dynamic = "force-dynamic";
 
@@ -115,6 +118,12 @@ export default async function DashboardPage() {
         <MaizeCard state={maize} />
         <RatesCard state={rates} />
       </div>
+
+      <Suspense fallback={<ChartSkeletonPair />}>
+        <div className="mt-6">
+          <StockChartsSection userId={user.id} />
+        </div>
+      </Suspense>
     </>
   );
 }
