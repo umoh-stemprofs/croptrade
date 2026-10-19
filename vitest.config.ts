@@ -7,5 +7,8 @@ export default defineConfig({
     // rather than lowering the cost. The assertions are unchanged.
     testTimeout: 30_000,
     hookTimeout: 30_000,
+    // One file at a time: loading all 15 files in parallel starved the workers on a
+    // low-end machine and timed out module fetches. Assertions are unchanged.
+    fileParallelism: false,
   },
 });

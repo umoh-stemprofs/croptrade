@@ -21,6 +21,16 @@ npm run db:seed        # seed demo data
 npm run dev            # http://localhost:3200
 ```
 
+## Commands
+
+```bash
+npm run dev        # dev server → http://localhost:3200
+npm test           # unit tests (vitest)
+npm run build      # production build
+npm run db:seed    # seed demo data — idempotent, safe to re-run
+npx prisma migrate deploy   # apply committed migrations
+```
+
 ## Environment variables (.env — git-ignored, never commit)
 
 | Key | Required | Purpose |
