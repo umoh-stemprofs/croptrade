@@ -38,10 +38,11 @@ npm run dev            # http://localhost:3200
 
 ## Data labelling
 
-All prices and FX rates are **Simulated** until an optional live source is configured.
-Badges on every card say `Live`, `Saved data`, `Simulated` or `Manual`.
-A manual rate is stored per farm (`ManualRate`), never in the shared FX table, so one
-farmer's override cannot change another farmer's rate. "Use live rate again" removes it.
+Every data card is badged `Live`, `Saved data`, `Simulated` or `Manual` (color + icon +
+word, never color alone). Exchange rates and weather are fetched **live** from the server;
+market prices are **simulated** by default (set `MARKET_API_URL` for a live feed). A manual
+rate is stored per farm (`ManualRate`), never in the shared FX table, so one farmer's
+override cannot change another farmer's rate. "Use live rate again" removes it.
 
 ## Charts
 
@@ -78,7 +79,14 @@ whenever the live source cannot be reached (that is the fallback path).
 - [x] Step 4A — auth (iron-session + bcrypt), dashboard shell, stock, market, weather, settings
 - [x] Step 4B — valuation wizard, saved valuations, Rates pages (per-farm manual rates)
 - [x] Step 5 — charts (bar, pie, line) with table views, empty states, skeletons and demo states
-- [ ] Step 6 — click-through
+- [x] Step 6 — full click-through, fixes, rules checklist, submission + hosting docs
+
+## Docs
+
+- `docs/api.md` — every external call, URL pattern, key name, sample response, fallback
+- `docs/rules-checklist.md` — every Agriculture rule (00-global §1) proved against the app
+- `docs/submission.md` — task overview, demo script, report outline, submission checklist
+- `docs/hosting.md` — Vercel + Neon: env names, build command, migrations, demo password
 
 ## Notices
 

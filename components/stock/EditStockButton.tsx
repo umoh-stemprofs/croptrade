@@ -20,6 +20,19 @@ export function EditStockButton({
 }) {
   const [open, setOpen] = useState(false);
 
+  // The action finishes with a redirect: on success the row below shows the new
+  // values, on failure the error sentence appears at the top of the page — either
+  // way the inline editor is done, so close it instead of leaving it open.
+  async function save(formData: FormData) {
+    try {
+      await updateStockAction(formData);
+    } catch {
+      // A redirect thrown by the action is not a failure to report here.
+    } finally {
+      setOpen(false);
+    }
+  }
+
   if (!open) {
     return (
       <button
@@ -34,7 +47,7 @@ export function EditStockButton({
 
   return (
     <form
-      action={updateStockAction}
+      action={save}
       className="w-full space-y-3 rounded-input border border-border bg-bg p-4"
     >
       <input type="hidden" name="id" value={id} />
