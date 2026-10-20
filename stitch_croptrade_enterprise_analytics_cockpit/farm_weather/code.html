@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>CropTrade</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "inverse-on-surface": "#eef0ff", "on-secondary-container": "#00476e", "background": "#faf8ff", "error-container": "#ffdad6", "on-surface": "#131b2e", "on-primary-fixed": "#002110", "on-primary": "#ffffff", "on-primary-fixed-variant": "#00522f", "surface-container-highest": "#dae2fd", "tertiary-container": "#a56800", "tertiary-fixed": "#ffddb8", "outline-variant": "#bdcabe", "on-tertiary": "#ffffff", "inverse-surface": "#283044", "on-tertiary-container": "#fffeff", "error": "#ba1a1a", "on-primary-container": "#fdfff9", "on-secondary-fixed-variant": "#004b73", "surface": "#faf8ff", "secondary": "#006398", "on-tertiary-fixed": "#2a1700", "primary-fixed-dim": "#70db9d", "surface-dim": "#d2d9f4", "surface-tint": "#006d40", "primary-fixed": "#8df8b7", "secondary-fixed-dim": "#93ccff", "surface-container-high": "#e2e7ff", "secondary-container": "#5bb8fe", "on-error": "#ffffff", "on-secondary-fixed": "#001d31", "on-surface-variant": "#3e4a41", "secondary-fixed": "#cce5ff", "surface-bright": "#faf8ff", "tertiary-fixed-dim": "#ffb95f", "inverse-primary": "#70db9d", "on-error-container": "#93000a", "surface-container-low": "#f2f3ff", "on-background": "#131b2e", "on-secondary": "#ffffff", "outline": "#6e7a70", "surface-container": "#eaedff", "on-tertiary-fixed-variant": "#653e00", "tertiary": "#835200", "surface-variant": "#dae2fd", "surface-container-lowest": "#ffffff", "primary-container": "#008751", "primary": "#006b3f" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-sm": "0.5rem", "gutter": "1rem", "space-xs": "0.25rem", "space-xl": "2rem", "margin-tablet": "1.5rem", "space-lg": "1.5rem", "gutter-desktop": "1.5rem", "space-md": "1rem", "margin": "1rem", "margin-desktop": "2rem" }, "fontFamily": { "headline-lg": [ "Plus Jakarta Sans" ], "headline-md": [ "Plus Jakarta Sans" ], "label-sm": [ "Inter" ], "title-md": [ "Inter" ], "display-lg": [ "Plus Jakarta Sans" ], "body-md": [ "Inter" ], "label-md": [ "Inter" ], "body-sm": [ "Inter" ], "body-lg": [ "Inter" ], "headline-lg-mobile": [ "Plus Jakarta Sans" ], "headline-sm": [ "Plus Jakarta Sans" ], "data-mono": [ "Inter" ], "display-lg-mobile": [ "Plus Jakarta Sans" ] }, "fontSize": { "headline-lg": [ "30px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-md": [ "22px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "label-sm": [ "11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" } ], "title-md": [ "16px", { "lineHeight": "22px", "letterSpacing": "-0.005em", "fontWeight": "600" } ], "display-lg": [ "36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "800" } ], "body-md": [ "14px", { "lineHeight": "20px", "fontWeight": "400" } ], "label-md": [ "13px", { "lineHeight": "16px", "fontWeight": "500" } ], "body-sm": [ "12px", { "lineHeight": "16px", "fontWeight": "400" } ], "body-lg": [ "16px", { "lineHeight": "24px", "fontWeight": "400" } ], "headline-lg-mobile": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "700" } ], "headline-sm": [ "18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "data-mono": [ "14px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "display-lg-mobile": [ "28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800" } ] } } } };</script></head><body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex flex-col antialiased selection:bg-primary selection:text-on-primary"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-6xl mx-auto px-6 flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md shrink-0"><div class="flex items-center gap-space-sm"><div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary-container shadow-sm"><span class="material-symbols-outlined text-[24px]">eco</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface leading-none">CropTrade</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-0.5">Agritech Simplicity</span></div></div></div><nav class="hidden lg:flex items-center gap-space-xs p-1 bg-surface-container-low rounded-xl" data-active-classes="bg-primary-container text-on-primary-container font-title-md text-title-md shadow-sm"><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="overview" href="#">Overview</a><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="stock" href="#">Stock</a><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="market" href="#">Market</a><a aria-current="page" class="min-h-[56px] px-space-md py-space-sm rounded-lg transition-all flex items-center justify-center leading-none bg-primary-container text-on-primary-container font-title-md text-title-md shadow-sm" data-path="weather" href="#">Weather</a><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="rates" href="#">Rates</a></nav><div class="flex items-center gap-space-sm shrink-0"><button aria-label="Toggle theme" class="min-h-[56px] min-w-[56px] rounded-xl flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors focus:outline-none focus:bg-surface-container-highest" id="theme-toggle-btn" type="button"><span class="material-symbols-outlined text-[24px]" id="theme-icon-light">light_mode</span><span class="material-symbols-outlined text-[24px] hidden" id="theme-icon-dark">dark_mode</span></button><div class="h-8 w-px bg-outline-variant/30 hidden sm:block mx-space-xs"></div><div class="flex items-center gap-space-sm p-1 rounded-xl hover:bg-surface-container-low transition-colors"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-label-md text-label-md text-on-surface leading-tight">Terminal 04</span><span class="font-label-sm text-label-sm text-primary flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>Live Feed</span></div></div></div></div></header><main class="w-full pt-20 bg-surface flex-1"><div class="max-w-6xl mx-auto py-space-xl px-6"><div class="flex flex-col w-full">
+<!-- Telemetry Live Stream Strip -->
+<div class="w-full bg-surface-container-low rounded-xl px-4 py-2.5 mb-6 flex flex-wrap items-center justify-between gap-3 text-on-surface-variant font-data-mono text-body-sm shadow-sm">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+<span class="font-title-md text-body-sm text-on-surface uppercase tracking-wider">RADAR ACTIVE</span>
+<span class="text-outline-variant">|</span>
+<span>NEXRAD GRAIN-STATION ID: #4815-E</span>
+</div>
+<div class="flex items-center gap-4 text-body-sm">
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-primary text-[18px]">grain</span> Silo Headspace RH: <strong class="text-on-surface font-title-md">58.4%</strong></span>
+<span class="text-outline-variant hidden sm:inline">|</span>
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-secondary text-[18px]">dew_point</span> Wet Bulb: <strong class="text-on-surface font-title-md">24.1°C</strong></span>
+<span class="text-outline-variant hidden md:inline">|</span>
+<span class="hidden md:flex items-center gap-1.5"><span class="material-symbols-outlined text-tertiary text-[18px]">ev_station</span> Solar Irradiance: <strong class="text-on-surface font-title-md">682 W/m²</strong></span>
+</div>
+</div>
+<!-- Header Section with Tactical Positioning -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
+<div class="flex flex-col gap-1 max-w-2xl">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary bg-primary/10 px-2.5 py-0.5 rounded-full">Atmospheric Intelligence</span>
+<span class="font-data-mono text-label-sm text-on-surface-variant">AGRI-MET FEED 10-SEC CYCLE</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-on-surface tracking-tight mt-1">Farm Weather</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+        Coordinate-calibrated atmospheric monitoring for crop drying and haulage dispatch.
+      </p>
+</div>
+<!-- Station Badge & Spatial Coordinates -->
+<div class="bg-surface-container rounded-xl p-4 flex flex-col gap-1.5 shrink-0 shadow-sm">
+<div class="flex items-center gap-2 text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-primary text-[20px]">my_location</span>
+<span class="font-title-md text-title-md text-on-surface">Station Coordinates</span>
+</div>
+<div class="font-data-mono text-body-sm text-on-surface-variant">
+        Station 4.8156° N, 7.0498° E • Elevation 42m AMSL
+      </div>
+<div class="flex items-center gap-2 pt-1 font-label-sm text-label-sm text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+        Calibrated with Delta-Barometer Node 09
+      </div>
+</div>
+</div>
+<!-- Main View: Single Giant Decision Card -->
+<div class="bg-surface-container-lowest rounded-xl p-6 sm:p-8 lg:p-10 mb-8 shadow-md relative overflow-hidden">
+<!-- Subtle Agronomic Top Visual Ambient Accent -->
+<div class="absolute -right-16 -top-16 w-80 h-80 rounded-full bg-primary/5 pointer-events-none blur-3xl"></div>
+<div class="absolute -left-16 -bottom-16 w-80 h-80 rounded-full bg-secondary/5 pointer-events-none blur-3xl"></div>
+<div class="relative z-10 flex flex-col gap-8">
+<!-- Core Atmosphere Reading Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<!-- Left: Graphic Weather Icon + Main Temp Display (7 cols) -->
+<div class="lg:col-span-7 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
+<!-- Dynamic High-Impact Weather SVG Instrument -->
+<div class="relative w-32 h-32 sm:w-40 sm:h-40 shrink-0 bg-surface-container-low rounded-xl p-3 flex items-center justify-center shadow-inner">
+<svg class="w-full h-full text-primary" fill="none" viewbox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+<!-- Sun Backing -->
+<circle cx="50" cy="50" fill="#ffb95f" fill-opacity="0.25" r="22"></circle>
+<circle cx="50" cy="50" fill="#835200" fill-opacity="0.85" r="16"></circle>
+<g stroke="#835200" stroke-linecap="round" stroke-width="2.5">
+<line x1="50" x2="50" y1="22" y2="16"></line>
+<line x1="50" x2="50" y1="78" y2="84"></line>
+<line x1="22" x2="16" y1="50" y2="50"></line>
+<line x1="78" x2="84" y1="50" y2="50"></line>
+<line x1="30" x2="25" y1="30" y2="25"></line>
+<line x1="70" x2="75" y1="70" y2="75"></line>
+<line x1="70" x2="75" y1="30" y2="25"></line>
+<line x1="30" x2="25" y1="70" y2="75"></line>
+</g>
+<!-- Primary Moisture Cloud -->
+<path d="M42 78h44a18 18 0 0 0 4-35.5 24 24 0 0 0-45-6.5A17 17 0 0 0 42 78z" fill="#006398" fill-opacity="0.95"></path>
+<!-- Rain Drizzle Drops -->
+<g stroke="#5bb8fe" stroke-linecap="round" stroke-width="3">
+<line x1="52" x2="48" y1="86" y2="96"></line>
+<line x1="68" x2="64" y1="86" y2="96"></line>
+<line x1="82" x2="78" y1="86" y2="96"></line>
+</g>
+</svg>
+<span class="absolute bottom-2 right-2 text-primary bg-surface-container-lowest px-2 py-0.5 rounded-full font-label-sm text-label-sm shadow-sm">Real-time</span>
+</div>
+<!-- Headline Reading -->
+<div class="flex flex-col gap-1 min-w-0">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-bold">Atmospheric Status</span>
+<div class="font-display-lg text-display-lg sm:text-[44px] sm:leading-[52px] font-extrabold text-on-surface tracking-tight">
+              30°C
+            </div>
+<div class="font-headline-md text-headline-md text-secondary font-bold tracking-normal uppercase">
+              LIGHT DRIZZLE
+            </div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+              Micro-shower passing through eastern sector. Ground evaporation index remains exceptionally favorable.
+            </p>
+</div>
+</div>
+<!-- Right: Real-time Micro-Climate Sensor Array (5 cols) -->
+<div class="lg:col-span-5 grid grid-cols-3 gap-3">
+<!-- Humidity Card -->
+<div class="bg-surface-container rounded-xl p-3.5 flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant mb-2">
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Humidity</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">water_drop</span>
+</div>
+<div class="font-headline-md text-headline-md text-on-surface font-bold">72%</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">arrow_downward</span> -3% 1hr
+            </div>
+</div>
+<!-- Barometric Pressure Card -->
+<div class="bg-surface-container rounded-xl p-3.5 flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant mb-2">
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Pressure</span>
+<span class="material-symbols-outlined text-tertiary text-[20px]">speed</span>
+</div>
+<div class="font-headline-md text-headline-md text-on-surface font-bold">1012<span class="font-title-md text-body-sm text-on-surface-variant font-normal">hPa</span></div>
+<div class="font-label-sm text-label-sm text-primary mt-1 font-semibold">
+              Steady
+            </div>
+</div>
+<!-- Wind Velocity Card -->
+<div class="bg-surface-container rounded-xl p-3.5 flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant mb-2">
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Wind</span>
+<span class="material-symbols-outlined text-primary text-[20px]">air</span>
+</div>
+<div class="font-headline-md text-headline-md text-on-surface font-bold">2<span class="font-title-md text-body-sm text-on-surface-variant font-normal">km/h</span></div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-1 font-semibold">
+              SSE Breeze
+            </div>
+</div>
+</div>
+</div>
+<!-- Agro-Logistics Context Strip / Imagery Duo -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+<div class="relative rounded-xl overflow-hidden h-36 bg-surface-container shadow-sm group">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="High-resolution aerial view of a modern grain silo complex with drying towers bathed in morning sunlight and clear sky, institutional industrial farm layout, crisp sharp focus with lush green surroundings." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBQZmwo966feLEhbL6-f8gVGSiezoWTEENXHtivjIttHdfzR2XL7k6N-a5yeHJH9MFXEefNNoIBgT5TRmsRqBvPLExGl6XpTYBygFhjtv6ROjyCDrJaNVeur37qrP31IuIKPg-TlnRucaeXnYITwyIVZN8TCMw7p-MGBT3zD7-5w5x769XTY1qpIuyVXX2hMixD22i7uL5fQSyAOYA1eq1Dx277kl5CAsddUWepx17dUVKdI026mSZi')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-on-surface/40 to-transparent flex flex-col justify-end p-4 text-on-primary">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed text-[18px]">verified</span>
+<span class="font-title-md text-title-md">Grain Drying Silo Unit #02</span>
+</div>
+<span class="font-label-sm text-label-sm text-surface-container-high">Operating at 65°C continuous cross-flow ventilation</span>
+</div>
+</div>
+<div class="relative rounded-xl overflow-hidden h-36 bg-surface-container shadow-sm group">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Clean paved agricultural transport logistics corridor with bulk grain carrier trucks ready for haulage under warm overcast sky, commercial grain terminal background with precise industrial infrastructure." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB99kt1yZ6rJkSz8JTgbvMywJv1W-RCcxWFMbji9emsrLUlLfGy0Un-IQh98xJ2O1Mx5UgTTPc7mQtGu8KGmHKP51mOswvlpsxLvLfxmn4CEo_obVZaXM-MG14YzORVGfH2mcJH2L5BfMXXjmewE5Cbv9eIdcssJQyZUkOgP4hyCbkC2Oks8qEGX2rbZpVo5OBOTU3HkSXdPNm6_Zaimq2F3hRYh-E-ONNMJAoOqK8E2fS8_qn4NnfK')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-on-surface/40 to-transparent flex flex-col justify-end p-4 text-on-primary">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]">local_shipping</span>
+<span class="font-title-md text-title-md">Haulage Dispatch Lane Alpha</span>
+</div>
+<span class="font-label-sm text-label-sm text-surface-container-high">Road friction coefficient: 0.88 • Pavement fully drained</span>
+</div>
+</div>
+</div>
+<!-- Big Prominent Green Action Banner (Height ≥ 60px) -->
+<div class="w-full min-h-[64px] bg-primary-container text-on-primary-container rounded-xl p-5 sm:p-6 shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-on-primary-container/15 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary-container text-[30px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex flex-col">
+<div class="font-headline-md text-headline-md sm:text-[24px] sm:leading-[30px] font-bold tracking-tight text-on-primary-container">
+              DRYING STATUS: GOOD TO DRY CROPS TODAY
+            </div>
+<p class="font-body-md text-body-md text-on-primary-container/90 mt-1 max-w-3xl">
+              Ambient silo headspace moisture is 14.2% (Nominal Safe Range). Next heavy precipitation window is delayed until Wednesday evening.
+            </p>
+</div>
+</div>
+<div class="shrink-0 flex items-center gap-3 w-full md:w-auto justify-end">
+<button class="px-5 py-3 rounded-lg bg-surface-container-lowest text-primary font-title-md text-title-md hover:bg-surface-container-low transition-colors shadow-sm flex items-center gap-2 min-h-[44px]" type="button">
+<span class="material-symbols-outlined text-[20px]">play_arrow</span>
+            Authorize Solar Batch
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Collapsible Section: Detailed Meteorological Forecast -->
+<div class="w-full bg-surface-container-lowest rounded-xl shadow-md overflow-hidden mb-10">
+<!-- Accordion Trigger Button (Minimum 56px touch height) -->
+<button aria-controls="forecast-drawer-content" aria-expanded="false" class="w-full min-h-[60px] px-6 py-4 flex items-center justify-between bg-surface-container-low hover:bg-surface-container transition-all cursor-pointer text-left focus:outline-none focus:bg-surface-container-high" id="forecast-toggle-btn" type="button">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">calendar_month</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface font-bold flex items-center gap-2" id="accordion-label">
+<span class="text-primary font-bold text-headline-sm inline-block transition-transform duration-200" id="forecast-chevron-symbol">▼</span>
+            Tap to view 5-Day Rainfall Forecast Table
+          </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Synoptic outlook, precipitation volumes &amp; dispatch readiness diagnostics</span>
+</div>
+</div>
+<div class="hidden sm:flex items-center gap-2 font-label-md text-label-md text-primary font-semibold">
+<span id="forecast-state-text">Expand Details</span>
+<span class="material-symbols-outlined text-[20px]">unfold_more</span>
+</div>
+</button>
+<!-- Expanded Drawer Content -->
+<div class="hidden flex-col p-6 sm:p-8 space-y-8 bg-surface-container-lowest" id="forecast-drawer-content">
+<!-- 5-Day Weather Forecast Matrix -->
+<div class="flex flex-col gap-4">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">5-Day Haulage &amp; Drying Outlook</h3>
+<span class="font-data-mono text-label-sm text-on-surface-variant">CALCULATED VIA ECMWF EPS 0.1° HIGH RESOLUTION MODEL</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+<!-- Monday Card -->
+<div class="bg-surface-container-low rounded-xl p-4 flex flex-col justify-between gap-4 hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-on-surface font-bold">Monday</span>
+<span class="material-symbols-outlined text-primary text-[22px]">wb_sunny</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-lg text-headline-lg text-on-surface">32°</span>
+<span class="font-title-md text-body-md text-on-surface-variant">/ 23°C</span>
+</div>
+<div class="flex items-center gap-2 font-label-sm text-label-sm text-on-surface-variant">
+<span class="text-secondary font-bold">96% Rain Prob</span>
+<span>•</span>
+<span class="font-data-mono font-bold text-on-surface">22.4 mm</span>
+</div>
+</div>
+<!-- Precipitation Bar Visual -->
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 58%"></div>
+</div>
+<div class="pt-2">
+<span class="inline-block w-full bg-primary/10 text-primary font-label-sm text-label-sm font-semibold p-2 rounded-lg leading-tight text-center">
+                Optimal Dry Loading Window (18h safe corridor)
+              </span>
+</div>
+</div>
+<!-- Tuesday Card -->
+<div class="bg-surface-container-low rounded-xl p-4 flex flex-col justify-between gap-4 hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-on-surface font-bold">Tuesday</span>
+<span class="material-symbols-outlined text-tertiary text-[22px]">partly_cloudy_day</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-lg text-headline-lg text-on-surface">31°</span>
+<span class="font-title-md text-body-md text-on-surface-variant">/ 22°C</span>
+</div>
+<div class="flex items-center gap-2 font-label-sm text-label-sm text-on-surface-variant">
+<span class="text-secondary font-bold">88% Rain Prob</span>
+<span>•</span>
+<span class="font-data-mono font-bold text-on-surface">18.2 mm</span>
+</div>
+</div>
+<!-- Precipitation Bar Visual -->
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 45%"></div>
+</div>
+<div class="pt-2">
+<span class="inline-block w-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold p-2 rounded-lg leading-tight text-center">
+                Caution Alert: Afternoon showers
+              </span>
+</div>
+</div>
+<!-- Wednesday Card (Critical Highlight) -->
+<div class="bg-error-container/40 rounded-xl p-4 flex flex-col justify-between gap-4 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-error font-bold">Wednesday</span>
+<span class="material-symbols-outlined text-error text-[22px]">thunderstorm</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-lg text-headline-lg text-error">29°</span>
+<span class="font-title-md text-body-md text-error/80">/ 21°C</span>
+</div>
+<div class="flex items-center gap-2 font-label-sm text-label-sm text-error">
+<span class="font-bold">99% Storm</span>
+<span>•</span>
+<span class="font-data-mono font-bold">38.6 mm</span>
+</div>
+</div>
+<!-- Precipitation Bar Visual -->
+<div class="w-full bg-error-container h-2 rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 95%"></div>
+</div>
+<div class="pt-2">
+<span class="inline-block w-full bg-error text-on-error font-label-sm text-label-sm font-bold p-2 rounded-lg leading-tight text-center shadow-sm">
+                CRITICAL: NO-GO DISPATCH (Severe Flood Risk)
+              </span>
+</div>
+</div>
+<!-- Thursday Card -->
+<div class="bg-surface-container-low rounded-xl p-4 flex flex-col justify-between gap-4 hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-on-surface font-bold">Thursday</span>
+<span class="material-symbols-outlined text-secondary text-[22px]">rainy</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-lg text-headline-lg text-on-surface">31°</span>
+<span class="font-title-md text-body-md text-on-surface-variant">/ 23°C</span>
+</div>
+<div class="flex items-center gap-2 font-label-sm text-label-sm text-on-surface-variant">
+<span class="text-secondary font-bold">94% Rain Prob</span>
+<span>•</span>
+<span class="font-data-mono font-bold text-on-surface">19.8 mm</span>
+</div>
+</div>
+<!-- Precipitation Bar Visual -->
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 50%"></div>
+</div>
+<div class="pt-2">
+<span class="inline-block w-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold p-2 rounded-lg leading-tight text-center">
+                Wet Road Caution
+              </span>
+</div>
+</div>
+<!-- Friday Card -->
+<div class="bg-surface-container-low rounded-xl p-4 flex flex-col justify-between gap-4 hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-on-surface font-bold">Friday</span>
+<span class="material-symbols-outlined text-primary text-[22px]">cloud_sync</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-lg text-headline-lg text-on-surface">32°</span>
+<span class="font-title-md text-body-md text-on-surface-variant">/ 24°C</span>
+</div>
+<div class="flex items-center gap-2 font-label-sm text-label-sm text-on-surface-variant">
+<span class="text-secondary font-bold">95% Rain Prob</span>
+<span>•</span>
+<span class="font-data-mono font-bold text-on-surface">21.0 mm</span>
+</div>
+</div>
+<!-- Precipitation Bar Visual -->
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 54%"></div>
+</div>
+<div class="pt-2">
+<span class="inline-block w-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-semibold p-2 rounded-lg leading-tight text-center">
+                Recovery Trend
+              </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Dispatch Readiness Diagnostic Checklist -->
+<div class="bg-surface-container rounded-xl p-6 flex flex-col gap-4">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[24px]">task_alt</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-bold">Dispatch Readiness Diagnostic Checklist</h4>
+</div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant bg-surface-container-highest px-3 py-1 rounded-full">Automated Sensor Validation</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
+<!-- Item 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex items-start gap-3 shadow-sm">
+<div class="w-7 h-7 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface font-bold">Silo Equilibrium Verified</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                Current: <strong class="text-primary font-data-mono">14.2%</strong> (Safety limit ceiling: 14.5%)
+              </p>
+<span class="font-label-sm text-label-sm text-primary mt-2">Zero spoilage heat detected</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex items-start gap-3 shadow-sm">
+<div class="w-7 h-7 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface font-bold">Haulage Road Saturation</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                Current moisture: <strong class="text-primary font-data-mono">12%</strong> (Firm transit verified)
+              </p>
+<span class="font-label-sm text-label-sm text-primary mt-2">Heavy multi-axle freight cleared</span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex items-start gap-3 shadow-sm">
+<div class="w-7 h-7 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface font-bold">Port Freight Logistics</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+<strong class="text-on-surface font-semibold">14 Bulk Trucks</strong> on Staging Perimeter
+              </p>
+<span class="font-label-sm text-label-sm text-secondary mt-2">On-dock loading slot secured: 16:30</span>
+</div>
+</div>
+</div>
+<!-- Safety Notification Footer -->
+<div class="mt-2 pt-3 flex flex-wrap items-center justify-between gap-3 text-on-surface-variant font-label-sm text-label-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">info</span>
+<span>Pre-dispatch protocol locks automatically when barometric drop exceeds 4.5 hPa/3h</span>
+</div>
+<span class="font-data-mono">SUPERVISOR KEY: TERMINAL-04-AUTH</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Real-Time Radar Satellite Map Widget Component -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-6 shadow-md mb-4">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-secondary/10 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">satellite_alt</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Regional Cloud Doppler &amp; Surface Radar</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Live composite feed with precipitation velocity vectors</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-data-mono text-label-sm bg-surface-container px-3 py-1.5 rounded-lg text-on-surface">Scan: 4.8156° N, 7.0498° E (50km radius)</span>
+</div>
+</div>
+<!-- Map representation via data-location container -->
+<div class="w-full h-72 rounded-xl bg-cover bg-center relative overflow-hidden shadow-inner" data-location="Port Harcourt, Nigeria" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAzY0nVI7fmv2f0_Ub8TuVO19miOStJ6y5ZerONXKfEGfkiBOxuM6kklTMu_cFanSwnhDFNqhqZkMfu321k5vEG5EiygyKaSjHMrqB_CHxt-A_UqZ6K_YvTJsQ14qIY4TlXaslbikmK7S6jJu0KllyXTrMzOl05z_26WBN3OYGGjfWeWpOomLD9P-Ij6V9jFZVSUTIvZ5qmx3O5978WtABlPBnNPKi7pVBLtpv4tb3H_a2CqFKRqGtJ')">
+<!-- Radar Overlay Scrim and Interface Rings -->
+<div class="absolute inset-0 bg-on-surface/30 backdrop-blur-[1px] flex flex-col justify-between p-4 pointer-events-none">
+<div class="flex items-center justify-between">
+<span class="font-data-mono text-label-sm text-on-primary bg-on-surface/70 px-2.5 py-1 rounded">BAND: C-WAVE DOPPLER</span>
+<span class="font-data-mono text-label-sm text-primary-fixed bg-on-surface/70 px-2.5 py-1 rounded flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary-fixed animate-ping"></span> LIVE RELAY
+          </span>
+</div>
+<!-- Center Crosshair and Distance Circle -->
+<div class="self-center flex flex-col items-center justify-center">
+<div class="w-28 h-28 rounded-full border border-dashed border-primary/60 flex items-center justify-center">
+<div class="w-4 h-4 rounded-full bg-primary/80 ring-4 ring-primary/20"></div>
+</div>
+<span class="font-data-mono text-label-sm text-on-primary bg-primary px-2 py-0.5 rounded shadow mt-1">ELEVATOR 04 (STATION)</span>
+</div>
+<div class="flex items-center justify-between text-on-primary font-label-sm text-label-sm">
+<span>PRECIPITATION THRESHOLD: &lt; 0.4 mm/hr</span>
+<span class="font-data-mono">UPDATED: JUST NOW</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function initWeatherAccordion() {
+    const toggleBtn = document.getElementById('forecast-toggle-btn');
+    const drawerContent = document.getElementById('forecast-drawer-content');
+    const chevronSymbol = document.getElementById('forecast-chevron-symbol');
+    const stateText = document.getElementById('forecast-state-text');
+    const accordionLabel = document.getElementById('accordion-label');
+
+    if (!toggleBtn || !drawerContent) return;
+
+    toggleBtn.addEventListener('click', function() {
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      const nextState = !isExpanded;
+
+      toggleBtn.setAttribute('aria-expanded', String(nextState));
+
+      if (nextState) {
+        drawerContent.classList.remove('hidden');
+        drawerContent.classList.add('flex');
+        chevronSymbol.textContent = '▲';
+        chevronSymbol.classList.add('rotate-180');
+        if (stateText) stateText.textContent = 'Collapse Details';
+      } else {
+        drawerContent.classList.add('hidden');
+        drawerContent.classList.remove('flex');
+        chevronSymbol.textContent = '▼';
+        chevronSymbol.classList.remove('rotate-180');
+        if (stateText) stateText.textContent = 'Expand Details';
+      }
+    });
+  })();
+</script></div></main><footer class="w-full bg-surface-container-low py-space-lg mt-auto shadow-[0_-1px_8px_rgba(0,0,0,0.02)]"><div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-space-md text-on-surface-variant font-label-md text-label-md"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm text-primary font-bold">CropTrade</span><span>• Agritech Global Exchange</span></div><div class="flex items-center gap-space-lg"><span class="font-data-mono text-data-mono">WAT (UTC+01:00) GRAIN-DESK</span><span>© 2026 CropTrade Platform. All rights reserved.</span></div></div></footer><script>const themeToggleBtn = document.getElementById('theme-toggle-btn'); const themeIconLight = document.getElementById('theme-icon-light'); const themeIconDark = document.getElementById('theme-icon-dark'); function applyTheme(isDark) { if (isDark) { document.documentElement.classList.add('dark'); if (themeIconLight && themeIconDark) { themeIconLight.classList.add('hidden'); themeIconDark.classList.remove('hidden'); } } else { document.documentElement.classList.remove('dark'); if (themeIconLight && themeIconDark) { themeIconLight.classList.remove('hidden'); themeIconDark.classList.add('hidden'); } } } const initialDark = localStorage.getItem('croptrade_theme') === 'dark' || (!('croptrade_theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches); applyTheme(initialDark); if (themeToggleBtn) { themeToggleBtn.addEventListener('click', () => { const isCurrentlyDark = document.documentElement.classList.contains('dark'); const newDark = !isCurrentlyDark; localStorage.setItem('croptrade_theme', newDark ? 'dark' : 'light'); applyTheme(newDark); }); }</script></body></html>

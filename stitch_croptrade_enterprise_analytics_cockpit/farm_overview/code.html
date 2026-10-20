@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="web_standard" name="shell-type"/>
+<title>CropTrade — Farm Overview</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+/* ── DESIGN.md tokens (Light + Dark) as CSS variables ─────────────────────
+   Light:  canvas #F8FAFC · card #FFFFFF · border #E2E8F0 · emerald #008751
+           ocean #0284C7 · amber #F59E0B · text #0F172A / #64748B
+   Dark:   canvas #0F172A · card #1E293B · border #334155 · emerald #10B981
+           cyan #06B6D4 · gold #FBBF24 · text #F8FAFC / #94A3B8            */
+:root{
+  color-scheme: light;
+  --surface:248 250 252;
+  --background:248 250 252;
+  --surface-lowest:255 255 255;
+  --surface-low:241 245 249;
+  --surface-container:226 232 240;
+  --surface-container-high:203 213 225;
+  --surface-container-highest:203 213 225;
+  --on-surface:15 23 42;
+  --on-surface-variant:100 116 139;
+  --primary:0 135 81;
+  --primary-container:0 124 75;
+  --on-primary:255 255 255;
+  --on-primary-container:255 255 255;
+  --secondary:2 132 199;
+  --secondary-container:125 211 252;
+  --on-secondary-container:7 89 133;
+  --tertiary:245 158 11;
+  --tertiary-strong:180 83 9;
+  --on-tertiary:255 255 255;
+  --error:185 28 28;
+  --on-error:255 255 255;
+  --outline:100 116 139;
+  --outline-variant:226 232 240;
+  --inverse-surface:15 23 42;
+  --inverse-on-surface:248 250 252;
+  --shadow-1:0px 1px 3px 0px rgba(15,23,42,0.05),0px 1px 2px -1px rgba(15,23,42,0.04);
+  --shadow-2:0px 10px 15px -3px rgba(15,23,42,0.08),0px 4px 6px -4px rgba(15,23,42,0.04);
+  --shadow-3:0px 20px 25px -5px rgba(15,23,42,0.12),0px 4px 10px -6px rgba(15,23,42,0.08);
+  --scrim:rgba(15,23,42,0.60);
+}
+html.dark{
+  color-scheme: dark;
+  --surface:15 23 42;
+  --background:15 23 42;
+  --surface-lowest:30 41 59;
+  --surface-low:30 41 59;
+  --surface-container:51 65 85;
+  --surface-container-high:71 85 105;
+  --surface-container-highest:71 85 105;
+  --on-surface:248 250 252;
+  --on-surface-variant:148 163 184;
+  --primary:16 185 129;
+  --primary-container:52 211 153;
+  --on-primary:15 23 42;
+  --on-primary-container:15 23 42;
+  --secondary:6 182 212;
+  --secondary-container:34 211 238;
+  --on-secondary-container:8 47 73;
+  --tertiary:251 191 36;
+  --tertiary-strong:251 191 36;
+  --on-tertiary:15 23 42;
+  --error:248 113 113;
+  --on-error:15 23 42;
+  --outline:148 163 184;
+  --outline-variant:51 65 85;
+  --inverse-surface:2 6 23;
+  --inverse-on-surface:248 250 252;
+  --shadow-1:none;
+  --shadow-2:0px 8px 24px -4px rgba(0,0,0,0.45);
+  --shadow-3:0px 8px 24px -4px rgba(0,0,0,0.45);
+  --scrim:rgba(0,0,0,0.75);
+}
+@layer base{
+  html,body{margin:0;padding:0;}
+  body{overscroll-behavior:none;}
+  main > :first-child{margin-top:0 !important;}
+  main > :last-child{margin-bottom:0 !important;}
+  .font-data-mono,table,input[type="number"],.tnum{font-variant-numeric:tabular-nums lining-nums;font-feature-settings:"tnum" 1,"zero" 1;}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:rgb(var(--secondary));box-shadow:0 0 0 1px rgb(var(--secondary));}
+}
+::-webkit-scrollbar{display:none;}
+.shadow-sm{box-shadow:var(--shadow-1);}
+.shadow-md{box-shadow:var(--shadow-2);}
+.shadow-lg{box-shadow:var(--shadow-3);}
+.scrim{background:var(--scrim);}
+
+@keyframes toast-in{from{opacity:0;transform:translateX(120%) scale(.96);}to{opacity:1;transform:translateX(0) scale(1);}}
+@keyframes toast-out{from{opacity:1;transform:translateX(0);}to{opacity:0;transform:translateX(120%);}}
+@keyframes bar-drain{from{transform:scaleX(1);}to{transform:scaleX(0);}}
+@keyframes spin-step{to{transform:rotate(360deg);}}
+@keyframes value-tick{0%{opacity:.35;transform:translateY(-3px);}100%{opacity:1;transform:translateY(0);}}
+@keyframes gauge-fill{from{stroke-dashoffset:157.08;} }
+.toast{animation:toast-in .32s cubic-bezier(.21,1.02,.73,1) both;}
+.toast.is-leaving{animation:toast-out .28s ease-in both;}
+.toast__bar{transform-origin:left;animation:bar-drain linear forwards;}
+.tick{animation:value-tick .3s ease-out;}
+.spin{animation:spin-step .8s linear infinite;}
+@media (prefers-reduced-motion: reduce){
+  .toast,.tick,.spin,.toast__bar{animation-duration:.001s !important;}
+}
+</style>
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        surface: "rgb(var(--surface) / <alpha-value>)",
+        background: "rgb(var(--background) / <alpha-value>)",
+        "surface-container-lowest": "rgb(var(--surface-lowest) / <alpha-value>)",
+        "surface-container-low": "rgb(var(--surface-low) / <alpha-value>)",
+        "surface-container": "rgb(var(--surface-container) / <alpha-value>)",
+        "surface-container-high": "rgb(var(--surface-container-high) / <alpha-value>)",
+        "surface-container-highest": "rgb(var(--surface-container-highest) / <alpha-value>)",
+        "on-surface": "rgb(var(--on-surface) / <alpha-value>)",
+        "on-surface-variant": "rgb(var(--on-surface-variant) / <alpha-value>)",
+        primary: "rgb(var(--primary) / <alpha-value>)",
+        "primary-container": "rgb(var(--primary-container) / <alpha-value>)",
+        "on-primary": "rgb(var(--on-primary) / <alpha-value>)",
+        "on-primary-container": "rgb(var(--on-primary-container) / <alpha-value>)",
+        secondary: "rgb(var(--secondary) / <alpha-value>)",
+        "secondary-container": "rgb(var(--secondary-container) / <alpha-value>)",
+        "on-secondary-container": "rgb(var(--on-secondary-container) / <alpha-value>)",
+        tertiary: "rgb(var(--tertiary) / <alpha-value>)",
+        "tertiary-strong": "rgb(var(--tertiary-strong) / <alpha-value>)",
+        "on-tertiary": "rgb(var(--on-tertiary) / <alpha-value>)",
+        error: "rgb(var(--error) / <alpha-value>)",
+        "on-error": "rgb(var(--on-error) / <alpha-value>)",
+        outline: "rgb(var(--outline) / <alpha-value>)",
+        "outline-variant": "rgb(var(--outline-variant) / <alpha-value>)",
+        "inverse-surface": "rgb(var(--inverse-surface) / <alpha-value>)",
+        "inverse-on-surface": "rgb(var(--inverse-on-surface) / <alpha-value>)"
+      },
+      borderRadius: {
+        sm: "0.125rem",
+        DEFAULT: "0.25rem",
+        md: "0.375rem",
+        lg: "0.25rem",
+        xl: "0.5rem",
+        "2xl": "0.75rem",
+        full: "9999px"
+      },
+      boxShadow: {
+        sm: "var(--shadow-1)",
+        md: "var(--shadow-2)",
+        lg: "var(--shadow-3)",
+        inner: "inset 0 1px 2px 0 rgba(15,23,42,0.06)"
+      },
+      spacing: {
+        "space-sm": "0.5rem", gutter: "1rem", "space-xs": "0.25rem", "space-xl": "2rem",
+        "margin-tablet": "1.5rem", "space-lg": "1.5rem", "gutter-desktop": "1.5rem",
+        "space-md": "1rem", margin: "1rem", "margin-desktop": "2rem"
+      },
+      fontFamily: {
+        "headline-lg": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"],
+        "headline-lg-mobile": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"],
+        "display-lg": ["Plus Jakarta Sans"], "display-lg-mobile": ["Plus Jakarta Sans"],
+        "label-sm": ["Inter"], "label-md": ["Inter"], "title-md": ["Inter"],
+        "body-md": ["Inter"], "body-sm": ["Inter"], "body-lg": ["Inter"], "data-mono": ["Inter"]
+      },
+      fontSize: {
+        "display-lg": ["36px", { lineHeight: "44px", letterSpacing: "-0.025em", fontWeight: "800" }],
+        "display-lg-mobile": ["28px", { lineHeight: "36px", letterSpacing: "-0.02em", fontWeight: "800" }],
+        "headline-lg": ["30px", { lineHeight: "38px", letterSpacing: "-0.02em", fontWeight: "700" }],
+        "headline-md": ["22px", { lineHeight: "28px", letterSpacing: "-0.015em", fontWeight: "600" }],
+        "headline-sm": ["18px", { lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "600" }],
+        "title-md": ["16px", { lineHeight: "22px", letterSpacing: "-0.005em", fontWeight: "600" }],
+        "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+        "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+        "body-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }],
+        "label-md": ["13px", { lineHeight: "16px", fontWeight: "500" }],
+        "label-sm": ["11px", { lineHeight: "14px", letterSpacing: "0.04em", fontWeight: "600" }],
+        "data-mono": ["14px", { lineHeight: "20px", letterSpacing: "-0.01em", fontWeight: "600" }]
+      }
+    }
+  }
+};
+</script>
+</head>
+
+<body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex flex-col antialiased selection:bg-primary selection:text-on-primary">
+
+<header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-sm border-b border-outline-variant">
+  <div class="h-20 max-w-6xl mx-auto px-6 flex items-center justify-between gap-space-md">
+    <div class="flex items-center gap-space-md shrink-0">
+      <div class="flex items-center gap-space-sm">
+        <div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary-container shadow-sm">
+          <span class="material-symbols-outlined text-[24px]">eco</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-headline-sm text-headline-sm text-on-surface leading-none">CropTrade</span>
+          <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-0.5">Agritech Simplicity</span>
+        </div>
+      </div>
+    </div>
+
+    <nav aria-label="Primary" class="hidden lg:flex items-center gap-space-xs p-1 bg-surface-container-low rounded-xl border border-outline-variant">
+      <a aria-current="page" class="min-h-[44px] px-space-md py-space-sm rounded-lg transition-all flex items-center justify-center leading-none bg-primary-container text-on-primary-container font-title-md text-title-md shadow-sm" data-path="overview" href="code.html">Overview</a>
+      <a class="min-h-[44px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="stock" href="../my_crop_stock/code.html">Stock</a>
+      <a class="min-h-[44px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="market" href="../crop_prices_today/code.html">Market</a>
+      <a class="min-h-[44px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="weather" href="../farm_weather/code.html">Weather</a>
+      <a class="min-h-[44px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="rates" href="../money_converter/code.html">Rates</a>
+    </nav>
+
+    <div class="flex items-center gap-space-sm shrink-0">
+      <button aria-label="Toggle theme" class="min-h-[44px] min-w-[44px] rounded-xl flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors focus:outline-none focus:bg-surface-container-highest" id="theme-toggle-btn" type="button">
+        <span class="material-symbols-outlined text-[24px]" id="theme-icon-light">light_mode</span>
+        <span class="material-symbols-outlined text-[24px] hidden" id="theme-icon-dark">dark_mode</span>
+      </button>
+      <div class="h-8 w-px bg-outline-variant hidden sm:block mx-space-xs"></div>
+      <div class="flex items-center gap-space-sm p-1 rounded-xl hover:bg-surface-container-low transition-colors">
+        <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0">
+          <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+        </div>
+        <div class="hidden md:flex flex-col text-left">
+          <span class="font-label-md text-label-md text-on-surface leading-tight">Terminal 04</span>
+          <span class="font-label-sm text-label-sm text-primary flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>Ledger Live
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="w-full pt-20 bg-surface flex-1">
+  <div class="max-w-6xl mx-auto py-space-xl px-6">
+    <div class="flex flex-col w-full">
+
+      <!-- Telemetry Stream Bar — live clock, connectivity, poll latency -->
+      <div class="w-full bg-surface-container-low border border-outline-variant rounded-xl px-space-md py-space-sm mb-space-lg flex flex-wrap items-center justify-between gap-space-sm shadow-sm">
+        <div class="flex items-center gap-space-sm min-w-0">
+          <span class="relative flex h-2.5 w-2.5 shrink-0" id="status-pip"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span></span>
+          <span class="font-data-mono text-data-mono text-primary font-bold" id="telemetry-status">SYSTEM STATUS: ONLINE</span>
+          <span class="text-on-surface-variant/40 hidden sm:inline">•</span>
+          <span class="font-data-mono text-data-mono text-on-surface-variant truncate">FARM COORDS: 4.8156° N, 7.0498° E</span>
+        </div>
+        <div class="flex items-center gap-space-md font-label-sm text-label-sm text-on-surface-variant">
+          <span class="flex items-center gap-1">
+            <span class="material-symbols-outlined text-[16px] text-secondary">satellite_alt</span>
+            GRAIN-SAT REF: L4-DELTA
+          </span>
+          <span class="bg-surface-container border border-outline-variant px-2 py-0.5 rounded text-on-surface font-data-mono" id="telemetry-poll">POLL —</span>
+        </div>
+      </div>
+
+      <!-- Hero Banner -->
+      <div class="relative bg-surface-container-lowest border border-outline-variant rounded-xl p-space-lg md:p-space-xl mb-space-lg shadow-sm overflow-hidden">
+        <div class="absolute -right-8 -top-8 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-primary/10 text-primary font-label-sm text-label-sm uppercase tracking-wider mb-space-sm">
+              <span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">analytics</span>
+              Harvest Valuation &amp; Execution Terminal
+            </div>
+            <h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Farm Overview</h1>
+            <p class="font-headline-sm text-headline-sm text-on-surface-variant mt-1 font-normal">
+              Your total crop value and best action for today.
+            </p>
+          </div>
+
+          <div class="flex items-center gap-space-sm bg-surface-container-low border border-outline-variant px-4 py-2.5 rounded-lg shrink-0">
+            <span class="material-symbols-outlined text-on-surface-variant text-[20px]">calendar_today</span>
+            <div class="flex flex-col">
+              <span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Current Trading Cycle</span>
+              <span class="font-data-mono text-data-mono text-on-surface font-bold" id="trading-cycle">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Currency Toggle -->
+      <div class="flex flex-wrap items-center justify-between gap-space-md mb-space-md">
+        <span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">All figures shown in</span>
+        <div class="flex items-center gap-space-xs p-1 bg-surface-container-low rounded-xl border border-outline-variant" role="group" aria-label="Currency for all figures">
+          <button type="button" class="currency-btn h-9 px-space-md rounded-lg font-title-md text-title-md transition-all bg-primary-container text-on-primary-container shadow-sm" data-currency="NGN" aria-pressed="true">₦ NGN</button>
+          <button type="button" class="currency-btn h-9 px-space-md rounded-lg font-title-md text-title-md transition-all text-on-surface-variant hover:bg-surface-container-high" data-currency="USD" aria-pressed="false">$ USD</button>
+        </div>
+      </div>
+
+      <!-- 3 Primary Metric Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-space-md mb-space-xl">
+        <!-- Card 1: Total Farm Worth -->
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-space-lg shadow-sm flex flex-col justify-between transition-transform duration-200 hover:-translate-y-0.5">
+          <div class="flex items-center justify-between mb-space-sm gap-2">
+            <span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Total Farm Worth</span>
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-secondary-container/25 text-on-secondary-container font-label-sm text-label-sm font-semibold whitespace-nowrap">
+              <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Simulated
+            </span>
+          </div>
+          <div class="my-space-sm">
+            <div class="font-headline-lg text-[40px] leading-tight text-on-surface font-extrabold tracking-tight tabular-nums" id="worth-value">—</div>
+            <div class="font-body-sm text-body-sm text-on-surface-variant tabular-nums" id="worth-alt">—</div>
+          </div>
+          <div class="pt-space-sm mt-space-sm flex items-center justify-between bg-surface-container-low border border-outline-variant rounded-lg p-2.5 gap-2">
+            <span class="font-label-sm text-label-sm text-on-surface-variant tabular-nums" id="worth-silos">—</span>
+            <span class="font-data-mono text-label-sm text-primary font-bold tabular-nums" id="worth-mtd">—</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Export Value -->
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-space-lg shadow-sm flex flex-col justify-between transition-transform duration-200 hover:-translate-y-0.5">
+          <div class="flex items-center justify-between mb-space-sm gap-2">
+            <span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Export Value</span>
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-primary/10 text-primary font-label-sm text-label-sm font-semibold whitespace-nowrap">
+              <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>Live FX
+            </span>
+          </div>
+          <div class="my-space-sm">
+            <div class="font-headline-lg text-[40px] leading-tight text-primary font-extrabold tracking-tight tabular-nums" id="export-value">—</div>
+            <div class="font-body-sm text-body-sm text-on-surface-variant tabular-nums" id="export-alt">—</div>
+          </div>
+          <div class="pt-space-sm mt-space-sm flex items-center justify-between bg-surface-container-low border border-outline-variant rounded-lg p-2.5 gap-2">
+            <span class="font-label-sm text-label-sm text-on-surface-variant tabular-nums" id="export-spot">—</span>
+            <span class="font-data-mono text-label-sm text-primary font-bold" id="export-hedge">Hedging Active</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Interactive Action Directive -->
+        <div class="bg-tertiary/10 border border-tertiary/40 rounded-xl p-space-lg shadow-sm flex flex-col justify-between transition-transform duration-200 hover:-translate-y-0.5">
+          <div class="flex items-center justify-between mb-space-sm gap-2">
+            <span class="font-label-md text-label-md text-tertiary-strong font-bold uppercase tracking-wider">Action Directive</span>
+            <div class="w-8 h-8 rounded-full bg-tertiary/15 flex items-center justify-center text-tertiary-strong">
+              <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">thumb_up</span>
+            </div>
+          </div>
+
+          <div class="my-space-xs">
+            <div class="font-headline-md text-[26px] leading-tight text-on-surface font-bold tracking-tight" id="directive-day">—</div>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mt-1" id="directive-detail">—</p>
+          </div>
+
+          <!-- Controls -->
+          <div class="mt-space-sm pt-space-sm border-t border-tertiary/30 space-y-space-sm">
+            <div class="flex items-center justify-between gap-space-sm">
+              <span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Rain threshold</span>
+              <div class="flex items-center gap-1" role="group" aria-label="Rain threshold for dry-day qualification">
+                <button type="button" class="threshold-chip h-7 px-2.5 rounded bg-surface-container-lowest border border-outline-variant font-data-mono text-body-sm text-on-surface transition-colors" data-threshold="5" aria-pressed="false">&lt;5mm</button>
+                <button type="button" class="threshold-chip h-7 px-2.5 rounded bg-surface-container-lowest border border-outline-variant font-data-mono text-body-sm text-on-surface transition-colors" data-threshold="10" aria-pressed="false">&lt;10mm</button>
+              </div>
+            </div>
+            <div class="flex items-center justify-between gap-space-sm">
+              <label class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant" for="trucks-input">Dispatch capacity</label>
+              <div class="flex items-center gap-1.5">
+                <input id="trucks-input" type="number" min="1" max="8" step="1" value="2" class="w-16 h-7 px-1.5 rounded bg-surface-container-lowest border border-outline-variant text-body-sm text-on-surface font-data-mono tabular-nums text-center" aria-label="Trucks per day"/>
+                <span class="font-label-sm text-label-sm text-on-surface-variant">trucks/day ×</span>
+                <select id="payload-select" class="h-7 px-1.5 rounded bg-surface-container-lowest border border-outline-variant text-body-sm text-on-surface font-data-mono" aria-label="Truck payload in kilograms">
+                  <option value="100">100kg</option>
+                  <option value="250">250kg</option>
+                  <option value="500" selected>500kg</option>
+                  <option value="1000">1000kg</option>
+                </select>
+              </div>
+            </div>
+            <p class="font-label-sm text-label-sm text-on-surface-variant tabular-nums" id="directive-plan">—</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section Divider -->
+      <div class="flex items-center justify-between mb-space-md px-1">
+        <div class="flex items-center gap-2">
+          <span class="font-title-md text-title-md text-on-surface font-bold">Detailed Operational Breakdown</span>
+          <span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container border border-outline-variant px-2 py-0.5 rounded">Tactical View</span>
+        </div>
+        <span class="font-label-sm text-label-sm text-on-surface-variant hidden sm:inline">Tap accordion cards below to inspect details</span>
+      </div>
+
+      <!-- Accordions -->
+      <div class="space-y-space-md">
+        <!-- Accordion 1: Quick Stock Breakdown → silo gauges -->
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden transition-all duration-300">
+          <button aria-controls="accordion-stock-content" aria-expanded="false" class="w-full min-h-[56px] px-space-md py-space-sm bg-surface-container-lowest hover:bg-surface-container-low text-left flex items-center justify-between gap-space-md transition-colors cursor-pointer select-none" id="accordion-stock-btn" type="button">
+            <div class="flex items-center gap-space-sm min-w-0">
+              <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                <span class="material-symbols-outlined text-[20px]">inventory_2</span>
+              </div>
+              <div class="flex flex-col min-w-0">
+                <span class="font-title-md text-title-md text-on-surface font-semibold truncate">Quick Stock Breakdown</span>
+                <span class="font-label-sm text-label-sm text-on-surface-variant truncate" id="stock-accordion-sub">—</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-space-sm shrink-0">
+              <span class="font-label-sm text-label-sm text-primary font-semibold hidden md:inline">Inspect Holdings</span>
+              <div class="w-8 h-8 rounded-lg bg-surface-container border border-outline-variant flex items-center justify-center text-on-surface transition-transform duration-300" id="chevron-stock-icon">
+                <span class="material-symbols-outlined text-[20px]">expand_more</span>
+              </div>
+            </div>
+          </button>
+
+          <div class="hidden transition-all duration-300" id="accordion-stock-content">
+            <div class="p-space-md pt-0 bg-surface-container-lowest">
+              <!-- Silo capacity gauges -->
+              <div class="bg-surface-container-low border border-outline-variant rounded-xl p-space-md mb-space-md">
+                <div class="flex items-center justify-between mb-space-sm">
+                  <span class="font-title-md text-title-md text-on-surface font-bold">Silo Capacity Gauges</span>
+                  <span class="font-label-sm text-label-sm text-on-surface-variant">Tap a silo to inspect its lot</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-space-md" id="silo-grid"></div>
+              </div>
+
+              <!-- Commodity value tiles (live) -->
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-space-md mb-space-md" id="commodity-grid"></div>
+
+              <a class="w-full min-h-[56px] rounded-lg bg-primary text-on-primary font-title-md text-title-md font-semibold px-space-lg flex items-center justify-center gap-2 shadow-sm hover:bg-primary-container transition-colors text-center" href="../my_crop_stock/code.html">
+                <span>Manage Full Inventory in Stock</span>
+                <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Accordion 2: Quick Weather Status → microclimate sensors -->
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden transition-all duration-300">
+          <button aria-controls="accordion-weather-content" aria-expanded="false" class="w-full min-h-[56px] px-space-md py-space-sm bg-surface-container-lowest hover:bg-surface-container-low text-left flex items-center justify-between gap-space-md transition-colors cursor-pointer select-none" id="accordion-weather-btn" type="button">
+            <div class="flex items-center gap-space-sm min-w-0">
+              <div class="w-9 h-9 rounded-lg bg-secondary-container/30 flex items-center justify-center text-secondary shrink-0">
+                <span class="material-symbols-outlined text-[20px]">thunderstorm</span>
+              </div>
+              <div class="flex flex-col min-w-0">
+                <span class="font-title-md text-title-md text-on-surface font-semibold truncate">Quick Weather Status</span>
+                <span class="font-label-sm text-label-sm text-on-surface-variant truncate" id="weather-accordion-sub">Microclimate sensors &amp; load forecast</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-space-sm shrink-0">
+              <span class="font-label-sm text-label-sm text-secondary font-semibold hidden md:inline">Inspect Sensors</span>
+              <div class="w-8 h-8 rounded-lg bg-surface-container border border-outline-variant flex items-center justify-center text-on-surface transition-transform duration-300" id="chevron-weather-icon">
+                <span class="material-symbols-outlined text-[20px]">expand_more</span>
+              </div>
+            </div>
+          </button>
+
+          <div class="hidden transition-all duration-300" id="accordion-weather-content">
+            <div class="p-space-md pt-0 bg-surface-container-lowest">
+              <div class="bg-surface-container-low border border-outline-variant rounded-xl p-space-md mb-space-md">
+
+                <!-- Poll controls -->
+                <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-space-md mb-space-md flex flex-wrap items-center justify-between gap-space-md shadow-sm">
+                  <div class="flex items-center gap-space-sm min-w-0">
+                    <div class="w-12 h-12 rounded-xl bg-secondary-container/30 flex items-center justify-center shrink-0">
+                      <span class="material-symbols-outlined text-[28px] text-secondary" id="sensor-main-icon">rainy</span>
+                    </div>
+                    <div class="min-w-0">
+                      <div class="font-headline-md text-headline-md text-on-surface font-bold" id="sensor-summary">—</div>
+                      <div class="font-body-md text-body-md text-on-surface-variant" id="sensor-subline">—</div>
+                    </div>
+                  </div>
+                  <div class="flex flex-wrap items-center gap-space-sm">
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded font-label-sm text-label-sm font-semibold" id="sensor-badge">—</span>
+                    <label class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant" for="poll-select">Auto-poll</label>
+                    <select id="poll-select" class="h-9 px-2 rounded bg-surface-container-lowest border border-outline-variant text-body-sm text-on-surface">
+                      <option value="0" selected>Off</option>
+                      <option value="30000">30s</option>
+                      <option value="60000">60s</option>
+                    </select>
+                    <button type="button" id="poll-now-btn" class="h-9 px-space-md rounded bg-primary text-on-primary font-label-md text-label-md font-semibold shadow-sm hover:bg-primary-container transition-colors flex items-center gap-1.5 disabled:opacity-60">
+                      <span class="material-symbols-outlined text-[16px]" id="poll-icon">sync</span>
+                      <span id="poll-label">Poll sensors</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Sensor readout grid -->
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-space-sm mb-space-md" id="sensor-grid"></div>
+
+                <!-- Dry window checklist -->
+                <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-space-md shadow-sm">
+                  <div class="flex items-center justify-between mb-space-sm gap-2">
+                    <span class="font-title-md text-title-md font-bold text-on-surface">Next 24h Safe Dry Window Checklist</span>
+                    <span class="px-2.5 py-0.5 rounded font-label-sm text-label-sm font-semibold" id="checklist-badge">—</span>
+                  </div>
+                  <div class="space-y-space-sm" id="checklist"></div>
+                </div>
+              </div>
+
+              <a class="w-full min-h-[56px] rounded-lg bg-secondary text-on-secondary font-title-md text-title-md font-semibold px-space-lg flex items-center justify-center gap-2 shadow-sm hover:opacity-90 transition-opacity text-center" href="../farm_weather/code.html">
+                <span>Open 5-Day Synoptic Weather Center</span>
+                <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel: 7-day forecast basis for the directive -->
+      <section aria-label="7-day forecast basis" class="mt-space-xl bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm p-space-md">
+        <div class="flex items-center justify-between mb-space-sm">
+          <div class="flex items-center gap-space-sm">
+            <span class="material-symbols-outlined text-secondary text-[20px]">calendar_month</span>
+            <h2 class="font-title-md text-title-md text-on-surface font-bold">7-Day Forecast Basis</h2>
+          </div>
+          <span class="font-label-sm text-label-sm text-on-surface-variant">Days meeting your threshold are marked dry</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left font-body-md text-body-md border-collapse">
+            <thead>
+              <tr class="bg-surface-container-lowest border-b border-outline-variant text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+                <th scope="col" class="py-space-sm px-space-md rounded-l-lg font-bold">Day</th>
+                <th scope="col" class="py-space-sm px-space-md font-bold">Date</th>
+                <th scope="col" class="py-space-sm px-space-md font-bold text-right">Rain</th>
+                <th scope="col" class="py-space-sm px-space-md font-bold text-right">High</th>
+                <th scope="col" class="py-space-sm px-space-md font-bold text-right">Humidity</th>
+                <th scope="col" class="py-space-sm px-space-md rounded-r-lg font-bold text-center">Verdict</th>
+              </tr>
+            </thead>
+            <tbody id="forecast-body" class="text-on-surface"></tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<footer class="w-full bg-surface-container-low py-space-lg mt-auto shadow-[0_-1px_8px_rgba(0,0,0,0.02)] border-t border-outline-variant">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-space-md text-on-surface-variant font-label-md text-label-md">
+    <div class="flex items-center gap-space-sm">
+      <span class="font-headline-sm text-headline-sm text-primary font-bold">CropTrade</span>
+      <span>• Agritech Global Exchange</span>
+    </div>
+    <div class="flex items-center gap-space-lg">
+      <span class="font-data-mono text-data-mono">WAT (UTC+01:00) GRAIN-DESK</span>
+      <span>© 2026 CropTrade Platform. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Toast host -->
+<div class="fixed bottom-4 right-4 z-[70] flex flex-col gap-space-sm w-[min(92vw,360px)]" id="toast-host" role="status" aria-live="polite"></div>
+
+<noscript>
+  <div class="p-6 text-center font-body-md text-body-md">This overview requires JavaScript for live valuation, dispatch recommendations and sensor polling.</div>
+</noscript>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ── helpers ─────────────────────────────────────────────────────────── */
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var byId = function (id) { return document.getElementById(id); };
+  var esc = function (s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  };
+  var round = function (n) { return Math.round(n); };
+  var trimNum = function (n, dp) { return String(Number(n.toFixed(dp === undefined ? 2 : dp))); };
+  var clamp = function (v, lo, hi) { return Math.max(lo, Math.min(hi, v)); };
+
+  /* ── state ───────────────────────────────────────────────────────────── */
+  var state = {
+    currency: "NGN",             // NGN | USD — converts every figure on screen
+    fx: { rate: 1331.62, pair: "NGN/USD", source: "Live", asOf: "open.er-api.com" },
+    baselineMtd: 375000,         // month-start portfolio value for the MTD delta
+    crops: [
+      { id: "maize",   name: "Maize",   emoji: "\uD83C\uDF3D", kg: 250, rate: 586,  silo: "silo-alpha", source: "Simulated" },
+      { id: "cassava", name: "Cassava", emoji: "\uD83E\uDD54", kg: 400, rate: 350,  silo: "cold-bay-b", source: "Simulated" },
+      { id: "yam",     name: "Yam",     emoji: "\uD83C\uDF60", kg: 120, rate: 946,  silo: "shed-2",     source: "Simulated" }
+    ],
+    silos: [
+      { id: "silo-alpha", name: "Silo Alpha",      capacityKg: 450 },
+      { id: "cold-bay-b", name: "Cold Storage B",  capacityKg: 550 },
+      { id: "shed-2",     name: "Ventilated Shed", capacityKg: 275 }
+    ],
+    selectedSilo: null,
+    // Deterministic 7-day forecast driving the Action Directive
+    forecast: [
+      { day: "Mon", date: "20 Oct", rainMm: 6.2,  tMax: 31, humidity: 78 },
+      { day: "Tue", date: "21 Oct", rainMm: 3.1,  tMax: 32, humidity: 71 },
+      { day: "Wed", date: "22 Oct", rainMm: 14.5, tMax: 29, humidity: 84 },
+      { day: "Thu", date: "23 Oct", rainMm: 8.8,  tMax: 30, humidity: 80 },
+      { day: "Fri", date: "24 Oct", rainMm: 1.9,  tMax: 33, humidity: 66 },
+      { day: "Sat", date: "25 Oct", rainMm: 22.0, tMax: 27, humidity: 91 },
+      { day: "Sun", date: "26 Oct", rainMm: 4.4,  tMax: 31, humidity: 74 }
+    ],
+    load: { thresholdMm: 5, trucksPerDay: 2, payloadKg: 500 },
+    sensors: {
+      tempC: 30.1, humidityPct: 72, windKmh: 2, windDir: "SSE",
+      rainRateMm: 1.2, soilMoisturePct: 41, grainMoisturePct: 14.2
+    },
+    lastPollAt: null,
+    lastPollMs: null,
+    polling: false,
+    autoPollMs: 0,
+    autoTimer: null,
+    online: navigator.onLine !== false
+  };
+
+  /* ── formatting ──────────────────────────────────────────────────────── */
+  function inUsd(ngn) { return ngn / state.fx.rate; }
+  // The headline figure renders in the selected currency; alt line shows the other.
+  function fmtMoney(ngn) {
+    if (state.currency === "USD") return "$" + inUsd(ngn).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return "\u20A6" + round(ngn).toLocaleString("en-NG");
+  }
+  function fmtMoneyAlt(ngn) {
+    if (state.currency === "USD") return "\u20A6" + round(ngn).toLocaleString("en-NG") + " NGN";
+    return "$" + inUsd(ngn).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " USD";
+  }
+  function fmtKg(kg) { return trimNum(kg, 1) + " kg"; }
+
+  function tick(el) {
+    if (!el) return;
+    el.classList.remove("tick");
+    void el.offsetWidth;
+    el.classList.add("tick");
+  }
+
+  /* ── aggregates (live from state) ────────────────────────────────────── */
+  function farmWorthNgn() {
+    return state.crops.reduce(function (s, c) { return s + c.kg * c.rate; }, 0);
+  }
+  function totalLoadKg() {
+    return state.crops.reduce(function (s, c) { return s + c.kg; }, 0);
+  }
+  function siloStats(silo) {
+    var used = state.crops.filter(function (c) { return c.silo === silo.id; })
+      .reduce(function (s, c) { return s + c.kg; }, 0);
+    return { used: used, capacity: silo.capacityKg, pct: silo.capacityKg ? (used / silo.capacityKg) * 100 : 0 };
+  }
+  function capacityTotals() {
+    var used = 0, capacity = 0;
+    state.silos.forEach(function (s) { var st = siloStats(s); used += st.used; capacity += st.capacity; });
+    return { used: used, capacity: capacity, pct: capacity ? (used / capacity) * 100 : 0, free: capacity - used };
+  }
+
+  /* ── Action Directive ────────────────────────────────────────────────── */
+  function computeDirective() {
+    var threshold = state.load.thresholdMm;
+    var dailyCap = state.load.trucksPerDay * state.load.payloadKg;
+    var totalLoad = totalLoadKg();
+    var daysNeeded = dailyCap > 0 ? Math.ceil(totalLoad / dailyCap) : Infinity;
+    var dryDays = state.forecast.filter(function (d) { return d.rainMm < threshold; });
+
+    if (!dryDays.length) {
+      return {
+        kind: "none", headline: "NO DRY WINDOW", detail: "Every forecast day exceeds " + threshold + "mm — hold loading or relax the threshold.",
+        plan: totalLoad + " kg staged \u2022 " + daysNeeded + " load-day(s) required at " + dailyCap + " kg/day",
+        days: []
+      };
+    }
+    if (dryDays.length < daysNeeded) {
+      return {
+        kind: "short", headline: "CAPACITY SHORTFALL",
+        detail: daysNeeded + " load-days needed but only " + dryDays.length + " dry day(s) below " + threshold + "mm in the 7-day window.",
+        plan: totalLoad + " kg \u00F7 (" + state.load.trucksPerDay + " trucks \u00D7 " + state.load.payloadKg + "kg) = " + daysNeeded + " days \u2022 dry: " + dryDays.map(function (d) { return d.day; }).join(", "),
+        days: dryDays
+      };
+    }
+    var window = dryDays.slice(0, daysNeeded);
+    var first = window[0];
+    return {
+      kind: "ok",
+      headline: "BEST DAY TO LOAD: " + first.day.toUpperCase(),
+      detail: "Rain " + trimNum(first.rainMm, 1) + "mm < " + threshold + "mm \u2022 " + (window.length > 1 ? "runs " + window[0].day + "\u2192" + window[window.length - 1].day + " (" + window.length + " days)" : "clears the lot in one run"),
+      plan: totalLoad + " kg \u00F7 (" + state.load.trucksPerDay + " trucks \u00D7 " + state.load.payloadKg + "kg) = " + daysNeeded + " day(s) \u2022 capacity " + dailyCap + " kg/day",
+      days: window
+    };
+  }
+
+  /* ── render: metric cards ────────────────────────────────────────────── */
+  function renderMetrics() {
+    var worth = farmWorthNgn();
+    var cap = capacityTotals();
+
+    var wv = byId("worth-value");
+    wv.textContent = fmtMoney(worth);
+    tick(wv);
+    byId("worth-alt").textContent = fmtMoneyAlt(worth);
+    byId("worth-silos").textContent = state.silos.length + " silos \u2022 " + trimNum(cap.pct, 0) + "% capacity used";
+    var mtd = ((worth - state.baselineMtd) / state.baselineMtd) * 100;
+    var mtdEl = byId("worth-mtd");
+    mtdEl.textContent = (mtd >= 0 ? "+" : "") + trimNum(mtd, 1) + "% MTD";
+    mtdEl.classList.toggle("text-primary", mtd >= 0);
+    mtdEl.classList.toggle("text-error", mtd < 0);
+
+    var ev = byId("export-value");
+    ev.textContent = fmtMoney(worth);
+    tick(ev);
+    byId("export-alt").textContent = fmtMoneyAlt(worth) + " at spot conversion";
+    byId("export-spot").textContent = "Spot Index: \u20A6" + state.fx.rate.toLocaleString("en-US", { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + "/USD \u2022 " + state.fx.source;
+
+    byId("stock-accordion-sub").textContent = state.crops.length + " active commodities \u2022 " + trimNum(cap.used, 0) + "/" + trimNum(cap.capacity, 0) + " kg stored";
+  }
+
+  function renderDirective() {
+    var d = computeDirective();
+    var dayEl = byId("directive-day");
+    dayEl.textContent = d.headline;
+    dayEl.classList.toggle("text-error", d.kind === "none" || d.kind === "short");
+    byId("directive-detail").textContent = d.detail;
+    byId("directive-plan").textContent = d.plan;
+    tick(dayEl);
+
+    $$(".threshold-chip").forEach(function (b) {
+      var active = Number(b.getAttribute("data-threshold")) === state.load.thresholdMm;
+      b.setAttribute("aria-pressed", String(active));
+      b.classList.toggle("bg-primary", active);
+      b.classList.toggle("text-on-primary", active);
+      b.classList.toggle("border-primary", active);
+      b.classList.toggle("bg-surface-container-lowest", !active);
+      b.classList.toggle("text-on-surface", !active);
+      b.classList.toggle("border-outline-variant", !active);
+    });
+    renderForecastTable();
+  }
+
+  function renderForecastTable() {
+    var d = computeDirective();
+    var chosen = {};
+    d.days.forEach(function (x) { chosen[x.day] = true; });
+    byId("forecast-body").innerHTML = state.forecast.map(function (f) {
+      var dry = f.rainMm < state.load.thresholdMm;
+      var inPlan = chosen[f.day];
+      var verdict = inPlan
+        ? '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-primary/10 text-primary font-label-sm text-label-sm font-semibold"><span class="material-symbols-outlined text-[14px]">local_shipping</span>Load</span>'
+        : dry
+          ? '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-secondary-container/25 text-on-secondary-container font-label-sm text-label-sm font-semibold"><span class="material-symbols-outlined text-[14px]">check</span>Dry</span>'
+          : '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-tertiary/15 text-tertiary-strong font-label-sm text-label-sm font-semibold"><span class="material-symbols-outlined text-[14px]">rainy</span>Wet</span>';
+      return '<tr class="' + (inPlan ? 'bg-primary/5' : '') + 'hover:bg-surface-container-low/60 transition-colors">' +
+        '<td class="py-space-sm px-space-md font-semibold">' + f.day + '</td>' +
+        '<td class="py-space-sm px-space-md font-data-mono text-body-sm text-on-surface-variant">' + f.date + '</td>' +
+        '<td class="py-space-sm px-space-md text-right font-data-mono tabular-nums">' + trimNum(f.rainMm, 1) + ' mm</td>' +
+        '<td class="py-space-sm px-space-md text-right font-data-mono tabular-nums">' + f.tMax + '\u00B0C</td>' +
+        '<td class="py-space-sm px-space-md text-right font-data-mono tabular-nums">' + f.humidity + '%</td>' +
+        '<td class="py-space-sm px-space-md text-center">' + verdict + '</td>' +
+      '</tr>';
+    }).join("");
+  }
+
+  /* ── render: silo gauges + commodity tiles ───────────────────────────── */
+  var ARC = Math.PI * 50; // semicircle length for r=50
+  function gaugeColor(pct) {
+    if (pct >= 90) return "rgb(var(--error))";
+    if (pct >= 70) return "rgb(var(--tertiary))";
+    return "rgb(var(--primary))";
+  }
+  function renderSilos() {
+    byId("silo-grid").innerHTML = state.silos.map(function (s) {
+      var st = siloStats(s);
+      var pct = clamp(st.pct, 0, 100);
+      var color = gaugeColor(st.pct);
+      var selected = state.selectedSilo === s.id;
+      var lots = state.crops.filter(function (c) { return c.silo === s.id; });
+      var lotRows = lots.map(function (c) {
+        return '<li class="flex items-center justify-between gap-2 font-body-sm text-body-sm">' +
+          '<span>' + c.emoji + ' ' + esc(c.name) + '</span>' +
+          '<span class="font-data-mono tabular-nums text-on-surface-variant">' + fmtKg(c.kg) + ' \u2022 ' + fmtMoney(c.kg * c.rate) + '</span></li>';
+      }).join("") || '<li class="font-body-sm text-body-sm text-on-surface-variant">No lots assigned</li>';
+
+      return '<button type="button" class="silo-gauge text-left bg-surface-container-lowest border ' + (selected ? 'border-primary ring-1 ring-primary' : 'border-outline-variant') + ' rounded-lg p-space-md shadow-sm transition-all focus:outline-none" data-silo="' + s.id + '" aria-pressed="' + selected + '">' +
+        '<div class="flex items-center justify-between mb-1">' +
+          '<span class="font-title-md text-title-md text-on-surface font-bold">' + esc(s.name) + '</span>' +
+          '<span class="font-label-sm text-label-sm font-semibold" style="color:' + color + '">' + trimNum(st.pct, 0) + '%</span>' +
+        '</div>' +
+        '<div class="relative flex justify-center">' +
+          '<svg viewBox="0 0 120 68" class="w-full max-w-[150px]" role="img" aria-label="' + esc(s.name) + ' at ' + trimNum(st.pct, 0) + ' percent capacity">' +
+            '<path d="M10 62 A50 50 0 0 1 110 62" fill="none" stroke="rgb(var(--surface-container))" stroke-width="10" stroke-linecap="round"/>' +
+            '<path d="M10 62 A50 50 0 0 1 110 62" fill="none" stroke="' + color + '" stroke-width="10" stroke-linecap="round" ' +
+              'stroke-dasharray="' + ARC.toFixed(2) + '" stroke-dashoffset="' + (ARC * (1 - pct / 100)).toFixed(2) + '"/>' +
+            '<text x="60" y="56" text-anchor="middle" font-family="Inter" font-size="16" font-weight="700" fill="rgb(var(--on-surface))">' + trimNum(st.used, 0) + '</text>' +
+          '</svg>' +
+        '</div>' +
+        '<div class="font-label-sm text-label-sm text-on-surface-variant text-center tabular-nums">' + trimNum(st.used, 0) + ' / ' + trimNum(st.capacity, 0) + ' kg used \u2022 ' + trimNum(Math.max(0, st.capacity - st.used), 0) + ' kg free</div>' +
+        '<ul class="mt-space-sm pt-space-sm border-t border-outline-variant space-y-1">' + lotRows + '</ul>' +
+      '</button>';
+    }).join("");
+  }
+
+  function renderCommodities() {
+    byId("commodity-grid").innerHTML = state.crops.map(function (c) {
+      var silo = state.silos.filter(function (s) { return s.id === c.silo; })[0];
+      var st = silo ? siloStats(silo) : null;
+      var lotPct = st && st.used ? (c.kg / st.used) * 100 : 0;
+      return '<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-space-md flex flex-col justify-between shadow-sm">' +
+        '<div class="flex items-center justify-between gap-2">' +
+          '<div class="flex items-center gap-2">' +
+            '<span class="material-symbols-outlined text-primary text-[20px]">grain</span>' +
+            '<span class="font-title-md text-title-md text-on-surface font-bold">' + c.emoji + ' ' + esc(c.name) + '</span>' +
+          '</div>' +
+          '<span class="px-2 py-0.5 rounded bg-secondary-container/25 text-on-secondary-container font-label-sm text-label-sm font-semibold">' + esc(c.source) + '</span>' +
+        '</div>' +
+        '<div class="mt-space-md mb-space-xs">' +
+          '<div class="font-data-mono text-[30px] leading-tight text-on-surface font-bold tabular-nums">' + fmtMoney(c.kg * c.rate) + '</div>' +
+          '<div class="font-label-md text-label-md text-on-surface-variant mt-1 tabular-nums">' + fmtKg(c.kg) + ' in ' + esc(silo ? silo.name : "\u2014") + ' \u2022 \u20A6' + c.rate.toLocaleString("en-NG") + '/kg</div>' +
+        '</div>' +
+        '<div class="w-full bg-surface-container rounded-full h-1.5 mt-space-sm" title="Share of silo load">' +
+          '<div class="h-1.5 rounded-full" style="width:' + clamp(lotPct, 4, 100).toFixed(0) + '%;background:' + (c.id === "cassava" ? "rgb(var(--secondary))" : c.id === "yam" ? "rgb(var(--tertiary))" : "rgb(var(--primary))") + '"></div>' +
+        '</div>' +
+      '</div>';
+    }).join("");
+  }
+
+  /* ── render: sensors, checklist, clock ───────────────────────────────── */
+  function renderSensors() {
+    var s = state.sensors;
+    var summary = s.tempC.toFixed(1) + "\u00B0C " + (s.rainRateMm >= 4 ? "Heavy rain" : s.rainRateMm >= 1 ? "Light drizzle" : "Dry");
+    byId("sensor-summary").textContent = summary;
+    byId("sensor-subline").textContent = "Rain rate: " + trimNum(s.rainRateMm, 1) + " mm/hr \u2022 wind " + s.windKmh + " km/h " + s.windDir;
+
+    var badge = byId("sensor-badge");
+    if (state.polling) {
+      badge.className = "inline-flex items-center gap-1 px-2.5 py-1 rounded font-label-sm text-label-sm font-semibold bg-secondary-container/30 text-on-secondary-container";
+      badge.textContent = "Polling\u2026";
+    } else if (state.online) {
+      badge.className = "inline-flex items-center gap-1 px-2.5 py-1 rounded font-label-sm text-label-sm font-semibold bg-primary/10 text-primary";
+      badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-primary inline-block animate-pulse"></span>Live sensor';
+    } else {
+      badge.className = "inline-flex items-center gap-1 px-2.5 py-1 rounded font-label-sm text-label-sm font-semibold bg-tertiary/15 text-tertiary-strong";
+      badge.textContent = "Cached reading";
+    }
+
+    byId("poll-label").textContent = state.polling ? "Polling\u2026" : "Poll sensors";
+    byId("poll-now-btn").disabled = state.polling;
+    byId("poll-icon").classList.toggle("spin", state.polling);
+
+    var last = state.lastPollAt
+      ? "Last polled " + fmtWAT(state.lastPollAt, true) +
+        (state.lastPollMs != null ? " \u2022 " + state.lastPollMs + "ms" : "")
+      : "Not polled yet this session";
+    byId("weather-accordion-sub").textContent = last;
+
+    var grid = [
+      { icon: "thermostat", label: "Temperature", value: trimNum(s.tempC, 1) + "\u00B0C" },
+      { icon: "humidity_mid", label: "Humidity", value: trimNum(s.humidityPct, 0) + "%" },
+      { icon: "air", label: "Wind", value: s.windKmh + " km/h " + s.windDir },
+      { icon: "rainy", label: "Rain rate", value: trimNum(s.rainRateMm, 1) + " mm/hr" },
+      { icon: "water_drop", label: "Soil moisture", value: trimNum(s.soilMoisturePct, 0) + "%" },
+      { icon: "grain", label: "Grain moisture", value: trimNum(s.grainMoisturePct, 1) + "% MC" }
+    ];
+    byId("sensor-grid").innerHTML = grid.map(function (g) {
+      return '<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-3 flex items-center gap-2.5">' +
+        '<span class="material-symbols-outlined text-secondary text-[20px]">' + g.icon + '</span>' +
+        '<div class="min-w-0">' +
+          '<div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">' + g.label + '</div>' +
+          '<div class="font-data-mono text-data-mono text-on-surface tabular-nums truncate">' + g.value + '</div>' +
+        '</div>' +
+      '</div>';
+    }).join("");
+
+    renderChecklist();
+    var pollEl = byId("telemetry-poll");
+    pollEl.textContent = state.online
+      ? (state.lastPollMs != null ? "POLL " + state.lastPollMs + "ms" : "POLL —")
+      : "OFFLINE";
+  }
+
+  function renderChecklist() {
+    var s = state.sensors;
+    var tomorrow = state.forecast[1];
+    var checks = [
+      {
+        ok: s.grainMoisturePct < 14.5,
+        title: "Dry Silo Equilibrium Verified",
+        detail: "Grain moisture content: " + trimNum(s.grainMoisturePct, 1) + "% MC (target <14.5%)"
+      },
+      {
+        ok: tomorrow && tomorrow.rainMm < 10,
+        title: "Tarped Transport Ramp Access",
+        detail: tomorrow
+          ? tomorrow.day + " forecast " + trimNum(tomorrow.rainMm, 1) + "mm (<10mm) \u2022 drainage active, no standing water risk"
+          : "Forecast unavailable"
+      },
+      {
+        ok: s.soilMoisturePct < 60,
+        title: "Field Trafficability Clear",
+        detail: "Soil moisture " + trimNum(s.soilMoisturePct, 0) + "% (limit 60%) \u2022 heavy vehicles can enter"
+      }
+    ];
+    var allOk = checks.every(function (c) { return c.ok; });
+    var badge = byId("checklist-badge");
+    badge.textContent = allOk ? "Conditions Clear" : "Review Required";
+    badge.className = "px-2.5 py-0.5 rounded font-label-sm text-label-sm font-semibold " +
+      (allOk ? "bg-primary/10 text-primary" : "bg-tertiary/15 text-tertiary-strong");
+
+    byId("checklist").innerHTML = checks.map(function (c) {
+      return '<div class="flex items-start gap-space-sm bg-surface-container-low border border-outline-variant p-2.5 rounded-lg">' +
+        '<span class="material-symbols-outlined text-[20px] mt-0.5 ' + (c.ok ? "text-primary" : "text-tertiary-strong") + '" style="font-variation-settings: \'FILL\' 1;">' + (c.ok ? "check_circle" : "warning") + '</span>' +
+        '<div>' +
+          '<span class="font-title-md text-body-md font-semibold text-on-surface">' + esc(c.title) + '</span>' +
+          '<span class="font-data-mono text-body-sm text-on-surface-variant block tabular-nums">' + esc(c.detail) + '</span>' +
+        '</div>' +
+      '</div>';
+    }).join("");
+  }
+
+  // CropTrade operates on West Africa Time (UTC+1, no DST): every displayed
+  // time renders in WAT regardless of the viewer's timezone.
+  var WAT_OFFSET_MS = 60 * 60 * 1000;
+  function fmtWAT(d, withSeconds) {
+    var t = new Date(d.getTime() + WAT_OFFSET_MS);
+    var hh = String(t.getUTCHours()).padStart(2, "0");
+    var mm = String(t.getUTCMinutes()).padStart(2, "0");
+    var ss = String(t.getUTCSeconds()).padStart(2, "0");
+    return hh + ":" + mm + (withSeconds ? ":" + ss : "");
+  }
+  function renderClock() {
+    var now = new Date(Date.now() + WAT_OFFSET_MS); // WAT calendar day
+    // ISO-8601 week number (computed on the WAT date)
+    var t = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+    var day = t.getUTCDay() || 7;
+    t.setUTCDate(t.getUTCDate() + 4 - day);
+    var yearStart = new Date(Date.UTC(t.getUTCFullYear(), 0, 1));
+    var week = Math.ceil((((t - yearStart) / 86400000) + 1) / 7);
+    byId("trading-cycle").textContent = "UTC+1 " + fmtWAT(new Date()) + " \u2022 WEEK " + week;
+  }
+
+  function renderConnectivity() {
+    var pip = byId("status-pip");
+    var label = byId("telemetry-status");
+    if (state.online) {
+      label.textContent = "SYSTEM STATUS: ONLINE";
+      label.classList.remove("text-tertiary-strong");
+      label.classList.add("text-primary");
+      pip.classList.remove("hidden");
+    } else {
+      label.textContent = "SYSTEM STATUS: OFFLINE \u2014 CACHED";
+      label.classList.remove("text-primary");
+      label.classList.add("text-tertiary-strong");
+      pip.classList.add("hidden");
+    }
+  }
+
+  function renderAll() {
+    renderMetrics();
+    renderDirective();
+    renderSilos();
+    renderCommodities();
+    renderSensors();
+    renderConnectivity();
+  }
+
+  /* ── toasts ──────────────────────────────────────────────────────────── */
+  function toast(kind, title, message) {
+    var host = byId("toast-host");
+    var tone = kind === "error" ? { icon: "error", cls: "text-error" }
+      : kind === "info" ? { icon: "info", cls: "text-secondary" }
+      : { icon: "check_circle", cls: "text-primary" };
+    var el = document.createElement("div");
+    el.className = "toast relative overflow-hidden bg-surface-container-lowest border border-outline-variant rounded-xl shadow-md p-3 pr-9";
+    el.innerHTML =
+      '<div class="flex items-start gap-2">' +
+        '<span class="material-symbols-outlined text-[20px] ' + tone.cls + '">' + tone.icon + '</span>' +
+        '<div class="min-w-0">' +
+          '<p class="font-title-md text-title-md text-on-surface font-semibold leading-tight">' + esc(title) + '</p>' +
+          '<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">' + esc(message) + '</p>' +
+        '</div>' +
+      '</div>' +
+      '<div class="absolute bottom-0 left-0 h-0.5 w-full bg-primary/70 toast__bar" style="animation-duration:4s"></div>' +
+      '<button type="button" aria-label="Dismiss notification" class="absolute top-2 right-2 w-6 h-6 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors">' +
+        '<span class="material-symbols-outlined text-[16px]">close</span></button>';
+    var remove = function () {
+      if (!el.parentNode) return;
+      el.classList.add("is-leaving");
+      setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 280);
+    };
+    el.querySelector("button").addEventListener("click", remove);
+    host.appendChild(el);
+    setTimeout(remove, 4200);
+  }
+
+  /* ── sensor polling (simulated rig with real measured latency) ───────── */
+  function jitter(value, spread, lo, hi) {
+    return clamp(value + (Math.random() - 0.5) * 2 * spread, lo, hi);
+  }
+  function pollSensors(manual) {
+    if (state.polling) return Promise.resolve(false);
+    if (!state.online) {
+      if (manual) toast("error", "Sensors unreachable", "Device reports offline — showing the last cached reading.");
+      return Promise.resolve(false);
+    }
+    state.polling = true;
+    renderSensors();
+    var t0 = performance.now();
+    var latency = 420 + Math.random() * 380;
+    return new Promise(function (resolve) {
+      setTimeout(function () {
+        var s = state.sensors;
+        s.tempC = jitter(s.tempC, 0.4, 22, 41);
+        s.humidityPct = jitter(s.humidityPct, 3, 35, 98);
+        s.windKmh = Math.round(jitter(s.windKmh, 1.5, 0, 24));
+        s.rainRateMm = Math.max(0, Number(jitter(s.rainRateMm, 0.4, 0, 18).toFixed(1)));
+        s.soilMoisturePct = Math.round(jitter(s.soilMoisturePct, 2, 20, 75));
+        s.grainMoisturePct = Number(jitter(s.grainMoisturePct, 0.15, 13.6, 14.4).toFixed(1));
+        state.lastPollMs = Math.round(performance.now() - t0);
+        state.lastPollAt = new Date();
+        state.polling = false;
+        renderSensors();
+        renderChecklist();
+        if (manual) toast("success", "Sensor poll complete", "Rig answered in " + state.lastPollMs + "ms — " + state.sensors.tempC.toFixed(1) + "\u00B0C, " + trimNum(state.sensors.rainRateMm, 1) + "mm/hr.");
+        resolve(true);
+      }, latency);
+    });
+  }
+  function setAutoPoll(ms) {
+    state.autoPollMs = ms;
+    if (state.autoTimer) { clearInterval(state.autoTimer); state.autoTimer = null; }
+    if (ms > 0) {
+      state.autoTimer = setInterval(function () {
+        // Self-invalidating: if the interval id was ever lost to an overlapping
+        // arm/disarm, a stray tick must not poll while the control says Off.
+        if (state.autoPollMs <= 0) {
+          clearInterval(state.autoTimer);
+          state.autoTimer = null;
+          return;
+        }
+        pollSensors(false);
+      }, ms);
+      toast("info", "Auto-poll armed", "Sensors will refresh every " + (ms / 1000) + "s.");
+    } else {
+      toast("info", "Auto-poll stopped", "Use Poll sensors to refresh manually.");
+    }
+  }
+
+  /* ── events ──────────────────────────────────────────────────────────── */
+  // currency toggle
+  $$(".currency-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      state.currency = btn.getAttribute("data-currency");
+      $$(".currency-btn").forEach(function (b) {
+        var active = b === btn;
+        b.setAttribute("aria-pressed", String(active));
+        b.classList.toggle("bg-primary-container", active);
+        b.classList.toggle("text-on-primary-container", active);
+        b.classList.toggle("shadow-sm", active);
+        b.classList.toggle("text-on-surface-variant", !active);
+        b.classList.toggle("hover:bg-surface-container-high", !active);
+      });
+      writeStored("croptrade_overview_currency", state.currency);
+      renderMetrics();
+      renderSilos();
+      renderCommodities();
+      renderChecklist();
+      toast("info", "Currency switched", "All figures now shown in " + (state.currency === "USD" ? "US dollars" : "naira") + ".");
+    });
+  });
+
+  // rain threshold chips
+  $$(".threshold-chip").forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      state.load.thresholdMm = Number(chip.getAttribute("data-threshold"));
+      renderDirective();
+      toast("info", "Threshold updated", "Dry day now means rain below " + state.load.thresholdMm + "mm.");
+    });
+  });
+
+  // dispatch capacity controls
+  byId("trucks-input").addEventListener("input", function (e) {
+    var v = parseInt(e.target.value, 10);
+    if (isNaN(v)) return;
+    state.load.trucksPerDay = clamp(v, 1, 8);
+    renderDirective();
+  });
+  byId("trucks-input").addEventListener("blur", function (e) {
+    e.target.value = state.load.trucksPerDay; // normalise out-of-range typed values
+  });
+  byId("payload-select").addEventListener("change", function (e) {
+    state.load.payloadKg = Number(e.target.value);
+    renderDirective();
+  });
+
+  // silo gauges: tap to focus / unfocus
+  byId("silo-grid").addEventListener("click", function (e) {
+    var g = e.target.closest("[data-silo]");
+    if (!g) return;
+    var id = g.getAttribute("data-silo");
+    state.selectedSilo = state.selectedSilo === id ? null : id;
+    renderSilos();
+  });
+
+  // accordions
+  function setupAccordion(btnId, contentId, chevronId) {
+    var btn = byId(btnId), content = byId(contentId), chevron = byId(chevronId);
+    if (!btn || !content || !chevron) return;
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!open));
+      content.classList.toggle("hidden", open);
+      chevron.style.transform = open ? "rotate(0deg)" : "rotate(180deg)";
+    });
+  }
+  setupAccordion("accordion-stock-btn", "accordion-stock-content", "chevron-stock-icon");
+  setupAccordion("accordion-weather-btn", "accordion-weather-content", "chevron-weather-icon");
+
+  // sensor polling controls
+  byId("poll-now-btn").addEventListener("click", function () { pollSensors(true); });
+  byId("poll-select").addEventListener("change", function (e) { setAutoPoll(Number(e.target.value)); });
+
+  // connectivity
+  window.addEventListener("online", function () {
+    state.online = true; renderConnectivity(); renderSensors();
+    toast("success", "Back online", "Live sensor polling resumed.");
+  });
+  window.addEventListener("offline", function () {
+    state.online = false; renderConnectivity(); renderSensors();
+    toast("error", "Connection lost", "Showing the last cached sensor reading.");
+  });
+
+  /* ── theme (guarded: storage may be denied) ──────────────────────────── */
+  var themeToggleBtn = byId("theme-toggle-btn");
+  var themeIconLight = byId("theme-icon-light");
+  var themeIconDark = byId("theme-icon-dark");
+  function readStored(key) {
+    try { return localStorage.getItem(key); } catch (e) { return null; }
+  }
+  function writeStored(key, value) {
+    try { localStorage.setItem(key, value); } catch (e) { /* session-only fallback */ }
+  }
+  function applyTheme(isDark) {
+    document.documentElement.classList.toggle("dark", isDark);
+    themeIconLight.classList.toggle("hidden", isDark);
+    themeIconDark.classList.toggle("hidden", !isDark);
+    themeToggleBtn.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+    themeToggleBtn.setAttribute("title", isDark ? "Switch to light mode" : "Switch to dark mode");
+  }
+  var storedTheme = readStored("croptrade_theme");
+  applyTheme(storedTheme === "dark" || (storedTheme === null && window.matchMedia("(prefers-color-scheme: dark)").matches));
+  themeToggleBtn.addEventListener("click", function () {
+    var nowDark = !document.documentElement.classList.contains("dark");
+    writeStored("croptrade_theme", nowDark ? "dark" : "light");
+    applyTheme(nowDark);
+    toast("info", nowDark ? "Dark mode on" : "Light mode on", "Theme preference saved for your next visit.");
+  });
+
+  /* ── boot ────────────────────────────────────────────────────────────── */
+  var storedCurrency = readStored("croptrade_overview_currency");
+  if (storedCurrency === "USD" || storedCurrency === "NGN") {
+    state.currency = storedCurrency;
+    $$(".currency-btn").forEach(function (b) {
+      var active = b.getAttribute("data-currency") === state.currency;
+      b.setAttribute("aria-pressed", String(active));
+      b.classList.toggle("bg-primary-container", active);
+      b.classList.toggle("text-on-primary-container", active);
+      b.classList.toggle("shadow-sm", active);
+      b.classList.toggle("text-on-surface-variant", !active);
+      b.classList.toggle("hover:bg-surface-container-high", !active);
+    });
+  }
+
+  renderAll();
+  renderClock();
+  setInterval(renderClock, 30000);
+  pollSensors(false); // initial reading so latency and sensor values are live at first paint
+})();
+</script>
+</body>
+</html>

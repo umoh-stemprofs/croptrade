@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>CropTrade</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "inverse-on-surface": "#eef0ff", "on-secondary-container": "#00476e", "background": "#faf8ff", "error-container": "#ffdad6", "on-surface": "#131b2e", "on-primary-fixed": "#002110", "on-primary": "#ffffff", "on-primary-fixed-variant": "#00522f", "surface-container-highest": "#dae2fd", "tertiary-container": "#a56800", "tertiary-fixed": "#ffddb8", "outline-variant": "#bdcabe", "on-tertiary": "#ffffff", "inverse-surface": "#283044", "on-tertiary-container": "#fffeff", "error": "#ba1a1a", "on-primary-container": "#fdfff9", "on-secondary-fixed-variant": "#004b73", "surface": "#faf8ff", "secondary": "#006398", "on-tertiary-fixed": "#2a1700", "primary-fixed-dim": "#70db9d", "surface-dim": "#d2d9f4", "surface-tint": "#006d40", "primary-fixed": "#8df8b7", "secondary-fixed-dim": "#93ccff", "surface-container-high": "#e2e7ff", "secondary-container": "#5bb8fe", "on-error": "#ffffff", "on-secondary-fixed": "#001d31", "on-surface-variant": "#3e4a41", "secondary-fixed": "#cce5ff", "surface-bright": "#faf8ff", "tertiary-fixed-dim": "#ffb95f", "inverse-primary": "#70db9d", "on-error-container": "#93000a", "surface-container-low": "#f2f3ff", "on-background": "#131b2e", "on-secondary": "#ffffff", "outline": "#6e7a70", "surface-container": "#eaedff", "on-tertiary-fixed-variant": "#653e00", "tertiary": "#835200", "surface-variant": "#dae2fd", "surface-container-lowest": "#ffffff", "primary-container": "#008751", "primary": "#006b3f" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-sm": "0.5rem", "gutter": "1rem", "space-xs": "0.25rem", "space-xl": "2rem", "margin-tablet": "1.5rem", "space-lg": "1.5rem", "gutter-desktop": "1.5rem", "space-md": "1rem", "margin": "1rem", "margin-desktop": "2rem" }, "fontFamily": { "headline-lg": [ "Plus Jakarta Sans" ], "headline-md": [ "Plus Jakarta Sans" ], "label-sm": [ "Inter" ], "title-md": [ "Inter" ], "display-lg": [ "Plus Jakarta Sans" ], "body-md": [ "Inter" ], "label-md": [ "Inter" ], "body-sm": [ "Inter" ], "body-lg": [ "Inter" ], "headline-lg-mobile": [ "Plus Jakarta Sans" ], "headline-sm": [ "Plus Jakarta Sans" ], "data-mono": [ "Inter" ], "display-lg-mobile": [ "Plus Jakarta Sans" ] }, "fontSize": { "headline-lg": [ "30px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-md": [ "22px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "label-sm": [ "11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" } ], "title-md": [ "16px", { "lineHeight": "22px", "letterSpacing": "-0.005em", "fontWeight": "600" } ], "display-lg": [ "36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "800" } ], "body-md": [ "14px", { "lineHeight": "20px", "fontWeight": "400" } ], "label-md": [ "13px", { "lineHeight": "16px", "fontWeight": "500" } ], "body-sm": [ "12px", { "lineHeight": "16px", "fontWeight": "400" } ], "body-lg": [ "16px", { "lineHeight": "24px", "fontWeight": "400" } ], "headline-lg-mobile": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "700" } ], "headline-sm": [ "18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "data-mono": [ "14px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "display-lg-mobile": [ "28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800" } ] } } } };</script></head><body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex flex-col antialiased selection:bg-primary selection:text-on-primary"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-6xl mx-auto px-6 flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md shrink-0"><div class="flex items-center gap-space-sm"><div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary-container shadow-sm"><span class="material-symbols-outlined text-[24px]">eco</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface leading-none">CropTrade</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-0.5">Agritech Simplicity</span></div></div></div><nav class="hidden lg:flex items-center gap-space-xs p-1 bg-surface-container-low rounded-xl" data-active-classes="bg-primary-container text-on-primary-container font-title-md text-title-md shadow-sm"><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="overview" href="#">Overview</a><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="stock" href="#">Stock</a><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="market" href="#">Market</a><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="weather" href="#">Weather</a><a aria-current="page" class="min-h-[56px] px-space-md py-space-sm rounded-lg transition-all flex items-center justify-center leading-none bg-primary-container text-on-primary-container font-title-md text-title-md shadow-sm" data-path="rates" href="#">Rates</a></nav><div class="flex items-center gap-space-sm shrink-0"><button aria-label="Toggle theme" class="min-h-[56px] min-w-[56px] rounded-xl flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors focus:outline-none focus:bg-surface-container-highest" id="theme-toggle-btn" type="button"><span class="material-symbols-outlined text-[24px]" id="theme-icon-light">light_mode</span><span class="material-symbols-outlined text-[24px] hidden" id="theme-icon-dark">dark_mode</span></button><div class="h-8 w-px bg-outline-variant/30 hidden sm:block mx-space-xs"></div><div class="flex items-center gap-space-sm p-1 rounded-xl hover:bg-surface-container-low transition-colors"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-label-md text-label-md text-on-surface leading-tight">Terminal 04</span><span class="font-label-sm text-label-sm text-primary flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>Live Feed</span></div></div></div></div></header><main class="w-full pt-20 bg-surface flex-1"><div class="max-w-6xl mx-auto py-space-xl px-6"><div class="flex flex-col w-full">
+<!-- Top Telemetry & Benchmark Bar -->
+<section class="w-full bg-surface-container-low rounded-xl px-4 py-3 mb-6 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse shrink-0"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">Central Bank of Nigeria Agro-Desk</span>
+<span class="text-outline-variant font-data-mono text-body-sm hidden sm:inline">|</span>
+<span class="font-label-sm text-label-sm text-primary bg-primary/10 px-2 py-0.5 rounded-full font-medium">Feed Verified</span>
+</div>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 font-data-mono text-data-mono text-on-surface">
+<div class="flex items-center gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">1 USD</span>
+<span class="text-primary font-bold">₦1,331.62</span>
+</div>
+<span class="text-outline-variant/50 hidden sm:inline">•</span>
+<div class="flex items-center gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">1 EUR</span>
+<span class="text-secondary font-bold">₦1,494.75</span>
+</div>
+<span class="text-outline-variant/50 hidden sm:inline">•</span>
+<div class="flex items-center gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">1 GBP</span>
+<span class="text-tertiary font-bold">₦1,850.00</span>
+</div>
+</div>
+</section>
+<!-- Page Header Layout -->
+<header class="mb-8 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+<div>
+<div class="flex items-center gap-2 mb-1.5">
+<span class="material-symbols-outlined text-primary text-[20px]">currency_exchange</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">FX Export Liquidity Terminal</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Money Converter</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-1 max-w-2xl">
+        Convert domestic harvest valuation (NGN) into export settlements with spot-cleared agro-parity rates.
+      </p>
+</div>
+<div class="flex items-center gap-3 self-start lg:self-auto">
+<div class="bg-surface-container rounded-lg px-3 py-2 flex items-center gap-2 text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px] text-primary">verified_user</span>
+<span>Institutional Agro-Corridor</span>
+</div>
+<div class="bg-surface-container rounded-lg px-3 py-2 flex items-center gap-2 text-on-surface-variant font-data-mono text-data-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span>UTC 11:42:09</span>
+</div>
+</div>
+</header>
+<!-- Tactile Converter Container (Main View) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+<!-- Input & Controls Column (7 Cols) -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<!-- Primary Input Card -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-3">
+<label class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2" for="naira-input">
+<span>Enter Naira Amount (₦)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-normal">Domestically Booked</span>
+</label>
+<span class="font-label-sm text-label-sm text-primary font-semibold uppercase tracking-wider">Base Currency</span>
+</div>
+<div class="relative flex items-center bg-surface-container-low rounded-xl px-4 py-2 focus-within:bg-surface-container transition-colors">
+<span class="font-headline-lg text-headline-lg text-on-surface-variant mr-3 select-none font-bold">₦</span>
+<input class="w-full bg-transparent font-headline-lg text-headline-lg text-on-surface focus:outline-none tracking-tight font-bold placeholder:text-outline-variant" id="naira-input" min="0" placeholder="0.00" step="100" type="number" value="601690"/>
+<button class="h-10 px-3 ml-2 rounded-lg bg-surface-container-high text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-1 font-label-md text-label-md shrink-0" id="reset-input-btn" title="Reset to benchmark batch" type="button">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+<span class="hidden sm:inline">Reset</span>
+</button>
+</div>
+<!-- Quick Amount Increments -->
+<div class="flex flex-wrap items-center gap-2 mt-4 pt-4">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Standard Lot:</span>
+<button class="quick-amt-btn px-2.5 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high font-data-mono text-body-sm text-on-surface transition-colors" data-amt="250000" type="button">+₦250k</button>
+<button class="quick-amt-btn px-2.5 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high font-data-mono text-body-sm text-on-surface transition-colors" data-amt="601690" type="button">₦601.69k (Batch #4)</button>
+<button class="quick-amt-btn px-2.5 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high font-data-mono text-body-sm text-on-surface transition-colors" data-amt="1200000" type="button">₦1.2M (Full Container)</button>
+</div>
+</div>
+<!-- Currency Switcher Toggles (Min 56px height) -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-3">
+<span class="font-title-md text-title-md text-on-surface font-semibold">Target Settlement Currency</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Institutional Cleared</span>
+</div>
+<div class="grid grid-cols-3 gap-3">
+<!-- USD Button -->
+<button class="currency-toggle-btn min-h-[56px] px-4 py-3 rounded-xl flex items-center justify-center gap-2 text-center transition-all bg-primary-container text-on-primary-container shadow-md" data-currency="USD" data-rate="1331.62" data-symbol="$" id="currency-usd" type="button">
+<span class="font-headline-sm text-headline-sm font-bold">$</span>
+<div class="flex flex-col text-left leading-none">
+<span class="font-title-md text-title-md font-bold">USD</span>
+<span class="font-label-sm text-label-sm opacity-80">US Dollar</span>
+</div>
+</button>
+<!-- EUR Button -->
+<button class="currency-toggle-btn min-h-[56px] px-4 py-3 rounded-xl flex items-center justify-center gap-2 text-center transition-all bg-surface-container hover:bg-surface-container-high text-on-surface" data-currency="EUR" data-rate="1494.75" data-symbol="€" id="currency-eur" type="button">
+<span class="font-headline-sm text-headline-sm font-bold">€</span>
+<div class="flex flex-col text-left leading-none">
+<span class="font-title-md text-title-md font-bold">EUR</span>
+<span class="font-label-sm text-label-sm opacity-70">Euro</span>
+</div>
+</button>
+<!-- GBP Button -->
+<button class="currency-toggle-btn min-h-[56px] px-4 py-3 rounded-xl flex items-center justify-center gap-2 text-center transition-all bg-surface-container hover:bg-surface-container-high text-on-surface" data-currency="GBP" data-rate="1850.00" data-symbol="£" id="currency-gbp" type="button">
+<span class="font-headline-sm text-headline-sm font-bold">£</span>
+<div class="flex flex-col text-left leading-none">
+<span class="font-title-md text-title-md font-bold">GBP</span>
+<span class="font-label-sm text-label-sm opacity-70">UK Sterling</span>
+</div>
+</button>
+</div>
+</div>
+<!-- Quick Context Micro-Card -->
+<div class="bg-surface-container-low rounded-xl p-4 flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[24px]">balance</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-label-md text-label-md text-on-surface font-semibold truncate">Export Parity Guaranteed</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Sovereign settlement locked for 24-hours upon grain terminal docket filing.</p>
+</div>
+</div>
+</div>
+<!-- Giant Result Card Column (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col justify-between bg-surface-container-lowest p-6 sm:p-8 rounded-xl shadow-md relative overflow-hidden">
+<!-- Decorative background glow -->
+<div class="absolute -top-12 -right-12 w-48 h-48 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+<div>
+<!-- Badges & State -->
+<div class="flex items-center justify-between gap-2 mb-6">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">Converted Valuation</span>
+<div class="flex items-center gap-1.5">
+<span class="px-2.5 py-1 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+              Live FX
+            </span>
+<span class="px-2.5 py-1 rounded-full bg-secondary-container/20 text-on-secondary-container font-label-sm text-label-sm font-semibold">
+              Simulated Total
+            </span>
+</div>
+</div>
+<!-- Giant Converted Output -->
+<div class="my-6">
+<div class="flex items-baseline gap-2 flex-wrap">
+<span class="font-display-lg text-display-lg text-primary tracking-tight font-extrabold transition-all duration-200" id="giant-result-val">
+              $451.85
+            </span>
+<span class="font-headline-md text-headline-md text-primary font-bold" id="giant-result-code">
+              USD
+            </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2" id="conversion-subtext">
+            Spot parity at 1 USD = ₦1,331.62 • Pre-export handling charges applied
+          </p>
+</div>
+<!-- Metric breakdown list -->
+<div class="space-y-3 pt-6 mb-6">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<span class="text-on-surface-variant">Gross Batch Equivalent:</span>
+<span class="font-data-mono font-bold text-on-surface" id="gross-eq-val">$451.85 USD</span>
+</div>
+<div class="flex items-center justify-between font-label-md text-label-md">
+<span class="text-on-surface-variant">Est. Handling Buffer (2.0%):</span>
+<span class="font-data-mono text-tertiary font-semibold" id="buffer-val">-$9.04 USD</span>
+</div>
+<div class="flex items-center justify-between font-label-md text-label-md">
+<span class="text-on-surface-variant">Export Settlement Account:</span>
+<span class="font-data-mono text-primary font-medium">GTB AGRO-DESK #994</span>
+</div>
+</div>
+</div>
+<!-- Action Button (Min 56px height) -->
+<button class="w-full min-h-[56px] px-6 py-4 rounded-xl bg-primary text-on-primary font-title-md text-title-md font-semibold hover:bg-primary-container hover:shadow-lg transition-all flex items-center justify-center gap-2 shadow-sm" id="save-valuation-btn" type="button">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Save Net Export Valuation</span>
+</button>
+<!-- Toast confirmation feedback -->
+<div class="hidden absolute inset-x-6 bottom-6 bg-inverse-surface text-inverse-on-surface px-4 py-3 rounded-lg shadow-xl flex items-center justify-between transition-opacity duration-300" id="save-toast">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed text-[20px]">task_alt</span>
+<span class="font-label-md text-label-md">Valuation archived to export pipeline</span>
+</div>
+<span class="font-data-mono text-label-sm opacity-70">EXP-8841</span>
+</div>
+</div>
+</div>
+<!-- Collapsible Section: Mandatory 30-Day FX Exchange Rate Chart & Deductions -->
+<section class="w-full bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden transition-all duration-300 mb-8">
+<!-- Accordion Trigger Banner (Min 56px touch height) -->
+<button aria-expanded="false" class="w-full min-h-[56px] px-6 py-4 flex items-center justify-between bg-surface-container hover:bg-surface-container-high transition-colors text-left focus:outline-none" id="accordion-toggle-btn" type="button">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">ssid_chart</span>
+</span>
+<div class="flex flex-col sm:flex-row sm:items-center sm:gap-3">
+<span class="font-title-md text-title-md text-on-surface font-semibold">30-Day FX Exchange Rate Chart &amp; Cost Deductions</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant hidden sm:inline">• Real-time volatility index</span>
+</div>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<span class="font-label-md text-label-md text-primary font-semibold hidden md:inline">Inspect Fluctuations</span>
+<span class="material-symbols-outlined text-primary text-[24px] transform transition-transform duration-300" id="accordion-icon">
+          expand_more
+        </span>
+</div>
+</button>
+<!-- Expanded Drawer Content -->
+<div class="hidden p-6 sm:p-8 bg-surface-container-lowest" id="accordion-drawer">
+<!-- Chart Header Metrics -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-6">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Historical Fluctuations</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold mt-0.5">USD/NGN 30-Day Ag-Corridor Trend</h2>
+</div>
+<div class="flex items-center gap-3 bg-surface-container-low px-4 py-2 rounded-xl">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Current Rate Highlight</span>
+<span class="font-data-mono text-title-md text-primary font-bold">₦1,331.62</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-data-mono text-label-sm font-semibold">+0.32%</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant hidden sm:inline">7-day stability band</span>
+</div>
+</div>
+<!-- Rich Custom Inline SVG Line Chart (USD / NGN Volatility) -->
+<div class="w-full bg-surface-container-low p-4 sm:p-6 rounded-xl relative mb-8">
+<!-- Y-Axis Labels & Grid Lines -->
+<div class="relative w-full h-56 flex flex-col justify-between pointer-events-none select-none">
+<div class="w-full flex items-center justify-between text-on-surface-variant font-data-mono text-body-sm">
+<span>₦1,340</span>
+<div class="w-full mx-4 h-px bg-outline-variant/20"></div>
+</div>
+<div class="w-full flex items-center justify-between text-on-surface-variant font-data-mono text-body-sm">
+<span>₦1,330</span>
+<div class="w-full mx-4 h-px bg-outline-variant/20"></div>
+</div>
+<div class="w-full flex items-center justify-between text-on-surface-variant font-data-mono text-body-sm">
+<span>₦1,320</span>
+<div class="w-full mx-4 h-px bg-outline-variant/20"></div>
+</div>
+<div class="w-full flex items-center justify-between text-on-surface-variant font-data-mono text-body-sm">
+<span>₦1,310</span>
+<div class="w-full mx-4 h-px bg-outline-variant/20"></div>
+</div>
+</div>
+<!-- SVG Line Overlay (Curved Sparkline with Area Gradient) -->
+<svg class="absolute inset-x-12 sm:inset-x-16 top-4 bottom-10 w-[calc(100%-6rem)] sm:w-[calc(100%-8rem)] h-44 overflow-visible" preserveaspectratio="none" viewbox="0 0 100 100">
+<defs>
+<lineargradient id="rateGradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#008751" stop-opacity="0.35"></stop>
+<stop offset="100%" stop-color="#008751" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<!-- Area Fill -->
+<path d="M 0,80 Q 15,75 25,60 T 50,45 T 75,30 T 100,22 L 100,100 L 0,100 Z" fill="url(#rateGradient)"></path>
+<!-- Smooth Line -->
+<path d="M 0,80 Q 15,75 25,60 T 50,45 T 75,30 T 100,22" fill="none" stroke="#008751" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+<!-- Key Points -->
+<circle cx="0" cy="80" fill="#faf8ff" r="3.5" stroke="#008751" stroke-width="2.5"></circle>
+<circle cx="25" cy="60" fill="#008751" r="3"></circle>
+<circle cx="50" cy="45" fill="#008751" r="3"></circle>
+<circle cx="75" cy="30" fill="#008751" r="3"></circle>
+<circle cx="100" cy="22" fill="#008751" r="4.5" stroke="#faf8ff" stroke-width="2.5"></circle>
+</svg>
+<!-- X-Axis Labels -->
+<div class="flex items-center justify-between pt-3 pl-12 sm:pl-14 text-on-surface-variant font-data-mono text-body-sm">
+<span>30 Days Ago (₦1,314.50)</span>
+<span class="hidden sm:inline">20 Days Ago (₦1,322.10)</span>
+<span>10 Days Ago (₦1,328.00)</span>
+<span class="font-bold text-primary">Today (₦1,331.62)</span>
+</div>
+</div>
+<!-- Comparative Sub-Grids: Reference Parities & Export Cost Deductions -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Reference Conversion Cards -->
+<div class="bg-surface-container-low p-5 rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-title-md text-title-md text-on-surface font-semibold">Multi-Currency Parity Index</span>
+<span class="font-label-sm text-label-sm text-primary font-bold">₦601,690.00 Ref</span>
+</div>
+<div class="space-y-3">
+<!-- EUR Reference -->
+<div class="flex items-center justify-between p-3 bg-surface-container rounded-lg">
+<div class="flex items-center gap-2.5">
+<span class="w-7 h-7 rounded bg-secondary-container/30 text-on-secondary-container font-headline-sm font-bold flex items-center justify-center">€</span>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-semibold block">EUR Parity</span>
+<span class="font-data-mono text-body-sm text-on-surface-variant">Pegged at ₦1,494.75</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-data-mono text-title-md text-on-surface font-bold">€402.53 EUR</span>
+<span class="block font-label-sm text-label-sm text-secondary font-medium">Clearance -0.18%</span>
+</div>
+</div>
+<!-- GBP Reference -->
+<div class="flex items-center justify-between p-3 bg-surface-container rounded-lg">
+<div class="flex items-center gap-2.5">
+<span class="w-7 h-7 rounded bg-tertiary-fixed text-on-tertiary-fixed font-headline-sm font-bold flex items-center justify-center">£</span>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-semibold block">GBP Parity</span>
+<span class="font-data-mono text-body-sm text-on-surface-variant">Pegged at ₦1,850.00</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-data-mono text-title-md text-on-surface font-bold">£325.23 GBP</span>
+<span class="block font-label-sm text-label-sm text-tertiary font-medium">Clearance +0.05%</span>
+</div>
+</div>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-4">
+            Quotes verified by CBN Central Clearing switch for agricultural bulk trade dockets.
+          </p>
+</div>
+<!-- Export Cost Deductions Overview -->
+<div class="bg-surface-container-low p-5 rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-title-md text-title-md text-on-surface font-semibold">Export Cost Deductions Overview</span>
+<span class="font-label-sm text-label-sm bg-tertiary-fixed text-on-tertiary-fixed font-bold px-2 py-0.5 rounded">Pre-Transit Gate</span>
+</div>
+<div class="space-y-3 font-label-md text-label-md">
+<div class="flex items-center justify-between pb-2">
+<span class="text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">local_shipping</span>
+                  Intermodal Freight Charge
+                </span>
+<span class="font-data-mono font-bold text-on-surface">$38.41 USD</span>
+</div>
+<div class="flex items-center justify-between pb-2">
+<span class="text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+                  Phytosanitary &amp; Bio-Inspection Seal
+                </span>
+<span class="font-data-mono font-bold text-on-surface">$15.00 USD</span>
+</div>
+<div class="flex items-center justify-between pb-2">
+<span class="text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">warehouse</span>
+                  Lagos Port Silo Handling
+                </span>
+<span class="font-data-mono font-bold text-on-surface leading-tight">$0.00 <span class="text-primary font-normal text-body-sm">(Subsidized)</span></span>
+</div>
+<!-- Net Realized Recovery Row -->
+<div class="bg-surface-container p-3 rounded-lg flex items-center justify-between">
+<div>
+<span class="font-title-md text-title-md text-primary font-bold block">Net Realized Recovery</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Post deductions settlement</span>
+</div>
+<div class="text-right">
+<span class="font-headline-sm text-headline-sm font-extrabold text-primary">$398.44 USD</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Settles to Corporate USD IBAN</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 mt-4 text-primary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">lock_reset</span>
+<span>Fees bound by Agro-Terminal Protocol 2025.1</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive JavaScript Engine -->
+<script>
+    (function initConverter() {
+      // Rates Table
+      const rates = {
+        USD: { rate: 1331.62, symbol: '$', code: 'USD', name: 'US Dollar', feeRate: 0.02 },
+        EUR: { rate: 1494.75, symbol: '€', code: 'EUR', name: 'Euro', feeRate: 0.02 },
+        GBP: { rate: 1850.00, symbol: '£', code: 'GBP', name: 'UK Sterling', feeRate: 0.02 }
+      };
+
+      let activeCurrency = 'USD';
+
+      // DOM Elements
+      const nairaInput = document.getElementById('naira-input');
+      const resetBtn = document.getElementById('reset-input-btn');
+      const giantResultVal = document.getElementById('giant-result-val');
+      const giantResultCode = document.getElementById('giant-result-code');
+      const conversionSubtext = document.getElementById('conversion-subtext');
+      const grossEqVal = document.getElementById('gross-eq-val');
+      const bufferVal = document.getElementById('buffer-val');
+      const currencyBtns = document.querySelectorAll('.currency-toggle-btn');
+      const quickAmtBtns = document.querySelectorAll('.quick-amt-btn');
+      
+      const accordionBtn = document.getElementById('accordion-toggle-btn');
+      const accordionDrawer = document.getElementById('accordion-drawer');
+      const accordionIcon = document.getElementById('accordion-icon');
+      
+      const saveBtn = document.getElementById('save-valuation-btn');
+      const saveToast = document.getElementById('save-toast');
+
+      // Calculation Engine
+      function calculateConversion() {
+        const inputRaw = parseFloat(nairaInput.value);
+        const nairaAmt = isNaN(inputRaw) || inputRaw < 0 ? 0 : inputRaw;
+        const cur = rates[activeCurrency];
+
+        const converted = nairaAmt / cur.rate;
+        const formattedAmount = `${cur.symbol}${converted.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        const bufferAmt = converted * cur.feeRate;
+        const formattedBuffer = `-${cur.symbol}${bufferAmt.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+        // Update Giant Card
+        giantResultVal.textContent = formattedAmount;
+        giantResultCode.textContent = cur.code;
+        grossEqVal.textContent = `${formattedAmount} ${cur.code}`;
+        bufferVal.textContent = `${formattedBuffer} ${cur.code}`;
+
+        conversionSubtext.textContent = `Spot parity at 1 ${cur.code} = ₦${cur.rate.toLocaleString('en-US', { minimumFractionDigits: 2 })} • Pre-export handling charges applied`;
+      }
+
+      // Currency Toggle Handler
+      currencyBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          activeCurrency = btn.getAttribute('data-currency');
+
+          // Reset styles
+          currencyBtns.forEach(b => {
+            b.className = 'currency-toggle-btn min-h-[56px] px-4 py-3 rounded-xl flex items-center justify-center gap-2 text-center transition-all bg-surface-container hover:bg-surface-container-high text-on-surface';
+          });
+
+          // Set active style
+          btn.className = 'currency-toggle-btn min-h-[56px] px-4 py-3 rounded-xl flex items-center justify-center gap-2 text-center transition-all bg-primary-container text-on-primary-container shadow-md';
+
+          calculateConversion();
+        });
+      });
+
+      // Quick Amount handler
+      quickAmtBtns.forEach(b => {
+        b.addEventListener('click', () => {
+          nairaInput.value = b.getAttribute('data-amt');
+          calculateConversion();
+        });
+      });
+
+      // Naira Input Event
+      nairaInput.addEventListener('input', calculateConversion);
+
+      // Reset Button Event
+      resetBtn.addEventListener('click', () => {
+        nairaInput.value = "601690";
+        calculateConversion();
+      });
+
+      // Accordion Drawer Toggle
+      accordionBtn.addEventListener('click', () => {
+        const isHidden = accordionDrawer.classList.contains('hidden');
+        if (isHidden) {
+          accordionDrawer.classList.remove('hidden');
+          accordionBtn.setAttribute('aria-expanded', 'true');
+          accordionIcon.style.transform = 'rotate(180deg)';
+        } else {
+          accordionDrawer.classList.add('hidden');
+          accordionBtn.setAttribute('aria-expanded', 'false');
+          accordionIcon.style.transform = 'rotate(0deg)';
+        }
+      });
+
+      // Save Valuation Simulation
+      saveBtn.addEventListener('click', () => {
+        saveToast.classList.remove('hidden');
+        setTimeout(() => {
+          saveToast.classList.add('hidden');
+        }, 3200);
+      });
+
+      // Initial execution
+      calculateConversion();
+    })();
+  </script>
+</div></div></main><footer class="w-full bg-surface-container-low py-space-lg mt-auto shadow-[0_-1px_8px_rgba(0,0,0,0.02)]"><div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-space-md text-on-surface-variant font-label-md text-label-md"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm text-primary font-bold">CropTrade</span><span>• Agritech Global Exchange</span></div><div class="flex items-center gap-space-lg"><span class="font-data-mono text-data-mono">WAT (UTC+01:00) GRAIN-DESK</span><span>© 2026 CropTrade Platform. All rights reserved.</span></div></div></footer><script>const themeToggleBtn = document.getElementById('theme-toggle-btn'); const themeIconLight = document.getElementById('theme-icon-light'); const themeIconDark = document.getElementById('theme-icon-dark'); function applyTheme(isDark) { if (isDark) { document.documentElement.classList.add('dark'); if (themeIconLight && themeIconDark) { themeIconLight.classList.add('hidden'); themeIconDark.classList.remove('hidden'); } } else { document.documentElement.classList.remove('dark'); if (themeIconLight && themeIconDark) { themeIconLight.classList.remove('hidden'); themeIconDark.classList.add('hidden'); } } } const initialDark = localStorage.getItem('croptrade_theme') === 'dark' || (!('croptrade_theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches); applyTheme(initialDark); if (themeToggleBtn) { themeToggleBtn.addEventListener('click', () => { const isCurrentlyDark = document.documentElement.classList.contains('dark'); const newDark = !isCurrentlyDark; localStorage.setItem('croptrade_theme', newDark ? 'dark' : 'light'); applyTheme(newDark); }); }</script></body></html>

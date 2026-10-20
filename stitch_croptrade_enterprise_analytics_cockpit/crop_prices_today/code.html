@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>CropTrade</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "inverse-on-surface": "#eef0ff", "on-secondary-container": "#00476e", "background": "#faf8ff", "error-container": "#ffdad6", "on-surface": "#131b2e", "on-primary-fixed": "#002110", "on-primary": "#ffffff", "on-primary-fixed-variant": "#00522f", "surface-container-highest": "#dae2fd", "tertiary-container": "#a56800", "tertiary-fixed": "#ffddb8", "outline-variant": "#bdcabe", "on-tertiary": "#ffffff", "inverse-surface": "#283044", "on-tertiary-container": "#fffeff", "error": "#ba1a1a", "on-primary-container": "#fdfff9", "on-secondary-fixed-variant": "#004b73", "surface": "#faf8ff", "secondary": "#006398", "on-tertiary-fixed": "#2a1700", "primary-fixed-dim": "#70db9d", "surface-dim": "#d2d9f4", "surface-tint": "#006d40", "primary-fixed": "#8df8b7", "secondary-fixed-dim": "#93ccff", "surface-container-high": "#e2e7ff", "secondary-container": "#5bb8fe", "on-error": "#ffffff", "on-secondary-fixed": "#001d31", "on-surface-variant": "#3e4a41", "secondary-fixed": "#cce5ff", "surface-bright": "#faf8ff", "tertiary-fixed-dim": "#ffb95f", "inverse-primary": "#70db9d", "on-error-container": "#93000a", "surface-container-low": "#f2f3ff", "on-background": "#131b2e", "on-secondary": "#ffffff", "outline": "#6e7a70", "surface-container": "#eaedff", "on-tertiary-fixed-variant": "#653e00", "tertiary": "#835200", "surface-variant": "#dae2fd", "surface-container-lowest": "#ffffff", "primary-container": "#008751", "primary": "#006b3f" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-sm": "0.5rem", "gutter": "1rem", "space-xs": "0.25rem", "space-xl": "2rem", "margin-tablet": "1.5rem", "space-lg": "1.5rem", "gutter-desktop": "1.5rem", "space-md": "1rem", "margin": "1rem", "margin-desktop": "2rem" }, "fontFamily": { "headline-lg": [ "Plus Jakarta Sans" ], "headline-md": [ "Plus Jakarta Sans" ], "label-sm": [ "Inter" ], "title-md": [ "Inter" ], "display-lg": [ "Plus Jakarta Sans" ], "body-md": [ "Inter" ], "label-md": [ "Inter" ], "body-sm": [ "Inter" ], "body-lg": [ "Inter" ], "headline-lg-mobile": [ "Plus Jakarta Sans" ], "headline-sm": [ "Plus Jakarta Sans" ], "data-mono": [ "Inter" ], "display-lg-mobile": [ "Plus Jakarta Sans" ] }, "fontSize": { "headline-lg": [ "30px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-md": [ "22px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "label-sm": [ "11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" } ], "title-md": [ "16px", { "lineHeight": "22px", "letterSpacing": "-0.005em", "fontWeight": "600" } ], "display-lg": [ "36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "800" } ], "body-md": [ "14px", { "lineHeight": "20px", "fontWeight": "400" } ], "label-md": [ "13px", { "lineHeight": "16px", "fontWeight": "500" } ], "body-sm": [ "12px", { "lineHeight": "16px", "fontWeight": "400" } ], "body-lg": [ "16px", { "lineHeight": "24px", "fontWeight": "400" } ], "headline-lg-mobile": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "700" } ], "headline-sm": [ "18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "data-mono": [ "14px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "display-lg-mobile": [ "28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800" } ] } } } };</script></head><body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex flex-col antialiased selection:bg-primary selection:text-on-primary"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-6xl mx-auto px-6 flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md shrink-0"><div class="flex items-center gap-space-sm"><div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary-container shadow-sm"><span class="material-symbols-outlined text-[24px]">eco</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface leading-none">CropTrade</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-0.5">Agritech Simplicity</span></div></div></div><nav class="hidden lg:flex items-center gap-space-xs p-1 bg-surface-container-low rounded-xl" data-active-classes="bg-primary-container text-on-primary-container font-title-md text-title-md shadow-sm"><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="overview" href="#">Overview</a><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="stock" href="#">Stock</a><a aria-current="page" class="min-h-[56px] px-space-md py-space-sm rounded-lg transition-all flex items-center justify-center leading-none bg-primary-container text-on-primary-container font-title-md text-title-md shadow-sm" data-path="market" href="#">Market</a><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="weather" href="#">Weather</a><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="rates" href="#">Rates</a></nav><div class="flex items-center gap-space-sm shrink-0"><button aria-label="Toggle theme" class="min-h-[56px] min-w-[56px] rounded-xl flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors focus:outline-none focus:bg-surface-container-highest" id="theme-toggle-btn" type="button"><span class="material-symbols-outlined text-[24px]" id="theme-icon-light">light_mode</span><span class="material-symbols-outlined text-[24px] hidden" id="theme-icon-dark">dark_mode</span></button><div class="h-8 w-px bg-outline-variant/30 hidden sm:block mx-space-xs"></div><div class="flex items-center gap-space-sm p-1 rounded-xl hover:bg-surface-container-low transition-colors"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-label-md text-label-md text-on-surface leading-tight">Terminal 04</span><span class="font-label-sm text-label-sm text-primary flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>Live Feed</span></div></div></div></div></header><main class="w-full pt-20 bg-surface flex-1"><div class="max-w-6xl mx-auto py-space-xl px-6"><div class="flex flex-col w-full">
+<!-- Telemetry Bar (Agritech Mission-Critical Strip) -->
+<div class="w-full bg-surface-container-low rounded-xl px-space-md py-space-xs mb-space-lg flex flex-wrap items-center justify-between gap-space-sm shadow-sm">
+<div class="flex items-center gap-space-md text-on-surface-variant font-data-mono text-label-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="uppercase tracking-wider font-bold text-on-surface">GRAIN-INDEX NGN</span>
+</div>
+<span class="text-outline-variant">•</span>
+<span>MOISTURE INDEX: 11.8%</span>
+<span class="text-outline-variant hidden sm:inline">•</span>
+<span class="hidden sm:inline">TERMINAL INFLOW: +3,420 MT</span>
+<span class="text-outline-variant hidden md:inline">•</span>
+<span class="hidden md:inline">BOARD STATUS: SPOT SETTLED</span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm">
+<span class="material-symbols-outlined text-[16px] text-primary">schedule</span>
+<span>TICK: 0.4s REFRESH</span>
+</div>
+</div>
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-xl">
+<div>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary-container/15 text-primary text-label-sm font-label-sm mb-space-xs uppercase tracking-wider">
+        Spot Exchange Desk
+      </div>
+<h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Crop Prices Today</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-1 max-w-2xl">
+        Live commodity benchmark rates calibrated across physical terminal silos and regional marketing boards.
+      </p>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<div class="bg-surface-container px-space-md py-space-sm rounded-xl flex items-center gap-space-sm shadow-sm">
+<span class="material-symbols-outlined text-[20px] text-secondary">tune</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Currency Mode</span>
+<span class="font-title-md text-title-md text-on-surface font-semibold">NGN (₦) / Metric kg</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 4-Card Primary Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md mb-space-xl">
+<!-- Card 1: Maize -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-20 h-20 bg-primary/5 rounded-full blur-xl group-hover:bg-primary/10 transition-colors"></div>
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">grain</span>
+<span class="font-title-md text-title-md text-on-surface">Maize</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-primary-container/15 text-primary text-label-sm font-label-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+            Live
+          </span>
+</div>
+<div class="font-display-lg text-display-lg text-on-surface font-bold tracking-tight my-1">
+          ₦586 <span class="font-body-md text-body-md text-on-surface-variant font-normal">/ kg</span>
+</div>
+<div class="inline-flex items-center gap-1 font-label-md text-label-md text-primary font-semibold mb-space-md">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+<span>Up 2.4%</span>
+<span class="text-on-surface-variant font-normal text-body-sm font-body-sm">(24h)</span>
+</div>
+</div>
+<div class="pt-space-sm bg-surface-container-low/70 -mx-space-md -mb-space-md px-space-md py-space-sm rounded-b-xl flex flex-col gap-0.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Benchmark Basis</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium truncate">State Board ₦572.50</span>
+</div>
+</div>
+<!-- Card 2: Cassava -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-20 h-20 bg-secondary/5 rounded-full blur-xl group-hover:bg-secondary/10 transition-colors"></div>
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">nutrition</span>
+<span class="font-title-md text-title-md text-on-surface">Cassava (Tubers)</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-primary-container/15 text-primary text-label-sm font-label-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+            Live
+          </span>
+</div>
+<div class="font-display-lg text-display-lg text-on-surface font-bold tracking-tight my-1">
+          ₦350 <span class="font-body-md text-body-md text-on-surface-variant font-normal">/ kg</span>
+</div>
+<div class="inline-flex items-center gap-1 font-label-md text-label-md text-primary font-semibold mb-space-md">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+<span>Up 1.2%</span>
+<span class="text-on-surface-variant font-normal text-body-sm font-body-sm">(24h)</span>
+</div>
+</div>
+<div class="pt-space-sm bg-surface-container-low/70 -mx-space-md -mb-space-md px-space-md py-space-sm rounded-b-xl flex flex-col gap-0.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Benchmark Basis</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium truncate">State Board ₦345.80</span>
+</div>
+</div>
+<!-- Card 3: Yam -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-20 h-20 bg-tertiary-container/10 rounded-full blur-xl group-hover:bg-tertiary-container/15 transition-colors"></div>
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[20px]">agriculture</span>
+<span class="font-title-md text-title-md text-on-surface">Yam (Export)</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-primary-container/15 text-primary text-label-sm font-label-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+            Live
+          </span>
+</div>
+<div class="font-display-lg text-display-lg text-on-surface font-bold tracking-tight my-1">
+          ₦946 <span class="font-body-md text-body-md text-on-surface-variant font-normal">/ kg</span>
+</div>
+<div class="inline-flex items-center gap-1 font-label-md text-label-md text-primary font-semibold mb-space-md">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+<span>Up 5.4%</span>
+<span class="text-on-surface-variant font-normal text-body-sm font-body-sm">(24h)</span>
+</div>
+</div>
+<div class="pt-space-sm bg-surface-container-low/70 -mx-space-md -mb-space-md px-space-md py-space-sm rounded-b-xl flex flex-col gap-0.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Benchmark Basis</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium truncate">National Index ₦895.00</span>
+</div>
+</div>
+<!-- Card 4: Rice -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-20 h-20 bg-primary/5 rounded-full blur-xl group-hover:bg-primary/10 transition-colors"></div>
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">inventory_2</span>
+<span class="font-title-md text-title-md text-on-surface">Rice (Paddy)</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-primary-container/15 text-primary text-label-sm font-label-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+            Live
+          </span>
+</div>
+<div class="font-display-lg text-display-lg text-on-surface font-bold tracking-tight my-1">
+          ₦961 <span class="font-body-md text-body-md text-on-surface-variant font-normal">/ kg</span>
+</div>
+<div class="inline-flex items-center gap-1 font-label-md text-label-md text-primary font-semibold mb-space-md">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+<span>Up 1.6%</span>
+<span class="text-on-surface-variant font-normal text-body-sm font-body-sm">(24h)</span>
+</div>
+</div>
+<div class="pt-space-sm bg-surface-container-low/70 -mx-space-md -mb-space-md px-space-md py-space-sm rounded-b-xl flex flex-col gap-0.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Benchmark Basis</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium truncate">Port Harcourt Terminal</span>
+</div>
+</div>
+</div>
+<!-- Operational Context Strip with Field Photography -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md mb-space-xl">
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-center gap-space-md">
+<img class="w-16 h-16 rounded-lg object-cover shrink-0 shadow-sm" data-alt="High-resolution institutional photo of yellow maize grain storage hopper flowing into a steel industrial silo with soft morning sunlight casting geometric agricultural shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCkbJg3Smss4yjKvkDOxkylYbOAemAE-_AGL1MObKexw1Qnn6nREHTQVpMxEBFYiCduTQ1HW5tuJfT2D0CPUdmr7LpIHm-TECsmOmBLJ_CEesdrRteKEtnwp2nOr9xDixbF-vuhRQE5equuxy_BJGDy3R10U0LQMU5pt7yyLUmr3MZ-lHu1QBFU67UYBtbQQ_N1hkMU4B3vh5HrLl-OTeTyuf_TpjwRHk86Bs1kG4LEJ1QPby-TjJq"/>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Silo Utilization</span>
+<div class="font-headline-sm text-headline-sm text-on-surface truncate">88.4% Full</div>
+<span class="font-body-sm text-body-sm text-primary font-medium">Kano Central Terminal</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-center gap-space-md">
+<img class="w-16 h-16 rounded-lg object-cover shrink-0 shadow-sm" data-alt="Close-up detailed capture of premium harvested yam tubers stacked neatly in a logistics warehouse pallet crate with balanced neutral studio light and rich brown earthy textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_EFRTwlpnMB_VXzTdxl9UcqmwkAV72wk9ZDa0ZElZGWqfaH1KxSRJ1lJUnQzjLQi98yoaLo5gehRBxqKXD9YnwfNe-Q3sM-bLFd2uN854pdgv6YL5XubvRg8svo09ugIRFtkGWGKoCZPWLKTUxBKhpNaXMlZc-0QVXlCj37JIdqdjbxaQfRU9LWaDnA198tslVRLqFvmH1ZgXcVjCRBhagw49qiJjiASwnmkbOmF4GFLCjUygKswK"/>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Export Inspection</span>
+<div class="font-headline-sm text-headline-sm text-on-surface truncate">Grade A Passed</div>
+<span class="font-body-sm text-body-sm text-secondary font-medium">Lagos Dry Port Port</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-center gap-space-md">
+<img class="w-16 h-16 rounded-lg object-cover shrink-0 shadow-sm" data-alt="Agricultural drone overview of harvested cassava field and tractor trailers under clear skies with clean dust-free color grading matching institutional agritech interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcfgcDsdlqNcJwUn9YkJkKVgY0EYKXld6VojLzmwdgFeD6DVFgz8iXyf10mCFV2DnbNluV5glo-f-erDmTeI1og9r60L-miUglZtzDeVv88rqXJ8ZvgBUXfENmDldwZeuB_WmoEuSm3v3DIR6pjCrqWk1fm9NYN2PbcQeTEAATAmqdK6BzohiRF3jQ_LwvdLEmujeyJ87XqQPPnDgUrOxtOotpUnNNGAYgtXnM1mKZhQTxMWhhC3Uj"/>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Rail Dispatch</span>
+<div class="font-headline-sm text-headline-sm text-on-surface truncate">14 Wagons En Route</div>
+<span class="font-body-sm text-body-sm text-tertiary font-medium">Western Corridor Line</span>
+</div>
+</div>
+</div>
+<!-- Progressive Disclosure Section 1: 30-Day Trend Chart -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm mb-space-lg overflow-hidden transition-all">
+<button aria-controls="accordion-content-trend" aria-expanded="false" class="w-full min-h-[56px] px-space-lg py-space-md flex items-center justify-between text-left bg-surface-container-low hover:bg-surface-container transition-colors focus:outline-none" id="accordion-toggle-trend">
+<div class="flex items-center gap-space-md">
+<div class="w-8 h-8 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">show_chart</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-space-md">
+<span class="font-title-md text-title-md text-on-surface font-bold">30-Day Price Trend Chart</span>
+<span class="text-on-surface-variant font-label-md text-label-md">Comparative Multi-Line Benchmark</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm text-primary font-title-md text-title-md font-semibold">
+<span class="hidden sm:inline" id="accordion-text-trend">Tap to view</span>
+<span class="material-symbols-outlined transition-transform duration-300" id="accordion-icon-trend">expand_more</span>
+</div>
+</button>
+<div class="hidden px-space-lg py-space-xl bg-surface-container-lowest" id="accordion-content-trend">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md pb-space-lg mb-space-md">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Historical Variance Analysis</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Multi-commodity 30-day trajectory highlighting spot rally inflection points</p>
+</div>
+<!-- Chart Legend -->
+<div class="flex flex-wrap items-center gap-space-md bg-surface-container-low px-space-md py-space-sm rounded-xl">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary-container"></span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Maize (₦586)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Cassava (₦350)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-tertiary-container"></span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Yam (₦946)</span>
+</div>
+</div>
+</div>
+<!-- SVG Line Chart Visual -->
+<div class="w-full overflow-x-auto">
+<div class="min-w-[680px]">
+<svg class="w-full h-auto" preserveaspectratio="xMidYMid meet" viewbox="0 0 800 320">
+<defs>
+<lineargradient id="maizeGrad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#008751" stop-opacity="0.18"></stop>
+<stop offset="100%" stop-color="#008751" stop-opacity="0.0"></stop>
+</lineargradient>
+<lineargradient id="yamGrad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#a56800" stop-opacity="0.15"></stop>
+<stop offset="100%" stop-color="#a56800" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<!-- Grid Lines & Y-Labels -->
+<!-- ₦1000 Line (y=40) -->
+<line opacity="0.6" stroke="#dae2fd" stroke-dasharray="3 3" x1="70" x2="760" y1="40" y2="40"></line>
+<text fill="#3e4a41" font-family="Inter" font-size="11" font-weight="600" text-anchor="end" x="60" y="44">₦1000</text>
+<!-- ₦750 Line (y=110) -->
+<line opacity="0.6" stroke="#dae2fd" stroke-dasharray="3 3" x1="70" x2="760" y1="110" y2="110"></line>
+<text fill="#3e4a41" font-family="Inter" font-size="11" font-weight="600" text-anchor="end" x="60" y="114">₦750</text>
+<!-- ₦500 Line (y=180) -->
+<line opacity="0.6" stroke="#dae2fd" stroke-dasharray="3 3" x1="70" x2="760" y1="180" y2="180"></line>
+<text fill="#3e4a41" font-family="Inter" font-size="11" font-weight="600" text-anchor="end" x="60" y="184">₦500</text>
+<!-- ₦250 Line (y=250) -->
+<line opacity="0.6" stroke="#dae2fd" stroke-dasharray="3 3" x1="70" x2="760" y1="250" y2="250"></line>
+<text fill="#3e4a41" font-family="Inter" font-size="11" font-weight="600" text-anchor="end" x="60" y="254">₦250</text>
+<!-- Baseline Grid Line (y=280) -->
+<line opacity="0.4" stroke="#bdcabe" x1="70" x2="760" y1="280" y2="280"></line>
+<!-- YAM Curve (Values: ~₦780, ~₦810, ~₦850, ~₦900, ₦946) -> Y coordinates: 102, 94, 82, 68, 55 -->
+<path d="M 100 102 C 180 98, 220 94, 260 94 C 330 94, 380 82, 420 82 C 490 82, 540 68, 580 68 C 650 68, 700 55, 740 55" fill="none" stroke="#a56800" stroke-linecap="round" stroke-width="3"></path>
+<polygon fill="url(#yamGrad)" opacity="0.5" points="100,102 260,94 420,82 580,68 740,55 740,280 100,280"></polygon>
+<!-- MAIZE Curve (Values: ~₦510, ~₦525, ~₦545, ~₦560, ₦586) -> Y coordinates: 177, 173, 167, 163, 156 -->
+<path d="M 100 177 C 180 175, 220 173, 260 173 C 330 173, 380 167, 420 167 C 490 167, 540 163, 580 163 C 650 163, 700 156, 740 156" fill="none" stroke="#008751" stroke-linecap="round" stroke-width="3.5"></path>
+<polygon fill="url(#maizeGrad)" opacity="0.6" points="100,177 260,173 420,167 580,163 740,156 740,280 100,280"></polygon>
+<!-- CASSAVA Curve (Values: ~₦310, ~₦320, ~₦330, ~₦335, ₦350) -> Y coordinates: 233, 230, 227, 226, 222 -->
+<path d="M 100 233 C 180 231, 220 230, 260 230 C 330 230, 380 227, 420 227 C 490 227, 540 226, 580 226 C 650 226, 700 222, 740 222" fill="none" stroke="#006398" stroke-linecap="round" stroke-width="2.5"></path>
+<!-- Data Dots at Today (x=740) -->
+<!-- Yam Dot & Badge -->
+<circle cx="740" cy="55" fill="#a56800" r="5" stroke="#ffffff" stroke-width="2"></circle>
+<rect fill="#a56800" height="20" rx="4" width="60" x="670" y="32"></rect>
+<text fill="#ffffff" font-family="Inter" font-size="11" font-weight="700" text-anchor="middle" x="700" y="46">₦946</text>
+<!-- Maize Dot & Badge -->
+<circle cx="740" cy="156" fill="#008751" r="6" stroke="#ffffff" stroke-width="2.5"></circle>
+<rect fill="#008751" height="20" rx="4" width="60" x="670" y="146"></rect>
+<text fill="#ffffff" font-family="Inter" font-size="11" font-weight="700" text-anchor="middle" x="700" y="160">₦586</text>
+<!-- Cassava Dot & Badge -->
+<circle cx="740" cy="222" fill="#006398" r="5" stroke="#ffffff" stroke-width="2"></circle>
+<rect fill="#006398" height="20" rx="4" width="60" x="670" y="212"></rect>
+<text fill="#ffffff" font-family="Inter" font-size="11" font-weight="700" text-anchor="middle" x="700" y="226">₦350</text>
+<!-- Vertical Highlight Line for 'Today' -->
+<line opacity="0.4" stroke="#008751" stroke-dasharray="2 2" x1="740" x2="740" y1="35" y2="280"></line>
+<!-- X-Axis Labels -->
+<text fill="#3e4a41" font-family="Inter" font-size="11" font-weight="500" text-anchor="middle" x="100" y="302">30 Days Ago</text>
+<text fill="#3e4a41" font-family="Inter" font-size="11" font-weight="500" text-anchor="middle" x="260" y="302">22 Days Ago</text>
+<text fill="#3e4a41" font-family="Inter" font-size="11" font-weight="500" text-anchor="middle" x="420" y="302">15 Days Ago</text>
+<text fill="#3e4a41" font-family="Inter" font-size="11" font-weight="500" text-anchor="middle" x="580" y="302">7 Days Ago</text>
+<text fill="#006b3f" font-family="Inter" font-size="12" font-weight="700" text-anchor="middle" x="740" y="302">Today</text>
+</svg>
+</div>
+</div>
+<div class="mt-space-md pt-space-md flex flex-wrap items-center justify-between gap-space-sm text-body-sm font-body-sm text-on-surface-variant">
+<span>*Aggregated from Kano, Ibadan, and Port Harcourt grain terminal feeds</span>
+<span class="font-data-mono text-data-mono">CONFIDENCE INTERVAL: 99.2%</span>
+</div>
+</div>
+</div>
+<!-- Progressive Disclosure Section 2: Stock Share Donut Chart -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden transition-all">
+<button aria-controls="accordion-content-donut" aria-expanded="false" class="w-full min-h-[56px] px-space-lg py-space-md flex items-center justify-between text-left bg-surface-container-low hover:bg-surface-container transition-colors focus:outline-none" id="accordion-toggle-donut">
+<div class="flex items-center gap-space-md">
+<div class="w-8 h-8 rounded-lg bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">pie_chart</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-space-md">
+<span class="font-title-md text-title-md text-on-surface font-bold">Stock Share Chart</span>
+<span class="text-on-surface-variant font-label-md text-label-md">Inventory Value Allocation</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm text-secondary font-title-md text-title-md font-semibold">
+<span class="hidden sm:inline" id="accordion-text-donut">Tap to view</span>
+<span class="material-symbols-outlined transition-transform duration-300" id="accordion-icon-donut">expand_more</span>
+</div>
+</button>
+<div class="hidden px-space-lg py-space-xl bg-surface-container-lowest" id="accordion-content-donut">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+<!-- Donut Visual (SVG) -->
+<div class="lg:col-span-6 flex flex-col items-center justify-center">
+<div class="relative w-64 h-64 sm:w-72 sm:h-72">
+<!-- 
+              Circumference of r=80 is 2 * PI * 80 = 502.65
+              Segments:
+              - Maize: 24% = 120.64
+              - Cassava: 23% = 115.61
+              - Yam: 19% = 95.50
+              - Rice: 13% = 65.34
+              - Tilapia: 12% = 60.32
+              - Tomato: 9% = 45.24
+              Total = 502.65
+            -->
+<svg class="w-full h-full -rotate-90 transform" viewbox="0 0 200 200">
+<!-- Background Circle Ring -->
+<circle cx="100" cy="100" fill="transparent" r="80" stroke="#eaedff" stroke-width="26"></circle>
+<!-- Maize 24% (Offset: 0) -->
+<circle class="hover:opacity-90 transition-opacity" cx="100" cy="100" fill="transparent" r="80" stroke="#008751" stroke-dasharray="120.64 382.01" stroke-dashoffset="0" stroke-width="26"></circle>
+<!-- Cassava 23% (Offset: -120.64) -->
+<circle class="hover:opacity-90 transition-opacity" cx="100" cy="100" fill="transparent" r="80" stroke="#006398" stroke-dasharray="115.61 387.04" stroke-dashoffset="-120.64" stroke-width="26"></circle>
+<!-- Yam 19% (Offset: -236.25) -->
+<circle class="hover:opacity-90 transition-opacity" cx="100" cy="100" fill="transparent" r="80" stroke="#a56800" stroke-dasharray="95.50 407.15" stroke-dashoffset="-236.25" stroke-width="26"></circle>
+<!-- Rice 13% (Offset: -331.75) -->
+<circle class="hover:opacity-90 transition-opacity" cx="100" cy="100" fill="transparent" r="80" stroke="#70db9d" stroke-dasharray="65.34 437.31" stroke-dashoffset="-331.75" stroke-width="26"></circle>
+<!-- Tilapia 12% (Offset: -397.09) -->
+<circle class="hover:opacity-90 transition-opacity" cx="100" cy="100" fill="transparent" r="80" stroke="#5bb8fe" stroke-dasharray="60.32 442.33" stroke-dashoffset="-397.09" stroke-width="26"></circle>
+<!-- Tomato 9% (Offset: -457.41) -->
+<circle class="hover:opacity-90 transition-opacity" cx="100" cy="100" fill="transparent" r="80" stroke="#ba1a1a" stroke-dasharray="45.24 457.41" stroke-dashoffset="-457.41" stroke-width="26"></circle>
+</svg>
+<!-- Center Text Overlay -->
+<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center px-4">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-bold tracking-wider leading-none">TOTAL PORTFOLIO</span>
+<span class="font-headline-lg text-headline-lg text-on-surface font-extrabold tracking-tight mt-1 leading-none">₦601.7k</span>
+<span class="font-label-sm text-label-sm text-primary font-medium mt-1">100% In-Warehouse</span>
+</div>
+</div>
+<div class="mt-space-md text-center">
+<span class="font-data-mono text-label-sm text-on-surface-variant">PORTFOLIO VALUATION: ₦601,690.00</span>
+</div>
+</div>
+<!-- Clean Breakdown Legend Table -->
+<div class="lg:col-span-6">
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between pb-space-sm mb-space-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Commodity Type</span>
+<div class="flex items-center gap-space-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Net Value</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold text-right w-12">Share</span>
+</div>
+</div>
+<div class="space-y-space-sm">
+<!-- Item 1: Maize -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-primary-container shrink-0"></span>
+<span class="font-title-md text-title-md text-on-surface font-medium">Maize</span>
+</div>
+<div class="flex items-center gap-space-lg">
+<span class="font-data-mono text-data-mono text-on-surface">₦146,500</span>
+<span class="font-label-md text-label-md text-primary font-bold text-right w-12">24%</span>
+</div>
+</div>
+<!-- Item 2: Cassava -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-secondary shrink-0"></span>
+<span class="font-title-md text-title-md text-on-surface font-medium">Cassava</span>
+</div>
+<div class="flex items-center gap-space-lg">
+<span class="font-data-mono text-data-mono text-on-surface">₦140,000</span>
+<span class="font-label-md text-label-md text-secondary font-bold text-right w-12">23%</span>
+</div>
+</div>
+<!-- Item 3: Yam -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-tertiary-container shrink-0"></span>
+<span class="font-title-md text-title-md text-on-surface font-medium">Yam</span>
+</div>
+<div class="flex items-center gap-space-lg">
+<span class="font-data-mono text-data-mono text-on-surface">₦113,520</span>
+<span class="font-label-md text-label-md text-tertiary font-bold text-right w-12">19%</span>
+</div>
+</div>
+<!-- Item 4: Rice -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-primary-fixed-dim shrink-0"></span>
+<span class="font-title-md text-title-md text-on-surface font-medium">Rice</span>
+</div>
+<div class="flex items-center gap-space-lg">
+<span class="font-data-mono text-data-mono text-on-surface">₦76,880</span>
+<span class="font-label-md text-label-md text-on-surface font-bold text-right w-12">13%</span>
+</div>
+</div>
+<!-- Item 5: Tilapia -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-secondary-container shrink-0"></span>
+<span class="font-title-md text-title-md text-on-surface font-medium">Tilapia</span>
+</div>
+<div class="flex items-center gap-space-lg">
+<span class="font-data-mono text-data-mono text-on-surface">₦72,390</span>
+<span class="font-label-md text-label-md text-on-surface font-bold text-right w-12">12%</span>
+</div>
+</div>
+<!-- Item 6: Tomato -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-error shrink-0"></span>
+<span class="font-title-md text-title-md text-on-surface font-medium">Tomato</span>
+</div>
+<div class="flex items-center gap-space-lg">
+<span class="font-data-mono text-data-mono text-on-surface">₦57,520</span>
+<span class="font-label-md text-label-md text-error font-bold text-right w-12">9%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function initAccordions() {
+    function setupAccordion(toggleId, contentId, textId, iconId, defaultLabel) {
+      const toggle = document.getElementById(toggleId);
+      const content = document.getElementById(contentId);
+      const label = document.getElementById(textId);
+      const icon = document.getElementById(iconId);
+
+      if (!toggle || !content) return;
+
+      toggle.addEventListener('click', function() {
+        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+        const nextState = !isExpanded;
+
+        toggle.setAttribute('aria-expanded', String(nextState));
+
+        if (nextState) {
+          content.classList.remove('hidden');
+          if (icon) icon.classList.add('rotate-180');
+          if (label) label.textContent = 'Tap to hide';
+        } else {
+          content.classList.add('hidden');
+          if (icon) icon.classList.remove('rotate-180');
+          if (label) label.textContent = defaultLabel;
+        }
+      });
+    }
+
+    setupAccordion('accordion-toggle-trend', 'accordion-content-trend', 'accordion-text-trend', 'accordion-icon-trend', 'Tap to view');
+    setupAccordion('accordion-toggle-donut', 'accordion-content-donut', 'accordion-text-donut', 'accordion-icon-donut', 'Tap to view');
+
+    // Sync shell navigation bar: set 'Market' active if shell links are present
+    const marketNav = document.querySelector('nav a[data-path="market"]');
+    if (marketNav) {
+      document.querySelectorAll('nav a').forEach(el => {
+        el.className = "min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none";
+      });
+      marketNav.className = "min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md bg-primary-container text-on-primary-container shadow-sm flex items-center justify-center text-center leading-none";
+    }
+  })();
+</script></div></main><footer class="w-full bg-surface-container-low py-space-lg mt-auto shadow-[0_-1px_8px_rgba(0,0,0,0.02)]"><div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-space-md text-on-surface-variant font-label-md text-label-md"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm text-primary font-bold">CropTrade</span><span>• Agritech Global Exchange</span></div><div class="flex items-center gap-space-lg"><span class="font-data-mono text-data-mono">WAT (UTC+01:00) GRAIN-DESK</span><span>© 2026 CropTrade Platform. All rights reserved.</span></div></div></footer><script>const themeToggleBtn = document.getElementById('theme-toggle-btn'); const themeIconLight = document.getElementById('theme-icon-light'); const themeIconDark = document.getElementById('theme-icon-dark'); function applyTheme(isDark) { if (isDark) { document.documentElement.classList.add('dark'); if (themeIconLight && themeIconDark) { themeIconLight.classList.add('hidden'); themeIconDark.classList.remove('hidden'); } } else { document.documentElement.classList.remove('dark'); if (themeIconLight && themeIconDark) { themeIconLight.classList.remove('hidden'); themeIconDark.classList.add('hidden'); } } } const initialDark = localStorage.getItem('croptrade_theme') === 'dark' || (!('croptrade_theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches); applyTheme(initialDark); if (themeToggleBtn) { themeToggleBtn.addEventListener('click', () => { const isCurrentlyDark = document.documentElement.classList.contains('dark'); const newDark = !isCurrentlyDark; localStorage.setItem('croptrade_theme', newDark ? 'dark' : 'light'); applyTheme(newDark); }); }</script></body></html>
