@@ -1,478 +1,1319 @@
 <!DOCTYPE html>
 
-<html class="scroll-smooth" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>CropTrade</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "inverse-on-surface": "#eef0ff", "on-secondary-container": "#00476e", "background": "#faf8ff", "error-container": "#ffdad6", "on-surface": "#131b2e", "on-primary-fixed": "#002110", "on-primary": "#ffffff", "on-primary-fixed-variant": "#00522f", "surface-container-highest": "#dae2fd", "tertiary-container": "#a56800", "tertiary-fixed": "#ffddb8", "outline-variant": "#bdcabe", "on-tertiary": "#ffffff", "inverse-surface": "#283044", "on-tertiary-container": "#fffeff", "error": "#ba1a1a", "on-primary-container": "#fdfff9", "on-secondary-fixed-variant": "#004b73", "surface": "#faf8ff", "secondary": "#006398", "on-tertiary-fixed": "#2a1700", "primary-fixed-dim": "#70db9d", "surface-dim": "#d2d9f4", "surface-tint": "#006d40", "primary-fixed": "#8df8b7", "secondary-fixed-dim": "#93ccff", "surface-container-high": "#e2e7ff", "secondary-container": "#5bb8fe", "on-error": "#ffffff", "on-secondary-fixed": "#001d31", "on-surface-variant": "#3e4a41", "secondary-fixed": "#cce5ff", "surface-bright": "#faf8ff", "tertiary-fixed-dim": "#ffb95f", "inverse-primary": "#70db9d", "on-error-container": "#93000a", "surface-container-low": "#f2f3ff", "on-background": "#131b2e", "on-secondary": "#ffffff", "outline": "#6e7a70", "surface-container": "#eaedff", "on-tertiary-fixed-variant": "#653e00", "tertiary": "#835200", "surface-variant": "#dae2fd", "surface-container-lowest": "#ffffff", "primary-container": "#008751", "primary": "#006b3f" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-sm": "0.5rem", "gutter": "1rem", "space-xs": "0.25rem", "space-xl": "2rem", "margin-tablet": "1.5rem", "space-lg": "1.5rem", "gutter-desktop": "1.5rem", "space-md": "1rem", "margin": "1rem", "margin-desktop": "2rem" }, "fontFamily": { "headline-lg": [ "Plus Jakarta Sans" ], "headline-md": [ "Plus Jakarta Sans" ], "label-sm": [ "Inter" ], "title-md": [ "Inter" ], "display-lg": [ "Plus Jakarta Sans" ], "body-md": [ "Inter" ], "label-md": [ "Inter" ], "body-sm": [ "Inter" ], "body-lg": [ "Inter" ], "headline-lg-mobile": [ "Plus Jakarta Sans" ], "headline-sm": [ "Plus Jakarta Sans" ], "data-mono": [ "Inter" ], "display-lg-mobile": [ "Plus Jakarta Sans" ] }, "fontSize": { "headline-lg": [ "30px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-md": [ "22px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "label-sm": [ "11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" } ], "title-md": [ "16px", { "lineHeight": "22px", "letterSpacing": "-0.005em", "fontWeight": "600" } ], "display-lg": [ "36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "800" } ], "body-md": [ "14px", { "lineHeight": "20px", "fontWeight": "400" } ], "label-md": [ "13px", { "lineHeight": "16px", "fontWeight": "500" } ], "body-sm": [ "12px", { "lineHeight": "16px", "fontWeight": "400" } ], "body-lg": [ "16px", { "lineHeight": "24px", "fontWeight": "400" } ], "headline-lg-mobile": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "700" } ], "headline-sm": [ "18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "data-mono": [ "14px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "display-lg-mobile": [ "28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800" } ] } } } };</script></head><body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex flex-col antialiased selection:bg-primary selection:text-on-primary"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-6xl mx-auto px-6 flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md shrink-0"><div class="flex items-center gap-space-sm"><div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary-container shadow-sm"><span class="material-symbols-outlined text-[24px]">eco</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface leading-none">CropTrade</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-0.5">Agritech Simplicity</span></div></div></div><nav class="hidden lg:flex items-center gap-space-xs p-1 bg-surface-container-low rounded-xl" data-active-classes="bg-primary-container text-on-primary-container font-title-md text-title-md shadow-sm"><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="overview" href="#">Overview</a><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="stock" href="#">Stock</a><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="market" href="#">Market</a><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="weather" href="#">Weather</a><a aria-current="page" class="min-h-[56px] px-space-md py-space-sm rounded-lg transition-all flex items-center justify-center leading-none bg-primary-container text-on-primary-container font-title-md text-title-md shadow-sm" data-path="rates" href="#">Rates</a></nav><div class="flex items-center gap-space-sm shrink-0"><button aria-label="Toggle theme" class="min-h-[56px] min-w-[56px] rounded-xl flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors focus:outline-none focus:bg-surface-container-highest" id="theme-toggle-btn" type="button"><span class="material-symbols-outlined text-[24px]" id="theme-icon-light">light_mode</span><span class="material-symbols-outlined text-[24px] hidden" id="theme-icon-dark">dark_mode</span></button><div class="h-8 w-px bg-outline-variant/30 hidden sm:block mx-space-xs"></div><div class="flex items-center gap-space-sm p-1 rounded-xl hover:bg-surface-container-low transition-colors"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-label-md text-label-md text-on-surface leading-tight">Terminal 04</span><span class="font-label-sm text-label-sm text-primary flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>Live Feed</span></div></div></div></div></header><main class="w-full pt-20 bg-surface flex-1"><div class="max-w-6xl mx-auto py-space-xl px-6"><div class="flex flex-col w-full">
-<!-- Top Telemetry & Benchmark Bar -->
-<section class="w-full bg-surface-container-low rounded-xl px-4 py-3 mb-6 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-<div class="flex items-center gap-2">
-<span class="w-2 h-2 rounded-full bg-primary animate-pulse shrink-0"></span>
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">Central Bank of Nigeria Agro-Desk</span>
-<span class="text-outline-variant font-data-mono text-body-sm hidden sm:inline">|</span>
-<span class="font-label-sm text-label-sm text-primary bg-primary/10 px-2 py-0.5 rounded-full font-medium">Feed Verified</span>
-</div>
-<div class="flex flex-wrap items-center gap-x-4 gap-y-1 font-data-mono text-data-mono text-on-surface">
-<div class="flex items-center gap-1.5">
-<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">1 USD</span>
-<span class="text-primary font-bold">₦1,331.62</span>
-</div>
-<span class="text-outline-variant/50 hidden sm:inline">•</span>
-<div class="flex items-center gap-1.5">
-<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">1 EUR</span>
-<span class="text-secondary font-bold">₦1,494.75</span>
-</div>
-<span class="text-outline-variant/50 hidden sm:inline">•</span>
-<div class="flex items-center gap-1.5">
-<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">1 GBP</span>
-<span class="text-tertiary font-bold">₦1,850.00</span>
-</div>
-</div>
+<html class="scroll-smooth" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>CropTrade · Money Converter</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface": "rgb(var(--surface) / <alpha-value>)", "surface-dim": "rgb(var(--surface-dim) / <alpha-value>)", "surface-bright": "rgb(var(--surface-bright) / <alpha-value>)", "surface-container-lowest": "rgb(var(--surface-container-lowest) / <alpha-value>)", "surface-container-low": "rgb(var(--surface-container-low) / <alpha-value>)", "surface-container": "rgb(var(--surface-container) / <alpha-value>)", "surface-container-high": "rgb(var(--surface-container-high) / <alpha-value>)", "surface-container-highest": "rgb(var(--surface-container-highest) / <alpha-value>)", "surface-variant": "rgb(var(--surface-variant) / <alpha-value>)", "background": "rgb(var(--background) / <alpha-value>)", "on-background": "rgb(var(--on-background) / <alpha-value>)", "on-surface": "rgb(var(--on-surface) / <alpha-value>)", "on-surface-variant": "rgb(var(--on-surface-variant) / <alpha-value>)", "outline": "rgb(var(--outline) / <alpha-value>)", "outline-variant": "rgb(var(--outline-variant) / <alpha-value>)", "surface-tint": "rgb(var(--surface-tint) / <alpha-value>)", "primary": "rgb(var(--primary) / <alpha-value>)", "on-primary": "rgb(var(--on-primary) / <alpha-value>)", "primary-container": "rgb(var(--primary-container) / <alpha-value>)", "on-primary-container": "rgb(var(--on-primary-container) / <alpha-value>)", "primary-fixed": "rgb(var(--primary-fixed) / <alpha-value>)", "primary-fixed-dim": "rgb(var(--primary-fixed-dim) / <alpha-value>)", "inverse-primary": "rgb(var(--inverse-primary) / <alpha-value>)", "secondary": "rgb(var(--secondary) / <alpha-value>)", "on-secondary": "rgb(var(--on-secondary) / <alpha-value>)", "secondary-container": "rgb(var(--secondary-container) / <alpha-value>)", "on-secondary-container": "rgb(var(--on-secondary-container) / <alpha-value>)", "tertiary": "rgb(var(--tertiary) / <alpha-value>)", "on-tertiary": "rgb(var(--on-tertiary) / <alpha-value>)", "tertiary-fixed": "rgb(var(--tertiary-fixed) / <alpha-value>)", "on-tertiary-fixed": "rgb(var(--on-tertiary-fixed) / <alpha-value>)", "error": "rgb(var(--error) / <alpha-value>)", "on-error": "rgb(var(--on-error) / <alpha-value>)", "error-container": "rgb(var(--error-container) / <alpha-value>)", "on-error-container": "rgb(var(--on-error-container) / <alpha-value>)", "inverse-surface": "rgb(var(--inverse-surface) / <alpha-value>)", "inverse-on-surface": "rgb(var(--inverse-on-surface) / <alpha-value>)" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-sm": "0.5rem", "gutter": "1rem", "space-xs": "0.25rem", "space-xl": "2rem", "margin-tablet": "1.5rem", "space-lg": "1.5rem", "gutter-desktop": "1.5rem", "space-md": "1rem", "margin": "1rem", "margin-desktop": "2rem" }, "fontFamily": { "headline-lg": [ "Plus Jakarta Sans" ], "headline-md": [ "Plus Jakarta Sans" ], "label-sm": [ "Inter" ], "title-md": [ "Inter" ], "display-lg": [ "Plus Jakarta Sans" ], "body-md": [ "Inter" ], "label-md": [ "Inter" ], "body-sm": [ "Inter" ], "body-lg": [ "Inter" ], "headline-lg-mobile": [ "Plus Jakarta Sans" ], "headline-sm": [ "Plus Jakarta Sans" ], "data-mono": [ "Inter" ], "display-lg-mobile": [ "Plus Jakarta Sans" ] }, "fontSize": { "headline-lg": [ "30px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-md": [ "22px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "label-sm": [ "11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" } ], "title-md": [ "16px", { "lineHeight": "22px", "letterSpacing": "-0.005em", "fontWeight": "600" } ], "display-lg": [ "36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "800" } ], "body-md": [ "14px", { "lineHeight": "20px", "fontWeight": "400" } ], "label-md": [ "13px", { "lineHeight": "16px", "fontWeight": "500" } ], "body-sm": [ "12px", { "lineHeight": "16px", "fontWeight": "400" } ], "body-lg": [ "16px", { "lineHeight": "24px", "fontWeight": "400" } ], "headline-lg-mobile": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "700" } ], "headline-sm": [ "18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "data-mono": [ "14px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "display-lg-mobile": [ "28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800" } ] } } } };</script>
+<style>
+/* ── Design tokens (AgroExecutive Tactical Canvas) ─────────────────────── */
+:root{
+  --surface:250 248 255;--surface-dim:210 217 244;--surface-bright:250 248 255;
+  --surface-container-lowest:255 255 255;--surface-container-low:242 243 255;
+  --surface-container:234 237 255;--surface-container-high:226 231 255;--surface-container-highest:218 226 253;
+  --surface-variant:218 226 253;--background:250 248 255;--on-background:19 27 46;
+  --on-surface:19 27 46;--on-surface-variant:62 74 65;--outline:110 122 112;--outline-variant:189 202 190;
+  --surface-tint:0 109 64;--primary:0 107 63;--on-primary:255 255 255;
+  --primary-container:0 135 81;--on-primary-container:253 255 249;
+  --primary-fixed:141 248 183;--primary-fixed-dim:112 219 157;--inverse-primary:112 219 157;
+  --secondary:0 99 152;--on-secondary:255 255 255;--secondary-container:91 184 254;--on-secondary-container:0 71 110;
+  --tertiary:131 82 0;--on-tertiary:255 255 255;--tertiary-fixed:255 221 184;--on-tertiary-fixed:42 23 0;
+  --error:186 26 26;--on-error:255 255 255;--error-container:255 218 214;--on-error-container:147 0 10;
+  --inverse-surface:40 48 68;--inverse-on-surface:238 240 255;
+  --ring:0 99 152;--shadow:15 23 42;
+}
+.dark{
+  --surface:15 23 42;--surface-dim:11 18 32;--surface-bright:38 52 73;
+  --surface-container-lowest:30 41 59;--surface-container-low:30 41 59;
+  --surface-container:38 52 73;--surface-container-high:51 65 85;--surface-container-highest:63 78 102;
+  --surface-variant:51 65 85;--background:15 23 42;--on-background:248 250 252;
+  --on-surface:248 250 252;--on-surface-variant:148 163 184;--outline:100 116 139;--outline-variant:51 65 85;
+  --surface-tint:16 185 129;--primary:16 185 129;--on-primary:4 30 21;
+  --primary-container:4 120 87;--on-primary-container:236 253 245;
+  --primary-fixed:141 248 183;--primary-fixed-dim:112 219 157;--inverse-primary:0 107 63;
+  --secondary:6 182 212;--on-secondary:3 26 33;--secondary-container:12 74 110;--on-secondary-container:204 229 255;
+  --tertiary:251 191 36;--on-tertiary:40 26 0;--tertiary-fixed:255 221 184;--on-tertiary-fixed:42 23 0;
+  --error:248 113 113;--on-error:40 8 8;--error-container:76 20 20;--on-error-container:254 226 226;
+  --inverse-surface:226 232 240;--inverse-on-surface:15 23 42;
+  --ring:6 182 212;--shadow:0 0 0;
+}
+@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } }
+::-webkit-scrollbar { display: none; }
+.tnum{font-variant-numeric:tabular-nums lining-nums;font-feature-settings:"tnum" 1,"zero" 1;}
+/* Level 1 (Soft) shapes: 4px controls, 8px cards, 12px overlays. Pills only for dots. */
+.card{background:rgb(var(--surface-container-lowest));border:1px solid rgb(var(--outline-variant));border-radius:.5rem;
+  box-shadow:0 1px 3px 0 rgb(var(--shadow)/.05),0 1px 2px -1px rgb(var(--shadow)/.04);}
+.dark .card{box-shadow:0 8px 24px -12px rgb(var(--shadow)/.60);}
+.label{font-size:11px;line-height:14px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:rgb(var(--on-surface-variant));}
+.badge{display:inline-flex;align-items:center;gap:.375rem;height:22px;padding:0 .5rem;border-radius:.25rem;
+  font-size:11px;line-height:14px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+  border:1px solid transparent;white-space:nowrap;}
+.badge-sim{background:rgb(var(--secondary)/.10);color:rgb(var(--secondary));border-color:rgb(var(--secondary)/.25);}
+.badge-live{background:rgb(var(--primary-container)/.10);color:rgb(var(--primary));border-color:rgb(var(--primary)/.30);}
+.badge-warn{background:rgb(var(--tertiary)/.12);color:rgb(var(--tertiary));border-color:rgb(var(--tertiary)/.30);}
+.badge-muted{background:rgb(var(--surface-container)/.85);color:rgb(var(--on-surface-variant));border-color:rgb(var(--outline-variant));}
+.pip{width:6px;height:6px;border-radius:9999px;background:rgb(var(--primary-container));flex:none;}
+.field{height:36px;width:100%;border:1px solid rgb(var(--outline-variant));border-radius:.25rem;
+  background:rgb(var(--surface-container-lowest));color:rgb(var(--on-surface));padding:0 .5rem;
+  font-size:14px;font-variant-numeric:tabular-nums;transition:border-color .12s ease;}
+.field:hover{border-color:rgb(var(--outline));}
+.field:focus{outline:none;border-color:rgb(var(--ring));box-shadow:0 0 0 1px rgb(var(--ring));}
+select.field{padding-right:1.75rem;cursor:pointer;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.375rem;height:36px;padding:0 .75rem;
+  border-radius:.25rem;border:1px solid transparent;font-size:13px;font-weight:600;line-height:16px;
+  transition:background-color .14s ease,border-color .14s ease,color .14s ease,opacity .14s ease;white-space:nowrap;}
+.btn:focus-visible{outline:2px solid rgb(var(--ring));outline-offset:2px;}
+.btn-primary{background:rgb(var(--primary-container));color:rgb(var(--on-primary-container));}
+.btn-primary:hover{background:rgb(var(--primary));}
+.dark .btn-primary:hover{filter:brightness(1.10);background:rgb(var(--primary-container));}
+.btn-ghost{background:transparent;color:rgb(var(--on-surface));border-color:rgb(var(--outline-variant));}
+.btn-ghost:hover{background:rgb(var(--surface-container));}
+.btn:disabled{opacity:.45;cursor:not-allowed;}
+.chip{display:inline-flex;align-items:center;gap:.375rem;height:28px;padding:0 .5rem;border-radius:.25rem;
+  background:rgb(var(--surface-container));color:rgb(var(--on-surface));border:1px solid transparent;
+  font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;transition:background-color .14s ease;}
+.chip:hover{background:rgb(var(--surface-container-high));}
+.chip[aria-pressed="true"]{background:rgb(var(--primary-container));color:rgb(var(--on-primary-container));}
+.chip:focus-visible{outline:2px solid rgb(var(--ring));outline-offset:2px;}
+.amount-input{height:56px;background:transparent;border:0;color:rgb(var(--on-surface));font-size:30px;
+  line-height:38px;font-weight:700;letter-spacing:-.02em;width:100%;min-width:0;font-variant-numeric:tabular-nums;}
+.amount-input:focus{outline:none;}
+.field-shell{display:flex;align-items:center;gap:.5rem;height:56px;padding:0 .75rem;border-radius:.5rem;
+  background:rgb(var(--surface-container-low));border:1px solid transparent;transition:border-color .14s ease,background-color .14s ease;}
+.field-shell:focus-within{border-color:rgb(var(--ring));background:rgb(var(--surface-container));}
+.slider{-webkit-appearance:none;appearance:none;height:6px;border-radius:9999px;background:rgb(var(--outline-variant));accent-color:rgb(var(--primary-container));}
+.slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:9999px;
+  background:rgb(var(--primary-container));border:2px solid rgb(var(--surface-container-lowest));cursor:pointer;}
+.slider::-moz-range-thumb{width:18px;height:18px;border-radius:9999px;background:rgb(var(--primary-container));
+  border:2px solid rgb(var(--surface-container-lowest));cursor:pointer;}
+.slider:focus-visible{outline:2px solid rgb(var(--ring));outline-offset:4px;}
+/* Chart */
+.chart-grid{stroke:rgb(var(--outline-variant));stroke-width:1;vector-effect:non-scaling-stroke;}
+.chart-axis{fill:rgb(var(--on-surface-variant));font-size:11px;font-family:Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;}
+.chart-line{fill:none;stroke:rgb(var(--primary-container));stroke-width:2;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke;}
+.chart-area{fill:url(#fxArea);}
+.chart-cross{stroke:rgb(var(--secondary));stroke-width:1;stroke-dasharray:3 3;vector-effect:non-scaling-stroke;}
+.chart-dot{fill:rgb(var(--secondary));stroke:rgb(var(--surface-container-lowest));stroke-width:2;vector-effect:non-scaling-stroke;}
+.chart-pin{fill:rgb(var(--tertiary));stroke:rgb(var(--surface-container-lowest));stroke-width:2;vector-effect:non-scaling-stroke;}
+.chart-today{fill:rgb(var(--primary-container));stroke:rgb(var(--surface-container-lowest));stroke-width:2;vector-effect:non-scaling-stroke;}
+#chart-tip{position:absolute;top:0;transform:translate(-50%,6px);opacity:0;pointer-events:none;transition:opacity .12s ease;z-index:20;}
+#chart-tip.on{opacity:1;}
+#chart-wrap:focus-visible{outline:2px solid rgb(var(--ring));outline-offset:4px;border-radius:.25rem;}
+.toast{opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .2s ease,transform .2s ease;}
+.toast.on{opacity:1;transform:translateY(0);}
+.parity-row{border:1px solid transparent;border-radius:.25rem;transition:background-color .14s ease,border-color .14s ease;}
+.parity-row:hover{background:rgb(var(--surface-container));}
+.parity-row[aria-current="true"]{border-color:rgb(var(--primary)/.45);background:rgb(var(--primary-container)/.08);}
+.ledger-row{border-bottom:1px solid rgb(var(--outline-variant));}
+.ledger-row:last-child{border-bottom:0;}
+@media (prefers-reduced-motion: reduce){ *{animation:none !important;transition:none !important;} }
+</style></head><body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex flex-col antialiased selection:bg-primary selection:text-on-primary"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-6xl mx-auto px-6 flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md shrink-0"><div class="flex items-center gap-space-sm"><div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary-container shadow-sm"><span class="material-symbols-outlined text-[24px]">eco</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface leading-none">CropTrade</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-0.5">Agritech Simplicity</span></div></div></div><nav class="hidden lg:flex items-center gap-space-xs p-1 bg-surface-container-low rounded-xl" data-active-classes="bg-primary-container text-on-primary-container font-title-md text-title-md shadow-sm"><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="overview" href="#">Overview</a><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="stock" href="#">Stock</a><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="market" href="#">Market</a><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="weather" href="#">Weather</a><a aria-current="page" class="min-h-[56px] px-space-md py-space-sm rounded-lg transition-all flex items-center justify-center leading-none bg-primary-container text-on-primary-container font-title-md text-title-md shadow-sm" data-path="rates" href="#">Rates</a></nav><div class="flex items-center gap-space-sm shrink-0"><button aria-label="Toggle theme" class="min-h-[56px] min-w-[56px] rounded-xl flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors focus:outline-none focus:bg-surface-container-highest" id="theme-toggle-btn" type="button"><span class="material-symbols-outlined text-[24px]" id="theme-icon-light">light_mode</span><span class="material-symbols-outlined text-[24px] hidden" id="theme-icon-dark">dark_mode</span></button><div class="h-8 w-px bg-outline-variant/30 hidden sm:block mx-space-xs"></div><div class="flex items-center gap-space-sm p-1 rounded-xl hover:bg-surface-container-low transition-colors"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-label-md text-label-md text-on-surface leading-tight">Terminal 04</span><span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>Demo rates</span></div></div></div></div></header><main class="w-full pt-20 bg-surface flex-1"><div class="max-w-6xl mx-auto py-space-lg px-4 sm:px-6"><div class="flex flex-col w-full">
+
+<!-- ══ Telemetry stream bar ══════════════════════════════════════════════ -->
+<section class="card px-space-md py-space-sm mb-space-lg flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+  <div class="flex items-center gap-space-sm flex-wrap">
+    <span class="pip"></span>
+    <span class="label">Export rate corridor</span>
+    <span class="badge badge-sim" title="Fixed demonstration constants baked into this page — no exchange-rate API is called">
+      <span class="material-symbols-outlined text-[14px]">science</span>Simulated
+    </span>
+  </div>
+  <div class="flex flex-wrap items-center gap-x-4 gap-y-1 font-data-mono text-data-mono text-on-surface" id="rail-pips"></div>
+  <div class="flex items-center gap-space-xs text-on-surface-variant font-data-mono text-data-mono">
+    <span class="material-symbols-outlined text-[16px]">schedule</span>
+    <span class="tnum">WAT <span id="clock">--:--:--</span></span>
+  </div>
 </section>
-<!-- Page Header Layout -->
-<header class="mb-8 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
-<div>
-<div class="flex items-center gap-2 mb-1.5">
-<span class="material-symbols-outlined text-primary text-[20px]">currency_exchange</span>
-<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">FX Export Liquidity Terminal</span>
-</div>
-<h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Money Converter</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant mt-1 max-w-2xl">
-        Convert domestic harvest valuation (NGN) into export settlements with spot-cleared agro-parity rates.
-      </p>
-</div>
-<div class="flex items-center gap-3 self-start lg:self-auto">
-<div class="bg-surface-container rounded-lg px-3 py-2 flex items-center gap-2 text-on-surface-variant font-label-md text-label-md">
-<span class="material-symbols-outlined text-[18px] text-primary">verified_user</span>
-<span>Institutional Agro-Corridor</span>
-</div>
-<div class="bg-surface-container rounded-lg px-3 py-2 flex items-center gap-2 text-on-surface-variant font-data-mono text-data-mono">
-<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
-<span>UTC 11:42:09</span>
-</div>
-</div>
+
+<!-- ══ Page header ═══════════════════════════════════════════════════════ -->
+<header class="mb-space-lg flex flex-col lg:flex-row lg:items-end lg:justify-between gap-space-md">
+  <div>
+    <div class="flex items-center gap-space-sm mb-1">
+      <span class="material-symbols-outlined text-primary text-[20px]">currency_exchange</span>
+      <span class="label text-primary">FX export liquidity terminal</span>
+    </div>
+    <h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Money Converter</h1>
+    <p class="font-body-lg text-body-lg text-on-surface-variant mt-1 max-w-2xl">
+      Convert a harvest valuation into an export settlement, net of the handling buffer and the
+      deductions that actually leave the terminal.
+    </p>
+  </div>
+  <div class="flex flex-wrap items-center gap-space-sm">
+    <span class="badge badge-muted" id="header-rate-badge">1 USD = ₦1,331.62</span>
+    <button class="btn btn-primary min-h-[44px] px-space-md" id="slip-btn" type="button">
+      <span class="material-symbols-outlined text-[18px]">download</span>Parity slip
+    </button>
+  </div>
 </header>
-<!-- Tactile Converter Container (Main View) -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
-<!-- Input & Controls Column (7 Cols) -->
-<div class="lg:col-span-7 flex flex-col gap-6">
-<!-- Primary Input Card -->
-<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col justify-between">
-<div class="flex items-center justify-between mb-3">
-<label class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2" for="naira-input">
-<span>Enter Naira Amount (₦)</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant font-normal">Domestically Booked</span>
-</label>
-<span class="font-label-sm text-label-sm text-primary font-semibold uppercase tracking-wider">Base Currency</span>
-</div>
-<div class="relative flex items-center bg-surface-container-low rounded-xl px-4 py-2 focus-within:bg-surface-container transition-colors">
-<span class="font-headline-lg text-headline-lg text-on-surface-variant mr-3 select-none font-bold">₦</span>
-<input class="w-full bg-transparent font-headline-lg text-headline-lg text-on-surface focus:outline-none tracking-tight font-bold placeholder:text-outline-variant" id="naira-input" min="0" placeholder="0.00" step="100" type="number" value="601690"/>
-<button class="h-10 px-3 ml-2 rounded-lg bg-surface-container-high text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-1 font-label-md text-label-md shrink-0" id="reset-input-btn" title="Reset to benchmark batch" type="button">
-<span class="material-symbols-outlined text-[18px]">restart_alt</span>
-<span class="hidden sm:inline">Reset</span>
-</button>
-</div>
-<!-- Quick Amount Increments -->
-<div class="flex flex-wrap items-center gap-2 mt-4 pt-4">
-<span class="font-label-sm text-label-sm text-on-surface-variant">Standard Lot:</span>
-<button class="quick-amt-btn px-2.5 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high font-data-mono text-body-sm text-on-surface transition-colors" data-amt="250000" type="button">+₦250k</button>
-<button class="quick-amt-btn px-2.5 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high font-data-mono text-body-sm text-on-surface transition-colors" data-amt="601690" type="button">₦601.69k (Batch #4)</button>
-<button class="quick-amt-btn px-2.5 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high font-data-mono text-body-sm text-on-surface transition-colors" data-amt="1200000" type="button">₦1.2M (Full Container)</button>
-</div>
-</div>
-<!-- Currency Switcher Toggles (Min 56px height) -->
-<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
-<div class="flex items-center justify-between mb-3">
-<span class="font-title-md text-title-md text-on-surface font-semibold">Target Settlement Currency</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Institutional Cleared</span>
-</div>
-<div class="grid grid-cols-3 gap-3">
-<!-- USD Button -->
-<button class="currency-toggle-btn min-h-[56px] px-4 py-3 rounded-xl flex items-center justify-center gap-2 text-center transition-all bg-primary-container text-on-primary-container shadow-md" data-currency="USD" data-rate="1331.62" data-symbol="$" id="currency-usd" type="button">
-<span class="font-headline-sm text-headline-sm font-bold">$</span>
-<div class="flex flex-col text-left leading-none">
-<span class="font-title-md text-title-md font-bold">USD</span>
-<span class="font-label-sm text-label-sm opacity-80">US Dollar</span>
-</div>
-</button>
-<!-- EUR Button -->
-<button class="currency-toggle-btn min-h-[56px] px-4 py-3 rounded-xl flex items-center justify-center gap-2 text-center transition-all bg-surface-container hover:bg-surface-container-high text-on-surface" data-currency="EUR" data-rate="1494.75" data-symbol="€" id="currency-eur" type="button">
-<span class="font-headline-sm text-headline-sm font-bold">€</span>
-<div class="flex flex-col text-left leading-none">
-<span class="font-title-md text-title-md font-bold">EUR</span>
-<span class="font-label-sm text-label-sm opacity-70">Euro</span>
-</div>
-</button>
-<!-- GBP Button -->
-<button class="currency-toggle-btn min-h-[56px] px-4 py-3 rounded-xl flex items-center justify-center gap-2 text-center transition-all bg-surface-container hover:bg-surface-container-high text-on-surface" data-currency="GBP" data-rate="1850.00" data-symbol="£" id="currency-gbp" type="button">
-<span class="font-headline-sm text-headline-sm font-bold">£</span>
-<div class="flex flex-col text-left leading-none">
-<span class="font-title-md text-title-md font-bold">GBP</span>
-<span class="font-label-sm text-label-sm opacity-70">UK Sterling</span>
-</div>
-</button>
-</div>
-</div>
-<!-- Quick Context Micro-Card -->
-<div class="bg-surface-container-low rounded-xl p-4 flex items-center gap-4">
-<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
-<span class="material-symbols-outlined text-[24px]">balance</span>
-</div>
-<div class="flex-1 min-w-0">
-<p class="font-label-md text-label-md text-on-surface font-semibold truncate">Export Parity Guaranteed</p>
-<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Sovereign settlement locked for 24-hours upon grain terminal docket filing.</p>
-</div>
-</div>
-</div>
-<!-- Giant Result Card Column (5 Cols) -->
-<div class="lg:col-span-5 flex flex-col justify-between bg-surface-container-lowest p-6 sm:p-8 rounded-xl shadow-md relative overflow-hidden">
-<!-- Decorative background glow -->
-<div class="absolute -top-12 -right-12 w-48 h-48 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
-<div>
-<!-- Badges & State -->
-<div class="flex items-center justify-between gap-2 mb-6">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">Converted Valuation</span>
-<div class="flex items-center gap-1.5">
-<span class="px-2.5 py-1 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm font-semibold flex items-center gap-1">
-<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
-              Live FX
-            </span>
-<span class="px-2.5 py-1 rounded-full bg-secondary-container/20 text-on-secondary-container font-label-sm text-label-sm font-semibold">
-              Simulated Total
-            </span>
-</div>
-</div>
-<!-- Giant Converted Output -->
-<div class="my-6">
-<div class="flex items-baseline gap-2 flex-wrap">
-<span class="font-display-lg text-display-lg text-primary tracking-tight font-extrabold transition-all duration-200" id="giant-result-val">
-              $451.85
-            </span>
-<span class="font-headline-md text-headline-md text-primary font-bold" id="giant-result-code">
-              USD
-            </span>
-</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-2" id="conversion-subtext">
-            Spot parity at 1 USD = ₦1,331.62 • Pre-export handling charges applied
+
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+
+  <!-- ══ Left column (8) ══════════════════════════════════════════════════ -->
+  <div class="lg:col-span-8 flex flex-col gap-space-lg">
+
+    <!-- ── Converter ───────────────────────────────────────────────────── -->
+    <section class="card p-space-lg" aria-labelledby="convert-h">
+      <div class="flex items-start justify-between gap-space-sm">
+        <div>
+          <h2 class="font-title-md text-title-md text-on-surface font-semibold" id="convert-h">Convert valuation</h2>
+          <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Every quote reads “1 unit = ₦”. Edit either side — the other follows.
           </p>
-</div>
-<!-- Metric breakdown list -->
-<div class="space-y-3 pt-6 mb-6">
-<div class="flex items-center justify-between font-label-md text-label-md">
-<span class="text-on-surface-variant">Gross Batch Equivalent:</span>
-<span class="font-data-mono font-bold text-on-surface" id="gross-eq-val">$451.85 USD</span>
-</div>
-<div class="flex items-center justify-between font-label-md text-label-md">
-<span class="text-on-surface-variant">Est. Handling Buffer (2.0%):</span>
-<span class="font-data-mono text-tertiary font-semibold" id="buffer-val">-$9.04 USD</span>
-</div>
-<div class="flex items-center justify-between font-label-md text-label-md">
-<span class="text-on-surface-variant">Export Settlement Account:</span>
-<span class="font-data-mono text-primary font-medium">GTB AGRO-DESK #994</span>
-</div>
-</div>
-</div>
-<!-- Action Button (Min 56px height) -->
-<button class="w-full min-h-[56px] px-6 py-4 rounded-xl bg-primary text-on-primary font-title-md text-title-md font-semibold hover:bg-primary-container hover:shadow-lg transition-all flex items-center justify-center gap-2 shadow-sm" id="save-valuation-btn" type="button">
-<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span>Save Net Export Valuation</span>
-</button>
-<!-- Toast confirmation feedback -->
-<div class="hidden absolute inset-x-6 bottom-6 bg-inverse-surface text-inverse-on-surface px-4 py-3 rounded-lg shadow-xl flex items-center justify-between transition-opacity duration-300" id="save-toast">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary-fixed text-[20px]">task_alt</span>
-<span class="font-label-md text-label-md">Valuation archived to export pipeline</span>
-</div>
-<span class="font-data-mono text-label-sm opacity-70">EXP-8841</span>
-</div>
-</div>
-</div>
-<!-- Collapsible Section: Mandatory 30-Day FX Exchange Rate Chart & Deductions -->
-<section class="w-full bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden transition-all duration-300 mb-8">
-<!-- Accordion Trigger Banner (Min 56px touch height) -->
-<button aria-expanded="false" class="w-full min-h-[56px] px-6 py-4 flex items-center justify-between bg-surface-container hover:bg-surface-container-high transition-colors text-left focus:outline-none" id="accordion-toggle-btn" type="button">
-<div class="flex items-center gap-3">
-<span class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary shrink-0">
-<span class="material-symbols-outlined text-[20px]">ssid_chart</span>
-</span>
-<div class="flex flex-col sm:flex-row sm:items-center sm:gap-3">
-<span class="font-title-md text-title-md text-on-surface font-semibold">30-Day FX Exchange Rate Chart &amp; Cost Deductions</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant hidden sm:inline">• Real-time volatility index</span>
-</div>
-</div>
-<div class="flex items-center gap-2 shrink-0">
-<span class="font-label-md text-label-md text-primary font-semibold hidden md:inline">Inspect Fluctuations</span>
-<span class="material-symbols-outlined text-primary text-[24px] transform transition-transform duration-300" id="accordion-icon">
-          expand_more
-        </span>
-</div>
-</button>
-<!-- Expanded Drawer Content -->
-<div class="hidden p-6 sm:p-8 bg-surface-container-lowest" id="accordion-drawer">
-<!-- Chart Header Metrics -->
-<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-6">
-<div>
-<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Historical Fluctuations</span>
-<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold mt-0.5">USD/NGN 30-Day Ag-Corridor Trend</h2>
-</div>
-<div class="flex items-center gap-3 bg-surface-container-low px-4 py-2 rounded-xl">
-<div class="flex flex-col">
-<span class="font-label-sm text-label-sm text-on-surface-variant">Current Rate Highlight</span>
-<span class="font-data-mono text-title-md text-primary font-bold">₦1,331.62</span>
-</div>
-<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-data-mono text-label-sm font-semibold">+0.32%</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant hidden sm:inline">7-day stability band</span>
-</div>
-</div>
-<!-- Rich Custom Inline SVG Line Chart (USD / NGN Volatility) -->
-<div class="w-full bg-surface-container-low p-4 sm:p-6 rounded-xl relative mb-8">
-<!-- Y-Axis Labels & Grid Lines -->
-<div class="relative w-full h-56 flex flex-col justify-between pointer-events-none select-none">
-<div class="w-full flex items-center justify-between text-on-surface-variant font-data-mono text-body-sm">
-<span>₦1,340</span>
-<div class="w-full mx-4 h-px bg-outline-variant/20"></div>
-</div>
-<div class="w-full flex items-center justify-between text-on-surface-variant font-data-mono text-body-sm">
-<span>₦1,330</span>
-<div class="w-full mx-4 h-px bg-outline-variant/20"></div>
-</div>
-<div class="w-full flex items-center justify-between text-on-surface-variant font-data-mono text-body-sm">
-<span>₦1,320</span>
-<div class="w-full mx-4 h-px bg-outline-variant/20"></div>
-</div>
-<div class="w-full flex items-center justify-between text-on-surface-variant font-data-mono text-body-sm">
-<span>₦1,310</span>
-<div class="w-full mx-4 h-px bg-outline-variant/20"></div>
-</div>
-</div>
-<!-- SVG Line Overlay (Curved Sparkline with Area Gradient) -->
-<svg class="absolute inset-x-12 sm:inset-x-16 top-4 bottom-10 w-[calc(100%-6rem)] sm:w-[calc(100%-8rem)] h-44 overflow-visible" preserveaspectratio="none" viewbox="0 0 100 100">
-<defs>
-<lineargradient id="rateGradient" x1="0%" x2="0%" y1="0%" y2="100%">
-<stop offset="0%" stop-color="#008751" stop-opacity="0.35"></stop>
-<stop offset="100%" stop-color="#008751" stop-opacity="0.0"></stop>
-</lineargradient>
-</defs>
-<!-- Area Fill -->
-<path d="M 0,80 Q 15,75 25,60 T 50,45 T 75,30 T 100,22 L 100,100 L 0,100 Z" fill="url(#rateGradient)"></path>
-<!-- Smooth Line -->
-<path d="M 0,80 Q 15,75 25,60 T 50,45 T 75,30 T 100,22" fill="none" stroke="#008751" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
-<!-- Key Points -->
-<circle cx="0" cy="80" fill="#faf8ff" r="3.5" stroke="#008751" stroke-width="2.5"></circle>
-<circle cx="25" cy="60" fill="#008751" r="3"></circle>
-<circle cx="50" cy="45" fill="#008751" r="3"></circle>
-<circle cx="75" cy="30" fill="#008751" r="3"></circle>
-<circle cx="100" cy="22" fill="#008751" r="4.5" stroke="#faf8ff" stroke-width="2.5"></circle>
-</svg>
-<!-- X-Axis Labels -->
-<div class="flex items-center justify-between pt-3 pl-12 sm:pl-14 text-on-surface-variant font-data-mono text-body-sm">
-<span>30 Days Ago (₦1,314.50)</span>
-<span class="hidden sm:inline">20 Days Ago (₦1,322.10)</span>
-<span>10 Days Ago (₦1,328.00)</span>
-<span class="font-bold text-primary">Today (₦1,331.62)</span>
-</div>
-</div>
-<!-- Comparative Sub-Grids: Reference Parities & Export Cost Deductions -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<!-- Reference Conversion Cards -->
-<div class="bg-surface-container-low p-5 rounded-xl flex flex-col justify-between">
-<div>
-<div class="flex items-center justify-between mb-4">
-<span class="font-title-md text-title-md text-on-surface font-semibold">Multi-Currency Parity Index</span>
-<span class="font-label-sm text-label-sm text-primary font-bold">₦601,690.00 Ref</span>
-</div>
-<div class="space-y-3">
-<!-- EUR Reference -->
-<div class="flex items-center justify-between p-3 bg-surface-container rounded-lg">
-<div class="flex items-center gap-2.5">
-<span class="w-7 h-7 rounded bg-secondary-container/30 text-on-secondary-container font-headline-sm font-bold flex items-center justify-center">€</span>
-<div>
-<span class="font-label-md text-label-md text-on-surface font-semibold block">EUR Parity</span>
-<span class="font-data-mono text-body-sm text-on-surface-variant">Pegged at ₦1,494.75</span>
-</div>
-</div>
-<div class="text-right">
-<span class="font-data-mono text-title-md text-on-surface font-bold">€402.53 EUR</span>
-<span class="block font-label-sm text-label-sm text-secondary font-medium">Clearance -0.18%</span>
-</div>
-</div>
-<!-- GBP Reference -->
-<div class="flex items-center justify-between p-3 bg-surface-container rounded-lg">
-<div class="flex items-center gap-2.5">
-<span class="w-7 h-7 rounded bg-tertiary-fixed text-on-tertiary-fixed font-headline-sm font-bold flex items-center justify-center">£</span>
-<div>
-<span class="font-label-md text-label-md text-on-surface font-semibold block">GBP Parity</span>
-<span class="font-data-mono text-body-sm text-on-surface-variant">Pegged at ₦1,850.00</span>
-</div>
-</div>
-<div class="text-right">
-<span class="font-data-mono text-title-md text-on-surface font-bold">£325.23 GBP</span>
-<span class="block font-label-sm text-label-sm text-tertiary font-medium">Clearance +0.05%</span>
-</div>
-</div>
-</div>
-</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-4">
-            Quotes verified by CBN Central Clearing switch for agricultural bulk trade dockets.
+        </div>
+        <span class="badge badge-muted">Bidirectional</span>
+      </div>
+
+      <!-- Send -->
+      <div class="mt-space-md">
+        <div class="flex items-center justify-between mb-1">
+          <label class="label" for="send-amount">You send</label>
+          <span class="font-label-sm text-label-sm text-on-surface-variant tnum" id="send-rate-note">Domestic booking</span>
+        </div>
+        <div class="field-shell">
+          <span class="font-headline-md text-headline-md text-on-surface-variant font-bold tnum select-none" id="send-sym">₦</span>
+          <input class="amount-input tnum" id="send-amount" inputmode="decimal" autocomplete="off" spellcheck="false" value="601690" aria-describedby="send-rate-note"/>
+          <select class="field w-auto shrink-0" id="send-ccy" aria-label="Send currency"></select>
+        </div>
+      </div>
+
+      <!-- Swap -->
+      <div class="flex items-center gap-space-sm my-space-sm">
+        <div class="h-px flex-1 bg-outline-variant"></div>
+        <button class="btn btn-ghost" id="swap-btn" type="button" aria-label="Swap send and receive currencies">
+          <span class="material-symbols-outlined text-[18px]">swap_vert</span>Swap
+        </button>
+        <div class="h-px flex-1 bg-outline-variant"></div>
+      </div>
+
+      <!-- Receive -->
+      <div>
+        <div class="flex items-center justify-between mb-1">
+          <label class="label" for="recv-amount">They receive</label>
+          <span class="font-label-sm text-label-sm text-on-surface-variant tnum" id="recv-rate-note">1 USD = ₦1,331.62</span>
+        </div>
+        <div class="field-shell">
+          <span class="font-headline-md text-headline-md text-primary font-bold tnum select-none" id="recv-sym">$</span>
+          <input class="amount-input tnum text-primary" id="recv-amount" inputmode="decimal" autocomplete="off" spellcheck="false" value="451.85" aria-describedby="recv-rate-note"/>
+          <select class="field w-auto shrink-0" id="recv-ccy" aria-label="Receive currency"></select>
+        </div>
+      </div>
+
+      <!-- Quick lots -->
+      <div class="mt-space-md pt-space-md border-t border-outline-variant">
+        <div class="flex flex-wrap items-center gap-space-sm">
+          <span class="label">Quick lot (NGN)</span>
+          <button class="chip" data-add="250000" type="button">+₦250k</button>
+          <button class="chip" data-add="1000000" type="button">+₦1M</button>
+          <button class="chip" id="custom-toggle" aria-expanded="false" aria-controls="custom-wrap" type="button">
+            <span class="material-symbols-outlined text-[16px]">edit</span>Custom
+          </button>
+          <button class="chip" id="reset-btn" type="button">
+            <span class="material-symbols-outlined text-[16px]">restart_alt</span>Reset ₦601,690
+          </button>
+        </div>
+        <div class="hidden mt-space-sm flex flex-wrap items-end gap-space-sm" id="custom-wrap">
+          <label class="flex flex-col gap-1">
+            <span class="label">Exact NGN amount</span>
+            <input class="field w-44 tnum" id="custom-amount" inputmode="decimal" autocomplete="off" value="601690"/>
+          </label>
+          <button class="btn btn-primary" id="custom-apply" type="button">Apply amount</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Settlement engine ───────────────────────────────────────────── -->
+    <section class="card p-space-lg" aria-labelledby="settle-h">
+      <div class="flex items-start justify-between gap-space-sm">
+        <div>
+          <h2 class="font-title-md text-title-md text-on-surface font-semibold" id="settle-h">Settlement engine</h2>
+          <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Buffer, destination account, and the deductions between gross and what lands.
           </p>
+        </div>
+        <span class="badge badge-muted" id="settle-badge">GTB AGRO-DESK</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md mt-space-md">
+        <div>
+          <div class="flex items-center justify-between">
+            <label class="label" for="buffer-range">Handling buffer</label>
+            <output class="font-data-mono text-data-mono text-tertiary tnum" id="buffer-out" for="buffer-range">2.0%</output>
+          </div>
+          <input class="slider w-full mt-space-sm" id="buffer-range" max="5" min="1" step="0.1" type="range" value="2" aria-describedby="buffer-help"/>
+          <div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant tnum mt-1">
+            <span>1.0%</span><span>3.0%</span><span>5.0%</span>
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface-variant mt-1" id="buffer-help">
+            Hold-back on gross settlement for handling variance.
+          </p>
+        </div>
+        <div>
+          <label class="label" for="account-select">Export destination</label>
+          <select class="field mt-space-sm" id="account-select"></select>
+          <p class="font-body-sm text-body-sm text-on-surface-variant mt-1" id="account-meta">—</p>
+        </div>
+      </div>
+
+      <div class="hidden mt-space-md rounded border border-tertiary/40 bg-tertiary/10 p-space-sm items-start gap-space-sm text-tertiary" id="account-warning">
+        <span class="material-symbols-outlined text-[18px] shrink-0">report</span>
+        <span class="font-body-sm text-body-sm" id="account-warning-text">No settlement account matches this currency.</span>
+      </div>
+
+      <div class="mt-space-md pt-space-md border-t border-outline-variant">
+        <div class="label mb-space-sm">Deductions</div>
+        <div class="space-y-2" id="fee-list"></div>
+        <div class="mt-space-md rounded border border-outline-variant bg-surface-container-low p-space-md flex items-center justify-between gap-space-sm">
+          <div class="min-w-0">
+            <span class="font-title-md text-title-md text-primary font-semibold block">Net realized recovery</span>
+            <span class="font-body-sm text-body-sm text-on-surface-variant" id="net-note">Post deductions settlement</span>
+          </div>
+          <div class="text-right shrink-0">
+            <span class="font-headline-sm text-headline-sm font-extrabold text-primary tnum block" id="net-val">—</span>
+            <span class="font-label-sm text-label-sm text-on-surface-variant" id="net-ccy">USD</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Volatility index ────────────────────────────────────────────── -->
+    <section class="card p-space-lg" aria-labelledby="fx-h">
+      <div class="flex flex-wrap items-start justify-between gap-space-sm">
+        <div>
+          <div class="label">Volatility index</div>
+          <h2 class="font-title-md text-title-md text-on-surface font-semibold mt-1" id="chart-title">USD/NGN · 30-day corridor</h2>
+        </div>
+        <div class="flex items-center gap-space-sm">
+          <span class="badge badge-sim">Simulated</span>
+          <button class="btn btn-ghost" id="chart-reset" type="button">
+            <span class="material-symbols-outlined text-[16px]">update</span>Today
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-space-sm mt-space-md" id="chart-stats"></div>
+
+      <div class="relative mt-space-md" id="chart-wrap" tabindex="0" role="group"
+           aria-label="30-day exchange rate chart. Use left and right arrow keys to inspect a day.">
+        <svg class="block w-full" height="260" id="chart" preserveAspectRatio="none" role="img"
+             aria-label="30-day exchange rate line chart" viewBox="0 0 720 260"></svg>
+        <div id="chart-tip" class="card px-space-sm py-space-xs"></div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-space-sm mt-space-md rounded border border-outline-variant bg-surface-container-low p-space-sm" id="inspect">
+        <div><div class="label">Inspected</div><div class="font-data-mono text-data-mono text-on-surface tnum mt-1" id="inspect-date">—</div></div>
+        <div><div class="label">Spot</div><div class="font-data-mono text-data-mono text-on-surface tnum mt-1" id="inspect-rate">—</div></div>
+        <div><div class="label">Δ 1 day</div><div class="font-data-mono text-data-mono tnum mt-1" id="inspect-d1">—</div></div>
+        <div><div class="label">Δ 30 days</div><div class="font-data-mono text-data-mono tnum mt-1" id="inspect-d30">—</div></div>
+        <div><div class="label">Band position</div><div class="font-data-mono text-data-mono text-on-surface tnum mt-1" id="inspect-band">—</div></div>
+        <div><div class="label">At this rate</div><div class="font-data-mono text-data-mono text-on-surface tnum mt-1" id="inspect-eq">—</div></div>
+      </div>
+      <div class="flex flex-wrap items-center justify-between gap-space-sm mt-space-sm">
+        <p class="font-body-sm text-body-sm text-on-surface-variant">
+          Hover or ← → to inspect a day · click to pin it. Values are fixed demo constants, not a fetched feed.
+        </p>
+        <span class="font-label-sm text-label-sm text-on-surface-variant tnum" id="inspect-pin">Pinned: today</span>
+      </div>
+    </section>
+
+    <!-- ── Custom pairings ─────────────────────────────────────────────── -->
+    <section class="card p-space-lg" aria-labelledby="pairs-h">
+      <h2 class="font-title-md text-title-md text-on-surface font-semibold" id="pairs-h">Custom regional pairings</h2>
+      <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+        GHS, KES, ZAR and XOF ship with the corridor. Add any other code with its naira quote.
+      </p>
+      <form class="mt-space-md flex flex-wrap items-end gap-space-sm" id="custom-form" novalidate>
+        <label class="flex flex-col gap-1">
+          <span class="label">Code</span>
+          <input class="field w-24 uppercase tnum" id="custom-code" maxlength="3" placeholder="TZS" autocomplete="off" spellcheck="false"/>
+        </label>
+        <label class="flex flex-col gap-1">
+          <span class="label">1 unit = ₦</span>
+          <input class="field w-32 tnum" id="custom-rate" inputmode="decimal" placeholder="0.00" autocomplete="off"/>
+        </label>
+        <button class="btn btn-ghost" type="submit">
+          <span class="material-symbols-outlined text-[16px]">add</span>Add pairing
+        </button>
+        <span class="font-body-sm text-body-sm text-error" id="custom-err" role="alert"></span>
+      </form>
+      <div class="flex flex-wrap items-center gap-space-sm mt-space-sm" id="custom-list"></div>
+    </section>
+
+  </div>
+
+  <!-- ══ Right column (4) ═════════════════════════════════════════════════ -->
+  <aside class="lg:col-span-4 flex flex-col gap-space-lg self-start w-full">
+    <!-- Result -->
+    <section class="card p-space-lg relative overflow-hidden" aria-labelledby="result-h">
+      <div class="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-primary/10 blur-3xl pointer-events-none"></div>
+      <div class="relative">
+        <div class="flex items-center justify-between gap-space-sm">
+          <h2 class="label" id="result-h">Net export settlement</h2>
+          <span class="badge badge-sim">Simulated</span>
+        </div>
+        <div class="flex items-baseline gap-2 flex-wrap mt-space-sm">
+          <span class="font-display-lg text-display-lg font-extrabold text-primary tnum" id="result-net">—</span>
+          <span class="font-headline-md text-headline-md font-bold text-primary" id="result-code">USD</span>
+        </div>
+        <p class="font-body-sm text-body-sm text-on-surface-variant mt-1" id="result-subtext">Spot parity · pre-export handling applied</p>
+
+        <dl class="mt-space-md pt-space-md border-t border-outline-variant space-y-2 font-label-md text-label-md">
+          <div class="flex items-center justify-between gap-2">
+            <dt class="text-on-surface-variant">Gross equivalent</dt>
+            <dd class="font-data-mono text-data-mono text-on-surface tnum" id="result-gross">—</dd>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <dt class="text-on-surface-variant" id="result-buffer-label">Handling buffer</dt>
+            <dd class="font-data-mono text-data-mono text-tertiary tnum" id="result-buffer">—</dd>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <dt class="text-on-surface-variant">Export costs</dt>
+            <dd class="font-data-mono text-data-mono text-tertiary tnum" id="result-fees">—</dd>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <dt class="text-on-surface-variant">Destination</dt>
+            <dd class="font-data-mono text-data-mono text-primary text-right" id="result-account">—</dd>
+          </div>
+        </dl>
+
+        <button class="btn btn-primary w-full min-h-[44px] mt-space-md" id="save-btn" type="button">
+          <span class="material-symbols-outlined text-[18px]">save</span>Save settlement
+        </button>
+        <button class="btn btn-ghost w-full mt-space-sm" id="slip-btn-2" type="button">
+          <span class="material-symbols-outlined text-[16px]">description</span>Download parity slip
+        </button>
+        <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-sm" id="save-hint">
+          The slip carries the rate, buffer, fees and inspected chart point.
+        </p>
+      </div>
+    </section>
+
+    <!-- Parity index -->
+    <section class="card p-space-lg" aria-labelledby="parity-h">
+      <h2 class="font-title-md text-title-md text-on-surface font-semibold" id="parity-h">Parity index</h2>
+      <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+        Same NGN valuation in every corridor, net of buffer and costs.
+      </p>
+      <div class="mt-space-sm space-y-1" id="parity-list"></div>
+      <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-sm">
+        Select a row to make it the settlement currency.
+      </p>
+    </section>
+
+    <!-- ── Settlement ledger ───────────────────────────────────────────── -->
+    <section class="card p-space-lg" aria-labelledby="ledger-h">
+      <div class="flex items-center justify-between gap-space-sm">
+        <h2 class="font-title-md text-title-md text-on-surface font-semibold" id="ledger-h">Settlement ledger</h2>
+        <span class="badge badge-muted" id="ledger-count">0 saved</span>
+      </div>
+      <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Saved settlements stay on this device only.</p>
+      <div class="mt-space-sm" id="ledger-list"></div>
+      <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-sm" id="ledger-empty">
+        Nothing saved yet. Convert an amount, then save the settlement.
+      </p>
+    </section>
+  </aside>
 </div>
-<!-- Export Cost Deductions Overview -->
-<div class="bg-surface-container-low p-5 rounded-xl flex flex-col justify-between">
-<div>
-<div class="flex items-center justify-between mb-4">
-<span class="font-title-md text-title-md text-on-surface font-semibold">Export Cost Deductions Overview</span>
-<span class="font-label-sm text-label-sm bg-tertiary-fixed text-on-tertiary-fixed font-bold px-2 py-0.5 rounded">Pre-Transit Gate</span>
+
+</div></div></main>
+
+<footer class="w-full bg-surface-container-low py-space-lg mt-auto shadow-[0_-1px_8px_rgba(0,0,0,0.02)]"><div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-space-md text-on-surface-variant font-label-md text-label-md"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm text-primary font-bold">CropTrade</span><span>· Agritech Global Exchange</span></div><div class="flex items-center gap-space-lg flex-wrap"><span class="font-data-mono text-data-mono">WAT (UTC+01:00) GRAIN-DESK</span><span>© 2026 CropTrade Platform. All rights reserved.</span></div></div></footer>
+
+<!-- Toast -->
+<div class="toast fixed left-1/2 bottom-6 -translate-x-1/2 z-[60] w-[min(92vw,26rem)] rounded-lg bg-inverse-surface text-inverse-on-surface px-space-md py-space-sm shadow-xl flex items-center justify-between gap-space-sm" id="save-toast" role="status" aria-live="polite">
+  <div class="flex items-center gap-space-sm min-w-0">
+    <span class="material-symbols-outlined text-primary-fixed text-[20px]">task_alt</span>
+    <span class="font-label-md text-label-md" id="toast-title">Saved</span>
+  </div>
+  <span class="font-data-mono text-label-sm opacity-70 tnum" id="toast-ref">—</span>
 </div>
-<div class="space-y-3 font-label-md text-label-md">
-<div class="flex items-center justify-between pb-2">
-<span class="text-on-surface-variant flex items-center gap-1.5">
-<span class="material-symbols-outlined text-[16px]">local_shipping</span>
-                  Intermodal Freight Charge
-                </span>
-<span class="font-data-mono font-bold text-on-surface">$38.41 USD</span>
-</div>
-<div class="flex items-center justify-between pb-2">
-<span class="text-on-surface-variant flex items-center gap-1.5">
-<span class="material-symbols-outlined text-[16px]">verified</span>
-                  Phytosanitary &amp; Bio-Inspection Seal
-                </span>
-<span class="font-data-mono font-bold text-on-surface">$15.00 USD</span>
-</div>
-<div class="flex items-center justify-between pb-2">
-<span class="text-on-surface-variant flex items-center gap-1.5">
-<span class="material-symbols-outlined text-[16px]">warehouse</span>
-                  Lagos Port Silo Handling
-                </span>
-<span class="font-data-mono font-bold text-on-surface leading-tight">$0.00 <span class="text-primary font-normal text-body-sm">(Subsidized)</span></span>
-</div>
-<!-- Net Realized Recovery Row -->
-<div class="bg-surface-container p-3 rounded-lg flex items-center justify-between">
-<div>
-<span class="font-title-md text-title-md text-primary font-bold block">Net Realized Recovery</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant">Post deductions settlement</span>
-</div>
-<div class="text-right">
-<span class="font-headline-sm text-headline-sm font-extrabold text-primary">$398.44 USD</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant block">Settles to Corporate USD IBAN</span>
-</div>
-</div>
-</div>
-</div>
-<div class="flex items-center gap-2 mt-4 text-primary font-label-sm text-label-sm">
-<span class="material-symbols-outlined text-[16px]">lock_reset</span>
-<span>Fees bound by Agro-Terminal Protocol 2025.1</span>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Interactive JavaScript Engine -->
+
+<noscript><div class="max-w-6xl mx-auto px-6 py-4 text-error font-body-md">This converter needs JavaScript — the arithmetic, chart and slip all run in the page.</div></noscript>
+
 <script>
-    (function initConverter() {
-      // Rates Table
-      const rates = {
-        USD: { rate: 1331.62, symbol: '$', code: 'USD', name: 'US Dollar', feeRate: 0.02 },
-        EUR: { rate: 1494.75, symbol: '€', code: 'EUR', name: 'Euro', feeRate: 0.02 },
-        GBP: { rate: 1850.00, symbol: '£', code: 'GBP', name: 'UK Sterling', feeRate: 0.02 }
+  (function initConverter() {
+    'use strict';
+
+    /* ── helpers ───────────────────────────────────────────────────────── */
+    var byId = function (id) { return document.getElementById(id); };
+    var esc = function (s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    };
+    function readStored(key, fallback) {
+      try { var v = localStorage.getItem(key); return v === null ? fallback : v; } catch (e) { return fallback; }
+    }
+    function writeStored(key, value) {
+      try { localStorage.setItem(key, value); } catch (e) { /* private mode — keep in memory */ }
+    }
+    function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+    function roundTo(n, dp) { var f = Math.pow(10, dp); return Math.round(n * f) / f; }
+    function parseAmount(raw) {
+      if (raw === null || raw === undefined) return NaN;
+      var cleaned = String(raw).replace(/[\s,_]/g, '');
+      if (cleaned === '' || cleaned === '-' || cleaned === '.') return NaN;
+      var n = Number(cleaned);
+      return isFinite(n) ? n : NaN;
+    }
+    function fmt(n, dp) {
+      if (!isFinite(n)) return '—';
+      var d = dp === undefined ? 2 : dp;
+      return Number(n).toLocaleString('en-US', {
+        minimumFractionDigits: d, maximumFractionDigits: d
+      });
+    }
+    function pct(n, dp) {
+      if (!isFinite(n)) return '—';
+      return (n >= 0 ? '+' : '') + fmt(n, dp === undefined ? 2 : dp) + '%';
+    }
+
+    /* ── rate table: "1 unit of CODE = X naira" (same meaning as the app) ─ */
+    var BASE_RATES = {
+      NGN: 1, USD: 1331.62, EUR: 1494.75, GBP: 1850.00,
+      GHS: 88.40, KES: 10.31, ZAR: 71.85, XOF: 2.24
+    };
+    var META = {
+      NGN: { sym: '₦', name: 'Nigerian Naira', dp: 0, note: 'Domestic booking' },
+      USD: { sym: '$', name: 'US Dollar', dp: 2, note: 'North America' },
+      EUR: { sym: '€', name: 'Euro', dp: 2, note: 'Eurozone' },
+      GBP: { sym: '£', name: 'UK Sterling', dp: 2, note: 'United Kingdom' },      GHS: { sym: 'GH₵', name: 'Ghanaian Cedi', dp: 2, note: 'West Africa' },
+      KES: { sym: 'KSh ', name: 'Kenyan Shilling', dp: 2, note: 'East Africa' },
+      ZAR: { sym: 'R', name: 'South African Rand', dp: 2, note: 'Southern Africa' },
+      XOF: { sym: 'CFA ', name: 'West African CFA', dp: 0, note: 'UEMOA' }
+    };
+    var CORE = ['NGN', 'USD', 'EUR', 'GBP', 'GHS', 'KES', 'ZAR', 'XOF'];
+
+    var ACCOUNTS = [
+      { id: 'gtb-usd', label: 'GTB AGRO-DESK #994', ccy: 'USD', detail: 'Guaranty Trust · Lagos', ref: '994' },
+      { id: 'zen-usd', label: 'ZENITH EXPORT IBAN', ccy: 'USD', detail: 'Zenith Bank · Apapa corridor', ref: '7781' },
+      { id: 'eco-eur', label: 'ECOBANK EUR SEPA', ccy: 'EUR', detail: 'Ecobank · Paris corridor', ref: '4410' },
+      { id: 'acc-gbp', label: 'ACCESS GBP CHAPS', ccy: 'GBP', detail: 'Access Bank · London', ref: '2207' },
+      { id: 'stb-ghs', label: 'STANBIC GHS SETTLE', ccy: 'GHS', detail: 'Stanbic · Accra desk', ref: '3390' },
+      { id: 'kcb-kes', label: 'KCB KES SWIFT', ccy: 'KES', detail: 'KCB · Nairobi desk', ref: '1182' }
+    ];
+
+    /* Fixed per-shipment costs, quoted in USD and converted into the settlement currency. */
+    var FEES = [
+      { label: 'Intermodal freight', icon: 'local_shipping', usd: 38.41 },
+      { label: 'Phytosanitary & bio-seal', icon: 'verified', usd: 15.00 },
+      { label: 'Port silo handling', icon: 'warehouse', usd: 0, note: 'Subsidised' }
+    ];
+
+    /* ── persisted state ──────────────────────────────────────────────── */
+    var customPairs = [];
+    try { customPairs = JSON.parse(readStored('croptrade_fx_custom', '[]')) || []; } catch (e) { customPairs = []; }
+    customPairs = customPairs.filter(function (p) {
+      return p && typeof p.code === 'string' && /^[A-Z]{3}$/.test(p.code) && isFinite(p.rate) && p.rate > 0;
+    }).slice(0, 6);
+
+    var ledger = [];
+    try { ledger = JSON.parse(readStored('croptrade_fx_ledger', '[]')) || []; } catch (e) { ledger = []; }
+    if (!Array.isArray(ledger)) ledger = [];
+
+    var state = {
+      sendCode: 'NGN',
+      recvCode: readStored('croptrade_fx_recv', 'USD'),
+      amountNgn: 601690,
+      bufferPct: 2.0,
+      accountId: 'gtb-usd',
+      pin: null,
+      hover: null
+    };
+    var ref = readStored('croptrade_fx_ref', '');
+    if (!ref) { ref = 'EXP-' + (1000 + Math.floor(Math.random() * 9000)); writeStored('croptrade_fx_ref', ref); }
+
+    function customPair(code) {
+      for (var i = 0; i < customPairs.length; i++) if (customPairs[i].code === code) return customPairs[i];
+      return null;
+    }
+    function rateOf(code) {
+      if (code === 'NGN') return 1;
+      var pair = customPair(code);
+      if (pair) return pair.rate;
+      return BASE_RATES[code] || 0;
+    }
+    function metaOf(code) {
+      if (META[code]) return META[code];
+      return { sym: code + ' ', name: 'Custom pairing', dp: 2, note: 'Custom' };
+    }
+    function dpOf(code) { return metaOf(code).dp; }
+    function money(n, code) { return metaOf(code).sym + fmt(n, dpOf(code)); }
+    /* Deduction amounts: a zero fee reads as "$0.00", never "−$0.00". */
+    function signed(n, code) {
+      var rounded = roundTo(Math.abs(n), dpOf(code));
+      return (rounded === 0 ? '' : '−') + money(rounded, code);
+    }
+    function amountStr(amount, code) { return String(roundTo(amount, dpOf(code))); }
+    function accountById(id) {
+      for (var i = 0; i < ACCOUNTS.length; i++) if (ACCOUNTS[i].id === id) return ACCOUNTS[i];
+      return null;
+    }
+    function currencyCodes() {
+      var codes = CORE.slice();
+      customPairs.forEach(function (p) { if (codes.indexOf(p.code) === -1) codes.push(p.code); });
+      return codes;
+    }
+
+    /* ── 30-day series: deterministic, anchored on today's rate ───────── */
+    var DAYS = 30;
+    var seriesCache = {};
+    function hash32(str) {
+      var h = 0x811c9dc5;
+      for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 0x01000193); }
+      return h >>> 0;
+    }
+    function rng(seed) {
+      var a = seed >>> 0;
+      return function () {
+        a = (a + 0x6d2b79f5) | 0;
+        var t = Math.imul(a ^ (a >>> 15), 1 | a);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
       };
-
-      let activeCurrency = 'USD';
-
-      // DOM Elements
-      const nairaInput = document.getElementById('naira-input');
-      const resetBtn = document.getElementById('reset-input-btn');
-      const giantResultVal = document.getElementById('giant-result-val');
-      const giantResultCode = document.getElementById('giant-result-code');
-      const conversionSubtext = document.getElementById('conversion-subtext');
-      const grossEqVal = document.getElementById('gross-eq-val');
-      const bufferVal = document.getElementById('buffer-val');
-      const currencyBtns = document.querySelectorAll('.currency-toggle-btn');
-      const quickAmtBtns = document.querySelectorAll('.quick-amt-btn');
-      
-      const accordionBtn = document.getElementById('accordion-toggle-btn');
-      const accordionDrawer = document.getElementById('accordion-drawer');
-      const accordionIcon = document.getElementById('accordion-icon');
-      
-      const saveBtn = document.getElementById('save-valuation-btn');
-      const saveToast = document.getElementById('save-toast');
-
-      // Calculation Engine
-      function calculateConversion() {
-        const inputRaw = parseFloat(nairaInput.value);
-        const nairaAmt = isNaN(inputRaw) || inputRaw < 0 ? 0 : inputRaw;
-        const cur = rates[activeCurrency];
-
-        const converted = nairaAmt / cur.rate;
-        const formattedAmount = `${cur.symbol}${converted.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-        const bufferAmt = converted * cur.feeRate;
-        const formattedBuffer = `-${cur.symbol}${bufferAmt.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-
-        // Update Giant Card
-        giantResultVal.textContent = formattedAmount;
-        giantResultCode.textContent = cur.code;
-        grossEqVal.textContent = `${formattedAmount} ${cur.code}`;
-        bufferVal.textContent = `${formattedBuffer} ${cur.code}`;
-
-        conversionSubtext.textContent = `Spot parity at 1 ${cur.code} = ₦${cur.rate.toLocaleString('en-US', { minimumFractionDigits: 2 })} • Pre-export handling charges applied`;
+    }
+    function seriesFor(code) {
+      if (seriesCache[code]) return seriesCache[code];
+      var end = rateOf(code) || 1;
+      var rand = rng(hash32('fx30|' + code + '|' + Math.round(end * 100)));
+      var drift = (rand() - 0.45) * 0.07;          // between −3.2% and +3.9% over the window
+      var start = end * (1 - drift);
+      var pts = [];
+      var walk = 0;
+      for (var i = 0; i < DAYS; i++) {
+        var t = DAYS === 1 ? 1 : i / (DAYS - 1);
+        walk = walk * 0.82 + (rand() - 0.5) * 0.009; // mean-reverting jitter
+        pts.push((start + (end - start) * t) * (1 + walk));
       }
+      pts[DAYS - 1] = end;                          // pin the live price at the tip
+      seriesCache[code] = pts;
+      return pts;
+    }
+    var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var TODAY = new Date();
+    function dayLabel(index) {
+      var offset = (DAYS - 1) - index;
+      var d = new Date(TODAY.getTime() - offset * 86400000);
+      return d.getDate() + ' ' + MONTHS[d.getMonth()];
+    }
+    function dayFull(index) {
+      var offset = (DAYS - 1) - index;
+      var d = new Date(TODAY.getTime() - offset * 86400000);
+      if (offset === 0) return 'Today · ' + d.getDate() + ' ' + MONTHS[d.getMonth()];
+      if (offset === 1) return 'Yesterday · ' + d.getDate() + ' ' + MONTHS[d.getMonth()];
+      return d.getDate() + ' ' + MONTHS[d.getMonth()] + ' · ' + offset + 'd ago';
+    }
+    function chartCode() {
+      if (state.recvCode === 'NGN') return state.sendCode === 'NGN' ? 'USD' : state.sendCode;
+      return state.recvCode;
+    }
 
-      // Currency Toggle Handler
-      currencyBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          activeCurrency = btn.getAttribute('data-currency');
+    /* ── settlement arithmetic ────────────────────────────────────────── */
+    function metrics() {
+      var recvRate = rateOf(state.recvCode) || 1;
+      var gross = state.amountNgn / recvRate;
+      var buffer = gross * (state.bufferPct / 100);
+      var usdInRecv = (rateOf('USD') || 1) / recvRate;
+      var fees = FEES.map(function (f) {
+        return { label: f.label, icon: f.icon, note: f.note, amount: f.usd * usdInRecv };
+      });
+      var feeTotal = fees.reduce(function (sum, f) { return sum + f.amount; }, 0);
+      var netRaw = gross - buffer - feeTotal;
+      return {
+        recvRate: recvRate, gross: gross, buffer: buffer,
+        fees: fees, feeTotal: feeTotal,
+        netRaw: netRaw, net: Math.max(0, netRaw), shortfall: netRaw < 0
+      };
+    }
+    function feeTotalUsd() {
+      return FEES.reduce(function (sum, f) { return sum + f.usd; }, 0);
+    }
 
-          // Reset styles
-          currencyBtns.forEach(b => {
-            b.className = 'currency-toggle-btn min-h-[56px] px-4 py-3 rounded-xl flex items-center justify-center gap-2 text-center transition-all bg-surface-container hover:bg-surface-container-high text-on-surface';
-          });
+    /* ── rendering: converter fields ──────────────────────────────────── */
+    function renderCurrencyOptions() {
+      var codes = currencyCodes();
+      ['send-ccy', 'recv-ccy'].forEach(function (id) {
+        var select = byId(id);
+        var value = id === 'send-ccy' ? state.sendCode : state.recvCode;
+        select.innerHTML = codes.map(function (code) {
+          return '<option value="' + code + '"' + (code === value ? ' selected' : '') + '>' + code + '</option>';
+        }).join('');
+        select.value = value;
+      });
+    }
 
-          // Set active style
-          btn.className = 'currency-toggle-btn min-h-[56px] px-4 py-3 rounded-xl flex items-center justify-center gap-2 text-center transition-all bg-primary-container text-on-primary-container shadow-md';
+    function renderFields(opts) {
+      var keep = opts || {};
+      var sendRate = rateOf(state.sendCode) || 1;
+      var recvRate = rateOf(state.recvCode) || 1;
+      if (!keep.send) byId('send-amount').value = amountStr(state.amountNgn / sendRate, state.sendCode);
+      if (!keep.recv) byId('recv-amount').value = amountStr(state.amountNgn / recvRate, state.recvCode);
+      byId('send-sym').textContent = metaOf(state.sendCode).sym;
+      byId('recv-sym').textContent = metaOf(state.recvCode).sym;
+      byId('send-rate-note').textContent = state.sendCode === 'NGN'
+        ? 'Domestic booking'
+        : '1 ' + state.sendCode + ' = ₦' + fmt(sendRate, 2);
+      byId('recv-rate-note').textContent = '1 ' + state.recvCode + ' = ₦' + fmt(recvRate, 2);
+      byId('header-rate-badge').textContent = '1 USD = ₦' + fmt(rateOf('USD'), 2);
+    }
 
-          calculateConversion();
+    /* ── rendering: settlement + result ───────────────────────────────── */
+    function renderSettlement(m) {
+      var code = state.recvCode;
+      byId('buffer-out').textContent = state.bufferPct.toFixed(1) + '%';
+      byId('buffer-range').value = String(state.bufferPct);
+
+      var rows = '';
+      rows += '<div class="flex items-center justify-between gap-2 font-label-md text-label-md">' +
+        '<span class="text-on-surface-variant flex items-center gap-1.5">' +
+        '<span class="material-symbols-outlined text-[16px]">percent</span>Handling buffer (' +
+        state.bufferPct.toFixed(1) + '%)</span>' +
+        '<span class="font-data-mono text-data-mono text-tertiary font-semibold tnum">' + signed(m.buffer, code) + '</span></div>';
+
+      m.fees.forEach(function (f) {
+        rows += '<div class="flex items-center justify-between gap-2 font-label-md text-label-md">' +
+          '<span class="text-on-surface-variant flex items-center gap-1.5">' +
+          '<span class="material-symbols-outlined text-[16px]">' + f.icon + '</span>' + esc(f.label) + '</span>' +
+          '<span class="font-data-mono text-data-mono text-on-surface tnum">' + signed(f.amount, code) +
+          (f.note ? ' <span class="text-primary font-body-sm">(' + esc(f.note) + ')</span>' : '') +
+          '</span></div>';
+      });
+      byId('fee-list').innerHTML = rows;
+
+      byId('net-val').textContent = money(m.net, code);
+      byId('net-ccy').textContent = code + ' · net of buffer and costs';
+      var netNote = byId('net-note');
+      netNote.textContent = m.shortfall
+        ? 'Export costs exceed this settlement — below break-even.'
+        : 'Gross ' + money(m.gross, code) + ' − ' + money(m.buffer + m.feeTotal, code) + ' in deductions';
+      netNote.className = 'font-body-sm text-body-sm ' + (m.shortfall ? 'text-error' : 'text-on-surface-variant');
+      byId('net-val').className = 'font-headline-sm text-headline-sm font-extrabold tnum block ' +
+        (m.shortfall ? 'text-error' : 'text-primary');
+
+      byId('result-net').textContent = money(m.net, code);
+      byId('result-code').textContent = code;
+      byId('result-gross').textContent = money(m.gross, code);
+      byId('result-buffer-label').textContent = 'Handling buffer (' + state.bufferPct.toFixed(1) + '%)';
+      byId('result-buffer').textContent = '−' + money(m.buffer, code);
+      byId('result-fees').textContent = '−' + money(m.feeTotal, code);
+      byId('result-subtext').textContent = m.shortfall
+        ? 'Costs exceed the lot — increase the amount or lower the buffer.'
+        : 'Spot ' + fmt(m.recvRate, 2) + ' NGN per 1 ' + code + ' · ' + state.bufferPct.toFixed(1) + '% buffer applied';
+
+      var account = accountById(state.accountId);
+      byId('result-account').textContent = account ? account.label : 'Unassigned';
+      byId('save-hint').textContent = m.shortfall
+        ? 'A below-cost settlement can still be saved for the record.'
+        : 'The slip carries the rate, buffer, fees and inspected chart point.';
+
+      var warning = byId('account-warning');
+      if (!account || account.ccy !== code) {
+        byId('account-warning-text').textContent = account
+          ? account.label + ' settles in ' + account.ccy + ', not ' + code + '. Pick a ' + code +
+            ' destination or add one before filing.'
+          : 'No destination account is wired for ' + code + '. Pick another corridor.';
+        warning.classList.remove('hidden');
+        warning.classList.add('flex');
+      } else {
+        warning.classList.add('hidden');
+        warning.classList.remove('flex');
+      }
+    }
+
+    function renderAccounts() {
+      var select = byId('account-select');
+      select.innerHTML = ACCOUNTS.map(function (a) {
+        return '<option value="' + a.id + '"' + (a.id === state.accountId ? ' selected' : '') + '>' +
+          esc(a.label) + ' · ' + a.ccy + '</option>';
+      }).join('');
+      select.value = state.accountId;
+      var account = accountById(state.accountId);
+      byId('account-meta').textContent = account ? account.detail + ' · ref ' + account.ref : 'No account selected';
+      byId('settle-badge').textContent = account ? account.label : 'Unassigned';
+    }
+
+    function renderParity() {
+      var codes = currencyCodes().filter(function (c) { return c !== 'NGN'; });
+      var usdInRecvBase = rateOf('USD') || 1;
+      byId('parity-list').innerHTML = codes.map(function (code) {
+        var rate = rateOf(code) || 1;
+        var gross = state.amountNgn / rate;
+        var buffer = gross * (state.bufferPct / 100);
+        var fee = feeTotalUsd() * usdInRecvBase / rate;
+        var net = Math.max(0, gross - buffer - fee);
+        var active = code === state.recvCode;
+        return '<button class="parity-row w-full px-space-sm py-space-xs flex items-center justify-between gap-space-sm text-left" ' +
+          'type="button" data-code="' + code + '" aria-current="' + (active ? 'true' : 'false') + '">' +
+          '<span class="flex items-center gap-space-sm min-w-0">' +
+          '<span class="w-7 h-7 rounded bg-surface-container-high text-on-surface flex items-center justify-center font-label-sm shrink-0">' +
+          esc(metaOf(code).sym.trim().slice(0, 3)) + '</span>' +
+          '<span class="min-w-0"><span class="font-label-md text-label-md text-on-surface font-semibold block">' + code +
+          '<span class="text-on-surface-variant font-normal"> · ₦' + fmt(rate, 2) + '</span></span>' +
+          '<span class="font-body-sm text-body-sm text-on-surface-variant block truncate">' + esc(metaOf(code).name) + '</span></span>' +
+          '</span>' +
+          '<span class="text-right shrink-0"><span class="font-data-mono text-data-mono text-on-surface tnum block">' + money(net, code) + '</span>' +
+          '<span class="font-label-sm text-label-sm text-on-surface-variant">net</span></span>' +
+          '</button>';
+      }).join('');
+    }
+
+    function refresh(opts) {
+      var m = metrics();
+      renderFields(opts);
+      renderSettlement(m);
+      renderParity();
+      renderChart();
+      renderInspection();
+    }
+
+    /* ── chart ────────────────────────────────────────────────────────── */
+    var chartW = 720;
+    var PAD_L = 56, PAD_R = 16, PAD_T = 18, PAD_B = 34, CH = 260;
+
+    function renderChart() {
+      var svg = byId('chart');
+      var wrap = byId('chart-wrap');
+      var code = chartCode();
+      var pts = seriesFor(code);
+      byId('chart-title').textContent = code + '/NGN · 30-day corridor';
+
+      chartW = Math.max(320, Math.round(wrap.clientWidth || 720));
+      var W = chartW, H = CH;
+      svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+
+      var lo = Math.min.apply(null, pts);
+      var hi = Math.max.apply(null, pts);
+      var pad = (hi - lo) * 0.18 || hi * 0.01 || 1;
+      var min = lo - pad, max = hi + pad, span = max - min;
+
+      function x(i) { return PAD_L + (W - PAD_L - PAD_R) * (i / (DAYS - 1)); }
+      function y(v) { return PAD_T + (H - PAD_T - PAD_B) * (1 - (v - min) / span); }
+
+      var d = '';
+      for (var i = 0; i < DAYS; i++) {
+        d += (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(pts[i]).toFixed(1) + ' ';
+      }
+      var area = d + 'L' + x(DAYS - 1).toFixed(1) + ' ' + (H - PAD_B) +
+        ' L' + x(0).toFixed(1) + ' ' + (H - PAD_B) + ' Z';
+
+      var out = [];
+      out.push('<defs><linearGradient id="fxArea" x1="0" y1="0" x2="0" y2="1">' +
+        '<stop offset="0%" style="stop-color:rgb(var(--primary-container));stop-opacity:0.26"/>' +
+        '<stop offset="100%" style="stop-color:rgb(var(--primary-container));stop-opacity:0"/></linearGradient></defs>');
+
+      for (var g = 0; g < 4; g++) {
+        var v = min + span * (g / 3);
+        var gy = y(v);
+        out.push('<line class="chart-grid" x1="' + PAD_L + '" x2="' + (W - PAD_R) + '" y1="' + gy.toFixed(1) + '" y2="' + gy.toFixed(1) + '"/>');
+        out.push('<text class="chart-axis" x="' + (PAD_L - 8) + '" y="' + (gy + 4).toFixed(1) + '" text-anchor="end">' +
+          esc(fmt(v, 2)) + '</text>');
+      }
+      [0, 7, 14, 21, DAYS - 1].forEach(function (idx) {
+        var anchor = idx === 0 ? 'start' : (idx === DAYS - 1 ? 'end' : 'middle');
+        out.push('<text class="chart-axis" x="' + x(idx).toFixed(1) + '" y="' + (H - 10) + '" text-anchor="' + anchor + '">' +
+          esc(dayLabel(idx)) + '</text>');
+      });
+
+      out.push('<path class="chart-area" d="' + area + '"/>');
+      out.push('<path class="chart-line" d="' + d + '"/>');
+
+      var active = state.hover !== null ? state.hover : state.pin;
+      if (active !== null && active >= 0) {
+        out.push('<line class="chart-cross" x1="' + x(active).toFixed(1) + '" x2="' + x(active).toFixed(1) +
+          '" y1="' + PAD_T + '" y2="' + (H - PAD_B) + '"/>');
+        out.push('<circle class="chart-dot" cx="' + x(active).toFixed(1) + '" cy="' + y(pts[active]).toFixed(1) + '" r="4.5"/>');
+      }
+      if (state.pin !== null && state.pin !== active) {
+        out.push('<circle class="chart-pin" cx="' + x(state.pin).toFixed(1) + '" cy="' + y(pts[state.pin]).toFixed(1) + '" r="4"/>');
+      }
+      out.push('<circle class="chart-today" cx="' + x(DAYS - 1).toFixed(1) + '" cy="' + y(pts[DAYS - 1]).toFixed(1) + '" r="4"/>');
+
+      svg.innerHTML = out.join('');
+      renderChartStats(pts);
+    }
+
+    function renderChartStats(pts) {
+      var lo = Math.min.apply(null, pts);
+      var hi = Math.max.apply(null, pts);
+      var mean = pts.reduce(function (s, v) { return s + v; }, 0) / pts.length;
+      var returns = [];
+      for (var i = 1; i < pts.length; i++) returns.push((pts[i] - pts[i - 1]) / pts[i - 1] * 100);
+      var varSum = returns.reduce(function (s, r) { return s + r * r; }, 0) / returns.length;
+      var vol = Math.sqrt(varSum);
+      var change = (pts[pts.length - 1] - pts[0]) / pts[0] * 100;
+
+      var tiles = [
+        ['30d low', fmt(lo, 2), ''],
+        ['30d high', fmt(hi, 2), ''],
+        ['Mean', fmt(mean, 2), ''],
+        ['Volatility', fmt(vol, 2) + '%', change >= 0 ? 'up' : 'down']
+      ];
+      byId('chart-stats').innerHTML = tiles.map(function (t) {
+        return '<div class="rounded border border-outline-variant bg-surface-container-low px-space-sm py-space-xs">' +
+          '<div class="label">' + t[0] + '</div>' +
+          '<div class="font-data-mono text-data-mono text-on-surface tnum mt-1">' + esc(t[1]) + '</div></div>';
+      }).join('') +
+        '<div class="rounded border border-outline-variant bg-surface-container-low px-space-sm py-space-xs">' +
+        '<div class="label">30d change</div>' +
+        '<div class="font-data-mono text-data-mono tnum mt-1 ' + (change >= 0 ? 'text-primary' : 'text-error') + '">' +
+        pct(change) + '</div></div>';
+    }
+
+    function renderInspection() {
+      var code = chartCode();
+      var pts = seriesFor(code);
+      var idx = state.hover !== null ? state.hover : (state.pin !== null ? state.pin : DAYS - 1);
+      idx = clamp(idx, 0, DAYS - 1);
+      var rate = pts[idx];
+      var d1 = idx > 0 ? (pts[idx] - pts[idx - 1]) / pts[idx - 1] * 100 : NaN;
+      var d30 = (pts[idx] - pts[0]) / pts[0] * 100;
+      var lo = Math.min.apply(null, pts);
+      var hi = Math.max.apply(null, pts);
+      var band = hi === lo ? 50 : ((rate - lo) / (hi - lo)) * 100;
+
+      byId('inspect-date').textContent = dayFull(idx);
+      byId('inspect-rate').textContent = '₦' + fmt(rate, 2);
+      var d1El = byId('inspect-d1');
+      d1El.textContent = isFinite(d1) ? pct(d1) : '—';
+      d1El.className = 'font-data-mono text-data-mono tnum mt-1 ' +
+        (!isFinite(d1) ? 'text-on-surface-variant' : (d1 >= 0 ? 'text-primary' : 'text-error'));
+      var d30El = byId('inspect-d30');
+      d30El.textContent = pct(d30);
+      d30El.className = 'font-data-mono text-data-mono tnum mt-1 ' + (d30 >= 0 ? 'text-primary' : 'text-error');
+      byId('inspect-band').textContent = fmt(band, 0) + '% of band';
+      byId('inspect-eq').textContent = money(state.amountNgn / rate, code);
+      byId('inspect-pin').textContent = state.pin === null
+        ? 'No pin — showing ' + (idx === DAYS - 1 ? 'today' : dayLabel(idx))
+        : 'Pinned: ' + (state.pin === DAYS - 1 ? 'today' : dayLabel(state.pin));
+
+      var tip = byId('chart-tip');
+      if (state.hover === null) {
+        tip.classList.remove('on');
+        return;
+      }
+      var W = chartW;
+      var px = PAD_L + (W - PAD_L - PAD_R) * (idx / (DAYS - 1));
+      tip.style.left = clamp(px, 78, W - 78) + 'px';
+      tip.innerHTML = '<div class="label">' + esc(dayLabel(idx)) + '</div>' +
+        '<div class="font-data-mono text-data-mono text-on-surface tnum mt-0.5">₦' + fmt(rate, 2) + '</div>' +
+        '<div class="font-label-sm text-label-sm tnum mt-0.5 ' + (isFinite(d1) && d1 < 0 ? 'text-error' : 'text-primary') + '">' +
+        (isFinite(d1) ? pct(d1) + ' on the day' : 'first day in window') + '</div>';
+      tip.classList.add('on');
+    }
+
+    function chartIndexFromEvent(ev) {
+      var svg = byId('chart');
+      var rect = svg.getBoundingClientRect();
+      if (!rect.width) return DAYS - 1;
+      var px = (ev.clientX - rect.left) / rect.width * chartW;
+      var ratio = (px - PAD_L) / (chartW - PAD_L - PAD_R);
+      return clamp(Math.round(ratio * (DAYS - 1)), 0, DAYS - 1);
+    }
+
+    /* ── parity slip ──────────────────────────────────────────────────── */
+    function buildSlip() {
+      var m = metrics();
+      var code = state.recvCode;
+      var account = accountById(state.accountId);
+      var pts = seriesFor(chartCode());
+      var idx = state.hover !== null ? state.hover : (state.pin !== null ? state.pin : DAYS - 1);
+      idx = clamp(idx, 0, DAYS - 1);
+      var d1 = idx > 0 ? (pts[idx] - pts[idx - 1]) / pts[idx - 1] * 100 : NaN;
+      var d30 = (pts[idx] - pts[0]) / pts[0] * 100;
+      var lo = Math.min.apply(null, pts), hi = Math.max.apply(null, pts), mean = pts.reduce(function (s, v) { return s + v; }, 0) / pts.length;
+      var row = function (label, value) {
+        var pad = '';
+        for (var i = label.length; i < 26; i++) pad += ' ';
+        return '  ' + label + pad + value;
+      };
+      var lines = [
+        'CROPTRADE · EXPORT PARITY SLIP',
+        '==================================================',
+        'Reference      ' + ref,
+        'Generated      ' + localStamp(),
+        'Terminal       GRAIN-DESK · WAT (UTC+01:00)',
+        '',
+        'CONVERSION',
+        row('You send', state.sendCode + ' ' + fmt(state.amountNgn / (rateOf(state.sendCode) || 1), dpOf(state.sendCode))),
+        row('Rate', '1 ' + code + ' = NGN ' + fmt(m.recvRate, 2)),
+        row('They receive (gross)', code + ' ' + fmt(m.gross, dpOf(code))),
+        '',
+        'SETTLEMENT',
+        row('Handling buffer', state.bufferPct.toFixed(1) + '%  =  ' + code + ' ' + fmt(m.buffer, dpOf(code))),
+        row('Intermodal freight', code + ' ' + fmt(m.fees[0].amount, dpOf(code))),
+        row('Phytosanitary seal', code + ' ' + fmt(m.fees[1].amount, dpOf(code))),
+        row('Port silo handling', code + ' ' + fmt(m.fees[2].amount, dpOf(code)) + ' (subsidised)'),
+        row('Total deductions', code + ' ' + fmt(m.buffer + m.feeTotal, dpOf(code))),
+        row('NET REALIZED RECOVERY', code + ' ' + fmt(m.net, dpOf(code))),
+        row('Destination', account ? account.label + ' (' + account.ccy + ')' : 'Unassigned'),
+        row('Account reference', account ? account.ref : '—'),
+        '',
+        'FX CONTEXT · ' + chartCode() + '/NGN, 30-day simulated window',
+        row('Inspected day', dayFull(idx)),
+        row('Rate on that day', 'NGN ' + fmt(pts[idx], 2)),
+        row('Change on the day', isFinite(d1) ? pct(d1) : 'first day in window'),
+        row('Change over 30 days', pct(d30)),
+        row('Window low / high', fmt(lo, 2) + ' / ' + fmt(hi, 2)),
+        row('Window mean', fmt(mean, 2)),
+        '',
+        'PROVENANCE',
+        '  Rates are fixed demonstration constants written into this page.',
+        '  No exchange-rate API was called. The CropTrade app can use a live',
+        '  feed when MARKET_API_URL / the FX provider is configured; this',
+        '  prototype does not, so every figure above is simulated.',
+        '',
+        'Generated by CropTrade · prototype build'
+      ];
+      return lines.join('\n');
+    }
+
+    /* Local time with an explicit offset, so the slip and the WAT clock agree. */
+    function localStamp() {
+      var d = new Date();
+      var pad2 = function (n) { return (n < 10 ? '0' : '') + n; };
+      var offMin = -d.getTimezoneOffset();
+      var abs = Math.abs(offMin);
+      return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()) +
+        'T' + pad2(d.getHours()) + ':' + pad2(d.getMinutes()) + ':' + pad2(d.getSeconds()) +
+        (offMin >= 0 ? '+' : '-') + pad2(Math.floor(abs / 60)) + ':' + pad2(abs % 60);
+    }
+
+    function stampForFile() {
+      var d = new Date();
+      var pad2 = function (n) { return (n < 10 ? '0' : '') + n; };
+      return d.getFullYear() + pad2(d.getMonth() + 1) + pad2(d.getDate()) + '-' + pad2(d.getHours()) + pad2(d.getMinutes());
+    }
+
+    var toastTimer = null;
+    function toast(title, reference) {
+      byId('toast-title').textContent = title;
+      byId('toast-ref').textContent = reference || ref;
+      var el = byId('save-toast');
+      el.classList.add('on');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () { el.classList.remove('on'); }, 3200);
+    }
+
+    function downloadSlip() {
+      var text = buildSlip();
+      var blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'croptrade-parity-slip-' + ref + '-' + stampForFile() + '.txt';
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 5000);
+      toast('Parity slip downloaded', ref);
+    }
+
+    /* ── ledger ───────────────────────────────────────────────────────── */
+    function renderLedger() {
+      byId('ledger-count').textContent = ledger.length + ' saved';
+      byId('ledger-empty').classList.toggle('hidden', ledger.length > 0);
+      byId('ledger-list').innerHTML = ledger.map(function (row, i) {
+        var when = new Date(row.ts);
+        var stamp = isNaN(when.getTime()) ? '' : when.toLocaleString('en-GB', {
+          day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit'
         });
+        return '<div class="ledger-row py-space-sm flex items-center justify-between gap-space-sm">' +
+          '<div class="min-w-0">' +
+          '<div class="font-label-md text-label-md text-on-surface tnum">' +
+          'NGN ' + fmt(row.ngn, 0) + ' <span class="text-on-surface-variant">→</span> ' +
+          money(row.net, row.recv) + ' <span class="text-on-surface-variant">' + esc(row.recv) + '</span></div>' +
+          '<div class="font-body-sm text-body-sm text-on-surface-variant truncate">' + esc(row.account) +
+          ' · ' + fmt(row.buffer, 1) + '% buffer · ' + esc(stamp) + '</div></div>' +
+          '<button class="btn btn-ghost shrink-0" data-del="' + i + '" type="button" aria-label="Remove saved settlement ' + esc(row.ref) + '">' +
+          '<span class="material-symbols-outlined text-[16px]">delete</span></button></div>';
+      }).join('');
+    }
+
+    function saveSettlement() {
+      var m = metrics();
+      var account = accountById(state.accountId);
+      ledger.unshift({
+        ref: ref,
+        ts: new Date().toISOString(),
+        send: state.sendCode,
+        recv: state.recvCode,
+        ngn: Math.round(state.amountNgn),
+        gross: roundTo(m.gross, 2),
+        net: roundTo(m.net, 2),
+        buffer: state.bufferPct,
+        account: account ? account.label : 'Unassigned'
       });
+      ledger = ledger.slice(0, 12);
+      writeStored('croptrade_fx_ledger', JSON.stringify(ledger));
+      renderLedger();
+      toast(m.shortfall ? 'Saved (below break-even)' : 'Settlement saved', ref);
+    }
 
-      // Quick Amount handler
-      quickAmtBtns.forEach(b => {
-        b.addEventListener('click', () => {
-          nairaInput.value = b.getAttribute('data-amt');
-          calculateConversion();
-        });
+    /* ── custom pairs ─────────────────────────────────────────────────── */
+    function renderCustomList() {
+      byId('custom-list').innerHTML = customPairs.length === 0
+        ? '<span class="font-body-sm text-body-sm text-on-surface-variant">No custom pairs yet.</span>'
+        : customPairs.map(function (p) {
+          return '<span class="chip">' + esc(p.code) + ' · ₦' + fmt(p.rate, 2) +
+            '<button class="material-symbols-outlined text-[14px] hover:text-error" data-remove="' + esc(p.code) +
+            '" type="button" aria-label="Remove ' + esc(p.code) + '">close</button></span>';
+        }).join('');
+    }
+
+    function setCustomError(message) {
+      byId('custom-err').textContent = message || '';
+    }
+
+    function addCustomPair() {
+      var code = String(byId('custom-code').value || '').trim().toUpperCase();
+      var rate = parseAmount(byId('custom-rate').value);
+      if (!/^[A-Z]{3}$/.test(code)) return setCustomError('Use a three-letter code, for example TZS.');
+      if (code === 'NGN' || BASE_RATES[code]) return setCustomError(code + ' is already in the corridor.');
+      if (customPair(code)) return setCustomError(code + ' has already been added.');
+      if (!isFinite(rate) || rate <= 0) return setCustomError('Enter the rate as a number above 0.');
+      if (customPairs.length >= 6) return setCustomError('Six custom pairs is the limit — remove one first.');
+      customPairs.push({ code: code, rate: roundTo(rate, 2) });
+      writeStored('croptrade_fx_custom', JSON.stringify(customPairs));
+      byId('custom-code').value = '';
+      byId('custom-rate').value = '';
+      setCustomError('');
+      renderCustomList();
+      renderCurrencyOptions();
+      refresh();
+      toast(code + ' pairing added', code);
+    }
+
+    function removeCustomPair(code) {
+      customPairs = customPairs.filter(function (p) { return p.code !== code; });
+      writeStored('croptrade_fx_custom', JSON.stringify(customPairs));
+      delete seriesCache[code];
+      if (state.recvCode === code) state.recvCode = 'USD';
+      if (state.sendCode === code) state.sendCode = 'NGN';
+      renderCustomList();
+      renderCurrencyOptions();
+      renderAccounts();
+      refresh();
+    }
+
+    /* ── wiring ───────────────────────────────────────────────────────── */
+    function ensureAccount() {
+      var account = accountById(state.accountId);
+      if (account && account.ccy === state.recvCode) return;
+      var match = ACCOUNTS.filter(function (a) { return a.ccy === state.recvCode; })[0];
+      if (match) state.accountId = match.id;
+    }
+
+    function onSendInput() {
+      var value = parseAmount(byId('send-amount').value);
+      state.amountNgn = isFinite(value) ? Math.max(0, value) * (rateOf(state.sendCode) || 1) : 0;
+      refresh({ send: true });
+    }
+    function onRecvInput() {
+      var value = parseAmount(byId('recv-amount').value);
+      state.amountNgn = isFinite(value) ? Math.max(0, value) * (rateOf(state.recvCode) || 1) : 0;
+      refresh({ recv: true });
+    }
+
+    byId('send-amount').addEventListener('input', onSendInput);
+    byId('recv-amount').addEventListener('input', onRecvInput);
+    byId('send-amount').addEventListener('blur', function () { refresh(); });
+    byId('recv-amount').addEventListener('blur', function () { refresh(); });
+
+    byId('send-ccy').addEventListener('change', function () {
+      state.sendCode = this.value;
+      if (state.sendCode === state.recvCode) state.recvCode = state.sendCode === 'NGN' ? 'USD' : 'NGN';
+      ensureAccount();
+      renderCurrencyOptions();
+      renderAccounts();
+      refresh();
+    });
+
+    byId('recv-ccy').addEventListener('change', function () {
+      state.recvCode = this.value;
+      if (state.recvCode === state.sendCode) state.sendCode = state.recvCode === 'NGN' ? 'USD' : 'NGN';
+      writeStored('croptrade_fx_recv', state.recvCode);
+      ensureAccount();
+      renderCurrencyOptions();
+      renderAccounts();
+      refresh();
+    });
+
+    byId('swap-btn').addEventListener('click', function () {
+      var send = state.sendCode;
+      state.sendCode = state.recvCode;
+      state.recvCode = send;
+      writeStored('croptrade_fx_recv', state.recvCode);
+      ensureAccount();
+      renderCurrencyOptions();
+      renderAccounts();
+      refresh();
+    });
+
+    document.querySelectorAll('[data-add]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var add = Number(btn.getAttribute('data-add'));
+        if (!isFinite(add)) return;
+        state.amountNgn = Math.max(0, state.amountNgn + add);
+        refresh();
       });
+    });
 
-      // Naira Input Event
-      nairaInput.addEventListener('input', calculateConversion);
+    byId('reset-btn').addEventListener('click', function () {
+      state.amountNgn = 601690;
+      refresh();
+    });
 
-      // Reset Button Event
-      resetBtn.addEventListener('click', () => {
-        nairaInput.value = "601690";
-        calculateConversion();
-      });
+    byId('custom-toggle').addEventListener('click', function () {
+      var wrap = byId('custom-wrap');
+      var open = wrap.classList.contains('hidden');
+      wrap.classList.toggle('hidden', !open);
+      this.setAttribute('aria-expanded', open ? 'true' : 'false');
+      this.setAttribute('aria-pressed', open ? 'true' : 'false');
+      if (open) {
+        byId('custom-amount').value = String(Math.round(state.amountNgn));
+        byId('custom-amount').focus();
+      }
+    });
 
-      // Accordion Drawer Toggle
-      accordionBtn.addEventListener('click', () => {
-        const isHidden = accordionDrawer.classList.contains('hidden');
-        if (isHidden) {
-          accordionDrawer.classList.remove('hidden');
-          accordionBtn.setAttribute('aria-expanded', 'true');
-          accordionIcon.style.transform = 'rotate(180deg)';
-        } else {
-          accordionDrawer.classList.add('hidden');
-          accordionBtn.setAttribute('aria-expanded', 'false');
-          accordionIcon.style.transform = 'rotate(0deg)';
-        }
-      });
+    byId('custom-apply').addEventListener('click', function () {
+      var value = parseAmount(byId('custom-amount').value);
+      if (!isFinite(value)) { byId('custom-amount').focus(); return; }
+      state.amountNgn = Math.max(0, value);
+      refresh();
+    });
 
-      // Save Valuation Simulation
-      saveBtn.addEventListener('click', () => {
-        saveToast.classList.remove('hidden');
-        setTimeout(() => {
-          saveToast.classList.add('hidden');
-        }, 3200);
-      });
+    byId('buffer-range').addEventListener('input', function () {
+      var value = Number(this.value);
+      state.bufferPct = isFinite(value) ? clamp(value, 1, 5) : 2;
+      refresh();
+    });
 
-      // Initial execution
-      calculateConversion();
-    })();
-  </script>
-</div></div></main><footer class="w-full bg-surface-container-low py-space-lg mt-auto shadow-[0_-1px_8px_rgba(0,0,0,0.02)]"><div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-space-md text-on-surface-variant font-label-md text-label-md"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm text-primary font-bold">CropTrade</span><span>• Agritech Global Exchange</span></div><div class="flex items-center gap-space-lg"><span class="font-data-mono text-data-mono">WAT (UTC+01:00) GRAIN-DESK</span><span>© 2026 CropTrade Platform. All rights reserved.</span></div></div></footer><script>const themeToggleBtn = document.getElementById('theme-toggle-btn'); const themeIconLight = document.getElementById('theme-icon-light'); const themeIconDark = document.getElementById('theme-icon-dark'); function applyTheme(isDark) { if (isDark) { document.documentElement.classList.add('dark'); if (themeIconLight && themeIconDark) { themeIconLight.classList.add('hidden'); themeIconDark.classList.remove('hidden'); } } else { document.documentElement.classList.remove('dark'); if (themeIconLight && themeIconDark) { themeIconLight.classList.remove('hidden'); themeIconDark.classList.add('hidden'); } } } const initialDark = localStorage.getItem('croptrade_theme') === 'dark' || (!('croptrade_theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches); applyTheme(initialDark); if (themeToggleBtn) { themeToggleBtn.addEventListener('click', () => { const isCurrentlyDark = document.documentElement.classList.contains('dark'); const newDark = !isCurrentlyDark; localStorage.setItem('croptrade_theme', newDark ? 'dark' : 'light'); applyTheme(newDark); }); }</script></body></html>
+    byId('account-select').addEventListener('change', function () {
+      state.accountId = this.value;
+      renderAccounts();
+      refresh();
+    });
+
+    byId('parity-list').addEventListener('click', function (ev) {
+      var row = ev.target.closest('[data-code]');
+      if (!row) return;
+      state.recvCode = row.getAttribute('data-code');
+      if (state.recvCode === state.sendCode) state.sendCode = 'NGN';
+      writeStored('croptrade_fx_recv', state.recvCode);
+      ensureAccount();
+      renderCurrencyOptions();
+      renderAccounts();
+      refresh();
+    });
+
+    /* chart interaction */
+    var wrap = byId('chart-wrap');
+    wrap.addEventListener('pointermove', function (ev) {
+      var idx = chartIndexFromEvent(ev);
+      if (idx !== state.hover) { state.hover = idx; renderChart(); }
+      renderInspection();
+    });
+    wrap.addEventListener('pointerleave', function () {
+      state.hover = null;
+      renderChart();
+      renderInspection();
+    });
+    wrap.addEventListener('click', function (ev) {
+      var idx = chartIndexFromEvent(ev);
+      state.pin = state.pin === idx ? null : idx;
+      renderChart();
+      renderInspection();
+    });
+    wrap.addEventListener('keydown', function (ev) {
+      var current = state.hover !== null ? state.hover : (state.pin !== null ? state.pin : DAYS - 1);
+      var next = current;
+      if (ev.key === 'ArrowLeft') next = current - 1;
+      else if (ev.key === 'ArrowRight') next = current + 1;
+      else if (ev.key === 'Home') next = 0;
+      else if (ev.key === 'End') next = DAYS - 1;
+      else if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        state.pin = state.pin === current ? null : current;
+        renderChart();
+        renderInspection();
+        return;
+      } else return;
+      ev.preventDefault();
+      state.hover = clamp(next, 0, DAYS - 1);
+      renderChart();
+      renderInspection();
+    });
+    byId('chart-reset').addEventListener('click', function () {
+      state.pin = DAYS - 1;
+      state.hover = null;
+      renderChart();
+      renderInspection();
+    });
+
+    /* slip + ledger */
+    byId('slip-btn').addEventListener('click', downloadSlip);
+    byId('slip-btn-2').addEventListener('click', downloadSlip);
+    byId('save-btn').addEventListener('click', saveSettlement);
+    byId('ledger-list').addEventListener('click', function (ev) {
+      var btn = ev.target.closest('[data-del]');
+      if (!btn) return;
+      var index = Number(btn.getAttribute('data-del'));
+      if (!isFinite(index) || index < 0 || index >= ledger.length) return;
+      ledger.splice(index, 1);
+      writeStored('croptrade_fx_ledger', JSON.stringify(ledger));
+      renderLedger();
+    });
+
+    byId('custom-form').addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      addCustomPair();
+    });
+    byId('custom-list').addEventListener('click', function (ev) {
+      var btn = ev.target.closest('[data-remove]');
+      if (!btn) return;
+      removeCustomPair(btn.getAttribute('data-remove'));
+    });
+
+    /* rate rail + clock */
+    function renderRail() {
+      var codes = ['USD', 'EUR', 'GBP'];
+      byId('rail-pips').innerHTML = codes.map(function (code) {
+        return '<div class="flex items-center gap-1.5">' +
+          '<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">1 ' + code + '</span>' +
+          '<span class="text-primary font-bold tnum">₦' + fmt(rateOf(code), 2) + '</span></div>';
+      }).join('<span class="text-outline-variant/50 hidden sm:inline">·</span>');
+    }
+    function tickClock() {
+      var d = new Date();
+      var pad2 = function (n) { return (n < 10 ? '0' : '') + n; };
+      byId('clock').textContent = pad2(d.getHours()) + ':' + pad2(d.getMinutes()) + ':' + pad2(d.getSeconds());
+    }
+    tickClock();
+    setInterval(tickClock, 1000);
+
+    /* resize */
+    var resizeFrame = null;
+    window.addEventListener('resize', function () {
+      if (resizeFrame) cancelAnimationFrame(resizeFrame);
+      resizeFrame = requestAnimationFrame(function () { renderChart(); renderInspection(); });
+    });
+
+    /* ── boot ─────────────────────────────────────────────────────────── */
+    if (!rateOf(state.recvCode) || state.recvCode === 'NGN') state.recvCode = 'USD';
+    if (state.sendCode === state.recvCode) state.sendCode = 'NGN';
+    renderRail();
+    renderAccounts();
+    renderCustomList();
+    renderLedger();
+    renderCurrencyOptions();
+    ensureAccount();
+    refresh();
+
+    /* test hook: lets the parity slip be inspected without downloading */
+    window.__croptrade = {
+      buildSlip: buildSlip,
+      metrics: metrics,
+      state: state,
+      series: seriesFor,
+      render: refresh
+    };
+  })();
+</script>
+<script>const themeToggleBtn = document.getElementById('theme-toggle-btn'); const themeIconLight = document.getElementById('theme-icon-light'); const themeIconDark = document.getElementById('theme-icon-dark'); function applyTheme(isDark) { if (isDark) { document.documentElement.classList.add('dark'); if (themeIconLight && themeIconDark) { themeIconLight.classList.add('hidden'); themeIconDark.classList.remove('hidden'); } } else { document.documentElement.classList.remove('dark'); if (themeIconLight && themeIconDark) { themeIconLight.classList.remove('hidden'); themeIconDark.classList.add('hidden'); } } } const initialDark = localStorage.getItem('croptrade_theme') === 'dark' || (!('croptrade_theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches); applyTheme(initialDark); if (themeToggleBtn) { themeToggleBtn.addEventListener('click', () => { const isCurrentlyDark = document.documentElement.classList.contains('dark'); const newDark = !isCurrentlyDark; localStorage.setItem('croptrade_theme', newDark ? 'dark' : 'light'); applyTheme(newDark); }); }</script></body></html>

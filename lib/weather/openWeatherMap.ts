@@ -9,7 +9,11 @@ import { z } from "zod";
 import { formatInTimeZone } from "date-fns-tz";
 import { APP_TZ } from "../config";
 import { fetchJson, type FetchLike } from "../server/http";
-import { weatherDataSchema, type WeatherData } from "./types";
+import {
+  weatherDataSchema,
+  type DayBarometricRecord,
+  type WeatherData,
+} from "./types";
 
 export const OWM_FORECAST_URL = "https://api.openweathermap.org/data/2.5/forecast";
 
@@ -20,6 +24,7 @@ const owmItemSchema = z.object({
     temp_min: z.number(),
     temp_max: z.number(),
     humidity: z.number(),
+    pressure: z.number().optional(),
   }),
   weather: z
     .array(z.object({ main: z.string(), description: z.string() }))
@@ -101,14 +106,40 @@ export async function fetchOpenWeatherMap(
     .slice(0, 5)
     .map(([date, g]) => ({ date, ...g }));
 
+  // OWM is 3-hourly, so a 3-hour fall is the gap between consecutive readings.
+  const byDate = new Map<string, number[]>();
+  for (const item of json.list) {
+    const date = formatInTimeZone(new Date(item.dt * 1000), APP_TZ, "yyyy-MM-dd");
+    if (typeof item.main.pressure !== "number") continue;
+    const list = byDate.get(date) ?? [];
+    list.push(item.main.pressure);
+    byDate.set(date, list);
+  }
+  const barometric: DayBarometricRecord[] = daily.map(({ date }) => {
+    const points = byDate.get(date) ?? [];
+    if (points.length < 2) return { date, drop3hMax: null, meanHpa: null };
+    let drop3hMax = -Infinity;
+    for (let i = 0; i + 1 < points.length; i += 1) {
+      drop3hMax = Math.max(drop3hMax, points[i] - points[i + 1]);
+    }
+    const mean = points.reduce((sum, value) => sum + value, 0) / points.length;
+    return {
+      date,
+      drop3hMax: Math.round(drop3hMax * 10) / 10,
+      meanHpa: Math.round(mean * 10) / 10,
+    };
+  });
+
   const data: WeatherData = {
     current: {
       tempC: first.main.temp,
       humidity: first.main.humidity,
       windKmh: Math.round(first.wind.speed * 3.6 * 10) / 10, // metric m/s → km/h
       text: owmText(first.weather[0].main),
+      pressureHpa: typeof first.main.pressure === "number" ? first.main.pressure : null,
     },
     daily,
+    barometric,
     fetchedAt: new Date().toISOString(),
     source: "OWM",
   };

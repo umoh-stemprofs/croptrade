@@ -17,7 +17,6 @@ import {
 } from "recharts";
 import type { BadgeSpec } from "@/components/DataSourceBadge";
 import {
-  SERIES_COLORS,
   longDate,
   naira,
   nairaExact,
@@ -25,6 +24,7 @@ import {
   sourceWord,
   type RatePoint,
 } from "@/lib/charts";
+import { useChartColors } from "@/lib/theme";
 import { ChartCard } from "./ChartCard";
 import { TooltipBox } from "./ChartTooltip";
 
@@ -67,6 +67,7 @@ function RateTooltip({
 }
 
 export function RateChart({ quotes }: { quotes: RateChartQuote[] }) {
+  const colors = useChartColors();
   const [selected, setSelected] = useState(quotes[0]?.quote ?? "USD");
   const active = quotes.find((row) => row.quote === selected) ?? quotes[0];
 
@@ -127,11 +128,11 @@ export function RateChart({ quotes }: { quotes: RateChartQuote[] }) {
           data={active.series}
           margin={{ top: 8, right: 12, bottom: 4, left: 0 }}
         >
-          <CartesianGrid stroke="#E4E7EC" strokeDasharray="3 3" vertical={false} />
+          <CartesianGrid stroke={colors.grid} strokeDasharray="3 3" vertical={false} />
           <XAxis
             dataKey="date"
             tickFormatter={(value: string) => shortDate(value)}
-            tick={{ fontSize: 12, fill: "#475467" }}
+            tick={{ fontSize: 12, fill: colors.axis }}
             tickLine={false}
             axisLine={false}
             interval={Math.max(1, Math.floor(active.series.length / 4))}
@@ -141,7 +142,7 @@ export function RateChart({ quotes }: { quotes: RateChartQuote[] }) {
             width={64}
             domain={["auto", "auto"]}
             tickFormatter={(value: number) => naira(value)}
-            tick={{ fontSize: 12, fill: "#475467" }}
+            tick={{ fontSize: 12, fill: colors.axis }}
             tickLine={false}
             axisLine={false}
           />
@@ -149,7 +150,7 @@ export function RateChart({ quotes }: { quotes: RateChartQuote[] }) {
           <Line
             type="monotone"
             dataKey="rate"
-            stroke={SERIES_COLORS[0]}
+            stroke={colors.series[0]}
             strokeWidth={2}
             dot={false}
             activeDot={{ r: 4 }}

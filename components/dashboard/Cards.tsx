@@ -13,7 +13,7 @@ import { prismaSnapshotStore } from "@/lib/weather/prismaStore";
 import { loadingWindow } from "@/lib/weather/loadingWindow";
 import { resolveFarmLocation } from "@/lib/farm";
 import { noOpSnapshotStore } from "@/lib/weather/getWeather";
-import type { WeatherDay } from "@/lib/weather/types";
+import type { WeatherDay, DayBarometricRecord } from "@/lib/weather/types";
 import { formatDateHuman, formatNairaFromKobo, formatRate } from "@/lib/format";
 import { DataSourceBadge, OldRateTag, type BadgeSpec } from "@/components/DataSourceBadge";
 import { RetryButton } from "@/components/RetryButton";
@@ -41,7 +41,11 @@ export type WeatherState =
       text: string;
       humidity: number;
       windKmh: number;
+      /** Current mean-sea-level pressure, hPa; null when the provider omitted it. */
+      pressureHpa: number | null;
       daily: WeatherDay[];
+      /** Per-day barometric summary used to derive the dispatch GO/NO-GO matrix. */
+      barometric: DayBarometricRecord[];
       loadingMessage: string;
     }
   | { kind: "error"; message: string };
@@ -117,7 +121,9 @@ export async function loadWeather(userId: string): Promise<WeatherState> {
       text: result.data.current.text,
       humidity: result.data.current.humidity,
       windKmh: result.data.current.windKmh,
+      pressureHpa: result.data.current.pressureHpa ?? null,
       daily: result.data.daily,
+      barometric: result.data.barometric ?? [],
       loadingMessage: window.message,
     };
   } catch {
@@ -189,7 +195,7 @@ export function MaizeCard({ state }: { state: MaizeState }) {
         <h2 id="maize-title" className={cardTitle}>
           Maize price
         </h2>
-        {state.kind === "price" ? <DataSourceBadge badge={{ kind: "simulated" }} /> : null}
+        {state.kind === "price" ? <DataSourceBadge badge={{ kind: "live", note: "WFP" }} /> : null}
       </div>
       {state.kind === "error" ? (
         <div className="mt-4 flex items-center gap-3">

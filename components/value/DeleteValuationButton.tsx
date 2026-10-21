@@ -31,7 +31,7 @@ export function DeleteValuationButton({ id, label }: { id: string; label: string
           <div className="w-full max-w-[420px] rounded-dialog border border-border bg-surface p-6 shadow-dialog">
             <h2
               id={`delete-valuation-${id}`}
-              className="text-[20px] font-semibold leading-7 text-text"
+              className="text-headline-sm text-text"
             >
               Delete this saved value?
             </h2>

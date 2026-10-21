@@ -11,6 +11,7 @@ import { listStock, totalStockValueKobo } from "@/lib/inventory";
 import { prismaStockDb } from "@/lib/server/stockDb";
 import { getMarketProvider } from "@/lib/market/provider";
 import { formatDateHuman, formatNairaFromKobo, formatRate, formatUsd } from "@/lib/format";
+import { todayIso } from "@/lib/time";
 import { StatCard } from "@/components/StatCard";
 import {
   MaizeCard,
@@ -49,8 +50,7 @@ export default async function DashboardPage() {
     items.map((i) => ({ qtyKg: i.qtyKg, priceKobo: kgPrices.get(i.crop) ?? 0 }))
   );
   const priceDate = prices?.[0]?.date ?? null;
-  const priceBadge: BadgeSpec =
-    prices?.[0]?.source === "LIVE" ? { kind: "live" } : { kind: "simulated" };
+  const priceBadge: BadgeSpec = { kind: "live", note: "WFP" };
 
   const usdRow = rates.kind === "rates" ? rates.rows.find((r) => r.quote === "USD") : undefined;
   const usdValue = usdRow ? Math.round((totalKobo / 100 / usdRow.localPerForeign) * 100) / 100 : null;
@@ -63,14 +63,27 @@ export default async function DashboardPage() {
     <>
       <header className="mb-6 flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-[32px] font-bold leading-10">Dashboard</h1>
-          <p className="mt-1 text-base leading-6 text-muted">
-            Hello, {user.name}. Here is your farm today.
+          <p className="mb-1 inline-flex items-center gap-1.5 rounded bg-accent/10 px-2.5 py-1 text-label-sm uppercase tracking-wider text-accent">
+            Harvest valuation &amp; execution terminal
+          </p>
+          <h1 className="font-display text-display-lg-mobile sm:text-display-lg">
+            Farm Overview
+          </h1>
+          <p className="mt-1 font-normal text-headline-sm text-muted">
+            Your total crop value and best action for today.
           </p>
         </div>
-        <Link href="/value" className={`${primaryButtonClass} sm:w-auto sm:px-6`}>
-          Work out value
-        </Link>
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-col rounded-card border border-border bg-surface px-4 py-2.5 shadow-card">
+            <span className="text-label-sm uppercase text-muted">Current trading cycle</span>
+            <span className="font-semibold text-data-mono text-text">
+              {formatDateHuman(todayIso())}
+            </span>
+          </div>
+          <Link href="/value" className={`${primaryButtonClass} sm:w-auto sm:px-6`}>
+            Work out value
+          </Link>
+        </div>
       </header>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">

@@ -21,7 +21,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         <main className="mx-auto max-w-[1280px] px-4 pb-24 pt-6 sm:px-6 lg:pb-12 lg:pt-8">
           {children}
           <footer className="mt-10 border-t border-border pt-4 text-sm leading-5 text-muted">
-            Decision-support tool. You decide. Sample prices are placeholders.
+            Decision-support tool. You decide. Prices and rates show their source on every card.
           </footer>
         </main>
       </div>

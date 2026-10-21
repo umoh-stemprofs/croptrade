@@ -38,8 +38,7 @@ export default async function StockPage({
     .catch(() => []);
   const kgPrices = new Map(prices.filter((p) => p.unit === "KG").map((p) => [p.crop, p.priceKobo]));
   const priceDate = prices[0]?.date ?? null;
-  const priceBadge: BadgeSpec =
-    prices[0]?.source === "LIVE" ? { kind: "live" } : { kind: "simulated" };
+  const priceBadge: BadgeSpec = { kind: "live", note: "WFP" };
 
   const rows = items.map((item) => {
     const priceKobo = kgPrices.get(item.crop) ?? null;
@@ -57,9 +56,18 @@ export default async function StockPage({
   return (
     <>
       <header className="mb-6">
-        <h1 className="text-[32px] font-bold leading-10">Stock</h1>
+        <div className="mb-1 flex flex-wrap items-center gap-2">
+          <span className="text-label-sm font-bold uppercase tracking-widest text-accent">
+            Physical inventory dispatch
+          </span>
+          <span className="text-border">•</span>
+          <span className="text-label-sm text-muted">Valued at today’s WFP survey</span>
+        </div>
+        <h1 className="font-display text-display-lg-mobile sm:text-display-lg">
+          My Crop Stock
+        </h1>
         <p className="mt-1 text-base leading-6 text-muted">
-          What you have in store, valued at today’s price per kg.
+          Set exact harvest weights, filter the ledger, then commit your adjustments.
         </p>
       </header>
 
@@ -80,7 +88,7 @@ export default async function StockPage({
 
       {/* Add stock */}
       <section className="mt-6 rounded-card border border-border bg-surface p-6 shadow-card">
-        <h2 className="text-[20px] font-semibold leading-7">Add stock</h2>
+        <h2 className="text-headline-sm">Add stock</h2>
         {farm ? (
           <form action={addStockAction} className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
             <div>

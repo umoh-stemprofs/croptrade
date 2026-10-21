@@ -28,7 +28,7 @@ export default async function SettingsPage({
   return (
     <>
       <header className="mb-6">
-        <h1 className="text-[32px] font-bold leading-10">Settings</h1>
+        <h1 className="font-display text-display-lg-mobile sm:text-display-lg">Settings</h1>
         <p className="mt-1 text-base leading-6 text-muted">
           Your farm details. The coordinates decide which weather you see.
         </p>

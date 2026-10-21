@@ -44,8 +44,9 @@ function FlaskIcon({ className }: { className: string }) {
   );
 }
 
+// Level 1 (Soft) shapes: a badge is a 4px chip — pills are reserved for status dots.
 const base =
-  "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-sm font-medium leading-5";
+  "inline-flex items-center gap-1.5 rounded-input border px-2.5 py-0.5 text-sm font-medium leading-5";
 
 export function DataSourceBadge({ badge }: { badge: BadgeSpec }) {
   switch (badge.kind) {

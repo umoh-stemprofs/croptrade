@@ -1,7 +1,7 @@
 // Rates (04-croptrade.md screen 6): one card per currency with rate, date, source
 // badge, Old rate tag and a Change button, plus the 30-day line chart with a
 // currency switch (the same numbers are in the card's "View as table"). Manual
-// rates are private to this farm; live and simulated rates stay shared. The
+// rates are private to this farm; live rates stay shared. The
 // Exchange Rate API credit stays visible.
 
 import Link from "next/link";
@@ -40,7 +40,7 @@ export default async function RatesPage({ searchParams }: { searchParams: Search
   return (
     <>
       <header>
-        <h1 className="text-[32px] font-bold leading-10">Rates</h1>
+        <h1 className="font-display text-display-lg-mobile sm:text-display-lg">Rates</h1>
         <p className="mt-1 max-w-[70ch] text-base leading-6 text-muted">
           Rate meaning: 1 foreign currency = X naira. A manual rate is yours alone and
           replaces the shared rate for your farm.

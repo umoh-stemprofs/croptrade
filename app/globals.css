@@ -2,28 +2,116 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── AgroExecutive Tactical Canvas tokens ──────────────────────────────────
+   Light: #F8FAFC canvas · #FFFFFF surface · #008751 primary · #0284C7 secondary
+          · #F59E0B alert
+   Dark:  #0F172A canvas · #1E293B surface · #10B981 primary · #06B6D4 secondary
+          · #FBBF24 alert
+   The code is stored as raw RGB channels so Tailwind can apply opacity:
+   `bg-accent/10` → rgb(var(--accent) / 0.1).                              */
+
 :root {
-  --bg: #f7f8fa;
-  --surface: #fff;
-  --border: #e4e7ec;
-  --text: #101828;
-  --muted: #475467;
-  --success: #1b7f3b;
-  --warning: #b54708;
-  --danger: #b42318;
-  --info: #175cd3;
-  --accent: #00796b;
-  --radius: 12px;
+  --bg: 248 250 252;
+  --surface: 255 255 255;
+  --border: 226 232 240;
+  --text: 15 23 42;
+  --muted: 100 116 139;
+
+  --accent: 0 135 81;
+  --accent-hover: 0 107 63;
+  --accent-fg: 255 255 255;
+
+  --success: 0 135 81;
+  --success-bg: 231 246 236;
+  /* #F59E0B is the alert colour; #B45309 keeps 4.5:1 when used as text. */
+  --warning: 180 83 9;
+  --warning-bg: 254 243 199;
+  --amber: 245 158 11;
+  --danger: 180 35 24;
+  --danger-bg: 254 228 226;
+  --info: 2 132 199;
+  --info-bg: 224 242 254;
+
+  --shadow: 15 23 42;
+
+  /* Chart-only tokens (Recharts needs literal colours). */
+  --chart-grid: #E2E8F0;
+  --chart-axis: #64748B;
+  --series-1: #0072B2;
+  --series-2: #E69F00;
+  --series-3: #009E73;
+  --series-4: #D55E00;
+  --series-5: #CC79A7;
+  --series-6: #56B4E9;
+
+  color-scheme: light;
+}
+
+.dark {
+  --bg: 15 23 42;
+  --surface: 30 41 59;
+  --border: 51 65 85;
+  --text: 248 250 252;
+  --muted: 148 163 184;
+
+  --accent: 16 185 129;
+  --accent-hover: 52 211 153;
+  --accent-fg: 6 40 30;
+
+  --success: 52 211 153;
+  --success-bg: 12 58 43;
+  --warning: 251 191 36;
+  --warning-bg: 74 52 16;
+  --amber: 251 191 36;
+  --danger: 252 165 165;
+  --danger-bg: 74 29 29;
+  --info: 6 182 212;
+  --info-bg: 11 58 70;
+
+  --shadow: 0 0 0;
+
+  --chart-grid: #334155;
+  --chart-axis: #94A3B8;
+  /* Brighter series so every line clears 4.5:1 on #0F172A. */
+  --series-1: #56B4E9;
+  --series-2: #E69F00;
+  --series-3: #34D399;
+  --series-4: #F97316;
+  --series-5: #CC79A7;
+  --series-6: #93C5FD;
+
+  color-scheme: dark;
 }
 
 html,
 body {
-  background: var(--bg);
-  color: var(--text);
+  background: rgb(var(--bg));
+  color: rgb(var(--text));
 }
 
 body {
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 16px;
   line-height: 24px;
+  /* Tabular figures everywhere: a dashboard of prices must not jitter. */
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "zero" 1;
+}
+
+/* Kill the white flash when the dark class is applied before paint. */
+html.dark {
+  background: rgb(var(--bg));
+}
+
+::selection {
+  background: rgb(var(--accent) / 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
 }

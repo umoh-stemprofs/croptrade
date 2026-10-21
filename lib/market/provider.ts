@@ -1,15 +1,17 @@
-// Market feed adapter (00-global §3): interface MarketProvider.
-// SimulatedProvider is the default. If MARKET_API_URL is set, LiveProvider fetches
-// it and falls back to Simulated on failure. The item's own `source` is the real source,
-// so the data-source badge never lies.
+// Market provider — the only price source is the live WFP feed (lib/market/wfp.ts).
+// There is deliberately no simulated fallback and no local price table: when the
+// network fails the provider throws a MarketFeedError and the screen shows an error
+// state with "Try again".
+//
+// The item's `source` is always the real source, so the data-source badge never lies.
 
-import { z } from "zod";
-import { CATALOG, getCatalogEntry } from "./catalog";
-import { priceKobo } from "./generator";
-import { addDaysIso, todayIso } from "../time";
-import { fetchJson, type FetchLike } from "../server/http";
+import { getCatalogEntry } from "./catalog";
+import { loadMarketFeed, seriesFor, type MarketFeed } from "./wfp";
+import { todayIso } from "../time";
 
-export type MarketSource = "SIMULATED" | "LIVE";
+export const MARKET_SOURCE_LABEL = "WFP · HDX";
+
+export type MarketSource = "LIVE";
 
 export interface MarketPrice {
   crop: string;
@@ -20,103 +22,59 @@ export interface MarketPrice {
 }
 
 export interface MarketProvider {
-  /** Latest price of every crop. */
+  readonly name: string;
+  /** The whole live feed (observations + newest quote per crop). */
+  feed(): Promise<MarketFeed>;
+  /** Newest price of every crop the feed covers. */
   latestPrices(): Promise<MarketPrice[]>;
   /** Daily history for one crop, oldest first. days 1..90. */
   history(crop: string, days: number): Promise<MarketPrice[]>;
 }
 
-export class SimulatedProvider implements MarketProvider {
-  readonly name = "SIMULATED";
+export class WfpProvider implements MarketProvider {
+  readonly name = MARKET_SOURCE_LABEL;
 
-  latestPrices(now: Date = new Date()): Promise<MarketPrice[]> {
-    const today = todayIso(now);
-    return Promise.resolve(
-      CATALOG.map((entry) => ({
-        crop: entry.crop,
-        date: today,
-        priceKobo: priceKobo(entry.crop, entry.salt, entry.base, today),
-        unit: entry.unit,
-        source: "SIMULATED" as const,
-      }))
-    );
-  }
+  constructor(private readonly loadFeed: () => Promise<MarketFeed> = () => loadMarketFeed()) {}
 
-  history(crop: string, days: number, now: Date = new Date()): Promise<MarketPrice[]> {
-    const entry = getCatalogEntry(crop);
-    if (!entry) return Promise.reject(new Error(`Unknown crop "${crop}".`));
-    if (days < 1 || days > 90) {
-      return Promise.reject(new Error("Days must be a whole number from 1 to 90."));
-    }
-    const today = todayIso(now);
-    const rows: MarketPrice[] = [];
-    for (let i = days - 1; i >= 0; i--) {
-      const date = addDaysIso(today, -i);
-      rows.push({
-        crop: entry.crop,
-        date,
-        priceKobo: priceKobo(entry.crop, entry.salt, entry.base, date),
-        unit: entry.unit,
-        source: "SIMULATED",
-      });
-    }
-    return Promise.resolve(rows);
-  }
-}
-
-/** Contract for a live feed: a JSON array of MarketPrice-shaped objects. */
-const livePriceSchema = z
-  .array(
-    z.object({
-      crop: z.string().min(1),
-      date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
-      priceKobo: z.number().int().positive(),
-      unit: z.enum(["KG", "TRAY", "LITRE"]),
-      source: z.enum(["LIVE", "SIMULATED"]),
-    })
-  )
-  .min(1);
-
-export class LiveProvider implements MarketProvider {
-  readonly name = "LIVE";
-
-  constructor(
-    private readonly url: string,
-    private readonly fallback: MarketProvider = new SimulatedProvider(),
-    private readonly fetchImpl: FetchLike = fetch
-  ) {}
-
-  private async fetchLive(params: Record<string, string>): Promise<MarketPrice[]> {
-    const url = new URL(this.url);
-    for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
-    const json = await fetchJson<unknown>(url.toString(), { fetchImpl: this.fetchImpl });
-    return livePriceSchema.parse(json);
+  feed(): Promise<MarketFeed> {
+    return this.loadFeed();
   }
 
   async latestPrices(): Promise<MarketPrice[]> {
-    try {
-      return await this.fetchLive({});
-    } catch {
-      return this.fallback.latestPrices();
-    }
+    const feed = await this.feed();
+    return feed.quotes.map((quote) => ({
+      crop: quote.crop,
+      date: quote.date,
+      priceKobo: quote.priceKobo,
+      unit: quote.unit,
+      source: "LIVE" as const,
+    }));
   }
 
   async history(crop: string, days: number): Promise<MarketPrice[]> {
-    try {
-      const rows = await this.fetchLive({ crop, days: String(days) });
-      return rows.filter((r) => r.crop === crop).slice(-days);
-    } catch {
-      return this.fallback.history(crop, days);
+    const entry = getCatalogEntry(crop);
+    if (!entry) throw new Error(`Unknown crop "${crop}".`);
+    if (!Number.isInteger(days) || days < 1 || days > 90) {
+      throw new Error("Days must be a whole number from 1 to 90.");
     }
+    const feed = await this.feed();
+    // The feed lags a few days, so the window ends at its newest observation rather
+    // than today — otherwise "7 days" would be nearly empty and look like no data.
+    const anchor = feed.asOf || todayIso();
+    return seriesFor(feed.observations, crop, days, anchor).map((point) => ({
+      crop,
+      date: point.date,
+      priceKobo: point.priceKobo,
+      unit: entry.unit,
+      source: "LIVE" as const,
+    }));
   }
 }
 
 let cached: MarketProvider | null = null;
 
-/** Server-side singleton. MARKET_API_URL switches on the live feed with simulated fallback. */
+/** Server-side singleton. */
 export function getMarketProvider(): MarketProvider {
-  if (cached) return cached;
-  const url = process.env.MARKET_API_URL?.trim();
-  cached = url ? new LiveProvider(url, new SimulatedProvider()) : new SimulatedProvider();
+  if (!cached) cached = new WfpProvider();
   return cached;
 }

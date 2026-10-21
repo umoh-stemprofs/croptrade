@@ -62,7 +62,7 @@ export default async function ChangeRatePage({ searchParams }: { searchParams: S
         >
           Back to Rates
         </Link>
-        <h1 className="mt-2 text-[32px] font-bold leading-10">Change the {quote} rate</h1>
+        <h1 className="mt-2 font-display text-display-lg-mobile sm:text-display-lg">Change the {quote} rate</h1>
         <p className="mt-1 max-w-[70ch] text-base leading-6 text-muted">
           This rate is used only for your farm.
         </p>

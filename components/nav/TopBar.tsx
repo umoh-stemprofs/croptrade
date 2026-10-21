@@ -5,6 +5,7 @@
 
 import Link from "next/link";
 import { logoutAction } from "@/lib/actions/auth";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const focusRing =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
@@ -16,6 +17,7 @@ export function TopBar() {
     <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border bg-surface px-3 lg:hidden">
       <p className="text-[18px] font-semibold leading-7 text-text">CropTrade</p>
       <div className="flex items-center gap-1">
+        <ThemeToggle compact />
         <Link href="/market" className={linkClass}>
           Market
         </Link>

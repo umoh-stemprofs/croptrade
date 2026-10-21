@@ -17,6 +17,7 @@ export const NAV_ITEMS: NavItem[] = [
   { href: "/weather", label: "Weather", icon: "weather" },
   { href: "/valuations", label: "Valuations", icon: "valuations" },
   { href: "/rates", label: "Rates", icon: "rates" },
+  { href: "/converter", label: "Converter", icon: "converter" },
   { href: "/settings", label: "Settings", icon: "settings" },
 ];
 

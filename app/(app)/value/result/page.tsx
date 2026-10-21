@@ -41,7 +41,7 @@ function Problem({ message }: { message: string }) {
   return (
     <>
       <header>
-        <h1 className="text-[32px] font-bold leading-10">Your export value</h1>
+        <h1 className="font-display text-display-lg-mobile sm:text-display-lg">Your export value</h1>
       </header>
       <ErrorLine message={message} />
       <div className="mt-4">
@@ -103,7 +103,7 @@ export default async function ValueResultPage({ searchParams }: { searchParams: 
   return (
     <>
       <header>
-        <h1 className="text-[32px] font-bold leading-10">Your export value</h1>
+        <h1 className="font-display text-display-lg-mobile sm:text-display-lg">Your export value</h1>
         <p className="mt-1 text-base leading-6 text-muted">
           {cropLabel(crop)} · {qtyKg} kg · {quote}
         </p>

@@ -24,7 +24,7 @@ export default async function SignupPage({
   return (
     <main className="flex min-h-screen items-center justify-center bg-bg px-4 py-8">
       <div className="w-full max-w-[420px] rounded-card border border-border bg-surface p-8 shadow-card">
-        <h1 className="text-[32px] font-bold leading-10">Create your account</h1>
+        <h1 className="font-display text-display-lg-mobile sm:text-display-lg">Create your account</h1>
         <p className="mt-1 text-base leading-6 text-muted">
           Track your stock and see what it is worth abroad.
         </p>

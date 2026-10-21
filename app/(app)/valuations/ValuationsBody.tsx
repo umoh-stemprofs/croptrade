@@ -38,7 +38,7 @@ export async function ValuationsBody({ userId }: { userId: string }) {
     return (
       <section className="mt-6 rounded-card border border-border bg-surface p-6 shadow-card">
         <EmptyIcon className="h-8 w-8 text-muted" />
-        <h2 className="mt-3 text-[20px] font-semibold leading-7">No saved valuations yet</h2>
+        <h2 className="mt-3 text-headline-sm">No saved valuations yet</h2>
         <p className="mt-2 text-base leading-6 text-muted">
           Work out what a crop could earn abroad, then save the result here.
         </p>

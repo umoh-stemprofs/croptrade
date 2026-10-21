@@ -8,6 +8,7 @@ export type IconName =
   | "weather"
   | "valuations"
   | "rates"
+  | "converter"
   | "settings";
 
 export function NavIcon({ name, className }: { name: IconName; className: string }) {
@@ -68,6 +69,13 @@ export function NavIcon({ name, className }: { name: IconName; className: string
           <path d="m15 5 3 3-3 3" />
           <path d="M20 16H6" />
           <path d="m9 13-3 3 3 3" />
+        </svg>
+      );
+    case "converter":
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="12" r="9" />
+          <path d="M15 9.5A3 3 0 0 0 9.5 11c0 1.5 2.5 2 2.5 3.5 0 1-1 1.5-2 1.5M12 7.5v1.5M12 16.5V18" />
         </svg>
       );
     case "settings":

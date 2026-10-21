@@ -11,14 +11,27 @@ export interface WeatherDay {
   rainChancePct: number;
 }
 
+/** One forecast day's barometric summary, derived from hourly pressure (see goNoGo.ts). */
+export interface DayBarometricRecord {
+  date: string; // YYYY-MM-DD
+  /** Steepest 3-hour pressure fall that day, hPa; null when pressure was not fetched. */
+  drop3hMax: number | null;
+  /** Mean surface pressure for the day, hPa; null when pressure was not fetched. */
+  meanHpa: number | null;
+}
+
 export interface WeatherData {
   current: {
     tempC: number;
     humidity: number; // %
     windKmh: number;
     text: string; // plain-words condition, e.g. "Partly cloudy"
+    /** Current mean-sea-level pressure, hPa; null when the provider did not supply it. */
+    pressureHpa?: number | null;
   };
   daily: WeatherDay[]; // up to 5 days
+  /** Per-day barometric summary; empty when the provider supplied no pressure data. */
+  barometric: DayBarometricRecord[];
   fetchedAt: string; // ISO timestamp
   source: string; // OPEN_METEO | OWM
 }
@@ -30,6 +43,7 @@ export const weatherDataSchema = z.object({
     humidity: z.number(),
     windKmh: z.number(),
     text: z.string().min(1),
+    pressureHpa: z.number().nullable().optional(),
   }),
   daily: z
     .array(
@@ -42,6 +56,16 @@ export const weatherDataSchema = z.object({
       })
     )
     .min(1),
+  barometric: z
+    .array(
+      z.object({
+        date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+        drop3hMax: z.number().nullable(),
+        meanHpa: z.number().nullable(),
+      })
+    )
+    .optional()
+    .default([]),
   fetchedAt: z.string(),
   source: z.string().min(1),
 });

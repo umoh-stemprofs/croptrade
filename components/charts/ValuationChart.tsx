@@ -16,13 +16,13 @@ import {
 } from "recharts";
 import type { BadgeSpec } from "@/components/DataSourceBadge";
 import {
-  SERIES_COLORS,
   compactMoney,
   longDate,
   money,
   shortDate,
   type ValuationBar,
 } from "@/lib/charts";
+import { useChartColors } from "@/lib/theme";
 import { ChartCard } from "./ChartCard";
 import { TooltipBox } from "./ChartTooltip";
 
@@ -67,6 +67,7 @@ export function ValuationChart({
   bars: ValuationBar[];
   badge: BadgeSpec;
 }) {
+  const colors = useChartColors();
   const quotes = [...new Set(bars.map((bar) => bar.quote))];
   const [selected, setSelected] = useState(quotes[0] ?? "USD");
   const active = bars.filter((bar) => bar.quote === selected);
@@ -139,11 +140,11 @@ export function ValuationChart({
           margin={{ top: 4, right: 16, bottom: 4, left: 0 }}
           barCategoryGap={10}
         >
-          <CartesianGrid horizontal={false} stroke="#E4E7EC" strokeDasharray="3 3" />
+          <CartesianGrid horizontal={false} stroke={colors.grid} strokeDasharray="3 3" />
           <XAxis
             type="number"
             tickFormatter={(value: number) => compactMoney(value, selected)}
-            tick={{ fontSize: 12, fill: "#475467" }}
+            tick={{ fontSize: 12, fill: colors.axis }}
             tickLine={false}
             axisLine={false}
           />
@@ -151,17 +152,17 @@ export function ValuationChart({
             type="category"
             dataKey="name"
             width={140}
-            tick={{ fontSize: 12, fill: "#101828" }}
+            tick={{ fontSize: 12, fill: colors.text }}
             tickFormatter={(value: string) =>
               value.length > 18 ? `${value.slice(0, 17)}…` : value
             }
             tickLine={false}
             axisLine={false}
           />
-          <Tooltip content={<ValuationTooltip quote={selected} />} cursor={{ fill: "#F7F8FA" }} />
+          <Tooltip content={<ValuationTooltip quote={selected} />} cursor={{ fill: colors.hover }} />
           <Bar
             dataKey="value"
-            fill={SERIES_COLORS[2]}
+            fill={colors.series[2]}
             radius={[0, 4, 4, 0]}
             isAnimationActive={false}
           />

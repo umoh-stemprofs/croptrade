@@ -39,7 +39,7 @@ export default async function ValuePage({ searchParams }: { searchParams: Search
     return (
       <>
         <header>
-          <h1 className="text-[32px] font-bold leading-10">Work out value</h1>
+          <h1 className="font-display text-display-lg-mobile sm:text-display-lg">Work out value</h1>
           <p className="mt-1 text-base leading-6 text-muted">
             Turn stock into the money it could earn abroad.
           </p>
@@ -48,7 +48,7 @@ export default async function ValuePage({ searchParams }: { searchParams: Search
 
         {crops.length === 0 ? (
           <section className="mt-6 max-w-[560px] rounded-card border border-border bg-surface p-6 shadow-card">
-            <h2 className="text-[20px] font-semibold leading-7">No stock to value yet</h2>
+            <h2 className="text-headline-sm">No stock to value yet</h2>
             <p className="mt-2 text-base leading-6 text-muted">
               Add a crop on the Stock page first, then come back here.
             </p>
@@ -75,7 +75,7 @@ export default async function ValuePage({ searchParams }: { searchParams: Search
     return (
       <>
         <header>
-          <h1 className="text-[32px] font-bold leading-10">Work out value</h1>
+          <h1 className="font-display text-display-lg-mobile sm:text-display-lg">Work out value</h1>
           <StepBar step={1} total={2} />
         </header>
         <ErrorLine message={firstWizardMessage(parsed.error)} />
@@ -101,7 +101,7 @@ export default async function ValuePage({ searchParams }: { searchParams: Search
   return (
     <>
       <header>
-        <h1 className="text-[32px] font-bold leading-10">Work out value</h1>
+        <h1 className="font-display text-display-lg-mobile sm:text-display-lg">Work out value</h1>
         <p className="mt-1 text-base leading-6 text-muted">
           {label} · {qtyKg} kg from your stock.
         </p>

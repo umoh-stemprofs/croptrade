@@ -20,12 +20,12 @@ import {
 import type { BadgeSpec } from "@/components/DataSourceBadge";
 import {
   MAX_PIE_SLICES,
-  SERIES_COLORS,
   compactNaira,
   naira,
   type PieSlice,
   type StockValueSlice,
 } from "@/lib/charts";
+import { useChartColors } from "@/lib/theme";
 import { ChartCard } from "./ChartCard";
 import { TooltipBox } from "./ChartTooltip";
 
@@ -83,6 +83,7 @@ export function StockCharts({
   pie: PieSlice[];
   badge: BadgeSpec;
 }) {
+  const colors = useChartColors();
   const barData: BarDatum[] = slices.map((slice) => ({
     name: slice.label,
     value: slice.valueKobo / 100,
@@ -121,11 +122,11 @@ export function StockCharts({
             margin={{ top: 4, right: 16, bottom: 4, left: 0 }}
             barCategoryGap={10}
           >
-            <CartesianGrid horizontal={false} stroke="#E4E7EC" strokeDasharray="3 3" />
+            <CartesianGrid horizontal={false} stroke={colors.grid} strokeDasharray="3 3" />
             <XAxis
               type="number"
               tickFormatter={(value: number) => compactNaira(value)}
-              tick={{ fontSize: 12, fill: "#475467" }}
+              tick={{ fontSize: 12, fill: colors.axis }}
               tickLine={false}
               axisLine={false}
             />
@@ -133,14 +134,14 @@ export function StockCharts({
               type="category"
               dataKey="name"
               width={96}
-              tick={{ fontSize: 12, fill: "#101828" }}
+              tick={{ fontSize: 12, fill: colors.text }}
               tickLine={false}
               axisLine={false}
             />
-            <Tooltip content={<BarTooltip />} cursor={{ fill: "#F7F8FA" }} />
+            <Tooltip content={<BarTooltip />} cursor={{ fill: colors.hover }} />
             <Bar
               dataKey="value"
-              fill={SERIES_COLORS[0]}
+              fill={colors.series[0]}
               radius={[0, 4, 4, 0]}
               isAnimationActive={false}
             />
@@ -188,14 +189,14 @@ export function StockCharts({
                   innerRadius={44}
                   outerRadius={82}
                   paddingAngle={2}
-                  stroke="#FFFFFF"
+                  stroke={colors.surface}
                   strokeWidth={2}
                   isAnimationActive={false}
                 >
                   {pieData.map((entry, index) => (
                     <Cell
                       key={entry.name}
-                      fill={SERIES_COLORS[index % SERIES_COLORS.length]}
+                      fill={colors.series[index % colors.series.length]}
                     />
                   ))}
                 </Pie>
@@ -209,7 +210,7 @@ export function StockCharts({
                 <span className="flex min-w-0 items-center gap-2">
                   <span
                     className="h-3 w-3 shrink-0 rounded-sm"
-                    style={{ backgroundColor: SERIES_COLORS[index % SERIES_COLORS.length] }}
+                    style={{ backgroundColor: colors.series[index % colors.series.length] }}
                     aria-hidden="true"
                   />
                   <span className="truncate text-text">{entry.name}</span>

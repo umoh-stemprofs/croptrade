@@ -29,7 +29,7 @@ export function DeleteStockButton({ id, label }: { id: string; label: string }) 
           className="fixed inset-0 z-50 flex items-center justify-center bg-text/40 p-4"
         >
           <div className="w-full max-w-[420px] rounded-dialog border border-border bg-surface p-6 shadow-dialog">
-            <h2 id={`delete-title-${id}`} className="text-[20px] font-semibold leading-7 text-text">
+            <h2 id={`delete-title-${id}`} className="text-headline-sm text-text">
               Delete {label}?
             </h2>
             <p className="mt-2 text-base leading-6 text-muted">

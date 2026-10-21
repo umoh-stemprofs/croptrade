@@ -6,7 +6,6 @@
 import { listStock, cropLabel } from "@/lib/inventory";
 import { prismaStockDb } from "@/lib/server/stockDb";
 import { getMarketProvider } from "@/lib/market/provider";
-import { getCatalogEntry } from "@/lib/market/catalog";
 import { effectiveRates } from "@/lib/fx/effective";
 import { fxHistory } from "@/lib/fx/history";
 import { FX_QUOTES } from "@/lib/config";
@@ -15,23 +14,10 @@ import { formatDateShort } from "@/lib/format";
 import { rateRowBadge } from "@/components/dashboard/Cards";
 import type { BadgeSpec } from "@/components/DataSourceBadge";
 import type { ValuationRow } from "@/lib/valuations";
-import {
-  pieSlices,
-  priceSeries,
-  rateSeries,
-  stockValueByCrop,
-  valuationBars,
-} from "@/lib/charts";
+import { pieSlices, rateSeries, stockValueByCrop, valuationBars } from "@/lib/charts";
 import { StockCharts } from "./StockCharts";
 import { RateChart, type RateChartQuote } from "./RateChart";
-import { MarketChart, type MarketCropSeries } from "./MarketChart";
 import { ValuationChart } from "./ValuationChart";
-
-const unitWord: Record<string, string> = {
-  KG: "per kg",
-  TRAY: "per tray of 30",
-  LITRE: "per litre",
-};
 
 /** Dashboard: "Stock value by crop" + "Share of stock value". */
 export async function StockChartsSection({ userId }: { userId: string }) {
@@ -53,8 +39,7 @@ export async function StockChartsSection({ userId }: { userId: string }) {
     })),
     cropLabel
   );
-  const badge: BadgeSpec =
-    prices?.[0]?.source === "LIVE" ? { kind: "live" } : { kind: "simulated" };
+  const badge: BadgeSpec = { kind: "live", note: "WFP" };
 
   return <StockCharts slices={slices} pie={pieSlices(slices)} badge={badge} />;
 }
@@ -93,31 +78,6 @@ export async function RatesChartSection({ farmId }: { farmId: string | null }) {
   });
 
   return <RateChart quotes={quotes} />;
-}
-
-/** Market: 90 days of prices per crop; the card switches crop and 7/30/90 days. */
-export async function MarketChartSection() {
-  const provider = getMarketProvider();
-  const latest = await provider.latestPrices().catch(() => []);
-  const histories = await Promise.all(
-    latest.map((row) => provider.history(row.crop, 90).catch(() => []))
-  );
-  const today = todayIso();
-
-  const crops: MarketCropSeries[] = latest
-    .map((row, index) => ({
-      crop: row.crop,
-      label: getCatalogEntry(row.crop)?.label ?? row.crop,
-      unit: unitWord[row.unit] ?? `per ${row.unit.toLowerCase()}`,
-      series: priceSeries(histories[index], { days: 90, today }),
-    }))
-    // A crop with no saved price would draw an empty chart — leave it out so the
-    // card can show its empty state instead of a blank grid.
-    .filter((row) => row.series.some((point) => point.priceKobo !== null));
-  const badge: BadgeSpec =
-    latest[0]?.source === "LIVE" ? { kind: "live" } : { kind: "simulated" };
-
-  return <MarketChart crops={crops} badge={badge} />;
 }
 
 /** Valuations: net per saved valuation, one currency at a time. */

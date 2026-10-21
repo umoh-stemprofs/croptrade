@@ -37,10 +37,14 @@ describe("resolveFarmLocation", () => {
 });
 
 const fixture: WeatherData = {
-  current: { tempC: 30.5, humidity: 78, windKmh: 9, text: "Partly cloudy" },
+  current: { tempC: 30.5, humidity: 78, windKmh: 9, text: "Partly cloudy", pressureHpa: 1012 },
   daily: [
     { date: "2026-10-18", minC: 24, maxC: 31, rainMm: 2, rainChancePct: 20 },
     { date: "2026-10-19", minC: 24, maxC: 30, rainMm: 12, rainChancePct: 70 },
+  ],
+  barometric: [
+    { date: "2026-10-18", drop3hMax: 0.4, meanHpa: 1012 },
+    { date: "2026-10-19", drop3hMax: 3.1, meanHpa: 1010 },
   ],
   fetchedAt: "2026-10-18T12:00:00Z",
   source: "OPEN_METEO",

@@ -37,7 +37,7 @@ export function StatCard({
       {sub ? <p className="mt-2 text-sm leading-5 text-muted">{sub}</p> : null}
       {oldRate ? (
         <p className="mt-2">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-warning/30 bg-warning-bg px-2.5 py-0.5 text-sm font-medium leading-5 text-warning">
+          <span className="inline-flex items-center gap-1.5 rounded-input border border-warning/30 bg-warning-bg px-2.5 py-0.5 text-sm font-medium leading-5 text-warning">
             <svg
               viewBox="0 0 24 24"
               fill="none"

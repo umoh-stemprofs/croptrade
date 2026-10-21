@@ -39,13 +39,20 @@ const failingFetch = (() =>
   Promise.reject(new Error("network down"))) as unknown as typeof fetch;
 
 const sampleSnapshotPayload: WeatherData = {
-  current: { tempC: 29, humidity: 75, windKmh: 10, text: "Partly cloudy" },
+  current: { tempC: 29, humidity: 75, windKmh: 10, text: "Partly cloudy", pressureHpa: 1013 },
   daily: [
     { date: "2026-10-18", minC: 24, maxC: 30, rainMm: 0, rainChancePct: 10 },
     { date: "2026-10-19", minC: 24, maxC: 31, rainMm: 0, rainChancePct: 10 },
     { date: "2026-10-20", minC: 23, maxC: 30, rainMm: 0, rainChancePct: 10 },
     { date: "2026-10-21", minC: 24, maxC: 31, rainMm: 0, rainChancePct: 10 },
     { date: "2026-10-22", minC: 24, maxC: 31, rainMm: 0, rainChancePct: 10 },
+  ],
+  barometric: [
+    { date: "2026-10-18", drop3hMax: 0.3, meanHpa: 1013 },
+    { date: "2026-10-19", drop3hMax: 0.5, meanHpa: 1012 },
+    { date: "2026-10-20", drop3hMax: 2.4, meanHpa: 1010 },
+    { date: "2026-10-21", drop3hMax: 0.2, meanHpa: 1013 },
+    { date: "2026-10-22", drop3hMax: 0.1, meanHpa: 1014 },
   ],
   fetchedAt: "2026-10-18T09:00:00.000Z",
   source: "OPEN_METEO",

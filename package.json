@@ -10,7 +10,6 @@
     "db:push": "prisma db push",
     "db:generate": "prisma generate",
     "db:seed": "prisma db seed",
-    "trends": "tsx scripts/print-trends.ts",
     "test": "vitest run"
   },
   "prisma": {
