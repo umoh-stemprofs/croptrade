@@ -22,7 +22,7 @@ export default async function ValuationsPage({ searchParams }: { searchParams: S
     <>
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="font-display text-display-lg-mobile sm:text-display-lg">Valuations</h1>
+          <h1 className="font-display text-display-lg-mobile sm:text-display-lg text-on-surface tracking-tight">Valuations</h1>
           <p className="mt-1 text-base leading-6 text-muted">
             Export values you saved for this farm, newest first.
           </p>

@@ -309,8 +309,6 @@ export function sourceWord(source: string | null): string {
   switch (source) {
     case "LIVE":
       return "Live";
-    case "SIMULATED":
-      return "Simulated";
     case "MANUAL":
       return "Manual";
     case "SAVED":

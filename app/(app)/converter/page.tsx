@@ -19,7 +19,6 @@ import { corridorRates } from "@/lib/converter/corridor";
 import { FX_QUOTES } from "@/lib/config";
 import { formatDateHuman } from "@/lib/format";
 import { RetryButton } from "@/components/RetryButton";
-import { DataSourceBadge } from "@/components/DataSourceBadge";
 import {
   Converter,
   type ConverterRate,
@@ -65,7 +64,7 @@ export default async function ConverterPage() {
         <section
           role="alert"
           aria-live="assertive"
-          className="rounded-card border border-danger/30 bg-surface p-6 shadow-card"
+          className="bg-surface-container-lowest rounded-xl border border-error/40 shadow-sm p-space-md sm:p-space-lg"
         >
           <h2 className="text-headline-sm">Rates are unavailable</h2>
           <p className="mt-1 text-base leading-6 text-muted">{ratesResult.error}</p>
@@ -151,34 +150,39 @@ export default async function ConverterPage() {
 
   return (
     <>
-      <header className="mb-6 flex flex-wrap items-end justify-between gap-3">
+      <header className="mb-space-lg flex flex-col lg:flex-row lg:items-end lg:justify-between gap-space-md">
         <div>
-          <p className="mb-1 flex items-center gap-2 text-label-sm uppercase tracking-wide text-accent">
-            FX export liquidity terminal
-          </p>
-          <h1 className="font-display text-display-lg-mobile sm:text-display-lg">
+          <div className="flex items-center gap-space-sm mb-1">
+            <span className="material-symbols-outlined text-primary text-[20px]" aria-hidden="true">
+              currency_exchange
+            </span>
+            <span className="font-label-sm text-label-sm uppercase tracking-wider text-primary">
+              FX export liquidity terminal
+            </span>
+          </div>
+          <h1 className="font-display text-display-lg-mobile sm:text-display-lg text-on-surface tracking-tight">
             Money Converter
           </h1>
-          <p className="mt-1 max-w-3xl text-base leading-6 text-muted">
+          <p className="mt-1 font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
             Convert a harvest valuation into an export settlement, net of your handling buffer
             and the export costs you set in Settings. Rates are live; custom pairings and
             accounts are yours.
           </p>
         </div>
-        <div className="flex flex-wrap items-center gap-3">
-          <DataSourceBadge
-            badge={
-              usd?.source === "MANUAL"
-                ? { kind: "manual" }
-                : usd?.source === "SIMULATED"
-                  ? { kind: "simulated" }
-                  : usd?.source === "LIVE"
-                    ? { kind: "live", note: "FX" }
-                    : usd
-                      ? { kind: "saved", ageLabel: formatDateHuman(usd.date) }
-                      : { kind: "live", note: "FX" }
-            }
-          />
+        <div className="flex flex-wrap items-center gap-space-sm">
+          <span className="inline-flex items-center gap-1.5 rounded bg-surface-container px-2.5 py-1 font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant border border-outline-variant">
+            <span className="material-symbols-outlined text-[14px] text-primary" aria-hidden="true">
+              schedule
+            </span>
+            1 USD = {usd ? `₦${usd.localPerForeign.toLocaleString("en-NG", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : "—"}
+          </span>
+          {usd && usd.source !== "LIVE" ? (
+            <span className="inline-flex items-center gap-1.5 rounded bg-surface-container px-2.5 py-1 font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant border border-outline-variant">
+              {usd.source === "MANUAL"
+                ? "Manual rate"
+                : `Saved · ${formatDateHuman(usd.date)}`}
+            </span>
+          ) : null}
         </div>
       </header>
 

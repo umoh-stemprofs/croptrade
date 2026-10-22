@@ -22,7 +22,8 @@ export interface FxRateView {
   quote: string;
   localPerForeign: number;
   date: string; // YYYY-MM-DD
-  source: "LIVE" | "SIMULATED" | "MANUAL";
+  // SIMULATED is never served — savedView filters it out above.
+  source: "LIVE" | "MANUAL";
   /** true → show the orange "Old rate" tag (still calculates) */
   old: boolean;
   /** true → data came from this request; false → served from saved data */
@@ -52,7 +53,9 @@ async function savedView(store: FxStore, quote: string, today: string): Promise<
   } catch {
     return null;
   }
-  if (!saved) return null;
+  // A SIMULATED tick is placeholder data — never serve it. If that was all
+  // there was, the caller falls through to the honest "no rate" state instead.
+  if (!saved || saved.source === "SIMULATED") return null;
   return {
     quote,
     localPerForeign: saved.localPerForeign,

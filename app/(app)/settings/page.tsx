@@ -28,7 +28,7 @@ export default async function SettingsPage({
   return (
     <>
       <header className="mb-6">
-        <h1 className="font-display text-display-lg-mobile sm:text-display-lg">Settings</h1>
+        <h1 className="font-display text-display-lg-mobile sm:text-display-lg text-on-surface tracking-tight">Settings</h1>
         <p className="mt-1 text-base leading-6 text-muted">
           Your farm details. The coordinates decide which weather you see.
         </p>
@@ -37,7 +37,7 @@ export default async function SettingsPage({
       {searchParams.error ? <ErrorLine message={searchParams.error} /> : null}
       {searchParams.saved ? <SuccessLine message="Settings saved." /> : null}
 
-      <section className="mt-6 max-w-[560px] rounded-card border border-border bg-surface p-6 shadow-card">
+      <section className="mt-6 max-w-[560px] bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm">
         {farm ? (
           <form action={saveSettingsAction} className="space-y-4">
             <Field

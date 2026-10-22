@@ -28,7 +28,7 @@ export function DeleteValuationButton({ id, label }: { id: string; label: string
           aria-labelledby={`delete-valuation-${id}`}
           className="fixed inset-0 z-50 flex items-center justify-center bg-text/40 p-4"
         >
-          <div className="w-full max-w-[420px] rounded-dialog border border-border bg-surface p-6 shadow-dialog">
+          <div className="w-full max-w-[420px] rounded-2xl border border-outline-variant bg-surface-container-lowest p-space-lg shadow-lg">
             <h2
               id={`delete-valuation-${id}`}
               className="text-headline-sm text-text"

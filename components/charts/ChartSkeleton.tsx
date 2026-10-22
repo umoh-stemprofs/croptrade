@@ -9,7 +9,7 @@ export function ChartSkeleton() {
     <section
       role="status"
       aria-live="polite"
-      className="rounded-card border border-border bg-surface p-4 shadow-card sm:p-6"
+      className="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 shadow-sm sm:p-6"
     >
       <span className="sr-only">Loading chart…</span>
       <div className={`h-5 w-40 ${pulse}`} />
@@ -35,9 +35,9 @@ export function ListSkeleton({ rows = 3 }: { rows?: number }) {
     <div role="status" aria-live="polite" className="mt-6 space-y-6">
       <span className="sr-only">Loading saved valuations…</span>
       <ChartSkeleton />
-      <div className={`h-20 w-full rounded-card ${pulse}`} />
+      <div className={`h-20 w-full rounded-xl ${pulse}`} />
       {Array.from({ length: rows }).map((_, index) => (
-        <div key={index} className={`h-16 w-full rounded-card ${pulse}`} />
+        <div key={index} className={`h-16 w-full rounded-xl ${pulse}`} />
       ))}
     </div>
   );

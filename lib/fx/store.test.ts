@@ -111,9 +111,9 @@ describe("getFxRates", () => {
 
   it("falls back to the last saved rate with Saved data when the call fails", async () => {
     const store = memoryStore([
-      { quote: "USD", date: "2026-10-16", localPerForeign: 1495, source: "SIMULATED" },
-      { quote: "EUR", date: "2026-10-16", localPerForeign: 1630, source: "SIMULATED" },
-      { quote: "GBP", date: "2026-10-16", localPerForeign: 1925, source: "SIMULATED" },
+      { quote: "USD", date: "2026-10-16", localPerForeign: 1495, source: "LIVE" },
+      { quote: "EUR", date: "2026-10-16", localPerForeign: 1630, source: "LIVE" },
+      { quote: "GBP", date: "2026-10-16", localPerForeign: 1925, source: "LIVE" },
     ]);
     const result = await getFxRates({ store, fetchImpl: failingFetch, now: new Date("2026-10-18T12:00:00Z") });
     expect(result.ok).toBe(true);
@@ -126,7 +126,7 @@ describe("getFxRates", () => {
 
   it("tags a saved rate older than 7 days as Old rate", async () => {
     const store = memoryStore([
-      { quote: "USD", date: "2026-10-01", localPerForeign: 1450, source: "SIMULATED" },
+      { quote: "USD", date: "2026-10-01", localPerForeign: 1450, source: "LIVE" },
     ]);
     const result = await getFxRates({ store, fetchImpl: failingFetch, now: new Date("2026-10-18T12:00:00Z") });
     expect(result.ok).toBe(true);
@@ -138,6 +138,17 @@ describe("getFxRates", () => {
 
   it("returns a one-sentence error when there is no rate and no saved data", async () => {
     const result = await getFxRates({ store: memoryStore(), fetchImpl: failingFetch });
+    expect(result.ok).toBe(false);
+    if (!result.ok) expect(result.error).toMatch(/no exchange rate available/i);
+  });
+
+  it("never serves a simulated tick — placeholder data reads as absent", async () => {
+    // Legacy rows may still carry source SIMULATED; they are not real pulls,
+    // so the fallback must behave as if nothing was saved at all.
+    const store = memoryStore([
+      { quote: "USD", date: "2026-10-16", localPerForeign: 9999, source: "SIMULATED" },
+    ]);
+    const result = await getFxRates({ store, fetchImpl: failingFetch, now: new Date("2026-10-18T12:00:00Z") });
     expect(result.ok).toBe(false);
     if (!result.ok) expect(result.error).toMatch(/no exchange rate available/i);
   });

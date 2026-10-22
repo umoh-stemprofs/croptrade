@@ -43,7 +43,7 @@ export function KgStepper({ stockKg }: { stockKg: number }) {
           inputMode="decimal"
           value={value}
           onChange={(event) => setValue(event.target.value)}
-          className={`${inputClass} mt-0 text-center`}
+          className={`${inputClass} mt-0 w-full text-center`}
         />
         <button
           type="button"

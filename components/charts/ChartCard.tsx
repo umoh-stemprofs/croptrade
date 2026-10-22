@@ -108,9 +108,16 @@ export function ChartCard({
   const [showTable, setShowTable] = useState(false);
 
   return (
-    <section className="rounded-card border border-border bg-surface p-4 shadow-card sm:p-6">
+    <section className="rounded-xl border border-outline-variant bg-surface-container-lowest p-4 shadow-sm sm:p-6">
       <div className="flex flex-wrap items-start justify-between gap-2">
-        <h2 className="text-base font-medium leading-6 text-muted">{title}</h2>
+        <div className="flex items-center gap-2">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <ChartIcon className="h-5 w-5" />
+          </div>
+          <h2 className="font-title-md text-title-md font-bold text-on-surface">
+            {title}
+          </h2>
+        </div>
         {badge ? <DataSourceBadge badge={badge} /> : null}
       </div>
 
@@ -137,7 +144,11 @@ export function ChartCard({
           >
             {children}
           </div>
-          {note ? <p className="mt-2 text-sm leading-5 text-muted">{note}</p> : null}
+          {note ? (
+            <p className="mt-2 font-body-sm text-body-sm text-on-surface-variant">
+              {note}
+            </p>
+          ) : null}
         </div>
       )}
 

@@ -39,7 +39,7 @@ export default async function ValuePage({ searchParams }: { searchParams: Search
     return (
       <>
         <header>
-          <h1 className="font-display text-display-lg-mobile sm:text-display-lg">Work out value</h1>
+          <h1 className="font-display text-display-lg-mobile sm:text-display-lg text-on-surface tracking-tight">Work out value</h1>
           <p className="mt-1 text-base leading-6 text-muted">
             Turn stock into the money it could earn abroad.
           </p>
@@ -47,7 +47,7 @@ export default async function ValuePage({ searchParams }: { searchParams: Search
         </header>
 
         {crops.length === 0 ? (
-          <section className="mt-6 max-w-[560px] rounded-card border border-border bg-surface p-6 shadow-card">
+          <section className="mt-6 max-w-[560px] bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm">
             <h2 className="text-headline-sm">No stock to value yet</h2>
             <p className="mt-2 text-base leading-6 text-muted">
               Add a crop on the Stock page first, then come back here.
@@ -75,7 +75,7 @@ export default async function ValuePage({ searchParams }: { searchParams: Search
     return (
       <>
         <header>
-          <h1 className="font-display text-display-lg-mobile sm:text-display-lg">Work out value</h1>
+          <h1 className="font-display text-display-lg-mobile sm:text-display-lg text-on-surface tracking-tight">Work out value</h1>
           <StepBar step={1} total={2} />
         </header>
         <ErrorLine message={firstWizardMessage(parsed.error)} />
@@ -101,7 +101,7 @@ export default async function ValuePage({ searchParams }: { searchParams: Search
   return (
     <>
       <header>
-        <h1 className="font-display text-display-lg-mobile sm:text-display-lg">Work out value</h1>
+        <h1 className="font-display text-display-lg-mobile sm:text-display-lg text-on-surface tracking-tight">Work out value</h1>
         <p className="mt-1 text-base leading-6 text-muted">
           {label} · {qtyKg} kg from your stock.
         </p>

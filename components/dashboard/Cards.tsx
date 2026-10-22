@@ -18,7 +18,7 @@ import { formatDateHuman, formatNairaFromKobo, formatRate } from "@/lib/format";
 import { DataSourceBadge, OldRateTag, type BadgeSpec } from "@/components/DataSourceBadge";
 import { RetryButton } from "@/components/RetryButton";
 
-const card = "rounded-card border border-border bg-surface p-6 shadow-card";
+const card = "bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm";
 const cardHead = "flex flex-wrap items-start justify-between gap-2";
 const cardTitle = "text-base font-medium leading-6 text-muted";
 

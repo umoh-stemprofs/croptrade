@@ -1,13 +1,19 @@
 "use client";
 
 // Edit one stock row inline (server action re-checks ownership).
+// Styled as the prototype's compact ledger action button.
 
 import { useState } from "react";
 import { updateStockAction } from "@/lib/actions/stock";
-import { inputClass, primaryButtonClass } from "@/components/ui/Field";
 
 const focusRing =
-  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring";
+
+const inputCls =
+  "mt-1 block h-9 w-full rounded bg-surface-container-lowest border border-outline-variant text-body-md text-on-surface px-2 " +
+  focusRing;
+
+const labelCls = "block font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant";
 
 export function EditStockButton({
   id,
@@ -38,9 +44,13 @@ export function EditStockButton({
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className={`flex h-12 items-center rounded-input border border-border bg-surface px-3 text-base font-medium text-text hover:bg-bg ${focusRing}`}
+        title="Edit batch"
+        aria-label="Edit batch"
+        className={`p-1.5 rounded hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors ${focusRing}`}
       >
-        Edit
+        <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
+          edit
+        </span>
       </button>
     );
   }
@@ -48,11 +58,11 @@ export function EditStockButton({
   return (
     <form
       action={save}
-      className="w-full space-y-3 rounded-input border border-border bg-bg p-4"
+      className="w-full space-y-3 rounded border border-outline-variant bg-surface-container-low p-space-md"
     >
       <input type="hidden" name="id" value={id} />
       <div>
-        <label htmlFor={`qty-${id}`} className="block text-sm font-medium leading-5 text-muted">
+        <label htmlFor={`qty-${id}`} className={labelCls}>
           Kg
         </label>
         <input
@@ -63,11 +73,11 @@ export function EditStockButton({
           step="any"
           required
           defaultValue={qtyKg}
-          className={inputClass}
+          className={inputCls}
         />
       </div>
       <div>
-        <label htmlFor={`note-${id}`} className="block text-sm font-medium leading-5 text-muted">
+        <label htmlFor={`note-${id}`} className={labelCls}>
           Note
         </label>
         <input
@@ -77,17 +87,20 @@ export function EditStockButton({
           maxLength={200}
           defaultValue={note ?? ""}
           placeholder="Optional"
-          className={inputClass}
+          className={inputCls}
         />
       </div>
-      <div className="flex gap-3">
-        <button type="submit" className={`${primaryButtonClass} w-auto px-4`}>
+      <div className="flex gap-space-sm">
+        <button
+          type="submit"
+          className={`h-9 px-space-md rounded bg-primary text-on-primary font-title-md text-title-md font-semibold hover:bg-primary-container transition-colors ${focusRing}`}
+        >
           Save
         </button>
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className={`inline-flex h-12 w-auto items-center justify-center rounded-input border border-border bg-surface px-4 text-base font-medium text-text hover:bg-bg ${focusRing}`}
+          className={`h-9 px-space-md rounded border border-outline-variant bg-surface-container-lowest hover:bg-surface-container font-label-md text-label-md text-on-surface transition-colors ${focusRing}`}
         >
           Cancel
         </button>

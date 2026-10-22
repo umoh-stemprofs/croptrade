@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>CropTrade</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; } .tnum{font-variant-numeric: tabular-nums lining-nums; font-feature-settings:"tnum" 1,"zero" 1;} .fx-btn{transition:all .15s ease;} .fx-btn[aria-pressed="true"]{background:rgb(var(--primary-container));color:rgb(var(--on-primary-container));box-shadow:0 1px 2px rgba(0,0,0,.15);} #chart-tip{opacity:0;transition:opacity .12s ease;pointer-events:none;} #chart-tip.on{opacity:1;} .card-hit{cursor:pointer;} .card-hit:hover{transform:translateY(-2px);} .card-hit:focus-visible{outline:2px solid rgb(var(--primary));outline-offset:2px;} .drawer{transition:transform .28s cubic-bezier(.4,0,.2,1);} .drawer-closed{transform:translateX(100%);} .scrim{transition:opacity .25s ease;} .modal-closed{opacity:0;pointer-events:none;} .modal-panel{transition:transform .2s ease,opacity .2s ease;} .modal-closed .modal-panel{transform:translateY(12px) scale(.98);opacity:0;} </style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "inverse-on-surface": "#eef0ff", "on-secondary-container": "#00476e", "background": "#faf8ff", "error-container": "#ffdad6", "on-surface": "#131b2e", "on-primary-fixed": "#002110", "on-primary": "#ffffff", "on-primary-fixed-variant": "#00522f", "surface-container-highest": "#dae2fd", "tertiary-container": "#a56800", "tertiary-fixed": "#ffddb8", "outline-variant": "#bdcabe", "on-tertiary": "#ffffff", "inverse-surface": "#283044", "on-tertiary-container": "#fffeff", "error": "#ba1a1a", "on-primary-container": "#fdfff9", "on-secondary-fixed-variant": "#004b73", "surface": "#faf8ff", "secondary": "#006398", "on-tertiary-fixed": "#2a1700", "primary-fixed-dim": "#70db9d", "surface-dim": "#d2d9f4", "surface-tint": "#006d40", "primary-fixed": "#8df8b7", "secondary-fixed-dim": "#93ccff", "surface-container-high": "#e2e7ff", "secondary-container": "#5bb8fe", "on-error": "#ffffff", "on-secondary-fixed": "#001d31", "on-surface-variant": "#3e4a41", "secondary-fixed": "#cce5ff", "surface-bright": "#faf8ff", "tertiary-fixed-dim": "#ffb95f", "inverse-primary": "#70db9d", "on-error-container": "#93000a", "surface-container-low": "#f2f3ff", "on-background": "#131b2e", "on-secondary": "#ffffff", "outline": "#6e7a70", "surface-container": "#eaedff", "on-tertiary-fixed-variant": "#653e00", "tertiary": "#835200", "surface-variant": "#dae2fd", "surface-container-lowest": "#ffffff", "primary-container": "#008751", "primary": "#006b3f" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-sm": "0.5rem", "gutter": "1rem", "space-xs": "0.25rem", "space-xl": "2rem", "margin-tablet": "1.5rem", "space-lg": "1.5rem", "gutter-desktop": "1.5rem", "space-md": "1rem", "margin": "1rem", "margin-desktop": "2rem" }, "fontFamily": { "headline-lg": [ "Plus Jakarta Sans" ], "headline-md": [ "Plus Jakarta Sans" ], "label-sm": [ "Inter" ], "title-md": [ "Inter" ], "display-lg": [ "Plus Jakarta Sans" ], "body-md": [ "Inter" ], "label-md": [ "Inter" ], "body-sm": [ "Inter" ], "body-lg": [ "Inter" ], "headline-lg-mobile": [ "Plus Jakarta Sans" ], "headline-sm": [ "Plus Jakarta Sans" ], "data-mono": [ "Inter" ], "display-lg-mobile": [ "Plus Jakarta Sans" ] }, "fontSize": { "headline-lg": [ "30px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-md": [ "22px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "label-sm": [ "11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" } ], "title-md": [ "16px", { "lineHeight": "22px", "letterSpacing": "-0.005em", "fontWeight": "600" } ], "display-lg": [ "36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "800" } ], "body-md": [ "14px", { "lineHeight": "20px", "fontWeight": "400" } ], "label-md": [ "13px", { "lineHeight": "16px", "fontWeight": "500" } ], "body-sm": [ "12px", { "lineHeight": "16px", "fontWeight": "400" } ], "body-lg": [ "16px", { "lineHeight": "24px", "fontWeight": "400" } ], "headline-lg-mobile": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "700" } ], "headline-sm": [ "18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "data-mono": [ "14px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "display-lg-mobile": [ "28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800" } ] } } } };</script></head><body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex flex-col antialiased selection:bg-primary selection:text-on-primary"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-6xl mx-auto px-6 flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md shrink-0"><div class="flex items-center gap-space-sm"><div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary-container shadow-sm"><span class="material-symbols-outlined text-[24px]">eco</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface leading-none">CropTrade</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-0.5">Agritech Simplicity</span></div></div></div><nav class="hidden lg:flex items-center gap-space-xs p-1 bg-surface-container-low rounded-xl" data-active-classes="bg-primary-container text-on-primary-container font-title-md text-title-md shadow-sm"><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="overview" href="#">Overview</a><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="stock" href="#">Stock</a><a aria-current="page" class="min-h-[56px] px-space-md py-space-sm rounded-lg transition-all flex items-center justify-center leading-none bg-primary-container text-on-primary-container font-title-md text-title-md shadow-sm" data-path="market" href="#">Market</a><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="weather" href="#">Weather</a><a class="min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none" data-path="rates" href="#">Rates</a></nav><div class="flex items-center gap-space-sm shrink-0"><button aria-label="Toggle theme" class="min-h-[56px] min-w-[56px] rounded-xl flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors focus:outline-none focus:bg-surface-container-highest" id="theme-toggle-btn" type="button"><span class="material-symbols-outlined text-[24px]" id="theme-icon-light">light_mode</span><span class="material-symbols-outlined text-[24px] hidden" id="theme-icon-dark">dark_mode</span></button><div class="h-8 w-px bg-outline-variant/30 hidden sm:block mx-space-xs"></div><div class="flex items-center gap-space-sm p-1 rounded-xl hover:bg-surface-container-low transition-colors"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-label-md text-label-md text-on-surface leading-tight">Terminal 04</span><span class="font-label-sm text-label-sm text-primary flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>Live Feed</span></div></div></div></div></header><main class="w-full pt-20 bg-surface flex-1"><div class="max-w-6xl mx-auto py-space-xl px-6"><div class="flex flex-col w-full">
+<!-- Telemetry Bar (Agritech Mission-Critical Strip) -->
+<div class="w-full bg-surface-container-low rounded-xl px-space-md py-space-xs mb-space-lg flex flex-wrap items-center justify-between gap-space-sm shadow-sm">
+<div class="flex items-center gap-space-md text-on-surface-variant font-data-mono text-label-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="uppercase tracking-wider font-bold text-on-surface">GRAIN-INDEX NGN</span>
+</div>
+<span class="text-outline-variant">•</span>
+<span>MOISTURE INDEX: 11.8%</span>
+<span class="text-outline-variant hidden sm:inline">•</span>
+<span class="hidden sm:inline">TERMINAL INFLOW: +3,420 MT</span>
+<span class="text-outline-variant hidden md:inline">•</span>
+<span class="hidden md:inline">BOARD STATUS: SPOT SETTLED</span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm">
+<span class="material-symbols-outlined text-[16px] text-primary">schedule</span>
+<span>TICK: 0.4s REFRESH</span>
+</div>
+</div>
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-xl">
+<div>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary-container/15 text-primary text-label-sm font-label-sm mb-space-xs uppercase tracking-wider">
+        Spot Exchange Desk
+      </div>
+<h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Crop Prices Today</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-1 max-w-2xl">
+        Live commodity benchmark rates calibrated across physical terminal silos and regional marketing boards.
+      </p>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<div class="bg-surface-container px-space-md py-space-sm rounded-xl flex items-center gap-space-sm shadow-sm">
+<span class="material-symbols-outlined text-[20px] text-secondary">currency_exchange</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Currency Mode</span>
+<div class="flex items-center gap-1 mt-0.5" role="group" aria-label="Display currency for all prices">
+<button type="button" class="fx-btn px-2 py-0.5 rounded font-label-md text-label-md font-bold bg-surface-container-lowest border border-outline-variant text-on-surface" data-fx="NGN" aria-pressed="true">₦</button>
+<button type="button" class="fx-btn px-2 py-0.5 rounded font-label-md text-label-md font-bold bg-surface-container-lowest border border-outline-variant text-on-surface-variant" data-fx="USD" aria-pressed="false">$</button>
+<button type="button" class="fx-btn px-2 py-0.5 rounded font-label-md text-label-md font-bold bg-surface-container-lowest border border-outline-variant text-on-surface-variant" data-fx="EUR" aria-pressed="false">€</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 4-Card Primary Grid (rendered live from state) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md mb-space-xl" id="card-grid"></div>
+<!-- Operational Context Strip with Field Photography -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md mb-space-xl">
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-center gap-space-md">
+<img class="w-16 h-16 rounded-lg object-cover shrink-0 shadow-sm" data-alt="High-resolution institutional photo of yellow maize grain storage hopper flowing into a steel industrial silo with soft morning sunlight casting geometric agricultural shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCkbJg3Smss4yjKvkDOxkylYbOAemAE-_AGL1MObKexw1Qnn6nREHTQVpMxEBFYiCduTQ1HW5tuJfT2D0CPUdmr7LpIHm-TECsmOmBLJ_CEesdrRteKEtnwp2nOr9xDixbF-vuhRQE5equuxy_BJGDy3R10U0LQMU5pt7yyLUmr3MZ-lHu1QBFU67UYBtbQQ_N1hkMU4B3vh5HrLl-OTeTyuf_TpjwRHk86Bs1kG4LEJ1QPby-TjJq"/>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Silo Utilization</span>
+<div class="font-headline-sm text-headline-sm text-on-surface truncate">88.4% Full</div>
+<span class="font-body-sm text-body-sm text-primary font-medium">Kano Central Terminal</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-center gap-space-md">
+<img class="w-16 h-16 rounded-lg object-cover shrink-0 shadow-sm" data-alt="Close-up detailed capture of premium harvested yam tubers stacked neatly in a logistics warehouse pallet crate with balanced neutral studio light and rich brown earthy textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_EFRTwlpnMB_VXzTdxl9UcqmwkAV72wk9ZDa0ZElZGWqfaH1KxSRJ1lJUnQzjLQi98yoaLo5gehRBxqKXD9YnwfNe-Q3sM-bLFd2uN854pdgv6YL5XubvRg8svo09ugIRFtkGWGKoCZPWLKTUxBKhpNaXMlZc-0QVXlCj37JIdqdjbxaQfRU9LWaDnA198tslVRLqFvmH1ZgXcVjCRBhagw49qiJjiASwnmkbOmF4GFLCjUygKswK"/>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Export Inspection</span>
+<div class="font-headline-sm text-headline-sm text-on-surface truncate">Grade A Passed</div>
+<span class="font-body-sm text-body-sm text-secondary font-medium">Lagos Dry Port Port</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-center gap-space-md">
+<img class="w-16 h-16 rounded-lg object-cover shrink-0 shadow-sm" data-alt="Agricultural drone overview of harvested cassava field and tractor trailers under clear skies with clean dust-free color grading matching institutional agritech interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcfgcDsdlqNcJwUn9YkJkKVgY0EYKXld6VojLzmwdgFeD6DVFgz8iXyf10mCFV2DnbNluV5glo-f-erDmTeI1og9r60L-miUglZtzDeVv88rqXJ8ZvgBUXfENmDldwZeuB_WmoEuSm3v3DIR6pjCrqWk1fm9NYN2PbcQeTEAATAmqdK6BzohiRF3jQ_LwvdLEmujeyJ87XqQPPnDgUrOxtOotpUnNNGAYgtXnM1mKZhQTxMWhhC3Uj"/>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Rail Dispatch</span>
+<div class="font-headline-sm text-headline-sm text-on-surface truncate">14 Wagons En Route</div>
+<span class="font-body-sm text-body-sm text-tertiary font-medium">Western Corridor Line</span>
+</div>
+</div>
+</div>
+<!-- Progressive Disclosure Section 1: 30-Day Trend Chart -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm mb-space-lg overflow-hidden transition-all">
+<button aria-controls="accordion-content-trend" aria-expanded="false" class="w-full min-h-[56px] px-space-lg py-space-md flex items-center justify-between text-left bg-surface-container-low hover:bg-surface-container transition-colors focus:outline-none" id="accordion-toggle-trend">
+<div class="flex items-center gap-space-md">
+<div class="w-8 h-8 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">show_chart</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-space-md">
+<span class="font-title-md text-title-md text-on-surface font-bold">30-Day Price Trend Chart</span>
+<span class="text-on-surface-variant font-label-md text-label-md">Comparative Multi-Line Benchmark</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm text-primary font-title-md text-title-md font-semibold">
+<span class="hidden sm:inline" id="accordion-text-trend">Tap to view</span>
+<span class="material-symbols-outlined transition-transform duration-300" id="accordion-icon-trend">expand_more</span>
+</div>
+</button>
+<div class="hidden px-space-lg py-space-xl bg-surface-container-lowest" id="accordion-content-trend">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md pb-space-lg mb-space-md">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Historical Variance Analysis</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Multi-commodity 30-day trajectory highlighting spot rally inflection points</p>
+</div>
+<!-- Chart Legend -->
+<div class="flex flex-wrap items-center gap-space-md bg-surface-container-low px-space-md py-space-sm rounded-xl">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary-container"></span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Maize (₦586)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Cassava (₦350)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-tertiary-container"></span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Yam (₦946)</span>
+</div>
+</div>
+</div>
+<!-- Interactive Chart Controls -->
+<div class="flex flex-wrap items-center justify-between gap-space-md pb-space-md mb-space-md border-b border-outline-variant">
+<div class="flex flex-wrap items-center gap-space-md" id="chart-legend"></div>
+<div class="flex items-center gap-1 p-1 bg-surface-container-low rounded-xl" role="group" aria-label="Chart time range">
+<button type="button" class="range-btn px-3 py-1 rounded-lg font-label-md text-label-md font-semibold text-on-surface-variant" data-range="1D" aria-pressed="false">1D</button>
+<button type="button" class="range-btn px-3 py-1 rounded-lg font-label-md text-label-md font-semibold text-on-surface-variant" data-range="1W" aria-pressed="false">1W</button>
+<button type="button" class="range-btn px-3 py-1 rounded-lg font-label-md text-label-md font-semibold bg-primary-container text-on-primary-container shadow-sm" data-range="1M" aria-pressed="true">1M</button>
+<button type="button" class="range-btn px-3 py-1 rounded-lg font-label-md text-label-md font-semibold text-on-surface-variant" data-range="1Y" aria-pressed="false">1Y</button>
+</div>
+</div>
+<!-- Interactive Chart Canvas Host -->
+<div class="w-full overflow-x-auto" id="chart-host">
+<div class="min-w-[680px] relative" id="chart-wrap">
+<svg class="w-full h-auto block" id="chart-svg" preserveaspectratio="xMidYMid meet" role="img" aria-label="Interactive multi-commodity price trend chart"></svg>
+<div class="absolute z-20 hidden bg-surface-container-lowest border border-outline-variant rounded-lg shadow-md px-3 py-2 pointer-events-none" id="chart-tip"></div>
+</div>
+<div class="mt-space-md pt-space-md flex flex-wrap items-center justify-between gap-space-sm text-body-sm font-body-sm text-on-surface-variant">
+<span>*Aggregated from Kano, Ibadan, and Port Harcourt grain terminal feeds</span>
+<span class="font-data-mono text-data-mono">CONFIDENCE INTERVAL: 99.2%</span>
+</div>
+</div>
+</div>
+<!-- Progressive Disclosure Section 2: Stock Share Donut Chart -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden transition-all">
+<button aria-controls="accordion-content-donut" aria-expanded="false" class="w-full min-h-[56px] px-space-lg py-space-md flex items-center justify-between text-left bg-surface-container-low hover:bg-surface-container transition-colors focus:outline-none" id="accordion-toggle-donut">
+<div class="flex items-center gap-space-md">
+<div class="w-8 h-8 rounded-lg bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">pie_chart</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-space-md">
+<span class="font-title-md text-title-md text-on-surface font-bold">Stock Share Chart</span>
+<span class="text-on-surface-variant font-label-md text-label-md">Inventory Value Allocation</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm text-secondary font-title-md text-title-md font-semibold">
+<span class="hidden sm:inline" id="accordion-text-donut">Tap to view</span>
+<span class="material-symbols-outlined transition-transform duration-300" id="accordion-icon-donut">expand_more</span>
+</div>
+</button>
+<div class="hidden px-space-lg py-space-xl bg-surface-container-lowest" id="accordion-content-donut">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+<!-- Donut Visual (SVG) -->
+<div class="lg:col-span-6 flex flex-col items-center justify-center">
+<div class="relative w-64 h-64 sm:w-72 sm:h-72">
+<!-- 
+              Circumference of r=80 is 2 * PI * 80 = 502.65
+              Segments:
+              - Maize: 24% = 120.64
+              - Cassava: 23% = 115.61
+              - Yam: 19% = 95.50
+              - Rice: 13% = 65.34
+              - Tilapia: 12% = 60.32
+              - Tomato: 9% = 45.24
+              Total = 502.65
+            -->
+<svg class="w-full h-full -rotate-90 transform" viewbox="0 0 200 200">
+<!-- Background Circle Ring -->
+<circle cx="100" cy="100" fill="transparent" r="80" stroke="#eaedff" stroke-width="26"></circle>
+<!-- Maize 24% (Offset: 0) -->
+<circle class="hover:opacity-90 transition-opacity" cx="100" cy="100" fill="transparent" r="80" stroke="#008751" stroke-dasharray="120.64 382.01" stroke-dashoffset="0" stroke-width="26"></circle>
+<!-- Cassava 23% (Offset: -120.64) -->
+<circle class="hover:opacity-90 transition-opacity" cx="100" cy="100" fill="transparent" r="80" stroke="#006398" stroke-dasharray="115.61 387.04" stroke-dashoffset="-120.64" stroke-width="26"></circle>
+<!-- Yam 19% (Offset: -236.25) -->
+<circle class="hover:opacity-90 transition-opacity" cx="100" cy="100" fill="transparent" r="80" stroke="#a56800" stroke-dasharray="95.50 407.15" stroke-dashoffset="-236.25" stroke-width="26"></circle>
+<!-- Rice 13% (Offset: -331.75) -->
+<circle class="hover:opacity-90 transition-opacity" cx="100" cy="100" fill="transparent" r="80" stroke="#70db9d" stroke-dasharray="65.34 437.31" stroke-dashoffset="-331.75" stroke-width="26"></circle>
+<!-- Tilapia 12% (Offset: -397.09) -->
+<circle class="hover:opacity-90 transition-opacity" cx="100" cy="100" fill="transparent" r="80" stroke="#5bb8fe" stroke-dasharray="60.32 442.33" stroke-dashoffset="-397.09" stroke-width="26"></circle>
+<!-- Tomato 9% (Offset: -457.41) -->
+<circle class="hover:opacity-90 transition-opacity" cx="100" cy="100" fill="transparent" r="80" stroke="#ba1a1a" stroke-dasharray="45.24 457.41" stroke-dashoffset="-457.41" stroke-width="26"></circle>
+</svg>
+<!-- Center Text Overlay -->
+<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center px-4">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-bold tracking-wider leading-none">TOTAL PORTFOLIO</span>
+<span class="font-headline-lg text-headline-lg text-on-surface font-extrabold tracking-tight mt-1 leading-none">₦601.7k</span>
+<span class="font-label-sm text-label-sm text-primary font-medium mt-1">100% In-Warehouse</span>
+</div>
+</div>
+<div class="mt-space-md text-center">
+<span class="font-data-mono text-label-sm text-on-surface-variant">PORTFOLIO VALUATION: ₦601,690.00</span>
+</div>
+</div>
+<!-- Clean Breakdown Legend Table -->
+<div class="lg:col-span-6">
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between pb-space-sm mb-space-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Commodity Type</span>
+<div class="flex items-center gap-space-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Net Value</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold text-right w-12">Share</span>
+</div>
+</div>
+<div class="space-y-space-sm">
+<!-- Item 1: Maize -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-primary-container shrink-0"></span>
+<span class="font-title-md text-title-md text-on-surface font-medium">Maize</span>
+</div>
+<div class="flex items-center gap-space-lg">
+<span class="font-data-mono text-data-mono text-on-surface">₦146,500</span>
+<span class="font-label-md text-label-md text-primary font-bold text-right w-12">24%</span>
+</div>
+</div>
+<!-- Item 2: Cassava -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-secondary shrink-0"></span>
+<span class="font-title-md text-title-md text-on-surface font-medium">Cassava</span>
+</div>
+<div class="flex items-center gap-space-lg">
+<span class="font-data-mono text-data-mono text-on-surface">₦140,000</span>
+<span class="font-label-md text-label-md text-secondary font-bold text-right w-12">23%</span>
+</div>
+</div>
+<!-- Item 3: Yam -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-tertiary-container shrink-0"></span>
+<span class="font-title-md text-title-md text-on-surface font-medium">Yam</span>
+</div>
+<div class="flex items-center gap-space-lg">
+<span class="font-data-mono text-data-mono text-on-surface">₦113,520</span>
+<span class="font-label-md text-label-md text-tertiary font-bold text-right w-12">19%</span>
+</div>
+</div>
+<!-- Item 4: Rice -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-primary-fixed-dim shrink-0"></span>
+<span class="font-title-md text-title-md text-on-surface font-medium">Rice</span>
+</div>
+<div class="flex items-center gap-space-lg">
+<span class="font-data-mono text-data-mono text-on-surface">₦76,880</span>
+<span class="font-label-md text-label-md text-on-surface font-bold text-right w-12">13%</span>
+</div>
+</div>
+<!-- Item 5: Tilapia -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-secondary-container shrink-0"></span>
+<span class="font-title-md text-title-md text-on-surface font-medium">Tilapia</span>
+</div>
+<div class="flex items-center gap-space-lg">
+<span class="font-data-mono text-data-mono text-on-surface">₦72,390</span>
+<span class="font-label-md text-label-md text-on-surface font-bold text-right w-12">12%</span>
+</div>
+</div>
+<!-- Item 6: Tomato -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-error shrink-0"></span>
+<span class="font-title-md text-title-md text-on-surface font-medium">Tomato</span>
+</div>
+<div class="flex items-center gap-space-lg">
+<span class="font-data-mono text-data-mono text-on-surface">₦57,520</span>
+<span class="font-label-md text-label-md text-error font-bold text-right w-12">9%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Order & Contract Logger Trigger -->
+<div class="mt-space-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md bg-surface-container-low border border-outline-variant rounded-xl p-space-md shadow-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-[24px] text-primary shrink-0">contract_edit</span>
+<div class="min-w-0">
+<span class="font-title-md text-title-md text-on-surface font-bold block">Order &amp; Contract Logger</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block truncate">Record off-take contract prices and arm price-target alerts against live benchmarks.</span>
+</div>
+</div>
+<button type="button" id="open-logger" class="shrink-0 min-h-[56px] px-space-lg rounded-xl bg-primary text-on-primary font-title-md text-title-md font-semibold shadow-sm hover:bg-primary-container transition-colors flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Log Contract</span>
+</button>
+</div>
+<!-- Logged contracts & alerts list -->
+<div class="mt-space-md space-y-space-sm" id="logger-list"></div>
+<!-- Detail Drawer (benchmark comparison) -->
+<div class="fixed inset-0 z-[60] hidden" id="drawer-root">
+<div class="absolute inset-0 scrim bg-inverse-surface/60" id="drawer-scrim"></div>
+<aside role="dialog" aria-modal="true" aria-labelledby="drawer-title" class="drawer drawer-closed absolute top-0 right-0 h-full w-[min(92vw,440px)] bg-surface-container-lowest border-l border-outline-variant shadow-2xl flex flex-col" id="drawer-panel">
+<div class="flex items-center justify-between px-space-lg py-space-md border-b border-outline-variant shrink-0">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-secondary text-[24px]" id="drawer-icon">grain</span>
+<div class="min-w-0">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold truncate" id="drawer-title">—</h2>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Market Board Comparison</span>
+</div>
+</div>
+<button type="button" id="drawer-close" aria-label="Close details" class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors shrink-0"><span class="material-symbols-outlined text-[22px]">close</span></button>
+</div>
+<div class="flex-1 overflow-y-auto px-space-lg py-space-md" id="drawer-body"></div>
+</aside>
+</div>
+<!-- Order / Contract Modal -->
+<div class="fixed inset-0 z-[70] modal-closed hidden" id="modal-root">
+<div class="absolute inset-0 scrim bg-inverse-surface/70" id="modal-scrim"></div>
+<div role="dialog" aria-modal="true" aria-labelledby="modal-title" class="modal-panel absolute inset-x-0 top-[8vh] mx-auto w-[min(94vw,520px)] max-h-[84vh] overflow-y-auto bg-surface-container-lowest border border-outline-variant rounded-xl shadow-2xl">
+<div class="flex items-center justify-between px-space-lg py-space-md border-b border-outline-variant">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[24px]">receipt_long</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold" id="modal-title">Log Off-take Contract</h2>
+</div>
+<button type="button" id="modal-close" aria-label="Close form" class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-[22px]">close</span></button>
+</div>
+<form id="contract-form" novalidate class="px-space-lg py-space-md space-y-space-md">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<label class="flex flex-col gap-1"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Commodity</span><select name="crop" required class="h-9 px-2 rounded bg-surface border border-outline-variant text-body-md text-on-surface font-body-md focus:outline-none focus:border-secondary"></select></label>
+<label class="flex flex-col gap-1"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Counterparty</span><input name="party" type="text" required placeholder="e.g. Dangote Mills" class="h-9 px-2 rounded bg-surface border border-outline-variant text-body-md text-on-surface font-body-md focus:outline-none focus:border-secondary"/></label>
+<label class="flex flex-col gap-1"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Contract Price (NGN/kg)</span><input name="price" type="number" min="0" step="0.01" required placeholder="586" class="h-9 px-2 rounded bg-surface border border-outline-variant text-body-md text-on-surface font-body-md tnum focus:outline-none focus:border-secondary"/></label>
+<label class="flex flex-col gap-1"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Volume (kg)</span><input name="volume" type="number" min="0" step="1" required placeholder="5000" class="h-9 px-2 rounded bg-surface border border-outline-variant text-body-md text-on-surface font-body-md tnum focus:outline-none focus:border-secondary"/></label>
+<label class="flex flex-col gap-1"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Delivery Date</span><input name="due" type="date" required class="h-9 px-2 rounded bg-surface border border-outline-variant text-body-md text-on-surface font-body-md focus:outline-none focus:border-secondary"/></label>
+<label class="flex flex-col gap-1"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Target Alert (NGN/kg)</span><input name="target" type="number" min="0" step="0.01" placeholder="optional" class="h-9 px-2 rounded bg-surface border border-outline-variant text-body-md text-on-surface font-body-md tnum focus:outline-none focus:border-secondary"/></label>
+</div>
+<div class="flex items-start gap-space-sm bg-surface-container-low rounded-lg p-space-sm border border-outline-variant">
+<span class="material-symbols-outlined text-secondary text-[20px] shrink-0">notifications_active</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Leave the target blank for a plain contract. Set one and the desk is alerted when the live benchmark crosses it.</span>
+</div>
+<p class="font-body-sm text-body-sm text-error hidden" id="form-error" role="alert"></p>
+<div class="flex items-center justify-end gap-space-sm pt-space-sm border-t border-outline-variant">
+<button type="button" id="modal-cancel" class="min-h-[44px] px-space-md rounded-lg border border-outline-variant font-title-md text-title-md text-on-surface hover:bg-surface-container-high transition-colors">Cancel</button>
+<button type="submit" class="min-h-[44px] px-space-md rounded-lg bg-primary text-on-primary font-title-md text-title-md font-semibold hover:bg-primary-container transition-colors">Save Contract</button>
+</div>
+</form>
+</div>
+</div>
+<script>
+  (function initAccordions() {
+    function setupAccordion(toggleId, contentId, textId, iconId, defaultLabel) {
+      const toggle = document.getElementById(toggleId);
+      const content = document.getElementById(contentId);
+      const label = document.getElementById(textId);
+      const icon = document.getElementById(iconId);
+
+      if (!toggle || !content) return;
+
+      toggle.addEventListener('click', function() {
+        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+        const nextState = !isExpanded;
+
+        toggle.setAttribute('aria-expanded', String(nextState));
+
+        if (nextState) {
+          content.classList.remove('hidden');
+          if (icon) icon.classList.add('rotate-180');
+          if (label) label.textContent = 'Tap to hide';
+        } else {
+          content.classList.add('hidden');
+          if (icon) icon.classList.remove('rotate-180');
+          if (label) label.textContent = defaultLabel;
+        }
+      });
+    }
+
+    setupAccordion('accordion-toggle-trend', 'accordion-content-trend', 'accordion-text-trend', 'accordion-icon-trend', 'Tap to view');
+    setupAccordion('accordion-toggle-donut', 'accordion-content-donut', 'accordion-text-donut', 'accordion-icon-donut', 'Tap to view');
+
+    // Sync shell navigation bar: set 'Market' active if shell links are present
+    const marketNav = document.querySelector('nav a[data-path="market"]');
+    if (marketNav) {
+      document.querySelectorAll('nav a').forEach(el => {
+        el.className = "min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all flex items-center justify-center text-center leading-none";
+      });
+      marketNav.className = "min-h-[56px] px-space-md py-space-sm rounded-lg font-title-md text-title-md bg-primary-container text-on-primary-container shadow-sm flex items-center justify-center text-center leading-none";
+    }
+  })();
+
+  /* ══ Interactive market engine ══════════════════════════════════════ */
+  (function () {
+    'use strict';
+    var $ = function (s, r) { return (r || document).querySelector(s); };
+    var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+    var byId = function (id) { return document.getElementById(id); };
+    var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+    var clamp = function (v, lo, hi) { return Math.max(lo, Math.min(hi, v)); };
+    function readStored(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+    function writeStored(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+    var FX = { NGN: { sym: '\u20A6', rate: 1, code: 'NGN' }, USD: { sym: '$', rate: 0.00065, code: 'USD' }, EUR: { sym: '\u20AC', rate: 0.00060, code: 'EUR' } };
+    var COLORS = { maize: '#008751', cassava: '#006398', yam: '#a56800', rice: '#70db9d' };
+
+    // Deterministic series generator (seeded) so every render is stable.
+    function makeSeries(seed, start, end, n) {
+      var pts = [], s = seed;
+      for (var i = 0; i < n; i++) {
+        s = (s * 1103515245 + 12345) & 0x7fffffff;
+        var jitter = ((s / 0x7fffffff) - 0.5);
+        var base = start + (end - start) * (i / (n - 1));
+        pts.push(base * (1 + jitter * 0.04));
+      }
+      pts[n - 1] = end; // pin the live price at the tip
+      return pts;
+    }
+
+    var CROPS = [
+      { id: 'maize',   name: 'Maize',         short: 'Maize',   icon: 'grain',       price: 586, chg: 2.4, basis: 'State Board', board: 'Kano State Marketing Board',  color: COLORS.maize,   series: makeSeries(11, 510, 586, 365) },
+      { id: 'cassava', name: 'Cassava',       short: 'Cassava', icon: 'nutrition',   price: 350, chg: 1.2, basis: 'State Board', board: 'Benue Produce Board',        color: COLORS.cassava, series: makeSeries(23, 310, 350, 365) },
+      { id: 'yam',     name: 'Yam (Export)',  short: 'Yam',     icon: 'agriculture', price: 946, chg: 5.4, basis: 'National Index', board: 'National Export Index',     color: COLORS.yam,     series: makeSeries(37, 780, 946, 365) },
+      { id: 'rice',    name: 'Rice (Paddy)',  short: 'Rice',    icon: 'inventory_2', price: 961, chg: 1.6, basis: 'Port Terminal', board: 'Port Harcourt Terminal',      color: COLORS.rice,    series: makeSeries(53, 880, 961, 365) }
+    ];
+    // Local market boards used for the drawer comparison.
+    var BOARDS = {
+      maize:   [['Kano Central', 572.5], ['Ibadan Ring', 581.0], ['Maiduguri', 566.0], ['Lagos Terminal', 594.2]],
+      cassava: [['Benue Depot', 345.8], ['Awka Market', 356.4], ['Ibadan Ring', 349.1]],
+      yam:     [['National Index', 895.0], ['Otigba Export', 962.3], ['Lagos Dry Port', 951.0]],
+      rice:    [['Port Harcourt', 961.0], ['Kebbi Paddy', 938.4], ['Ibadan Ring', 972.6]]
+    };
+    var HIST_LABELS = [['7d', 0.97], ['30d', 0.94], ['90d', 0.91], ['12mo', 0.88], ['Live', 1]];
+    var RANGES = { '1D': { n: 24, unit: 'h' }, '1W': { n: 7, unit: 'd' }, '1M': { n: 30, unit: 'd' }, '1Y': { n: 52, unit: 'w' } };
+
+    var state = {
+      fx: (function () { var s = readStored('croptrade_prices_fx'); return (s && FX[s]) ? s : 'NGN'; })(),
+      range: '1M',
+      hidden: {},           // toggled-off series
+      contracts: [],
+      hoverIdx: null
+    };
+    try { state.contracts = JSON.parse(readStored('croptrade_prices_contracts') || '[]'); } catch (e) { state.contracts = []; }
+
+    function fmtMoney(ngn) {
+      var f = FX[state.fx];
+      var v = ngn * f.rate;
+      var dp = state.fx === 'NGN' ? 0 : 2;
+      return f.sym + v.toLocaleString('en-US', { minimumFractionDigits: dp, maximumFractionDigits: dp });
+    }
+    function sliceSeries(crop) {
+      var n = RANGES[state.range].n;
+      return crop.series.slice(crop.series.length - n);
+    }
+
+    /* ── cards ─────────────────────────────────────────────────────── */
+    function renderCards() {
+      byId('card-grid').innerHTML = CROPS.map(function (c) {
+        var up = c.chg >= 0;
+        return '<div class="card-hit bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between relative overflow-hidden group" role="button" tabindex="0" data-crop="' + c.id + '" aria-label="Open ' + esc(c.name) + ' market board details">' +
+          '<div class="absolute -right-4 -top-4 w-20 h-20 rounded-full blur-xl transition-colors" style="background:' + c.color + '14"></div>' +
+          '<div>' +
+            '<div class="flex items-center justify-between mb-space-sm">' +
+              '<div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[20px]" style="color:' + c.color + '">' + c.icon + '</span>' +
+              '<span class="font-title-md text-title-md text-on-surface">' + esc(c.name) + '</span></div>' +
+              '<span class="px-2 py-0.5 rounded-full text-primary text-label-sm font-label-sm font-semibold flex items-center gap-1" style="background:' + c.color + '1f"><span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>Live</span>' +
+            '</div>' +
+            '<div class="font-display-lg text-display-lg text-on-surface font-bold tracking-tight my-1 tnum">' + fmtMoney(c.price) + ' <span class="font-body-md text-body-md text-on-surface-variant font-normal">/ kg</span></div>' +
+            '<div class="inline-flex items-center gap-1 font-label-md text-label-md font-semibold mb-space-md ' + (up ? 'text-primary' : 'text-error') + '">' +
+              '<span class="material-symbols-outlined text-[16px]">' + (up ? 'arrow_upward' : 'arrow_downward') + '</span>' +
+              '<span>' + (up ? 'Up ' : 'Down ') + Math.abs(c.chg).toFixed(1) + '%</span>' +
+              '<span class="text-on-surface-variant font-normal text-body-sm">(24h)</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="pt-space-sm bg-surface-container-low/70 -mx-space-md -mb-space-md px-space-md py-space-sm rounded-b-xl flex items-center justify-between gap-2">' +
+            '<div class="min-w-0"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block">Benchmark Basis</span>' +
+            '<span class="font-body-sm text-body-sm text-on-surface font-medium truncate">' + esc(c.basis) + ' ' + fmtMoney(c.price * 0.977) + '</span></div>' +
+            '<span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-primary group-hover:translate-x-0.5 transition-all shrink-0">chevron_right</span>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    /* ── chart ─────────────────────────────────────────────────────── */
+    var CH = { w: 800, h: 320, l: 70, r: 60, t: 20, b: 40 };
+    function renderLegend() {
+      byId('chart-legend').innerHTML = CROPS.map(function (c) {
+        var off = state.hidden[c.id];
+        return '<button type="button" class="flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-surface-container-high transition-colors ' + (off ? 'opacity-40' : '') + '" data-legend="' + c.id + '" aria-pressed="' + (!off) + '">' +
+          '<span class="w-3 h-3 rounded-full shrink-0" style="background:' + (off ? 'transparent' : c.color) + ';border:2px solid ' + c.color + '"></span>' +
+          '<span class="font-label-md text-label-md text-on-surface font-semibold tnum">' + esc(c.short) + ' ' + fmtMoney(c.price) + '</span></button>';
+      }).join('');
+    }
+    function visibleCrops() { return CROPS.filter(function (c) { return !state.hidden[c.id]; }); }
+    function renderChart() {
+      var svg = byId('chart-svg');
+      var crops = visibleCrops();
+      var n = RANGES[state.range].n;
+      var all = [];
+      crops.forEach(function (c) { all = all.concat(sliceSeries(c)); });
+      if (!all.length) { svg.innerHTML = '<text x="400" y="160" text-anchor="middle" font-family="Inter" font-size="13" fill="#64748b">All series hidden — toggle one in the legend.</text>'; return; }
+      var min = Math.min.apply(null, all), max = Math.max.apply(null, all);
+      var pad = (max - min) * 0.15 || 1; min -= pad; max += pad;
+      var pw = CH.w - CH.l - CH.r, ph = CH.h - CH.t - CH.b;
+      var X = function (i) { return CH.l + (i / (n - 1)) * pw; };
+      var Y = function (v) { return CH.t + (1 - (v - min) / (max - min)) * ph; };
+
+      var out = '';
+      // y grid
+      for (var g = 0; g <= 4; g++) {
+        var val = min + (max - min) * (g / 4), y = Y(val);
+        out += '<line opacity="0.5" stroke="#dae2fd" stroke-dasharray="3 3" x1="' + CH.l + '" x2="' + (CH.w - CH.r) + '" y1="' + y + '" y2="' + y + '"></line>';
+        out += '<text fill="#64748b" font-family="Inter" font-size="11" font-weight="600" text-anchor="end" x="' + (CH.l - 8) + '" y="' + (y + 4) + '">' + fmtMoney(val) + '</text>';
+      }
+      // x labels
+      var unit = RANGES[state.range].unit;
+      var steps = [0, Math.floor((n - 1) / 2), n - 1];
+      steps.forEach(function (i) {
+        var back = (n - 1 - i);
+        var lbl = back === 0 ? 'Now' : back + unit.toUpperCase();
+        out += '<text fill="#64748b" font-family="Inter" font-size="11" font-weight="500" text-anchor="middle" x="' + X(i) + '" y="' + (CH.h - 14) + '">' + lbl + '</text>';
+      });
+      // lines
+      crops.forEach(function (c) {
+        var s = sliceSeries(c), d = '';
+        for (var i = 0; i < s.length; i++) { d += (i ? ' L ' : 'M ') + X(i).toFixed(1) + ' ' + Y(s[i]).toFixed(1); }
+        out += '<path d="' + d + '" fill="none" stroke="' + c.color + '" stroke-linecap="round" stroke-width="' + (c.id === 'maize' ? 3 : 2.5) + '"></path>';
+        var lx = X(s.length - 1), ly = Y(s[s.length - 1]);
+        out += '<circle cx="' + lx.toFixed(1) + '" cy="' + ly.toFixed(1) + '" r="5" fill="' + c.color + '" stroke="#ffffff" stroke-width="2"></circle>';
+      });
+      // hover crosshair + focus dot
+      if (state.hoverIdx != null) {
+        var hx = X(state.hoverIdx);
+        out += '<line opacity="0.5" stroke="#008751" stroke-dasharray="2 2" x1="' + hx.toFixed(1) + '" x2="' + hx.toFixed(1) + '" y1="' + CH.t + '" y2="' + (CH.h - CH.b) + '"></line>';
+        crops.forEach(function (c) {
+          var s = sliceSeries(c), v = s[clamp(state.hoverIdx, 0, s.length - 1)];
+          out += '<circle cx="' + hx.toFixed(1) + '" cy="' + Y(v).toFixed(1) + '" r="4" fill="#fff" stroke="' + c.color + '" stroke-width="2.5"></circle>';
+        });
+      }
+      out += '<rect id="chart-capture" x="' + CH.l + '" y="' + CH.t + '" width="' + pw + '" height="' + ph + '" fill="transparent"></rect>';
+      svg.setAttribute('viewBox', '0 0 ' + CH.w + ' ' + CH.h);
+      svg.innerHTML = out;
+      bindHover(X, n, crops);
+    }
+    function bindHover(X, n, crops) {
+      var svg = byId('chart-svg'), cap = byId('chart-capture'), tip = byId('chart-tip');
+      if (!cap) return;
+      function move(ev) {
+        var rect = svg.getBoundingClientRect();
+        var scale = CH.w / rect.width;
+        var sx = (ev.clientX - rect.left) * scale;
+        var frac = (sx - CH.l) / (CH.w - CH.l - CH.r);
+        var idx = clamp(Math.round(frac * (n - 1)), 0, n - 1);
+        state.hoverIdx = idx;
+        renderChart();
+        // tooltip content
+        var back = n - 1 - idx;
+        var dateLbl = back === 0 ? 'Now' : back + ' ' + RANGES[state.range].unit + ' ago';
+        var rows = crops.map(function (c) {
+          var s = sliceSeries(c), v = s[idx];
+          var base = s[0];
+          var delta = ((v - base) / base) * 100;
+          var sign = delta >= 0 ? '+' : '';
+          return '<div class="flex items-center justify-between gap-4"><span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full" style="background:' + c.color + '"></span><span class="font-body-sm text-body-sm text-on-surface">' + esc(c.short) + '</span></span>' +
+            '<span class="font-data-mono text-data-mono tnum text-on-surface">' + fmtMoney(v) + ' <span class="' + (delta >= 0 ? 'text-primary' : 'text-error') + '">' + sign + delta.toFixed(2) + '%</span></span></div>';
+        }).join('');
+        tip.innerHTML = '<div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">' + dateLbl + '</div>' + rows;
+        tip.classList.remove('hidden'); tip.classList.add('on');
+        var wrap = byId('chart-wrap').getBoundingClientRect();
+        var left = clamp(ev.clientX - wrap.left + 14, 0, wrap.width - 190);
+        tip.style.left = left + 'px'; tip.style.top = (ev.clientY - wrap.top - 10) + 'px';
+      }
+      cap.addEventListener('mousemove', move);
+      cap.addEventListener('mouseleave', function () { state.hoverIdx = null; tip.classList.add('hidden'); tip.classList.remove('on'); renderChart(); });
+    }
+
+    /* ── drawer ────────────────────────────────────────────────────── */
+    function openDrawer(id) {
+      var c = CROPS.filter(function (x) { return x.id === id; })[0];
+      if (!c) return;
+      byId('drawer-title').textContent = c.name;
+      byId('drawer-icon').textContent = c.icon;
+      var boards = BOARDS[id];
+      var maxAbs = Math.max.apply(null, boards.map(function (b) { return Math.abs(b[1] - c.price); }));
+      var rows = boards.map(function (b) {
+        var diff = b[1] - c.price, pct = (diff / c.price) * 100;
+        // A board priced below spot is the cheaper buy (good for the desk) -> green.
+        var cheaper = diff <= 0;
+        var w = (Math.abs(diff) / maxAbs) * 100;
+        return '<div class="bg-surface-container-low rounded-lg p-space-sm border border-outline-variant">' +
+          '<div class="flex items-center justify-between mb-1"><span class="font-title-md text-title-md text-on-surface">' + esc(b[0]) + '</span>' +
+          '<span class="font-data-mono text-data-mono tnum text-on-surface">' + fmtMoney(b[1]) + '</span></div>' +
+          '<div class="flex items-center justify-between gap-2"><div class="flex-1 h-1.5 rounded-full bg-surface-container-high overflow-hidden"><div class="h-full rounded-full ' + (cheaper ? 'bg-primary' : 'bg-error') + '" style="width:' + w.toFixed(0) + '%"></div></div>' +
+          '<span class="font-label-sm text-label-sm tnum ' + (cheaper ? 'text-primary' : 'text-error') + '">' + (cheaper ? '\u25BC ' : '\u25B2 ') + Math.abs(pct).toFixed(2) + '%</span></div>' +
+        '</div>';
+      }).join('');
+      // volume history bars
+      var vol = [42, 55, 48, 61, 58, 72, 66, 80];
+      var vmax = Math.max.apply(null, vol);
+      var vols = vol.map(function (v, i) {
+        var h = Math.max(6, Math.round((v / vmax) * 104));
+        return '<div class="flex flex-col items-center justify-end gap-1 flex-1 h-full"><div class="w-full rounded-t bg-primary-container/70" style="height:' + h + 'px"></div><span class="font-label-sm text-label-sm text-on-surface-variant">w' + (i + 1) + '</span></div>';
+      }).join('');
+      byId('drawer-body').innerHTML =
+        '<div class="mb-space-md"><div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-space-sm">Volume Traded (last 8 weeks, \u2019000 MT)</div>' +
+        '<div class="bg-surface-container-low rounded-lg p-space-md border border-outline-variant flex items-end gap-1 h-32">' + vols + '</div></div>' +
+        '<div><div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-space-sm">Local Market Boards vs Spot (' + esc(c.short) + ')</div>' +
+        '<div class="bg-surface-container-low rounded-lg p-space-md border border-outline-variant mb-space-md"><div class="flex items-center justify-between mb-space-sm"><span class="font-body-sm text-body-sm text-on-surface-variant">Desk spot</span><span class="font-data-mono text-data-mono tnum text-primary font-bold">' + fmtMoney(c.price) + ' / kg</span></div></div>' +
+        '<div class="space-y-space-sm">' + rows + '</div></div>' +
+        '<div class="mt-space-md pt-space-md border-t border-outline-variant"><div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-space-sm">Historical Snapshot</div>' +
+        '<div class="space-y-1">' + HIST_LABELS.map(function (h) {
+          return '<div class="flex items-center justify-between py-1"><span class="font-body-sm text-body-sm text-on-surface-variant">' + h[0] + '</span><span class="font-data-mono text-data-mono tnum text-on-surface">' + fmtMoney(c.price * h[1]) + '</span></div>';
+        }).join('') + '</div></div>';
+      var root = byId('drawer-root');
+      root.classList.remove('hidden');
+      requestAnimationFrame(function () { byId('drawer-panel').classList.remove('drawer-closed'); });
+      byId('drawer-close').focus();
+    }
+    function closeDrawer() {
+      byId('drawer-panel').classList.add('drawer-closed');
+      setTimeout(function () { byId('drawer-root').classList.add('hidden'); }, 280);
+    }
+
+    /* ── logger list ───────────────────────────────────────────────── */
+    function alertState(c, target) {
+      return target >= c.price ? 'Armed \u00b7 below spot' : 'Triggered \u00b7 above spot';
+    }
+    function renderLogger() {
+      var host = byId('logger-list');
+      if (!state.contracts.length) { host.innerHTML = ''; return; }
+      host.innerHTML = '<div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider px-1">Logged Contracts &amp; Alerts</div>' + state.contracts.map(function (k, i) {
+        var c = CROPS.filter(function (x) { return x.id === k.crop; })[0];
+        var hasAlert = k.target != null && k.target !== '';
+        var st = hasAlert ? alertState(c, Number(k.target)) : null;
+        return '<div class="flex items-start justify-between gap-space-sm bg-surface-container-lowest border border-outline-variant rounded-lg p-space-sm shadow-sm">' +
+          '<div class="flex items-start gap-space-sm min-w-0"><span class="material-symbols-outlined text-[20px] mt-0.5" style="color:' + c.color + '">' + c.icon + '</span>' +
+          '<div class="min-w-0"><span class="font-title-md text-title-md text-on-surface font-semibold">' + esc(c.short) + ' \u00b7 ' + esc(k.party) + '</span>' +
+          '<span class="font-data-mono text-data-mono tnum text-on-surface-variant block">' + fmtMoney(Number(k.price)) + '/kg \u00d7 ' + Number(k.volume).toLocaleString('en-US') + 'kg = ' + fmtMoney(Number(k.price) * Number(k.volume)) + '</span>' +
+          '<span class="font-body-sm text-body-sm text-on-surface-variant block">Delivery ' + esc(k.due) + (hasAlert ? ' \u00b7 alert @ ' + fmtMoney(Number(k.target)) + ' \u2014 <span class="font-semibold ' + (st.indexOf('Triggered') === 0 ? 'text-primary' : 'text-tertiary') + '">' + st + '</span>' : '') + '</span></div></div>' +
+          '<button type="button" class="shrink-0 w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:text-error hover:bg-error-container transition-colors" data-del="' + i + '" aria-label="Delete contract"><span class="material-symbols-outlined text-[18px]">delete</span></button>' +
+        '</div>';
+      }).join('');
+    }
+
+    /* ── modal ─────────────────────────────────────────────────────── */
+    function openModal() {
+      var sel = $('#contract-form select[name="crop"]');
+      sel.innerHTML = CROPS.map(function (c) { return '<option value="' + c.id + '">' + esc(c.name) + ' \u2014 ' + fmtMoney(c.price) + '/kg</option>'; }).join('');
+      var root = byId('modal-root'); root.classList.remove('hidden');
+      requestAnimationFrame(function () { root.classList.remove('modal-closed'); });
+      byId('form-error').classList.add('hidden');
+      sel.focus();
+    }
+    function closeModal() {
+      var root = byId('modal-root'); root.classList.add('modal-closed');
+      setTimeout(function () { root.classList.add('hidden'); }, 220);
+    }
+
+    /* ── wiring ────────────────────────────────────────────────────── */
+    function renderAll() { renderCards(); renderLegend(); renderChart(); renderLogger(); }
+
+    // currency
+    $$('.fx-btn').forEach(function (b) {
+      b.addEventListener('click', function () {
+        state.fx = b.getAttribute('data-fx');
+        writeStored('croptrade_prices_fx', state.fx);
+        $$('.fx-btn').forEach(function (x) {
+          var on = x === b;
+          x.setAttribute('aria-pressed', String(on));
+          x.classList.toggle('text-on-surface', on);
+          x.classList.toggle('text-on-surface-variant', !on);
+        });
+        renderAll();
+      });
+    });
+    // range
+    $$('.range-btn').forEach(function (b) {
+      b.addEventListener('click', function () {
+        state.range = b.getAttribute('data-range'); state.hoverIdx = null;
+        $$('.range-btn').forEach(function (x) {
+          var on = x === b;
+          x.setAttribute('aria-pressed', String(on));
+          x.classList.toggle('bg-primary-container', on);
+          x.classList.toggle('text-on-primary-container', on);
+          x.classList.toggle('shadow-sm', on);
+          x.classList.toggle('text-on-surface-variant', !on);
+        });
+        renderChart();
+      });
+    });
+    // card click + legend
+    byId('card-grid').addEventListener('click', function (e) {
+      var el = e.target.closest('[data-crop]'); if (el) openDrawer(el.getAttribute('data-crop'));
+    });
+    byId('card-grid').addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      var el = e.target.closest('[data-crop]'); if (el) { e.preventDefault(); openDrawer(el.getAttribute('data-crop')); }
+    });
+    byId('chart-legend').addEventListener('click', function (e) {
+      var el = e.target.closest('[data-legend]'); if (!el) return;
+      var id = el.getAttribute('data-legend');
+      var others = CROPS.filter(function (c) { return c.id !== id && !state.hidden[c.id]; });
+      if (!others.length && !state.hidden[id]) return; // never hide the last series
+      state.hidden[id] = !state.hidden[id];
+      renderLegend(); renderChart();
+    });
+    // drawer
+    byId('drawer-close').addEventListener('click', closeDrawer);
+    byId('drawer-scrim').addEventListener('click', closeDrawer);
+    // modal
+    byId('open-logger').addEventListener('click', openModal);
+    byId('modal-close').addEventListener('click', closeModal);
+    byId('modal-cancel').addEventListener('click', closeModal);
+    byId('modal-scrim').addEventListener('click', closeModal);
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      if (!byId('modal-root').classList.contains('hidden')) closeModal();
+      else if (!byId('drawer-root').classList.contains('hidden')) closeDrawer();
+    });
+    byId('contract-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var f = e.target, err = byId('form-error');
+      var price = Number(f.price.value), volume = Number(f.volume.value);
+      if (!f.party.value.trim() || !(price > 0) || !(volume > 0) || !f.due.value) {
+        err.textContent = 'Please complete counterparty, a positive price and volume, and a delivery date.';
+        err.classList.remove('hidden'); return;
+      }
+      state.contracts.push({ crop: f.crop.value, party: f.party.value.trim(), price: price, volume: volume, due: f.due.value, target: f.target.value === '' ? null : Number(f.target.value) });
+      writeStored('croptrade_prices_contracts', JSON.stringify(state.contracts));
+      f.reset(); closeModal(); renderLogger();
+    });
+    byId('logger-list').addEventListener('click', function (e) {
+      var b = e.target.closest('[data-del]'); if (!b) return;
+      state.contracts.splice(Number(b.getAttribute('data-del')), 1);
+      writeStored('croptrade_prices_contracts', JSON.stringify(state.contracts));
+      renderLogger();
+    });
+
+    // restore currency button visuals
+    $$('.fx-btn').forEach(function (x) {
+      var on = x.getAttribute('data-fx') === state.fx;
+      x.setAttribute('aria-pressed', String(on));
+      x.classList.toggle('text-on-surface', on);
+      x.classList.toggle('text-on-surface-variant', !on);
+    });
+    renderAll();
+  })();
+</script></div></main><footer class="w-full bg-surface-container-low py-space-lg mt-auto shadow-[0_-1px_8px_rgba(0,0,0,0.02)]"><div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-space-md text-on-surface-variant font-label-md text-label-md"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm text-primary font-bold">CropTrade</span><span>• Agritech Global Exchange</span></div><div class="flex items-center gap-space-lg"><span class="font-data-mono text-data-mono">WAT (UTC+01:00) GRAIN-DESK</span><span>© 2026 CropTrade Platform. All rights reserved.</span></div></div></footer><script>const themeToggleBtn = document.getElementById('theme-toggle-btn'); const themeIconLight = document.getElementById('theme-icon-light'); const themeIconDark = document.getElementById('theme-icon-dark'); function applyTheme(isDark) { if (isDark) { document.documentElement.classList.add('dark'); if (themeIconLight && themeIconDark) { themeIconLight.classList.add('hidden'); themeIconDark.classList.remove('hidden'); } } else { document.documentElement.classList.remove('dark'); if (themeIconLight && themeIconDark) { themeIconLight.classList.remove('hidden'); themeIconDark.classList.add('hidden'); } } } const initialDark = localStorage.getItem('croptrade_theme') === 'dark' || (!('croptrade_theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches); applyTheme(initialDark); if (themeToggleBtn) { themeToggleBtn.addEventListener('click', () => { const isCurrentlyDark = document.documentElement.classList.contains('dark'); const newDark = !isCurrentlyDark; localStorage.setItem('croptrade_theme', newDark ? 'dark' : 'light'); applyTheme(newDark); }); }</script></body></html>

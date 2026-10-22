@@ -49,7 +49,7 @@ export interface ConverterRate {
   quote: string;
   localPerForeign: number;
   date: string; // YYYY-MM-DD
-  source: "LIVE" | "SIMULATED" | "MANUAL" | "SAVED";
+  source: "LIVE" | "MANUAL" | "SAVED";
   old: boolean;
 }
 
@@ -186,8 +186,6 @@ function rateBadge(rate: ConverterRate | undefined): BadgeSpec | undefined {
       return { kind: "live", note: "FX" };
     case "MANUAL":
       return { kind: "manual" };
-    case "SIMULATED":
-      return { kind: "simulated" };
     default:
       return { kind: "saved", ageLabel: formatDateHuman(rate.date) };
   }
@@ -201,8 +199,6 @@ function rateNote(rate: ConverterRate | undefined): string {
       return `Live · Exchange Rate API, ${when}`;
     case "MANUAL":
       return `Manual rate, ${when}`;
-    case "SIMULATED":
-      return `Simulated, ${when}`;
     default:
       return `Saved data, ${when}`;
   }
@@ -211,7 +207,7 @@ function rateNote(rate: ConverterRate | undefined): string {
 // ---------------------------------------------------------------- sub-sections
 
 function labelClass(): string {
-  return "block text-sm font-medium leading-5 text-muted";
+  return "block font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant";
 }
 
 function SectionCard({
@@ -230,14 +226,16 @@ function SectionCard({
   return (
     <section
       aria-labelledby={labelledBy}
-      className="rounded-card border border-border bg-surface p-4 shadow-card sm:p-6"
+      className="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm p-space-md sm:p-space-lg"
     >
-      <div className="flex flex-wrap items-start justify-between gap-2">
+      <div className="flex flex-wrap items-start justify-between gap-space-sm">
         <div>
-          <h2 id={labelledBy} className="text-headline-sm">
+          <h2 id={labelledBy} className="font-title-md text-title-md text-on-surface font-semibold">
             {title}
           </h2>
-          {hint ? <p className="mt-1 text-sm leading-5 text-muted">{hint}</p> : null}
+          {hint ? (
+            <p className="mt-1 font-body-sm text-body-sm text-on-surface-variant">{hint}</p>
+          ) : null}
         </div>
         {badge}
       </div>
@@ -419,11 +417,9 @@ export function Converter({
         `₦${fmt(point.localPerForeign, 2)}`,
         point.source === "LIVE"
           ? "Live"
-          : point.source === "SIMULATED"
-            ? "Simulated"
-            : point.source === "MANUAL"
-              ? "Manual"
-              : "Saved data",
+          : point.source === "MANUAL"
+            ? "Manual"
+            : "Saved data",
       ]),
     note: "One row per saved rate date. Missing days are not filled in.",
   };
@@ -640,35 +636,43 @@ export function Converter({
   // ---------------------------------------------------------------- render
 
   return (
-    <div className="space-y-6">
-      {/* Rate rail */}
+    <div className="flex flex-col w-full">
+      {/* Telemetry bar — real corridor rates */}
       <section
         aria-label="Live corridor rates"
-        className="flex flex-wrap items-center justify-between gap-3 rounded-card border border-border bg-surface px-4 py-3 shadow-card"
+        className="w-full bg-surface-container-low rounded-xl px-space-md py-space-xs mb-space-lg flex flex-wrap items-center justify-between gap-space-sm shadow-sm"
       >
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
-          {["USD", "EUR", "GBP"].map((code) => {
-            const rate = rateMap.get(code);
-            return (
-              <span key={code} className="tabular-nums">
-                <span className="text-muted">1 {code}</span>{" "}
-                <span className="font-semibold text-accent">
-                  {rate ? `₦${fmt(rate.localPerForeign, 2)}` : "—"}
+        <div className="flex items-center gap-space-sm flex-wrap">
+          <span className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            <span className="font-label-sm text-label-sm uppercase tracking-wider font-bold text-on-surface">
+              Export rate corridor
+            </span>
+          </span>
+          <span className="text-outline-variant">•</span>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 font-data-mono text-data-mono text-on-surface">
+            {["USD", "EUR", "GBP"].map((code) => {
+              const rate = rateMap.get(code);
+              return (
+                <span key={code} className="tabular-nums">
+                  <span className="text-on-surface-variant">1 {code}</span>{" "}
+                  <span className="font-semibold text-primary">
+                    {rate ? `₦${fmt(rate.localPerForeign, 2)}` : "—"}
+                  </span>
                 </span>
-              </span>
-            );
-          })}
-          <DataSourceBadge badge={rateBadge(rateMap.get("USD")) ?? { kind: "live", note: "FX" }} />
+              );
+            })}
+          </div>
         </div>
-        <p className="text-sm leading-5 text-muted tabular-nums">
+        <p className="font-body-sm text-body-sm text-on-surface-variant tabular-nums">
           Rates of {rateMap.get("USD") ? formatDateHuman(rateMap.get("USD")!.date) : "—"} ·{" "}
           {rates.length} currencies live
         </p>
       </section>
 
-      <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-12">
+      <div className="grid grid-cols-1 items-start gap-space-lg lg:grid-cols-12">
         {/* ── Left column ─────────────────────────────────────────────── */}
-        <div className="flex flex-col gap-6 lg:col-span-8">
+        <div className="flex flex-col gap-space-lg lg:col-span-8">
           {/* Converter */}
           <SectionCard
             labelledBy="convert-h"
@@ -693,7 +697,7 @@ export function Converter({
                       : "No rate available"}
                 </span>
               </div>
-              <div className="flex h-14 items-center gap-3 rounded-card border border-border bg-bg px-3 focus-within:border-accent">
+              <div className="flex h-14 items-center gap-3 rounded border border-outline-variant bg-surface-container-low px-3 focus-within:border-accent">
                 <span className="text-[22px] font-bold text-muted tabular-nums select-none">
                   {sendMeta.sym}
                 </span>
@@ -747,7 +751,7 @@ export function Converter({
                   {recvRate ? `1 ${recvCode} = ₦${fmt(recvRate, 2)}` : "No rate available"}
                 </span>
               </div>
-              <div className="flex h-14 items-center gap-3 rounded-card border border-border bg-bg px-3 focus-within:border-accent">
+              <div className="flex h-14 items-center gap-3 rounded border border-outline-variant bg-surface-container-low px-3 focus-within:border-accent">
                 <span className="text-[22px] font-bold text-accent tabular-nums select-none">
                   {recvMeta.sym}
                 </span>
@@ -915,7 +919,7 @@ export function Converter({
                   value={selectedAccount?.id ?? ""}
                   onChange={(event) => setAccountId(event.target.value)}
                   aria-label="Export destination account"
-                  className={inputClass}
+                  className={`${inputClass} w-full`}
                 >
                   {accounts.length === 0 ? (
                     <option value="">No accounts yet — add one below</option>
@@ -936,7 +940,7 @@ export function Converter({
             </div>
 
             {accountMismatch ? (
-              <p className="mt-4 rounded-card border border-warning/30 bg-warning-bg p-3 text-sm leading-5 text-warning">
+              <p className="mt-4 rounded border border-tertiary/40 bg-tertiary/10 p-3 text-sm leading-5 text-warning">
                 {selectedAccount!.label} settles in {selectedAccount!.ccy}, not {recvCode}. Pick
                 a {recvCode} destination or add one before filing.
               </p>
@@ -981,7 +985,7 @@ export function Converter({
                     value={newAccountLabel}
                     onChange={(event) => setNewAccountLabel(event.target.value)}
                     placeholder="GTB export desk"
-                    className={inputClass}
+                    className={`${inputClass} w-full`}
                   />
                 </div>
                 <div>
@@ -1039,7 +1043,7 @@ export function Converter({
                   </span>
                 </div>
               </div>
-              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-card border border-border bg-bg p-4">
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded border border-outline-variant bg-surface-container-low p-4">
                 <div className="min-w-0">
                   <span className="block text-base font-semibold text-accent">
                     Net realized recovery
@@ -1130,7 +1134,7 @@ export function Converter({
                 ].map(([label, value]) => (
                   <div
                     key={label}
-                    className="rounded-card border border-border bg-bg px-3 py-2"
+                    className="rounded border border-outline-variant bg-surface-container-low px-3 py-2"
                   >
                     <div className="text-xs font-semibold uppercase leading-4 tracking-wide text-muted">
                       {label}
@@ -1138,7 +1142,7 @@ export function Converter({
                     <div className="mt-1 text-sm font-semibold tabular-nums">{value}</div>
                   </div>
                 ))}
-                <div className="rounded-card border border-border bg-bg px-3 py-2">
+                <div className="rounded border border-outline-variant bg-surface-container-low px-3 py-2">
                   <div className="text-xs font-semibold uppercase leading-4 tracking-wide text-muted">
                     30d change
                   </div>
@@ -1202,7 +1206,7 @@ export function Converter({
                         | undefined;
                       if (!point) return null;
                       return (
-                        <div className="rounded-card border border-border bg-surface px-3 py-2 shadow-card">
+                        <div className="bg-surface-container-lowest rounded-xl border border-outline-variant px-3 py-2 shadow-sm">
                           <p className="text-sm font-medium">{longDate(point.date)}</p>
                           <p className="text-sm text-muted tabular-nums">
                             ₦{fmt(point.rate, 2)} per {chartCode}
@@ -1225,7 +1229,7 @@ export function Converter({
             </div>
 
             {inspected ? (
-              <div className="mt-3 grid grid-cols-2 gap-2 rounded-card border border-border bg-bg p-3 sm:grid-cols-3 lg:grid-cols-6">
+              <div className="mt-3 grid grid-cols-2 gap-2 rounded border border-outline-variant bg-surface-container-low p-3 sm:grid-cols-3 lg:grid-cols-6">
                 <div>
                   <div className="text-xs font-semibold uppercase leading-4 tracking-wide text-muted">
                     Inspected
@@ -1376,11 +1380,11 @@ export function Converter({
         </div>
 
         {/* ── Right column ────────────────────────────────────────────── */}
-        <aside className="flex flex-col gap-6 self-start lg:col-span-4">
+        <aside className="flex flex-col gap-space-lg self-start lg:col-span-4">
           {/* Result */}
           <section
             aria-labelledby="result-h"
-            className="rounded-card border border-border bg-surface p-4 shadow-card sm:p-6"
+            className="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 shadow-sm sm:p-6"
           >
             <div className="flex items-center justify-between gap-2">
               <h2 id="result-h" className="text-sm font-medium uppercase leading-5 tracking-wide text-muted">
@@ -1569,7 +1573,7 @@ export function Converter({
         <div
           role="status"
           aria-live="polite"
-          className="fixed bottom-24 left-1/2 z-50 w-[min(92vw,26rem)] -translate-x-1/2 rounded-card border border-border bg-surface px-4 py-3 text-sm font-semibold shadow-dialog lg:bottom-8"
+          className="fixed bottom-24 left-1/2 z-50 w-[min(92vw,26rem)] -translate-x-1/2 bg-surface-container-lowest rounded-xl border border-outline-variant px-4 py-3 text-sm font-semibold shadow-lg lg:bottom-8"
         >
           <span className="tabular-nums">{toast}</span> · <span className="text-muted tabular-nums">{reference}</span>
         </div>

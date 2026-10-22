@@ -2,116 +2,525 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── AgroExecutive Tactical Canvas tokens ──────────────────────────────────
-   Light: #F8FAFC canvas · #FFFFFF surface · #008751 primary · #0284C7 secondary
-          · #F59E0B alert
-   Dark:  #0F172A canvas · #1E293B surface · #10B981 primary · #06B6D4 secondary
-          · #FBBF24 alert
-   The code is stored as raw RGB channels so Tailwind can apply opacity:
-   `bg-accent/10` → rgb(var(--accent) / 0.1).                              */
+/* ────────────────────────────────────────────────────────────────────────
+   Google Stitch design tokens — copied verbatim from
+   stitch_croptrade_enterprise_analytics_cockpit/money_converter/code.html
+   (the AgroExecutive Tactical Canvas palette from DESIGN.md).
+   Light:  canvas #FAF8FF · cards #FFFFFF · primary #006B3F ·
+           primary-container #008751 · secondary #006398 · tertiary #835200 ·
+           text #131B2E · muted #3E4A41 · border #BDCABE
+   Dark:   canvas #0F172A · cards #1E293B · primary #10B981 ·
+           secondary #06B6D4 · tertiary #FBBF24 · text #F8FAFC ·
+           muted #94A3B8 · border #334155
+   Raw RGB channels so Tailwind can apply opacity
+   (e.g. `bg-primary/10` → rgb(var(--primary) / 0.1)).
+   ──────────────────────────────────────────────────────────────────────── */
 
 :root {
-  --bg: 248 250 252;
-  --surface: 255 255 255;
-  --border: 226 232 240;
-  --text: 15 23 42;
-  --muted: 100 116 139;
-
-  --accent: 0 135 81;
-  --accent-hover: 0 107 63;
-  --accent-fg: 255 255 255;
-
-  --success: 0 135 81;
-  --success-bg: 231 246 236;
-  /* #F59E0B is the alert colour; #B45309 keeps 4.5:1 when used as text. */
-  --warning: 180 83 9;
-  --warning-bg: 254 243 199;
-  --amber: 245 158 11;
-  --danger: 180 35 24;
-  --danger-bg: 254 228 226;
-  --info: 2 132 199;
-  --info-bg: 224 242 254;
-
+  color-scheme: light;
+  --surface: 250 248 255;
+  --surface-dim: 210 217 244;
+  --surface-bright: 250 248 255;
+  --surface-container-lowest: 255 255 255;
+  --surface-container-low: 242 243 255;
+  --surface-container: 234 237 255;
+  --surface-container-high: 226 231 255;
+  --surface-container-highest: 218 226 253;
+  --surface-variant: 218 226 253;
+  --background: 250 248 255;
+  --on-background: 19 27 46;
+  --on-surface: 19 27 46;
+  --on-surface-variant: 62 74 65;
+  --outline: 110 122 112;
+  --outline-variant: 189 202 190;
+  --surface-tint: 0 109 64;
+  --primary: 0 107 63;
+  --on-primary: 255 255 255;
+  --primary-container: 0 135 81;
+  --on-primary-container: 253 255 249;
+  --primary-fixed: 141 248 183;
+  --primary-fixed-dim: 112 219 157;
+  --inverse-primary: 112 219 157;
+  --secondary: 0 99 152;
+  --on-secondary: 255 255 255;
+  --secondary-container: 91 184 254;
+  --on-secondary-container: 0 71 110;
+  --secondary-fixed: 204 229 255;
+  --secondary-fixed-dim: 147 204 255;
+  --on-secondary-fixed: 0 29 49;
+  --on-secondary-fixed-variant: 0 75 115;
+  --tertiary: 131 82 0;
+  --tertiary-strong: 131 82 0;
+  --on-tertiary: 255 255 255;
+  --tertiary-fixed: 255 221 184;
+  --tertiary-fixed-dim: 255 185 95;
+  --on-tertiary-fixed: 42 23 0;
+  --on-tertiary-fixed-variant: 101 62 0;
+  --tertiary-container: 165 104 0;
+  --on-tertiary-container: 255 254 255;
+  --error: 186 26 26;
+  --on-error: 255 255 255;
+  --error-container: 255 218 214;
+  --on-error-container: 147 0 10;
+  --inverse-surface: 40 48 68;
+  --inverse-on-surface: 238 240 255;
+  --ring: 0 99 152;
   --shadow: 15 23 42;
 
-  /* Chart-only tokens (Recharts needs literal colours). */
-  --chart-grid: #E2E8F0;
-  --chart-axis: #64748B;
-  --series-1: #0072B2;
-  --series-2: #E69F00;
-  --series-3: #009E73;
-  --series-4: #D55E00;
-  --series-5: #CC79A7;
-  --series-6: #56B4E9;
-
-  color-scheme: light;
+  /* Chart literals (Recharts needs concrete colours). */
+  --chart-grid: rgb(var(--surface-container-high));
+  --chart-axis: rgb(var(--on-surface-variant));
+  --series-1: #0072b2;
+  --series-2: #e69f00;
+  --series-3: #009e73;
+  --series-4: #d55e00;
+  --series-5: #cc79a7;
+  --series-6: #56b4e9;
 }
 
 .dark {
-  --bg: 15 23 42;
-  --surface: 30 41 59;
-  --border: 51 65 85;
-  --text: 248 250 252;
-  --muted: 148 163 184;
-
-  --accent: 16 185 129;
-  --accent-hover: 52 211 153;
-  --accent-fg: 6 40 30;
-
-  --success: 52 211 153;
-  --success-bg: 12 58 43;
-  --warning: 251 191 36;
-  --warning-bg: 74 52 16;
-  --amber: 251 191 36;
-  --danger: 252 165 165;
-  --danger-bg: 74 29 29;
-  --info: 6 182 212;
-  --info-bg: 11 58 70;
-
+  color-scheme: dark;
+  --surface: 15 23 42;
+  --surface-dim: 11 18 32;
+  --surface-bright: 38 52 73;
+  --surface-container-lowest: 30 41 59;
+  --surface-container-low: 30 41 59;
+  --surface-container: 38 52 73;
+  --surface-container-high: 51 65 85;
+  --surface-container-highest: 63 78 102;
+  --surface-variant: 51 65 85;
+  --background: 15 23 42;
+  --on-background: 248 250 252;
+  --on-surface: 248 250 252;
+  --on-surface-variant: 148 163 184;
+  --outline: 100 116 139;
+  --outline-variant: 51 65 85;
+  --surface-tint: 16 185 129;
+  --primary: 16 185 129;
+  --on-primary: 4 30 21;
+  --primary-container: 4 120 87;
+  --on-primary-container: 236 253 245;
+  --primary-fixed: 141 248 183;
+  --primary-fixed-dim: 112 219 157;
+  --inverse-primary: 0 107 63;
+  --secondary: 6 182 212;
+  --on-secondary: 3 26 33;
+  --secondary-container: 12 74 110;
+  --on-secondary-container: 204 229 255;
+  --secondary-fixed: 204 229 255;
+  --secondary-fixed-dim: 147 204 255;
+  --on-secondary-fixed: 0 29 49;
+  --on-secondary-fixed-variant: 0 75 115;
+  --tertiary: 251 191 36;
+  --tertiary-strong: 251 191 36;
+  --on-tertiary: 40 26 0;
+  --tertiary-fixed: 255 221 184;
+  --tertiary-fixed-dim: 255 185 95;
+  --on-tertiary-fixed: 42 23 0;
+  --on-tertiary-fixed-variant: 101 62 0;
+  --tertiary-container: 165 104 0;
+  --on-tertiary-container: 255 254 255;
+  --error: 248 113 113;
+  --on-error: 40 8 8;
+  --error-container: 76 20 20;
+  --on-error-container: 254 226 226;
+  --inverse-surface: 226 232 240;
+  --inverse-on-surface: 15 23 42;
+  --ring: 6 182 212;
   --shadow: 0 0 0;
 
-  --chart-grid: #334155;
-  --chart-axis: #94A3B8;
+  --chart-grid: rgb(var(--surface-container-high));
+  --chart-axis: rgb(var(--on-surface-variant));
   /* Brighter series so every line clears 4.5:1 on #0F172A. */
-  --series-1: #56B4E9;
-  --series-2: #E69F00;
-  --series-3: #34D399;
-  --series-4: #F97316;
-  --series-5: #CC79A7;
-  --series-6: #93C5FD;
+  --series-1: #56b4e9;
+  --series-2: #e69f00;
+  --series-3: #34d399;
+  --series-4: #f97316;
+  --series-5: #cc79a7;
+  --series-6: #93c5fd;
+}
 
-  color-scheme: dark;
+/* ── Base ─────────────────────────────────────────────────────────────── */
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    overscroll-behavior: none;
+  }
+  main > :first-child {
+    margin-top: 0 !important;
+  }
+  main > :last-child {
+    margin-bottom: 0 !important;
+  }
+  .tnum,
+  table,
+  input[type="number"] {
+    font-variant-numeric: tabular-nums lining-nums;
+    font-feature-settings: "tnum" 1, "zero" 1;
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: rgb(var(--secondary));
+    box-shadow: 0 0 0 1px rgb(var(--secondary));
+  }
 }
 
 html,
 body {
-  background: rgb(var(--bg));
-  color: rgb(var(--text));
+  background: rgb(var(--background));
+  color: rgb(var(--on-surface));
 }
 
 body {
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 16px;
   line-height: 24px;
-  /* Tabular figures everywhere: a dashboard of prices must not jitter. */
-  font-variant-numeric: tabular-nums lining-nums;
-  font-feature-settings: "tnum" 1, "zero" 1;
+}
+
+/* Stitch hides scrollbars everywhere. */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Material Symbols — the icon set every Stitch page loads ──────────── */
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Stitch component classes — verbatim from money_converter/code.html ─ */
+.card {
+  background: rgb(var(--surface-container-lowest));
+  border: 1px solid rgb(var(--outline-variant));
+  border-radius: 0.5rem;
+  box-shadow:
+    0 1px 3px 0 rgb(var(--shadow) / 0.05),
+    0 1px 2px -1px rgb(var(--shadow) / 0.04);
+}
+.dark .card {
+  box-shadow: 0 8px 24px -12px rgb(var(--shadow) / 0.6);
+}
+.label {
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgb(var(--on-surface-variant));
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  height: 22px;
+  padding: 0 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.pip {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: rgb(var(--primary-container));
+  flex: none;
+}
+.field {
+  height: 36px;
+  width: 100%;
+  border: 1px solid rgb(var(--outline-variant));
+  border-radius: 0.25rem;
+  background: rgb(var(--surface-container-lowest));
+  color: rgb(var(--on-surface));
+  padding: 0 0.5rem;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  transition: border-color 0.12s ease;
+}
+.field:hover {
+  border-color: rgb(var(--outline));
+}
+.field:focus {
+  outline: none;
+  border-color: rgb(var(--ring));
+  box-shadow: 0 0 0 1px rgb(var(--ring));
+}
+select.field {
+  padding-right: 1.75rem;
+  cursor: pointer;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  height: 36px;
+  padding: 0 0.75rem;
+  border-radius: 0.25rem;
+  border: 1px solid transparent;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 16px;
+  transition:
+    background-color 0.14s ease,
+    border-color 0.14s ease,
+    color 0.14s ease,
+    opacity 0.14s ease;
+  white-space: nowrap;
+}
+.btn:focus-visible {
+  outline: 2px solid rgb(var(--ring));
+  outline-offset: 2px;
+}
+.btn-primary {
+  background: rgb(var(--primary-container));
+  color: rgb(var(--on-primary-container));
+}
+.btn-primary:hover {
+  background: rgb(var(--primary));
+}
+.dark .btn-primary:hover {
+  filter: brightness(1.1);
+  background: rgb(var(--primary-container));
+}
+.btn-ghost {
+  background: transparent;
+  color: rgb(var(--on-surface));
+  border-color: rgb(var(--outline-variant));
+}
+.btn-ghost:hover {
+  background: rgb(var(--surface-container));
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  height: 28px;
+  padding: 0 0.5rem;
+  border-radius: 0.25rem;
+  background: rgb(var(--surface-container));
+  color: rgb(var(--on-surface));
+  border: 1px solid transparent;
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  transition: background-color 0.14s ease;
+}
+.chip:hover {
+  background: rgb(var(--surface-container-high));
+}
+.chip[aria-pressed="true"] {
+  background: rgb(var(--primary-container));
+  color: rgb(var(--on-primary-container));
+}
+.chip:focus-visible {
+  outline: 2px solid rgb(var(--ring));
+  outline-offset: 2px;
+}
+.amount-input {
+  height: 56px;
+  background: transparent;
+  border: 0;
+  color: rgb(var(--on-surface));
+  font-size: 30px;
+  line-height: 38px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  width: 100%;
+  min-width: 0;
+  font-variant-numeric: tabular-nums;
+}
+.amount-input:focus {
+  outline: none;
+}
+.field-shell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 56px;
+  padding: 0 0.75rem;
+  border-radius: 0.5rem;
+  background: rgb(var(--surface-container-low));
+  border: 1px solid transparent;
+  transition:
+    border-color 0.14s ease,
+    background-color 0.14s ease;
+}
+.field-shell:focus-within {
+  border-color: rgb(var(--ring));
+  background: rgb(var(--surface-container));
+}
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 9999px;
+  background: rgb(var(--outline-variant));
+  accent-color: rgb(var(--primary-container));
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: rgb(var(--primary-container));
+  border: 2px solid rgb(var(--surface-container-lowest));
+  cursor: pointer;
+}
+.slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: rgb(var(--primary-container));
+  border: 2px solid rgb(var(--surface-container-lowest));
+  cursor: pointer;
+}
+.slider:focus-visible {
+  outline: 2px solid rgb(var(--ring));
+  outline-offset: 4px;
+}
+
+/* ── Chart styling (SVG + Recharts) — from the prototype pages ────────── */
+.chart-grid {
+  stroke: rgb(var(--outline-variant));
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.chart-axis {
+  fill: rgb(var(--on-surface-variant));
+  font-size: 11px;
+  font-family: Inter, system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+.chart-line {
+  fill: none;
+  stroke: rgb(var(--primary-container));
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+.chart-cross {
+  stroke: rgb(var(--secondary));
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  vector-effect: non-scaling-stroke;
+}
+.chart-dot {
+  fill: rgb(var(--secondary));
+  stroke: rgb(var(--surface-container-lowest));
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+.chart-today {
+  fill: rgb(var(--primary-container));
+  stroke: rgb(var(--surface-container-lowest));
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+/* ── Prototype motion (toasts, tickers, spinners) ─────────────────────── */
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(120%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+@keyframes toast-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(120%);
+  }
+}
+@keyframes bar-drain {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+@keyframes spin-step {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes value-tick {
+  0% {
+    opacity: 0.35;
+    transform: translateY(-3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.toast {
+  animation: toast-in 0.32s cubic-bezier(0.21, 1.02, 0.73, 1) both;
+}
+.toast.is-leaving {
+  animation: toast-out 0.28s ease-in both;
+}
+.toast__bar {
+  transform-origin: left;
+  animation: bar-drain linear forwards;
+}
+.tick {
+  animation: value-tick 0.3s ease-out;
+}
+.spin {
+  animation: spin-step 0.8s linear infinite;
 }
 
 /* Kill the white flash when the dark class is applied before paint. */
 html.dark {
-  background: rgb(var(--bg));
+  background: rgb(var(--background));
 }
 
 ::selection {
-  background: rgb(var(--accent) / 0.25);
+  background: rgb(var(--primary));
+  color: rgb(var(--on-primary));
 }
 
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    animation-duration: 0.001ms !important;
-    transition-duration: 0.001ms !important;
+    animation-duration: 0.001s !important;
+    transition-duration: 0.001s !important;
   }
 }

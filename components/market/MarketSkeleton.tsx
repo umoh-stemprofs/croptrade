@@ -8,7 +8,7 @@ export function MarketSkeleton({ cards = 6 }: { cards?: number }) {
     <div role="status" aria-live="polite" className="space-y-6">
       <span className="sr-only">Loading live prices from the World Food Programme…</span>
 
-      <section className="rounded-card border border-border bg-surface p-4 shadow-card sm:p-6">
+      <section className="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 shadow-sm sm:p-6">
         <div className="flex items-center justify-between gap-3">
           <div className={`h-5 w-48 ${pulse}`} />
           <div className={`h-6 w-24 rounded-input ${pulse}`} />
@@ -21,13 +21,13 @@ export function MarketSkeleton({ cards = 6 }: { cards?: number }) {
         <div className={`mt-4 h-[240px] w-full rounded-input ${pulse}`} />
       </section>
 
-      <div className={`h-12 w-full rounded-input ${pulse}`} />
+      <div className={`h-9 w-full rounded ${pulse}`} />
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {Array.from({ length: cards }).map((_, index) => (
           <div
             key={index}
-            className="rounded-card border border-border bg-surface p-5 shadow-card"
+            className="bg-surface-container-lowest rounded-xl border border-outline-variant p-5 shadow-sm"
           >
             <div className={`h-4 w-28 ${pulse}`} />
             <div className={`mt-3 h-8 w-32 ${pulse}`} />
@@ -36,7 +36,7 @@ export function MarketSkeleton({ cards = 6 }: { cards?: number }) {
         ))}
       </div>
 
-      <div className="rounded-card border border-border bg-surface p-4 shadow-card sm:p-6">
+      <div className="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 shadow-sm sm:p-6">
         <div className={`h-4 w-40 ${pulse}`} />
         <div className={`mt-4 h-4 w-full ${pulse}`} />
         <div className={`mt-2 h-4 w-full ${pulse}`} />

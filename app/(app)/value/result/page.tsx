@@ -41,7 +41,7 @@ function Problem({ message }: { message: string }) {
   return (
     <>
       <header>
-        <h1 className="font-display text-display-lg-mobile sm:text-display-lg">Your export value</h1>
+        <h1 className="font-display text-display-lg-mobile sm:text-display-lg text-on-surface tracking-tight">Your export value</h1>
       </header>
       <ErrorLine message={message} />
       <div className="mt-4">
@@ -103,13 +103,13 @@ export default async function ValueResultPage({ searchParams }: { searchParams: 
   return (
     <>
       <header>
-        <h1 className="font-display text-display-lg-mobile sm:text-display-lg">Your export value</h1>
+        <h1 className="font-display text-display-lg-mobile sm:text-display-lg text-on-surface tracking-tight">Your export value</h1>
         <p className="mt-1 text-base leading-6 text-muted">
           {cropLabel(crop)} · {qtyKg} kg · {quote}
         </p>
       </header>
 
-      <section className="mt-6 rounded-card border border-border bg-surface p-6 shadow-card">
+      <section className="mt-6 bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm">
         <div className="flex flex-wrap items-start justify-between gap-2">
           <h2 className="text-base font-medium leading-6 text-muted">Net after export costs</h2>
           <DataSourceBadge badge={rateRowBadge(rate)} />
@@ -127,7 +127,7 @@ export default async function ValueResultPage({ searchParams }: { searchParams: 
         ) : null}
       </section>
 
-      <section className="mt-4 rounded-card border border-border bg-surface p-6 shadow-card">
+      <section className="mt-4 bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm">
         <dl className="space-y-3 text-base">
           <div className="flex flex-wrap justify-between gap-2">
             <dt className="text-muted">Naira total</dt>

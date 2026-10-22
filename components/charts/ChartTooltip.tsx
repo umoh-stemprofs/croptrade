@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 
 export function TooltipBox({ children }: { children: ReactNode }) {
   return (
-    <div className="rounded-input border border-border bg-surface px-3 py-2 text-sm leading-5 shadow-card">
+    <div className="rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-body-sm leading-5 shadow-md">
       {children}
     </div>
   );

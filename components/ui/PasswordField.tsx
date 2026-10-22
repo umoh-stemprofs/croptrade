@@ -32,7 +32,7 @@ export function PasswordField({
           type={visible ? "text" : "password"}
           autoComplete={autoComplete}
           required
-          className={`${inputClass} pr-20`}
+          className={`${inputClass} w-full pr-20`}
         />
         <button
           type="button"

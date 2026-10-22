@@ -1,7 +1,9 @@
-// Stat card (design.md §2: label, big number, small note, optional data-source badge).
+// KPI tile — the Stitch prototype's metric card (agroexecutive_tactical_canvas):
+// label-sm uppercase header with an optional source flag, a 40px extrabold
+// tabular readout, body-sm context, and an inset footer strip for the Old-rate tag.
 
 import type { ReactNode } from "react";
-import { DataSourceBadge, type BadgeSpec } from "./DataSourceBadge";
+import { DataSourceBadge, OldRateTag, type BadgeSpec } from "./DataSourceBadge";
 
 export function StatCard({
   label,
@@ -20,40 +22,34 @@ export function StatCard({
   valueSize?: "big" | "small";
 }) {
   return (
-    <section className="rounded-card border border-border bg-surface p-6 shadow-card">
-      <div className="flex flex-wrap items-start justify-between gap-2">
-        <h2 className="text-base font-medium leading-6 text-muted">{label}</h2>
+    <section className="flex flex-col justify-between rounded-xl border border-outline-variant bg-surface-container-lowest p-6 shadow-sm">
+      <div className="mb-2 flex flex-wrap items-start justify-between gap-2">
+        <span className="font-label-sm uppercase tracking-wider text-label-sm text-on-surface-variant">
+          {label}
+        </span>
         {badge ? <DataSourceBadge badge={badge} /> : null}
       </div>
-      <p
-        className={
-          valueSize === "big"
-            ? "mt-3 text-[32px] font-bold leading-10 tabular-nums"
-            : "mt-3 text-[20px] font-semibold leading-7"
-        }
-      >
-        {value}
-      </p>
-      {sub ? <p className="mt-2 text-sm leading-5 text-muted">{sub}</p> : null}
-      {oldRate ? (
-        <p className="mt-2">
-          <span className="inline-flex items-center gap-1.5 rounded-input border border-warning/30 bg-warning-bg px-2.5 py-0.5 text-sm font-medium leading-5 text-warning">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={1.75}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              className="h-4 w-4"
-            >
-              <circle cx="12" cy="12" r="9" />
-              <path d="M12 7v5l3 2" />
-            </svg>
-            Old rate
-          </span>
+      <div className="my-1">
+        <p
+          className={
+            valueSize === "big"
+              ? "font-headline-lg text-[40px] font-extrabold leading-tight tracking-tight tabular-nums text-on-surface"
+              : "font-headline-sm text-headline-sm font-bold tabular-nums text-on-surface"
+          }
+        >
+          {value}
         </p>
+        {sub ? (
+          <p className="mt-1 font-body-sm text-body-sm text-on-surface-variant">{sub}</p>
+        ) : null}
+      </div>
+      {oldRate ? (
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-outline-variant bg-surface-container-low p-2.5">
+          <span className="font-label-sm uppercase tracking-wider text-label-sm text-on-surface-variant">
+            Rate age
+          </span>
+          <OldRateTag />
+        </div>
       ) : null}
     </section>
   );

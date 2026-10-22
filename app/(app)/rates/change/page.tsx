@@ -72,7 +72,7 @@ export default async function ChangeRatePage({ searchParams }: { searchParams: S
       {!rates.ok ? <ErrorLine message={rates.error} /> : null}
 
       {effective ? (
-        <section className="mt-6 rounded-card border border-border bg-surface p-6 shadow-card">
+        <section className="mt-6 bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm">
           <div className="flex flex-wrap items-start justify-between gap-2">
             <h2 className="text-base font-medium leading-6 text-muted">
               Current rate for 1 {quote}
@@ -93,7 +93,7 @@ export default async function ChangeRatePage({ searchParams }: { searchParams: S
         </section>
       ) : null}
 
-      <section className="mt-6 max-w-[560px] rounded-card border border-border bg-surface p-6 shadow-card">
+      <section className="mt-6 max-w-[560px] bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm">
         <form action={setManualRateAction} className="space-y-4">
           <input type="hidden" name="quote" value={quote} />
           <Field

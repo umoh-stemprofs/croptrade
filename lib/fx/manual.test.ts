@@ -108,7 +108,7 @@ describe("manual rate isolation", () => {
 
   it("one farm's manual rate never changes another farm's rate", async () => {
     const store = memoryFxStore([
-      { quote: "USD", date: "2026-10-17", localPerForeign: 1490, source: "SIMULATED" },
+      { quote: "USD", date: "2026-10-17", localPerForeign: 1490, source: "LIVE" },
     ]);
     const manualStore = memoryManualStore({
       "farm-a": [{ quote: "USD", localPerForeign: 1700, setOn: "2026-10-17" }],

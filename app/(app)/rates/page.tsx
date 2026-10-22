@@ -40,7 +40,7 @@ export default async function RatesPage({ searchParams }: { searchParams: Search
   return (
     <>
       <header>
-        <h1 className="font-display text-display-lg-mobile sm:text-display-lg">Rates</h1>
+        <h1 className="font-display text-display-lg-mobile sm:text-display-lg text-on-surface tracking-tight">Rates</h1>
         <p className="mt-1 max-w-[70ch] text-base leading-6 text-muted">
           Rate meaning: 1 foreign currency = X naira. A manual rate is yours alone and
           replaces the shared rate for your farm.
@@ -67,7 +67,7 @@ export default async function RatesPage({ searchParams }: { searchParams: Search
             <section
               key={row.quote}
               aria-labelledby={`rate-${row.quote}`}
-              className="rounded-card border border-border bg-surface p-6 shadow-card"
+              className="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm"
             >
               <div className="flex flex-wrap items-start justify-between gap-2">
                 <h2 id={`rate-${row.quote}`} className="text-base font-medium leading-6 text-muted">

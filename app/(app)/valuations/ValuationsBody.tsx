@@ -36,7 +36,7 @@ export async function ValuationsBody({ userId }: { userId: string }) {
 
   if (rows.length === 0) {
     return (
-      <section className="mt-6 rounded-card border border-border bg-surface p-6 shadow-card">
+      <section className="mt-6 bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm">
         <EmptyIcon className="h-8 w-8 text-muted" />
         <h2 className="mt-3 text-headline-sm">No saved valuations yet</h2>
         <p className="mt-2 text-base leading-6 text-muted">
@@ -51,7 +51,7 @@ export async function ValuationsBody({ userId }: { userId: string }) {
 
   return (
     <>
-      <section className="mt-6 rounded-card border border-border bg-surface p-6 shadow-card">
+      <section className="mt-6 bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm">
         <h2 className="text-base font-medium leading-6 text-muted">Totals saved</h2>
         <ul className="mt-3 space-y-1">
           {totals.map((total) => (
@@ -71,7 +71,7 @@ export async function ValuationsBody({ userId }: { userId: string }) {
       </div>
 
       {/* Desktop table */}
-      <div className="mt-6 hidden overflow-hidden rounded-card border border-border bg-surface shadow-card md:block">
+      <div className="mt-6 hidden overflow-hidden bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm md:block">
         <table className="w-full text-left">
           <thead className="border-b border-border text-sm text-muted">
             <tr>
@@ -115,7 +115,7 @@ export async function ValuationsBody({ userId }: { userId: string }) {
       {/* Phone cards */}
       <ul className="mt-6 space-y-4 md:hidden">
         {rows.map((row) => (
-          <li key={row.id} className="rounded-card border border-border bg-surface p-6 shadow-card">
+          <li key={row.id} className="bg-surface-container-lowest rounded-xl border border-outline-variant p-6 shadow-sm">
             <div className="flex flex-wrap items-start justify-between gap-2">
               <p className="text-base font-semibold">{cropLabel(row.crop)}</p>
               <p className="text-sm tabular-nums text-muted">{formatDateShort(row.date)}</p>

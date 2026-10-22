@@ -1,5 +1,6 @@
 // Effective exchange rates for ONE farm (server only).
-// ManualRate wins → otherwise the shared latest live/saved/simulated FxTick rate.
+// ManualRate wins → otherwise the shared latest live/saved FxTick rate (a
+// simulated tick is placeholder data and is never served — see service.ts).
 // Every page that shows or uses a rate goes through here so no farm ever sees
 // another farm's override.
 

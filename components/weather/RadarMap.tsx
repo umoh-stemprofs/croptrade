@@ -109,7 +109,7 @@ export function RadarMap({
 
   return (
     <div
-      className="relative overflow-hidden rounded-card border border-border bg-bg"
+      className="relative overflow-hidden rounded border border-outline-variant bg-surface-container-low"
       style={{ width, height }}
     >
       {/* OpenStreetMap base layer */}

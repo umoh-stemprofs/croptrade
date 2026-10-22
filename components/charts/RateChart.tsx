@@ -3,7 +3,7 @@
 // Rates page chart (04-croptrade.md screen 6): one line per currency, switchable
 // between USD, EUR and GBP. Days with no saved rate are gaps — the line never
 // bridges or invents one. The tooltip names the source of every point
-// (Live, Saved data, Simulated, Manual).
+// (Live, Saved data, Manual).
 
 import { useState } from "react";
 import {

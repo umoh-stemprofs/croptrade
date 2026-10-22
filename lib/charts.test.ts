@@ -92,8 +92,8 @@ describe("pieSlices — max 5 slices, the rest as Other", () => {
 
 describe("rateSeries — gaps are gaps, never invented", () => {
   const history = [
-    { date: "2026-10-15", localPerForeign: 1500, source: "SIMULATED" },
-    { date: "2026-10-18", localPerForeign: 1520, source: "SIMULATED" },
+    { date: "2026-10-15", localPerForeign: 1500, source: "LIVE" },
+    { date: "2026-10-18", localPerForeign: 1520, source: "LIVE" },
   ];
 
   it("returns one point per day, oldest first, with null for missing days", () => {
@@ -191,7 +191,9 @@ describe("labels and axis units", () => {
 
   it("names every source in words", () => {
     expect(sourceWord("LIVE")).toBe("Live");
-    expect(sourceWord("SIMULATED")).toBe("Simulated");
+    // A simulated tick is placeholder data and is never served (fx/service.ts);
+    // if one ever reached a label it must read as absent, not as a value.
+    expect(sourceWord("SIMULATED")).toBe("No data");
     expect(sourceWord("MANUAL")).toBe("Manual");
     expect(sourceWord("SAVED")).toBe("Saved data");
     expect(sourceWord(null)).toBe("No data");
